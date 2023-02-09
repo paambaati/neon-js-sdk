@@ -3,6 +3,7 @@
 Node.js and Deno SDK for managing your [Neon](https://neon.tech/) Serverless Postgres projects.
 
 > **Note**
+
 > Neon is a fully managed serverless PostgreSQL with a generous free tier. Neon separates storage and compute and offers modern developer features such as serverless, branching, bottomless storage, and more. Neon is open source and written in Rust.
 > 
 > [Learn more about Neon](https://neon.tech/docs/introduction/about)
