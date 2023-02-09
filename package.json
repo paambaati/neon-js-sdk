@@ -24,7 +24,7 @@
   },
   "scripts": {
     "generate": "npx openapi-typescript-codegen --input https://dqjnwjfwjj8yz.cloudfront.net/api_spec/release/v2.json --output ./generated --useUnionTypes --name NeonClient",
-    "build": "tsup ./generated/NeonClient.ts --dts --format cjs,esm",
+    "build": "tsup ./generated/NeonClient.ts --dts --format cjs,esm --target node18",
     "prepublishOnly": "npm run build"
   },
   "engines": {
