@@ -37,7 +37,8 @@ jobs:
     - name: Make a release on NPM and GitHub
       run: npm_config_yes=true npx semantic-release
       env:
-        NPM_USERNAME: gprasannah
+        NPM_CONFIG_USERCONFIG: '/dev/null' # Ignore local .npmrc as semantic-release will use ONLY THAT if it finds one, leading to npm auth not working.
+        NPM_USERNAME: 'gprasannah'
         NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_PERSONAL_TOKEN }}
