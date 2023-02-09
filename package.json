@@ -31,6 +31,9 @@
     "node": ">=18"
   },
   "engineStrict": true,
+  "files": [
+    "dist/"
+  ],
   "main": "./dist/NeonClient.js",
   "module": "./dist/NeonClient.mjs",
   "types": "./dist/NeonClient.d.ts",
