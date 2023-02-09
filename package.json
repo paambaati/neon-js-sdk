@@ -1,0 +1,59 @@
+{
+  "name": "neon-sdk",
+  "version": "0.0.0",
+  "description": "TypeScript SDK for managing your Neon Serverless PostgreSQL projects",
+  "keywords": [
+    "neon",
+    "sdk",
+    "postgresql",
+    "serverless"
+  ],
+  "homepage": "https://github.com/paambaati/neon-js-sdk",
+  "bugs": {
+    "url": "https://github.com/paambaati/neon-js-sdk/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "GP",
+    "email": "me@httgp.com",
+    "url": "https://httgp.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paambaati/neon-js-sdk.git"
+  },
+  "scripts": {
+    "generate": "npx openapi-typescript-codegen --input https://dqjnwjfwjj8yz.cloudfront.net/api_spec/release/v2.json --output ./generated --useUnionTypes --name NeonClient",
+    "build": "tsup ./generated/NeonClient.ts --dts --format cjs,esm",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "engineStrict": true,
+  "main": "./dist/NeonClient.js",
+  "module": "./dist/NeonClient.mjs",
+  "types": "./dist/NeonClient.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/NeonClient.js",
+      "import": "./dist/NeonClient.mjs",
+      "types": "./dist/NeonClient.d.ts"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "6.0.2",
+    "@semantic-release/commit-analyzer": "9.0.2",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/github": "8.0.7",
+    "@semantic-release/npm": "9.0.2",
+    "@semantic-release/release-notes-generator": "10.0.3",
+    "openapi-typescript-codegen": "0.23.0",
+    "tsup": "6.6.0",
+    "typescript": "4.9.5"
+  }
+}
