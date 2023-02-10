@@ -34,6 +34,9 @@ jobs:
     - name: Build package
       run: npm run build
 
+    - name: Check package for packaging errors
+      run: npm_config_yes=true npx publint run
+
     - name: Make a release on NPM and GitHub
       run: npm_config_yes=true npx semantic-release
       env:
