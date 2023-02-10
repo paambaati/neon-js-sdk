@@ -9,6 +9,13 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Check commits for leaks
+      uses: gitleaks/gitleaks-action@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_PERSONAL_TOKEN }}
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
@@ -27,6 +34,9 @@ jobs:
       run: |
         npm run generate
         npm run build
+
+    - name: Check package for packaging errors
+      run: npm_config_yes=true npx publint run
 
     - name: Check for uncommitted changes
       # Ensure no changes, but ignore node_modules dir since dev/fresh ci deps installed.
