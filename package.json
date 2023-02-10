@@ -22,13 +22,17 @@
     "type": "git",
     "url": "https://github.com/paambaati/neon-js-sdk.git"
   },
+  "config": {
+    "neonOpenApiSpec": "https://dqjnwjfwjj8yz.cloudfront.net/api_spec/release/v2.json"
+  },
   "scripts": {
-    "generate": "npx openapi-typescript-codegen --input https://dqjnwjfwjj8yz.cloudfront.net/api_spec/release/v2.json --output ./generated --useUnionTypes --name NeonClient",
+    "generate": "npx openapi-typescript-codegen --useUnionTypes --name NeonClient --input $npm_package_config_neonOpenApiSpec --output ./generated",
     "build": "tsup ./generated/NeonClient.ts --dts --format cjs,esm --target node18",
     "prepublishOnly": "npm run build"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=18",
+    "deno": ">=1.28"
   },
   "engineStrict": true,
   "files": [
@@ -39,9 +43,9 @@
   "types": "./dist/NeonClient.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/NeonClient.d.ts",
       "require": "./dist/NeonClient.js",
-      "import": "./dist/NeonClient.mjs",
-      "types": "./dist/NeonClient.d.ts"
+      "import": "./dist/NeonClient.mjs"
     }
   },
   "publishConfig": {
