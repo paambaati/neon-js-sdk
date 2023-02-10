@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/paambaati/neon-js-sdk/compare/v1.0.0...v1.1.0) (2023-02-10)
+
+
+### Features
+
+* bump up package version ([ac0c7f0](https://github.com/paambaati/neon-js-sdk/commit/ac0c7f065beb6420158cf4b7586d0bb464c4e599))
+
 # 1.0.0 (2023-02-10)
 
 
