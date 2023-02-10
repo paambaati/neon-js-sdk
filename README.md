@@ -1,6 +1,9 @@
 # `neon-sdk`
 
-Node.js and Deno SDK for managing your [Neon](https://neon.tech/) Serverless Postgres projects.
+![CI](https://github.com/paambaati/neon-js-sdk/actions/workflows/ci.yml/badge.svg)
+[![NPM Version](https://img.shields.io/npm/v/neon-sdk.svg?logo=npm)](https://www.npmjs.com/package/neon-sdk)
+
+Fully-typed Node.js and Deno SDK for managing your [Neon](https://neon.tech/) Serverless Postgres projects.
 
 > **Note**
 
@@ -33,7 +36,7 @@ Node.js and Deno SDK for managing your [Neon](https://neon.tech/) Serverless Pos
     })()
     ```
 
-**Deno**
+**Deno (>= v1.28.x)**
 
 1. Simply import the `neon-sdk` from npm using the [`npm:` specifier](https://deno.land/manual@v1.30.3/node/npm_specifiers) and initialize the client with your [Neon API token](https://neon.tech/docs/manage/api-keys#manage-api-keys-with-the-neon-api).
 
