@@ -45,5 +45,6 @@ export type Project = {
      *
      */
     synthetic_storage_size?: number;
+    quota_reset_at?: string;
 };
 

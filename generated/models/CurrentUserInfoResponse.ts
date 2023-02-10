@@ -15,5 +15,6 @@ export type CurrentUserInfoResponse = {
     endpoints_limit: number;
     branches_limit: number;
     max_autoscaling_limit: number;
+    compute_seconds_limit: number;
 };
 
