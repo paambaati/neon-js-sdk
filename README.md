@@ -41,6 +41,7 @@ Fully-typed Node.js and Deno SDK for managing your [Neon](https://neon.tech/) Se
 1. Simply import the `neon-sdk` from npm using the [`npm:` specifier](https://deno.land/manual@v1.30.3/node/npm_specifiers) and initialize the client with your [Neon API token](https://neon.tech/docs/manage/api-keys#manage-api-keys-with-the-neon-api).
 
     ```typescript
+    // neon.ts
     import { NeonClient } from "npm:neon-sdk";
 
     const neonClient = new NeonClient({
@@ -48,6 +49,12 @@ Fully-typed Node.js and Deno SDK for managing your [Neon](https://neon.tech/) Se
     });
     const projects = await neonClient.project.listProjects();
     console.log(projects);
+    ```
+
+    Make sure to allow `net` permissions to `console.neon.tech` for the code to run.
+
+    ```bash
+    deno run --allow-net=console.neon.tech neon.ts
     ```
 
 ## Developer Notes
