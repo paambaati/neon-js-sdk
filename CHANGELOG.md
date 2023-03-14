@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/paambaati/neon-js-sdk/compare/v1.1.0...v1.1.1) (2023-03-14)
+
+
+### Bug Fixes
+
+* export everything ([b7d6c21](https://github.com/paambaati/neon-js-sdk/commit/b7d6c21b3abe37119509ed75d4bb2fd439bfa404)), closes [#2](https://github.com/paambaati/neon-js-sdk/issues/2)
+* export everything ([#3](https://github.com/paambaati/neon-js-sdk/issues/3)) ([fe76708](https://github.com/paambaati/neon-js-sdk/commit/fe76708ad6c7dc5a72f7b09be88f8e1e201a66d7))
+
 # [1.1.0](https://github.com/paambaati/neon-js-sdk/compare/v1.0.0...v1.1.0) (2023-02-10)
 
 
