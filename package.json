@@ -38,14 +38,14 @@
   "files": [
     "dist/"
   ],
-  "main": "./dist/NeonClient.js",
-  "module": "./dist/NeonClient.mjs",
-  "types": "./dist/NeonClient.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/NeonClient.d.ts",
-      "require": "./dist/NeonClient.js",
-      "import": "./dist/NeonClient.mjs"
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
     }
   },
   "publishConfig": {
