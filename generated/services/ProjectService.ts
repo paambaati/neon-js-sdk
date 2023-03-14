@@ -30,15 +30,15 @@ export class ProjectService {
      * A project is the top-level object in the Neon object hierarchy.
      * For more information, see [Manage projects](https://neon.tech/docs/manage/projects/).
      *
-     * @param cursor Specify the cursor value from the previous response to get the next batch of projects
-     * @param limit Specify a value from 1 to 1000 to limit number of projects in the response
+     * @param cursor Specify the cursor value from the previous response to get the next batch of projects.
+     * @param limit Specify a value from 1 to 100 to limit number of projects in the response.
      * @returns any Returned a list of projects for the Neon account
      * @returns GeneralError General Error
      * @throws ApiError
      */
     public listProjects(
         cursor?: string,
-        limit?: number,
+        limit: number = 10,
     ): CancelablePromise<(ProjectsResponse & PaginationResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
