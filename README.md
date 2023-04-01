@@ -36,6 +36,17 @@ Fully-typed Node.js and Deno SDK for managing your [Neon](https://neon.tech/) Se
     })()
     ```
 
+<details><summary><strong>Node.js (>= v16.15.x)</strong></summary>
+
+You can use the same steps to use this package if you're on Node.js v16.15.x or above, with one minor change; when running your code, you will need to pass the `--experimental-fetch` flag to `node`.
+
+For example –
+
+```
+node --experimental-fetch app.js
+```
+</details>
+
 **Deno (>= v1.28.x)**
 
 1. Simply import the `neon-sdk` from npm using the [`npm:` specifier](https://deno.land/manual@v1.30.3/node/npm_specifiers) and initialize the client with your [Neon API token](https://neon.tech/docs/manage/api-keys#manage-api-keys-with-the-neon-api).
