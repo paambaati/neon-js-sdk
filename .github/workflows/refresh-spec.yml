@@ -1,0 +1,41 @@
+name: "Refresh code"
+on:
+  schedule:
+    - cron: "0 0 * * 0" # NOTE: Run this weekly. SEE: https://crontab.guru/every-week
+
+jobs:
+  refresh_code:
+    name: "Refresh code"
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 'lts/*'
+        cache: 'npm'
+        registry-url: 'https://registry.npmjs.org'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Generate OpenAPI bindings
+      run: |
+        npm run generate
+
+    - name: Create pull request with changes
+      uses: peter-evans/create-pull-request@v4
+      with:
+        token: ${{ secrets.CUSTOM_GITHUB_PERSONAL_TOKEN }}
+        add-paths: |
+          generated
+        title: "feat: update to track latest spec changes"
+        body: "Automated changes after Neon spec has been updated"
+        commit-message: "feat: update to track latest spec changes"
+        committer: "GP <me@httgp.com>"
+        assignees: "paambaati"
+        delete-branch: true
