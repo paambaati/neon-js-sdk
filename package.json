@@ -23,7 +23,7 @@
     "url": "https://github.com/paambaati/neon-js-sdk.git"
   },
   "config": {
-    "neonOpenApiSpec": "https://dqjnwjfwjj8yz.cloudfront.net/api_spec/release/v2.json"
+    "neonOpenApiSpec": "https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json"
   },
   "scripts": {
     "generate": "npx openapi-typescript-codegen --useUnionTypes --name NeonClient --input $npm_package_config_neonOpenApiSpec --output ./generated",
