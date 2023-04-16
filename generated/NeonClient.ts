@@ -9,6 +9,7 @@ import { ApiKeyService } from './services/ApiKeyService';
 import { BranchService } from './services/BranchService';
 import { EndpointService } from './services/EndpointService';
 import { OperationService } from './services/OperationService';
+import { PreviewService } from './services/PreviewService';
 import { ProjectService } from './services/ProjectService';
 
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
@@ -19,6 +20,7 @@ export class NeonClient {
     public readonly branch: BranchService;
     public readonly endpoint: EndpointService;
     public readonly operation: OperationService;
+    public readonly preview: PreviewService;
     public readonly project: ProjectService;
 
     public readonly request: BaseHttpRequest;
@@ -40,6 +42,7 @@ export class NeonClient {
         this.branch = new BranchService(this.request);
         this.endpoint = new EndpointService(this.request);
         this.operation = new OperationService(this.request);
+        this.preview = new PreviewService(this.request);
         this.project = new ProjectService(this.request);
     }
 }

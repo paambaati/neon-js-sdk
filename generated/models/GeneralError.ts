@@ -10,7 +10,7 @@ import type { ErrorCode } from './ErrorCode';
 export type GeneralError = {
     code: ErrorCode;
     /**
-     * Description of error that happened
+     * Error message
      */
     message: string;
 };

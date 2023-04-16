@@ -8,47 +8,11 @@ import type { ProjectOwnerData } from './ProjectOwnerData';
 import type { ProjectSettingsData } from './ProjectSettingsData';
 import type { Provisioner } from './Provisioner';
 
-export type Project = {
-    /**
-     * Bytes-Hour. Project consumed that much storage hourly during the billing period. The value has some lag.
-     * The value is reset at the beginning of each billing period.
-     *
-     */
-    data_storage_bytes_hour: number;
-    /**
-     * Bytes. Egress traffic from the Neon cloud to the client for given project over the billing period.
-     * Includes deleted endpoints. The value has some lag. The value is reset at the beginning of each billing period.
-     *
-     */
-    data_transfer_bytes: number;
-    /**
-     * Bytes. Amount of WAL that travelled through storage for given project across all branches.
-     * The value has some lag. The value is reset at the beginning of each billing period.
-     *
-     */
-    written_data_bytes: number;
-    /**
-     * Seconds. The number of CPU seconds used by the project's compute endpoints, including compute endpoints that have been deleted.
-     * The value has some lag. The value is reset at the beginning of each billing period.
-     * Examples:
-     * 1. An endpoint that uses 1 CPU for 1 second is equal to `compute_time=1`.
-     * 2. An endpoint that uses 2 CPUs simultaneously for 1 second is equal to `compute_time=2`.
-     *
-     */
-    compute_time_seconds: number;
-    /**
-     * Seconds. Control plane observed endpoints of this project being active this amount of wall-clock time.
-     * The value has some lag.
-     * The value is reset at the beginning of each billing period.
-     *
-     */
-    active_time_seconds: number;
-    /**
-     * DEPRECATED, use compute_time instead.
-     *
-     * @deprecated
-     */
-    cpu_used_sec: number;
+/**
+ * Essential data about the project. Full data is available at the getProject endpoint.
+ *
+ */
+export type ProjectListItem = {
     /**
      * The project ID
      *
@@ -94,6 +58,17 @@ export type Project = {
      */
     store_passwords: boolean;
     /**
+     * Control plane observed endpoints of this project being active this amount of wall-clock time.
+     *
+     */
+    active_time: number;
+    /**
+     * DEPRECATED, use data from the getProject endpoint instead.
+     *
+     * @deprecated
+     */
+    cpu_used_sec: number;
+    /**
      * A timestamp indicating when project maintenance begins. If set, the project is placed into maintenance mode at this time.
      *
      */
@@ -119,16 +94,6 @@ export type Project = {
      *
      */
     synthetic_storage_size?: number;
-    /**
-     * A date-time indicating when Neon Cloud started measuring consumption for current consumption period.
-     *
-     */
-    consumption_period_start: string;
-    /**
-     * A date-time indicating when Neon Cloud plans to stop measuring consumption for current consumption period.
-     *
-     */
-    consumption_period_end: string;
     /**
      * DEPRECATED. Use `consumption_period_end` from the getProject endpoint instead.
      * A timestamp indicating when the project quota resets

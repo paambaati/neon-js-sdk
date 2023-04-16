@@ -3,8 +3,8 @@
 /* eslint-disable */
 
 /**
- * Endpoint type. Either "read_write" for read-write primary or "read_only" for read-only secondary.
- * "read_only" endpoints are not yet implemented.
+ * The compute endpoint type. Either `read_write` or `read_only`.
+ * The `read_only` compute endpoint type is not yet supported.
  *
  */
 export type EndpointType = 'read_only' | 'read_write';
