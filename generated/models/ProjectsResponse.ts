@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { Project } from './Project';
+import type { ProjectListItem } from './ProjectListItem';
 
 export type ProjectsResponse = {
-    projects: Array<Project>;
+    projects: Array<ProjectListItem>;
 };
 

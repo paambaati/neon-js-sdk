@@ -3,6 +3,6 @@
 /* eslint-disable */
 
 /**
- * Major version of the Postgres
+ * The major PostgreSQL version number. Currently supported version are `14` and `15`.
  */
 export type PgVersion = number;

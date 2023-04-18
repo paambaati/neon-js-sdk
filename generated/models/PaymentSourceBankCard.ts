@@ -2,11 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type RolePasswordResponse = {
+export type PaymentSourceBankCard = {
     /**
-     * The role password
+     * Last 4 digits of the card.
      *
      */
-    password: string;
+    last4: string;
 };
 

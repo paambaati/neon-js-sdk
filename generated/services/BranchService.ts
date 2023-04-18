@@ -6,7 +6,7 @@ import type { BranchesResponse } from '../models/BranchesResponse';
 import type { BranchOperations } from '../models/BranchOperations';
 import type { BranchResponse } from '../models/BranchResponse';
 import type { BranchUpdateRequest } from '../models/BranchUpdateRequest';
-import type { ConnectionURIsResponse } from '../models/ConnectionURIsResponse';
+import type { ConnectionURIsOptionalResponse } from '../models/ConnectionURIsOptionalResponse';
 import type { DatabaseCreateRequest } from '../models/DatabaseCreateRequest';
 import type { DatabaseOperations } from '../models/DatabaseOperations';
 import type { DatabaseResponse } from '../models/DatabaseResponse';
@@ -46,7 +46,7 @@ export class BranchService {
     public createProjectBranch(
         projectId: string,
         requestBody?: BranchCreateRequest,
-    ): CancelablePromise<GeneralError | (BranchResponse & EndpointsResponse & OperationsResponse & ConnectionURIsResponse)> {
+    ): CancelablePromise<GeneralError | (BranchResponse & EndpointsResponse & OperationsResponse & ConnectionURIsOptionalResponse)> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project_id}/branches',

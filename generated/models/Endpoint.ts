@@ -2,51 +2,101 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { ComputeUnit } from './ComputeUnit';
 import type { EndpointPoolerMode } from './EndpointPoolerMode';
 import type { EndpointSettingsData } from './EndpointSettingsData';
 import type { EndpointState } from './EndpointState';
 import type { EndpointType } from './EndpointType';
+import type { Provisioner } from './Provisioner';
 
 export type Endpoint = {
     /**
-     * Hostname to connect to.
+     * The hostname of the compute endpoint. This is the hostname specified when connecting to a Neon database.
      *
      */
     host: string;
+    /**
+     * The compute endpoint ID. Compute endpoint IDs have an `ep-` prefix. For example: `ep-little-smoke-851426`
+     *
+     */
     id: string;
+    /**
+     * The ID of the project to which the compute endpoint belongs
+     *
+     */
     project_id: string;
+    /**
+     * The ID of the branch that the compute endpoint is associated with
+     *
+     */
     branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
+    /**
+     * The minimum number of CPU units
+     *
+     */
+    autoscaling_limit_min_cu: ComputeUnit;
+    /**
+     * The maximum number of CPU units
+     *
+     */
+    autoscaling_limit_max_cu: ComputeUnit;
+    /**
+     * The region identifier
+     *
+     */
     region_id: string;
     type: EndpointType;
     current_state: EndpointState;
     pending_state?: EndpointState;
     settings: EndpointSettingsData;
     /**
-     * Enable or disable connection pooling for this endpoint.
+     * Whether connection pooling is enabled for the compute endpoint
+     *
      */
     pooler_enabled: boolean;
     pooler_mode: EndpointPoolerMode;
     /**
-     * Restrict any connections to this endpoint.
+     * Whether to restrict connections to the compute endpoint
+     *
      */
     disabled: boolean;
     /**
-     * Allow or restrict passwordless access to this endpoint.
+     * Whether to permit passwordless access to the compute endpoint
+     *
      */
     passwordless_access: boolean;
     /**
-     * Timestamp of the last detected activity of the endpoint.
+     * A timestamp indicating when the compute endpoint was last active
+     *
      */
     last_active?: string;
+    /**
+     * The compute endpoint creation source
+     *
+     */
     creation_source: string;
+    /**
+     * A timestamp indicating when the compute endpoint was created
+     *
+     */
     created_at: string;
+    /**
+     * A timestamp indicating when the compute endpoint was last updated
+     *
+     */
     updated_at: string;
     /**
      * DEPRECATED. Use the "host" property instead.
      *
      */
     proxy_host: string;
+    /**
+     * Duration of inactivity in seconds after which endpoint will be
+     * automatically suspended. Value `0` means use global default,
+     * `-1` means never suspend. Maximum value is 24 hours in seconds.
+     *
+     */
+    suspend_timeout_seconds: number;
+    provisioner: Provisioner;
 };
 
