@@ -28,7 +28,7 @@ jobs:
         npm run generate
 
     - name: Create pull request with changes
-      uses: peter-evans/create-pull-request@v4
+      uses: peter-evans/create-pull-request@v5
       with:
         token: ${{ secrets.CUSTOM_GITHUB_PERSONAL_TOKEN }}
         add-paths: |
@@ -38,4 +38,5 @@ jobs:
         commit-message: "feat: update to track latest spec changes"
         committer: "GP <me@httgp.com>"
         assignees: "paambaati"
+        labels: enhancement
         delete-branch: true
