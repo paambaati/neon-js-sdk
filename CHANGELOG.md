@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/paambaati/neon-js-sdk/compare/v1.2.2...v1.2.3) (2023-04-20)
+
+
+### Bug Fixes
+
+* **core:** regenerate core bindings ([31ad9a2](https://github.com/paambaati/neon-js-sdk/commit/31ad9a24cb489de55ef03393dc4c0d269186bf35))
+
 ## [1.2.2](https://github.com/paambaati/neon-js-sdk/compare/v1.2.1...v1.2.2) (2023-04-20)
 
 
