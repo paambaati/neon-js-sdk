@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/paambaati/neon-js-sdk/compare/v1.2.1...v1.2.2) (2023-04-20)
+
+
+### Bug Fixes
+
+* **ci:** enable id-token write permission for GHA provenance ([95f8a23](https://github.com/paambaati/neon-js-sdk/commit/95f8a236ff5ed50d17550aea719c0d0ad4b03da5))
+
 ## [1.2.1](https://github.com/paambaati/neon-js-sdk/compare/v1.2.0...v1.2.1) (2023-04-20)
 
 
