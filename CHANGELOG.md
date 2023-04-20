@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/paambaati/neon-js-sdk/compare/v1.2.0...v1.2.1) (2023-04-20)
+
+
+### Bug Fixes
+
+* **npm:** turn on npm provenance ([19c368c](https://github.com/paambaati/neon-js-sdk/commit/19c368c974faadc62dd183b98f5f71fd16da1ce6))
+
 # [1.2.0](https://github.com/paambaati/neon-js-sdk/compare/v1.1.1...v1.2.0) (2023-04-18)
 
 
