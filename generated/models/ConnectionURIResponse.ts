@@ -2,9 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { ConnectionURI } from './ConnectionURI';
+import type { ConnectionDetails } from './ConnectionDetails';
 
 export type ConnectionURIResponse = {
-    connection_uri: ConnectionURI;
+    connection_uri: ConnectionDetails;
 };
 

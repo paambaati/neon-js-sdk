@@ -5,6 +5,7 @@
 import type { ComputeUnit } from './ComputeUnit';
 import type { EndpointType } from './EndpointType';
 import type { Provisioner } from './Provisioner';
+import type { SuspendTimeoutSeconds } from './SuspendTimeoutSeconds';
 
 export type BranchCreateRequestEndpointOptions = {
     type: EndpointType;
@@ -19,12 +20,6 @@ export type BranchCreateRequestEndpointOptions = {
      */
     autoscaling_limit_max_cu?: ComputeUnit;
     provisioner?: Provisioner;
-    /**
-     * Duration of inactivity in seconds after which endpoint will be
-     * automatically suspended. Value `0` means use global default,
-     * `-1` means never suspend. Maximum value is 24 hours in seconds.
-     *
-     */
-    suspend_timeout_seconds?: number;
+    suspend_timeout_seconds?: SuspendTimeoutSeconds;
 };
 
