@@ -59,8 +59,13 @@ export type Branch = {
      * 1. A branch that uses 1 CPU for 1 second is equal to `cpu_used_sec=1`.
      * 2. A branch that uses 2 CPUs simultaneously for 1 second is equal to `cpu_used_sec=2`.
      *
+     * @deprecated
      */
     cpu_used_sec: number;
+    compute_time_seconds: number;
+    active_time_seconds: number;
+    written_data_bytes: number;
+    data_transfer_bytes: number;
     /**
      * A timestamp indicating when the branch was created
      *

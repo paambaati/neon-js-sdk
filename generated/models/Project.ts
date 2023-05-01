@@ -104,6 +104,11 @@ export type Project = {
      */
     creation_source: string;
     /**
+     * The number of seconds to retain PITR backup history for this project.
+     *
+     */
+    history_retention_seconds: number;
+    /**
      * A timestamp indicating when the project was created
      *
      */

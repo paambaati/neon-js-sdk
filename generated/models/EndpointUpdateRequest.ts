@@ -6,6 +6,7 @@ import type { ComputeUnit } from './ComputeUnit';
 import type { EndpointPoolerMode } from './EndpointPoolerMode';
 import type { EndpointSettingsData } from './EndpointSettingsData';
 import type { Provisioner } from './Provisioner';
+import type { SuspendTimeoutSeconds } from './SuspendTimeoutSeconds';
 
 export type EndpointUpdateRequest = {
     endpoint: {
@@ -42,13 +43,7 @@ export type EndpointUpdateRequest = {
          *
          */
         passwordless_access?: boolean;
-        /**
-         * Duration of inactivity in seconds after which endpoint will be
-         * automatically suspended. Value `0` means use global default,
-         * `-1` means never suspend. Maximum value is 24 hours in seconds.
-         *
-         */
-        suspend_timeout_seconds?: number;
+        suspend_timeout_seconds?: SuspendTimeoutSeconds;
     };
 };
 

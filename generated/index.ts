@@ -24,7 +24,8 @@ export type { BranchResponse } from './models/BranchResponse';
 export type { BranchState } from './models/BranchState';
 export type { BranchUpdateRequest } from './models/BranchUpdateRequest';
 export type { ComputeUnit } from './models/ComputeUnit';
-export type { ConnectionURI } from './models/ConnectionURI';
+export type { ConnectionDetails } from './models/ConnectionDetails';
+export type { ConnectionParameters } from './models/ConnectionParameters';
 export type { ConnectionURIResponse } from './models/ConnectionURIResponse';
 export type { ConnectionURIsOptionalResponse } from './models/ConnectionURIsOptionalResponse';
 export type { ConnectionURIsResponse } from './models/ConnectionURIsResponse';
@@ -87,6 +88,7 @@ export type { RoleResponse } from './models/RoleResponse';
 export type { RolesResponse } from './models/RolesResponse';
 export type { StatementData } from './models/StatementData';
 export type { StatementResult } from './models/StatementResult';
+export type { SuspendTimeoutSeconds } from './models/SuspendTimeoutSeconds';
 
 export { ApiKeyService } from './services/ApiKeyService';
 export { BranchService } from './services/BranchService';
