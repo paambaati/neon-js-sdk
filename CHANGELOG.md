@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/paambaati/neon-js-sdk/compare/v1.2.3...v1.3.0) (2023-05-01)
+
+
+### Features
+
+* update to track latest spec changes ([435367a](https://github.com/paambaati/neon-js-sdk/commit/435367a91bbc056f60e41e011cd5eaa9f748df8e))
+* update to track latest spec changes ([3530142](https://github.com/paambaati/neon-js-sdk/commit/35301428daa4548f6d599b944fa3ef91cb450674))
+
 ## [1.2.3](https://github.com/paambaati/neon-js-sdk/compare/v1.2.2...v1.2.3) (2023-04-20)
 
 
