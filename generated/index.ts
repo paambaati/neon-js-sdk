@@ -70,6 +70,7 @@ export type { PgVersion } from './models/PgVersion';
 export type { Project } from './models/Project';
 export type { ProjectConsumption } from './models/ProjectConsumption';
 export type { ProjectCreateRequest } from './models/ProjectCreateRequest';
+export type { ProjectLimits } from './models/ProjectLimits';
 export type { ProjectListItem } from './models/ProjectListItem';
 export type { ProjectOperations } from './models/ProjectOperations';
 export type { ProjectOwnerData } from './models/ProjectOwnerData';
