@@ -6,4 +6,4 @@
  * The Neon compute provisioner.
  *
  */
-export type Provisioner = 'k8s-pod' | 'k8s-neonvm' | 'docker';
+export type Provisioner = 'k8s-pod' | 'k8s-neonvm';

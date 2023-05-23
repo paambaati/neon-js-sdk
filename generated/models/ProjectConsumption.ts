@@ -15,6 +15,11 @@ export type ProjectConsumption = {
      */
     data_storage_bytes_hour: number;
     /**
+     * Bytes. Current space occupied by project in the storage. The value has some lag.
+     *
+     */
+    synthetic_storage_size: number;
+    /**
      * Bytes. Egress traffic from the Neon cloud to the client for given project over the billing period.
      * Includes deleted endpoints. The value has some lag. The value is reset at the beginning of each billing period.
      *
