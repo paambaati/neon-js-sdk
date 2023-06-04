@@ -5,4 +5,4 @@
 /**
  * The action performed by the operation
  */
-export type OperationAction = 'create_compute' | 'create_timeline' | 'start_compute' | 'suspend_compute' | 'apply_config' | 'check_availability' | 'delete_timeline' | 'create_branch' | 'tenant_ignore' | 'tenant_attach' | 'tenant_detach' | 'tenant_reattach' | 'replace_safekeeper' | 'disable_maintenance';
+export type OperationAction = 'create_compute' | 'create_timeline' | 'start_compute' | 'suspend_compute' | 'apply_config' | 'check_availability' | 'delete_timeline' | 'create_branch' | 'tenant_ignore' | 'tenant_attach' | 'tenant_detach' | 'tenant_reattach' | 'replace_safekeeper' | 'disable_maintenance' | 'apply_storage_config';
