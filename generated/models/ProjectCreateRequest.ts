@@ -55,6 +55,11 @@ export type ProjectCreateRequest = {
          *
          */
         store_passwords?: boolean;
+        /**
+         * The number of seconds to retain PITR backup history for this project. Defaults to 7 days
+         *
+         */
+        history_retention_seconds?: number;
     };
 };
 
