@@ -32,12 +32,12 @@ export type Endpoint = {
      */
     branch_id: string;
     /**
-     * The minimum number of CPU units
+     * The minimum number of Compute Units
      *
      */
     autoscaling_limit_min_cu: ComputeUnit;
     /**
-     * The maximum number of CPU units
+     * The maximum number of Compute Units
      *
      */
     autoscaling_limit_max_cu: ComputeUnit;

@@ -397,7 +397,7 @@ export class BranchService {
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
      * In Neon, the terms "role" and "user" are synonymous.
-     * For related information, see [Manage users](https://neon.tech/docs/manage/users/).
+     * For related information, see [Manage roles](https://neon.tech/docs/manage/roles/).
      *
      * @param projectId The Neon project ID
      * @param branchId The branch ID
@@ -425,7 +425,7 @@ export class BranchService {
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
      * In Neon, the terms "role" and "user" are synonymous.
-     * For related information, see [Manage users](https://neon.tech/docs/manage/users/).
+     * For related information, see [Manage roles](https://neon.tech/docs/manage/roles/).
      *
      * Connections established to the active read-write endpoint will be dropped.
      * If the read-write endpoint is idle, the endpoint becomes active for a short period of time and is suspended afterward.
@@ -461,7 +461,7 @@ export class BranchService {
      * You can obtain the `branch_id` by listing the project's branches.
      * You can obtain the `role_name` by listing the roles for a branch.
      * In Neon, the terms "role" and "user" are synonymous.
-     * For related information, see [Managing users](https://neon.tech/docs/manage/users/).
+     * For related information, see [Manage roles](https://neon.tech/docs/manage/roles/).
      *
      * @param projectId The Neon project ID
      * @param branchId The branch ID
@@ -493,7 +493,7 @@ export class BranchService {
      * You can obtain the `branch_id` by listing the project's branches.
      * You can obtain the `role_name` by listing the roles for a branch.
      * In Neon, the terms "role" and "user" are synonymous.
-     * For related information, see [Managing users](https://neon.tech/docs/manage/users/).
+     * For related information, see [Manage roles](https://neon.tech/docs/manage/roles/).
      *
      * @param projectId The Neon project ID
      * @param branchId The branch ID
@@ -525,7 +525,7 @@ export class BranchService {
      * You can obtain the `branch_id` by listing the project's branches.
      * You can obtain the `role_name` by listing the roles for a branch.
      * In Neon, the terms "role" and "user" are synonymous.
-     * For related information, see [Managing users](https://neon.tech/docs/manage/users/).
+     * For related information, see [Manage roles](https://neon.tech/docs/manage/roles/).
      *
      * @param projectId The Neon project ID
      * @param branchId The branch ID
@@ -566,7 +566,7 @@ export class BranchService {
      * You can obtain the `branch_id` by listing the project's branches.
      * You can obtain the `role_name` by listing the roles for a branch.
      * In Neon, the terms "role" and "user" are synonymous.
-     * For related information, see [Managing users](https://neon.tech/docs/manage/users/).
+     * For related information, see [Manage roles](https://neon.tech/docs/manage/roles/).
      *
      * @param projectId The Neon project ID
      * @param branchId The branch ID
