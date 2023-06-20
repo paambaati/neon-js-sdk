@@ -13,13 +13,14 @@ export class PreviewService {
     constructor(public readonly httpRequest: BaseHttpRequest) {}
 
     /**
-     * Get a list of projects consumption
-     * Note, this is a preview API and could be subjected to significant changes in the future.
-     * Retrieves a list of per-project consumption for the current billing period.
+     * Rerives a list consumption metrics for each project
+     * This is a preview API and is subject to changes in the future.
+     *
+     * Retrieves a list project consumption metrics for each project for the current billing period.
      *
      * @param cursor Specify the cursor value from the previous response to get the next batch of projects.
      * @param limit Specify a value from 1 to 1000 to limit number of projects in the response.
-     * @returns any Returned a list of per-project consumption for the Neon account
+     * @returns any Returned a list of project consumption metrics for the Neon account
      * @returns GeneralError General Error
      * @throws ApiError
      */

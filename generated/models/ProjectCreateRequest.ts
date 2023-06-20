@@ -33,18 +33,21 @@ export type ProjectCreateRequest = {
             database_name?: string;
         };
         /**
-         * The minimum number of CPU units
+         * The minimum number of Compute Units. The minimum value is `0.25`.
+         * See [Compute size and Autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration)
+         * for more information.
          *
          */
         autoscaling_limit_min_cu?: ComputeUnit;
         /**
-         * The maximum number of CPU units
+         * The maximum number of Compute Units. See [Compute size and Autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration)
+         * for more information.
          *
          */
         autoscaling_limit_max_cu?: ComputeUnit;
         provisioner?: Provisioner;
         /**
-         * The region identifier. See [the documentation](https://neon.tech/docs/introduction/regions) for the list of supported regions.
+         * The region identifier. Refer to our [Regions](https://neon.tech/docs/introduction/regions) documentation for supported regions. Values are specified in this format: `aws-us-east-1`
          *
          */
         region_id?: string;
@@ -56,7 +59,8 @@ export type ProjectCreateRequest = {
          */
         store_passwords?: boolean;
         /**
-         * The number of seconds to retain PITR backup history for this project. Defaults to 7 days
+         * The number of seconds to retain the point-in-time restore (PITR) backup history for this project.
+         * The default is 604800 seconds (7 days).
          *
          */
         history_retention_seconds?: number;

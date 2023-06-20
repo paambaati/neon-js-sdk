@@ -24,12 +24,16 @@ export type EndpointCreateRequest = {
         type: EndpointType;
         settings?: EndpointSettingsData;
         /**
-         * The minimum number of CPU units
+         * The minimum number of Compute Units. The minimum value is `0.25`.
+         * See [Compute size and Autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration)
+         * for more information.
          *
          */
         autoscaling_limit_min_cu?: ComputeUnit;
         /**
-         * The maximum number of CPU units
+         * The maximum number of Compute Units.
+         * See [Compute size and Autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration)
+         * for more information.
          *
          */
         autoscaling_limit_max_cu?: ComputeUnit;
