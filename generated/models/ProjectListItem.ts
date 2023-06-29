@@ -4,7 +4,6 @@
 
 import type { DefaultEndpointSettings } from './DefaultEndpointSettings';
 import type { PgVersion } from './PgVersion';
-import type { ProjectOwnerData } from './ProjectOwnerData';
 import type { ProjectSettingsData } from './ProjectSettingsData';
 import type { Provisioner } from './Provisioner';
 
@@ -102,6 +101,5 @@ export type ProjectListItem = {
      */
     quota_reset_at?: string;
     owner_id: string;
-    owner?: ProjectOwnerData;
 };
 
