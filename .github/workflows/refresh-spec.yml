@@ -1,5 +1,6 @@
 name: "Refresh code"
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 0 * * 0" # NOTE: Run this weekly. SEE: https://crontab.guru/every-week
 
