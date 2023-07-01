@@ -63,6 +63,6 @@
     "@semantic-release/release-notes-generator": "10.0.3",
     "openapi-typescript-codegen": "0.24.0",
     "tsup": "7.1.0",
-    "typescript": "5.0.4"
+    "typescript": "5.1.6"
   }
 }
