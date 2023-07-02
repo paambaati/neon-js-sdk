@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 import type { ComputeUnit } from './ComputeUnit';
-import type { PgSettingsData } from './PgSettingsData';
+import type { DefaultEndpointSettings } from './DefaultEndpointSettings';
 import type { PgVersion } from './PgVersion';
 import type { ProjectSettingsData } from './ProjectSettingsData';
 import type { Provisioner } from './Provisioner';
@@ -51,7 +51,7 @@ export type ProjectCreateRequest = {
          *
          */
         region_id?: string;
-        default_endpoint_settings?: PgSettingsData;
+        default_endpoint_settings?: DefaultEndpointSettings;
         pg_version?: PgVersion;
         /**
          * Whether or not passwords are stored for roles in the Neon project. Storing passwords facilitates access to Neon features that require authorization.
