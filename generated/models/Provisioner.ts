@@ -3,7 +3,8 @@
 /* eslint-disable */
 
 /**
- * The Neon compute provisioner. Select the `k8s-neonvm` provisioner to enable autoscaling.
+ * The Neon compute provisioner.
+ * Specify the `k8s-neonvm` provisioner to create a compute endpoint that supports Autoscaling.
  *
  */
 export type Provisioner = 'k8s-pod' | 'k8s-neonvm';

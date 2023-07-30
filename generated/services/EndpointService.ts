@@ -19,13 +19,13 @@ export class EndpointService {
      * Create an endpoint
      * Creates an endpoint for the specified branch.
      * An endpoint is a Neon compute instance.
-     * There is a maximum of one endpoint per branch.
-     * If the specified branch already has an endpoint, the operation fails.
+     * There is a maximum of one read-write endpoint per branch.
+     * If the specified branch already has a read-write endpoint, the operation fails.
+     * A branch can have multiple read-only endpoints.
      *
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain `branch_id` by listing the project's branches.
      * A `branch_id` has a `br-` prefix.
-     * Currently, only the `read_write` endpoint type is supported.
      * For supported regions and `region_id` values, see [Regions](https://neon.tech/docs/introduction/regions/).
      * For more information about endpoints, see [Manage endpoints](https://neon.tech/docs/manage/endpoints/).
      *
