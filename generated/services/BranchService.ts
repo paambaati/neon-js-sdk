@@ -46,7 +46,7 @@ export class BranchService {
     public createProjectBranch(
         projectId: string,
         requestBody?: BranchCreateRequest,
-    ): CancelablePromise<GeneralError | (BranchResponse & EndpointsResponse & OperationsResponse & ConnectionURIsOptionalResponse)> {
+    ): CancelablePromise<GeneralError | (BranchResponse & EndpointsResponse & OperationsResponse & RolesResponse & DatabasesResponse & ConnectionURIsOptionalResponse)> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project_id}/branches',
@@ -427,8 +427,8 @@ export class BranchService {
      * In Neon, the terms "role" and "user" are synonymous.
      * For related information, see [Manage roles](https://neon.tech/docs/manage/roles/).
      *
-     * Connections established to the active read-write endpoint will be dropped.
-     * If the read-write endpoint is idle, the endpoint becomes active for a short period of time and is suspended afterward.
+     * Connections established to the active compute endpoint will be dropped.
+     * If the compute endpoint is idle, the endpoint becomes active for a short period of time and is suspended afterward.
      *
      * @param projectId The Neon project ID
      * @param branchId The branch ID
@@ -559,8 +559,8 @@ export class BranchService {
      * Resets the password for the specified role.
      * Returns a new password and operations. The new password is ready to use when the last operation finishes.
      * The old password remains valid until last operation finishes.
-     * Connections to the read-write endpoint are dropped. If idle,
-     * the read-write endpoint becomes active for a short period of time.
+     * Connections to the compute endpoint are dropped. If idle,
+     * the compute endpoint becomes active for a short period of time.
      *
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.

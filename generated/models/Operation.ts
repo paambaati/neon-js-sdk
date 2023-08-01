@@ -44,5 +44,9 @@ export type Operation = {
      * A timestamp indicating when the operation status was last updated
      */
     updated_at: string;
+    /**
+     * The total duration of the operation in milliseconds
+     */
+    total_duration_ms: number;
 };
 

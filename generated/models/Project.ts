@@ -143,5 +143,12 @@ export type Project = {
     quota_reset_at?: string;
     owner_id: string;
     owner?: ProjectOwnerData;
+    /**
+     * The most recent time when any endpoint of this project was active.
+     *
+     * Omitted when observed no actitivy for endpoints of this project.
+     *
+     */
+    compute_last_active_at?: string;
 };
 
