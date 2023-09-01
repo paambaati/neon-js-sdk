@@ -1,3 +1,4 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -34,6 +35,7 @@ export type EndpointUpdateRequest = {
         /**
          * Whether to enable connection pooling for the compute endpoint
          *
+         * @deprecated
          */
         pooler_enabled?: boolean;
         pooler_mode?: EndpointPoolerMode;
