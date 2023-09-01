@@ -1,3 +1,4 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -28,10 +29,8 @@ export type { BranchUpdateRequest } from './models/BranchUpdateRequest';
 export type { ComputeUnit } from './models/ComputeUnit';
 export type { ConnectionDetails } from './models/ConnectionDetails';
 export type { ConnectionParameters } from './models/ConnectionParameters';
-export type { ConnectionURIResponse } from './models/ConnectionURIResponse';
 export type { ConnectionURIsOptionalResponse } from './models/ConnectionURIsOptionalResponse';
 export type { ConnectionURIsResponse } from './models/ConnectionURIsResponse';
-export type { ConsoleSettingsRaw } from './models/ConsoleSettingsRaw';
 export type { CurrentUserAuthAccount } from './models/CurrentUserAuthAccount';
 export type { CurrentUserInfoResponse } from './models/CurrentUserInfoResponse';
 export type { Database } from './models/Database';
