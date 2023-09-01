@@ -1,3 +1,4 @@
+/* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -8,7 +9,7 @@ export type BranchCreateRequest = {
     endpoints?: Array<BranchCreateRequestEndpointOptions>;
     branch?: {
         /**
-         * The `branch_id` of the parent branch
+         * The `branch_id` of the parent branch. If omitted or empty, the branch will be created from the project's primary branch.
          *
          */
         parent_id?: string;
