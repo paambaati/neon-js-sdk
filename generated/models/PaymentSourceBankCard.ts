@@ -9,5 +9,20 @@ export type PaymentSourceBankCard = {
      *
      */
     last4: string;
+    /**
+     * Brand of credit card.
+     *
+     */
+    brand?: 'amex' | 'diners' | 'discover' | 'jcb' | 'mastercard' | 'unionpay' | 'unknown' | 'visa';
+    /**
+     * Credit card expiration month
+     *
+     */
+    exp_month?: number;
+    /**
+     * Credit card expiration year
+     *
+     */
+    exp_year?: number;
 };
 

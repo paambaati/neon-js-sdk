@@ -12,6 +12,7 @@ import { EndpointService } from './services/EndpointService';
 import { OperationService } from './services/OperationService';
 import { PreviewService } from './services/PreviewService';
 import { ProjectService } from './services/ProjectService';
+import { UsersService } from './services/UsersService';
 
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 
@@ -23,6 +24,7 @@ export class NeonClient {
     public readonly operation: OperationService;
     public readonly preview: PreviewService;
     public readonly project: ProjectService;
+    public readonly users: UsersService;
 
     public readonly request: BaseHttpRequest;
 
@@ -45,6 +47,7 @@ export class NeonClient {
         this.operation = new OperationService(this.request);
         this.preview = new PreviewService(this.request);
         this.project = new ProjectService(this.request);
+        this.users = new UsersService(this.request);
     }
 }
 

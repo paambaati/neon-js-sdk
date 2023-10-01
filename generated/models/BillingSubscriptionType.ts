@@ -8,4 +8,4 @@
  * Notice that for users without billing account this will be "UNKNOWN"
  *
  */
-export type BillingSubscriptionType = 'UNKNOWN' | 'free' | 'pro' | 'platform_partnership' | 'enterprise';
+export type BillingSubscriptionType = 'UNKNOWN' | 'free' | 'pro' | 'direct_sales';

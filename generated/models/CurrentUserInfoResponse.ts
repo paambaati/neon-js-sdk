@@ -20,6 +20,7 @@ export type CurrentUserInfoResponse = {
     image: string;
     login: string;
     name: string;
+    last_name: string;
     projects_limit: number;
     branches_limit: number;
     max_autoscaling_limit: ComputeUnit;

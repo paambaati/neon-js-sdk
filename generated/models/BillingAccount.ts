@@ -49,5 +49,10 @@ export type BillingAccount = {
      *
      */
     address_state: string;
+    /**
+     * Orb user portal url
+     *
+     */
+    orb_portal_url?: string;
 };
 
