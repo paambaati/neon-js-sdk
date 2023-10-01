@@ -10,7 +10,6 @@ import type { GeneralError } from '../models/GeneralError';
 import type { OperationsResponse } from '../models/OperationsResponse';
 import type { PaginationResponse } from '../models/PaginationResponse';
 import type { ProjectCreateRequest } from '../models/ProjectCreateRequest';
-import type { ProjectOperations } from '../models/ProjectOperations';
 import type { ProjectResponse } from '../models/ProjectResponse';
 import type { ProjectsResponse } from '../models/ProjectsResponse';
 import type { ProjectUpdateRequest } from '../models/ProjectUpdateRequest';
@@ -30,7 +29,7 @@ export class ProjectService {
      * For more information, see [Manage projects](https://neon.tech/docs/manage/projects/).
      *
      * @param cursor Specify the cursor value from the previous response to get the next batch of projects.
-     * @param limit Specify a value from 1 to 100 to limit number of projects in the response.
+     * @param limit Specify a value from 1 to 400 to limit number of projects in the response.
      * @returns any Returned a list of projects for the Neon account
      * @returns GeneralError General Error
      * @throws ApiError
@@ -112,14 +111,14 @@ export class ProjectService {
      *
      * @param projectId The Neon project ID
      * @param requestBody
-     * @returns ProjectOperations Updated the specified project
+     * @returns ProjectResponse Updated the specified project
      * @returns GeneralError General Error
      * @throws ApiError
      */
     public updateProject(
         projectId: string,
         requestBody: ProjectUpdateRequest,
-    ): CancelablePromise<ProjectOperations | GeneralError> {
+    ): CancelablePromise<ProjectResponse | GeneralError> {
         return this.httpRequest.request({
             method: 'PATCH',
             url: '/projects/{project_id}',
