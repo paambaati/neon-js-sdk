@@ -111,14 +111,14 @@ export class ProjectService {
      *
      * @param projectId The Neon project ID
      * @param requestBody
-     * @returns ProjectResponse Updated the specified project
+     * @returns any Updated the specified project
      * @returns GeneralError General Error
      * @throws ApiError
      */
     public updateProject(
         projectId: string,
         requestBody: ProjectUpdateRequest,
-    ): CancelablePromise<ProjectResponse | GeneralError> {
+    ): CancelablePromise<(ProjectResponse & OperationsResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'PATCH',
             url: '/projects/{project_id}',
