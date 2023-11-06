@@ -7,5 +7,6 @@ import type { ProjectConsumption } from './ProjectConsumption';
 
 export type ProjectsConsumptionResponse = {
     projects: Array<ProjectConsumption>;
+    periods_in_response: number;
 };
 

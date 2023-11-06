@@ -21,6 +21,12 @@ export class PreviewService {
      *
      * @param cursor Specify the cursor value from the previous response to get the next batch of projects.
      * @param limit Specify a value from 1 to 1000 to limit number of projects in the response.
+     * @param from Specify the start of the period to get the consumption for.
+     * If `from` or `to` is not specified, we return only current consumption period.
+     *
+     * @param to Specify the end of the period to get the consumption for.
+     * If `from` or `to` is not specified, we return only current consumption period.
+     *
      * @returns any Returned a list of project consumption metrics for the Neon account
      * @returns GeneralError General Error
      * @throws ApiError
@@ -28,6 +34,8 @@ export class PreviewService {
     public listProjectsConsumption(
         cursor?: string,
         limit: number = 10,
+        from?: string,
+        to?: string,
     ): CancelablePromise<(ProjectsConsumptionResponse & PaginationResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
@@ -35,6 +43,8 @@ export class PreviewService {
             query: {
                 'cursor': cursor,
                 'limit': limit,
+                'from': from,
+                'to': to,
             },
         });
     }
