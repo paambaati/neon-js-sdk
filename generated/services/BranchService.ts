@@ -521,7 +521,7 @@ export class BranchService {
 
     /**
      * Get role password
-     * Retrieves password of the specified role if possible.
+     * Retrieves the password for the specified role, if possible.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
      * You can obtain the `role_name` by listing the roles for a branch.

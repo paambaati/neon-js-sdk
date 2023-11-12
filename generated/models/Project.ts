@@ -120,8 +120,7 @@ export type Project = {
      */
     updated_at: string;
     /**
-     * Experimental. Do not use this field yet.
-     * The data storage size in bytes.
+     * The current space occupied by the project in storage, in bytes. Synthetic storage size combines the logical data size and Write-Ahead Log (WAL) size for all branches in a project.
      *
      */
     synthetic_storage_size?: number;
@@ -137,7 +136,7 @@ export type Project = {
     consumption_period_end: string;
     /**
      * DEPRECATED. Use `consumption_period_end` from the getProject endpoint instead.
-     * A timestamp indicating when the project quota resets
+     * A timestamp indicating when the project quota resets.
      *
      * @deprecated
      */

@@ -77,5 +77,10 @@ export type Branch = {
      *
      */
     updated_at: string;
+    /**
+     * A timestamp indicating when the branch was last reset
+     *
+     */
+    last_reset_at?: string;
 };
 

@@ -10,7 +10,7 @@ export type BillingAccount = {
     payment_source: PaymentSource;
     subscription_type: BillingSubscriptionType;
     /**
-     * Last time when quota was reset. Defaults to current datetime when account is created.
+     * The last time the quota was reset. Defaults to the date-time the account is created.
      *
      */
     quota_reset_at_last: string;

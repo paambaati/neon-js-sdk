@@ -63,7 +63,7 @@ export type ProjectListItem = {
      */
     active_time: number;
     /**
-     * DEPRECATED, use data from the getProject endpoint instead.
+     * DEPRECATED. Use data from the getProject endpoint instead.
      *
      * @deprecated
      */
@@ -89,8 +89,7 @@ export type ProjectListItem = {
      */
     updated_at: string;
     /**
-     * Experimental. Do not use this field yet.
-     * The data storage size in bytes.
+     * The current space occupied by the project in storage, in bytes. Synthetic storage size combines the logical data size and Write-Ahead Log (WAL) size for all branches in a project.
      *
      */
     synthetic_storage_size?: number;
