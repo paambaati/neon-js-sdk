@@ -14,9 +14,9 @@ export class UsersService {
 
     /**
      * Get current user details
-     * Retrieves information about the current user
+     * Retrieves information about the current Neon user account.
+     *
      * @returns CurrentUserInfoResponse Returned information about the current user
-     * Warning! This api is unstable and susceptible to changes
      *
      * @returns GeneralError General Error
      * @throws ApiError
