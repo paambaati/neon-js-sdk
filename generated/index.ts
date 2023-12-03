@@ -10,6 +10,7 @@ export { CancelablePromise, CancelError } from './core/CancelablePromise';
 export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
+export type { AllowedIps } from './models/AllowedIps';
 export type { ApiKeyCreateRequest } from './models/ApiKeyCreateRequest';
 export type { ApiKeyCreateResponse } from './models/ApiKeyCreateResponse';
 export type { ApiKeyRevokeResponse } from './models/ApiKeyRevokeResponse';
