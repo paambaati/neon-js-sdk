@@ -58,7 +58,11 @@ export type Endpoint = {
     pooler_enabled: boolean;
     pooler_mode: EndpointPoolerMode;
     /**
-     * Whether to restrict connections to the compute endpoint
+     * Whether to restrict connections to the compute endpoint.
+     * Enabling this option schedules a suspend compute operation.
+     * A disabled compute endpoint cannot be enabled by a connection or
+     * console action. However, the compute endpoint is periodically
+     * enabled by check_availability operations.
      *
      */
     disabled: boolean;
