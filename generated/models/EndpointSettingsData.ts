@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
+import type { PgbouncerSettingsData } from './PgbouncerSettingsData';
 import type { PgSettingsData } from './PgSettingsData';
 
 /**
@@ -10,5 +11,6 @@ import type { PgSettingsData } from './PgSettingsData';
  */
 export type EndpointSettingsData = {
     pg_settings?: PgSettingsData;
+    pgbouncer_settings?: PgbouncerSettingsData;
 };
 
