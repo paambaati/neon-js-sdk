@@ -2,7 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type Role = {
     /**
      * The ID of the branch to which the role belongs

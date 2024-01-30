@@ -2,10 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { OperationAction } from './OperationAction';
 import type { OperationStatus } from './OperationStatus';
-
 export type Operation = {
     /**
      * The operation ID

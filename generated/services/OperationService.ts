@@ -6,14 +6,10 @@ import type { GeneralError } from '../models/GeneralError';
 import type { OperationResponse } from '../models/OperationResponse';
 import type { OperationsResponse } from '../models/OperationsResponse';
 import type { PaginationResponse } from '../models/PaginationResponse';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
-
 export class OperationService {
-
     constructor(public readonly httpRequest: BaseHttpRequest) {}
-
     /**
      * Get operation details
      * Retrieves details for the specified operation.
@@ -40,7 +36,6 @@ export class OperationService {
             },
         });
     }
-
     /**
      * Get a list of operations
      * Retrieves a list of operations for the specified Neon project.
@@ -74,5 +69,4 @@ export class OperationService {
             },
         });
     }
-
 }

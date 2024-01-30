@@ -2,10 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { BillingSubscriptionType } from './BillingSubscriptionType';
 import type { PaymentSource } from './PaymentSource';
-
 export type BillingAccount = {
     payment_source: PaymentSource;
     subscription_type: BillingSubscriptionType;

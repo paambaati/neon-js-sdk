@@ -2,12 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { DefaultEndpointSettings } from './DefaultEndpointSettings';
 import type { PgVersion } from './PgVersion';
 import type { ProjectSettingsData } from './ProjectSettingsData';
 import type { Provisioner } from './Provisioner';
-
 /**
  * Essential data about the project. Full data is available at the getProject endpoint.
  *

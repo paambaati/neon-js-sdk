@@ -2,10 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { DefaultEndpointSettings } from './DefaultEndpointSettings';
 import type { ProjectSettingsData } from './ProjectSettingsData';
-
 export type ProjectUpdateRequest = {
     project: {
         settings?: ProjectSettingsData;

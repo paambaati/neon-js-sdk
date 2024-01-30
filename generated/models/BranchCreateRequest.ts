@@ -2,9 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { BranchCreateRequestEndpointOptions } from './BranchCreateRequestEndpointOptions';
-
 export type BranchCreateRequest = {
     endpoints?: Array<BranchCreateRequestEndpointOptions>;
     branch?: {

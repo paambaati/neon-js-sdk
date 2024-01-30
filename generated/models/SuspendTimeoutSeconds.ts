@@ -2,7 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 /**
  * Duration of inactivity in seconds after which the compute endpoint is
  * automatically suspended. The value `0` means use the global default.

@@ -2,10 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 /**
  * Type of subscription to Neon Cloud.
  * Notice that for users without billing account this will be "UNKNOWN"
  *
  */
-export type BillingSubscriptionType = 'UNKNOWN' | 'free' | 'pro' | 'direct_sales' | 'aws_marketplace';
+export type BillingSubscriptionType = 'UNKNOWN' | 'free' | 'pro' | 'direct_sales' | 'aws_marketplace' | 'free_v2' | 'launch' | 'scale';

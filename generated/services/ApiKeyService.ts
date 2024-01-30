@@ -7,14 +7,10 @@ import type { ApiKeyCreateResponse } from '../models/ApiKeyCreateResponse';
 import type { ApiKeyRevokeResponse } from '../models/ApiKeyRevokeResponse';
 import type { ApiKeysListResponseItem } from '../models/ApiKeysListResponseItem';
 import type { GeneralError } from '../models/GeneralError';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
-
 export class ApiKeyService {
-
     constructor(public readonly httpRequest: BaseHttpRequest) {}
-
     /**
      * Get a list of API keys
      * Retrieves the API keys for your Neon account.
@@ -32,7 +28,6 @@ export class ApiKeyService {
             url: '/api_keys',
         });
     }
-
     /**
      * Create an API key
      * Creates an API key.
@@ -56,7 +51,6 @@ export class ApiKeyService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Revoke an API key
      * Revokes the specified API key.
@@ -82,5 +76,4 @@ export class ApiKeyService {
             },
         });
     }
-
 }

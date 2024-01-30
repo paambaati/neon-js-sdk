@@ -2,13 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { ComputeUnit } from './ComputeUnit';
 import type { EndpointPoolerMode } from './EndpointPoolerMode';
 import type { EndpointSettingsData } from './EndpointSettingsData';
 import type { Provisioner } from './Provisioner';
 import type { SuspendTimeoutSeconds } from './SuspendTimeoutSeconds';
-
 export type EndpointUpdateRequest = {
     endpoint: {
         /**

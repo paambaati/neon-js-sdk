@@ -2,13 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { ComputeUnit } from './ComputeUnit';
 import type { DefaultEndpointSettings } from './DefaultEndpointSettings';
 import type { PgVersion } from './PgVersion';
 import type { ProjectSettingsData } from './ProjectSettingsData';
 import type { Provisioner } from './Provisioner';
-
 export type ProjectCreateRequest = {
     project: {
         settings?: ProjectSettingsData;

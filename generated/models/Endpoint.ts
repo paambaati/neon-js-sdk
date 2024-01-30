@@ -2,7 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { ComputeUnit } from './ComputeUnit';
 import type { EndpointPoolerMode } from './EndpointPoolerMode';
 import type { EndpointSettingsData } from './EndpointSettingsData';
@@ -10,7 +9,6 @@ import type { EndpointState } from './EndpointState';
 import type { EndpointType } from './EndpointType';
 import type { Provisioner } from './Provisioner';
 import type { SuspendTimeoutSeconds } from './SuspendTimeoutSeconds';
-
 export type Endpoint = {
     /**
      * The hostname of the compute endpoint. This is the hostname specified when connecting to a Neon database.

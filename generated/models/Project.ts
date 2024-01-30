@@ -2,13 +2,11 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { DefaultEndpointSettings } from './DefaultEndpointSettings';
 import type { PgVersion } from './PgVersion';
 import type { ProjectOwnerData } from './ProjectOwnerData';
 import type { ProjectSettingsData } from './ProjectSettingsData';
 import type { Provisioner } from './Provisioner';
-
 export type Project = {
     /**
      * Bytes-Hour. Project consumed that much storage hourly during the billing period. The value has some lag.

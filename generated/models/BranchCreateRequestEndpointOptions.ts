@@ -2,12 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { ComputeUnit } from './ComputeUnit';
 import type { EndpointType } from './EndpointType';
 import type { Provisioner } from './Provisioner';
 import type { SuspendTimeoutSeconds } from './SuspendTimeoutSeconds';
-
 export type BranchCreateRequestEndpointOptions = {
     type: EndpointType;
     /**

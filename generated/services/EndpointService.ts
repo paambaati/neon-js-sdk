@@ -8,14 +8,10 @@ import type { EndpointResponse } from '../models/EndpointResponse';
 import type { EndpointsResponse } from '../models/EndpointsResponse';
 import type { EndpointUpdateRequest } from '../models/EndpointUpdateRequest';
 import type { GeneralError } from '../models/GeneralError';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
-
 export class EndpointService {
-
     constructor(public readonly httpRequest: BaseHttpRequest) {}
-
     /**
      * Create an endpoint
      * Creates an endpoint for the specified branch.
@@ -50,7 +46,6 @@ export class EndpointService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Get a list of endpoints
      * Retrieves a list of endpoints for the specified project.
@@ -74,7 +69,6 @@ export class EndpointService {
             },
         });
     }
-
     /**
      * Get an endpoint
      * Retrieves information about the specified endpoint.
@@ -103,7 +97,6 @@ export class EndpointService {
             },
         });
     }
-
     /**
      * Delete an endpoint
      * Delete the specified endpoint.
@@ -135,7 +128,6 @@ export class EndpointService {
             },
         });
     }
-
     /**
      * Update an endpoint
      * Updates the specified endpoint. Currently, only changing the associated branch is supported.
@@ -174,7 +166,6 @@ export class EndpointService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Start an endpoint
      * Starts an endpoint. The endpoint is ready to use
@@ -204,7 +195,6 @@ export class EndpointService {
             },
         });
     }
-
     /**
      * Suspend an endpoint
      * Suspend the specified endpoint
@@ -232,5 +222,4 @@ export class EndpointService {
             },
         });
     }
-
 }

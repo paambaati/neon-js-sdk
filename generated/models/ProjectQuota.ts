@@ -2,7 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 /**
  * Per-project consumption quota. If the quota is exceeded, all active computes
  * are automatically suspended and it will not be possible to start them with

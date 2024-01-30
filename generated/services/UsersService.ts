@@ -4,14 +4,10 @@
 /* eslint-disable */
 import type { CurrentUserInfoResponse } from '../models/CurrentUserInfoResponse';
 import type { GeneralError } from '../models/GeneralError';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
-
 export class UsersService {
-
     constructor(public readonly httpRequest: BaseHttpRequest) {}
-
     /**
      * Get current user details
      * Retrieves information about the current Neon user account.
@@ -27,5 +23,4 @@ export class UsersService {
             url: '/users/me',
         });
     }
-
 }

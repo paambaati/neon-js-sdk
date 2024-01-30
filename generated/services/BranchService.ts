@@ -21,14 +21,10 @@ import type { RoleOperations } from '../models/RoleOperations';
 import type { RolePasswordResponse } from '../models/RolePasswordResponse';
 import type { RoleResponse } from '../models/RoleResponse';
 import type { RolesResponse } from '../models/RolesResponse';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
-
 export class BranchService {
-
     constructor(public readonly httpRequest: BaseHttpRequest) {}
-
     /**
      * Create a branch
      * Creates a branch in the specified project.
@@ -58,7 +54,6 @@ export class BranchService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Get a list of branches
      * Retrieves a list of branches for the specified project.
@@ -86,7 +81,6 @@ export class BranchService {
             },
         });
     }
-
     /**
      * Get branch details
      * Retrieves information about the specified branch.
@@ -118,7 +112,6 @@ export class BranchService {
             },
         });
     }
-
     /**
      * Delete a branch
      * Deletes the specified branch from a project, and places
@@ -152,7 +145,6 @@ export class BranchService {
             },
         });
     }
-
     /**
      * Update a branch
      * Updates the specified branch. Only changing the branch name is supported.
@@ -183,7 +175,6 @@ export class BranchService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Set the branch as the primary branch of a project
      * The primary mark is automatically removed from the previous primary branch.
@@ -210,7 +201,6 @@ export class BranchService {
             },
         });
     }
-
     /**
      * Get a list of branch endpoints
      * Retrieves a list of endpoints for the specified branch.
@@ -237,7 +227,6 @@ export class BranchService {
             },
         });
     }
-
     /**
      * Get a list of databases
      * Retrieves a list of databases for the specified branch.
@@ -265,7 +254,6 @@ export class BranchService {
             },
         });
     }
-
     /**
      * Create a database
      * Creates a database in the specified branch.
@@ -297,7 +285,6 @@ export class BranchService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Get database details
      * Retrieves information about the specified database.
@@ -327,7 +314,6 @@ export class BranchService {
             },
         });
     }
-
     /**
      * Update a database
      * Updates the specified database in the branch.
@@ -361,7 +347,6 @@ export class BranchService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Delete a database
      * Deletes the specified database from the branch.
@@ -391,7 +376,6 @@ export class BranchService {
             },
         });
     }
-
     /**
      * Get a list of roles
      * Retrieves a list of roles from the specified branch.
@@ -419,7 +403,6 @@ export class BranchService {
             },
         });
     }
-
     /**
      * Create a role
      * Creates a role in the specified branch.
@@ -454,7 +437,6 @@ export class BranchService {
             mediaType: 'application/json',
         });
     }
-
     /**
      * Get role details
      * Retrieves details about the specified role.
@@ -486,7 +468,6 @@ export class BranchService {
             },
         });
     }
-
     /**
      * Delete a role
      * Deletes the specified role from the branch.
@@ -518,7 +499,6 @@ export class BranchService {
             },
         });
     }
-
     /**
      * Get role password
      * Retrieves the password for the specified role, if possible.
@@ -554,7 +534,6 @@ export class BranchService {
             },
         });
     }
-
     /**
      * Reset the role password
      * Resets the password for the specified role.
@@ -591,5 +570,4 @@ export class BranchService {
             },
         });
     }
-
 }

@@ -2,7 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 /**
  * The Neon compute provisioner.
  * Specify the `k8s-neonvm` provisioner to create a compute endpoint that supports Autoscaling.

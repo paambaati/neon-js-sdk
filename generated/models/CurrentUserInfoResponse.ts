@@ -2,11 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { BillingAccount } from './BillingAccount';
 import type { ComputeUnit } from './ComputeUnit';
 import type { CurrentUserAuthAccount } from './CurrentUserAuthAccount';
-
 export type CurrentUserInfoResponse = {
     /**
      * Control plane observes active endpoints of a user this amount of wall-clock time.

@@ -5,14 +5,10 @@
 import type { GeneralError } from '../models/GeneralError';
 import type { PaginationResponse } from '../models/PaginationResponse';
 import type { ProjectsConsumptionResponse } from '../models/ProjectsConsumptionResponse';
-
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
-
 export class PreviewService {
-
     constructor(public readonly httpRequest: BaseHttpRequest) {}
-
     /**
      * Retrieves a list consumption metrics for each project
      * Retrieves a list consumption metrics for each project for the current billing period.
@@ -47,5 +43,4 @@ export class PreviewService {
             },
         });
     }
-
 }

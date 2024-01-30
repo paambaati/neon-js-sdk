@@ -2,9 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 import type { ErrorCode } from './ErrorCode';
-
 /**
  * General Error
  */

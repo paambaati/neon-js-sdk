@@ -2,8 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { Branch } from './Branch';
-export type BranchResponse = {
-    branch: Branch;
+export type ProjectPermission = {
+    id: string;
+    granted_to_email: string;
+    granted_at: string;
+    revoked_at?: string;
 };
 
