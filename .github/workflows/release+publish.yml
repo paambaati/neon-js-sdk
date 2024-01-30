@@ -17,31 +17,36 @@ jobs:
       id-token: write
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         token: ${{ secrets.CUSTOM_GITHUB_PERSONAL_TOKEN }}
+
+    - name: setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 8
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         node-version: 'lts/*'
-        cache: 'npm'
+        cache: 'pnpm'
         registry-url: 'https://registry.npmjs.org'
 
     - name: Install dependencies
-      run: npm ci
+      run: pnpm install
 
     - name: Check lock file for untrusted packages
-      run: npm_config_yes=true npx lockfile-lint --path package-lock.json --allowed-hosts npm --validate-https
+      run: pnpm dlx lockfile-lint --path package-lock.json --allowed-hosts npm --validate-https
 
     - name: Build package
-      run: npm run build
+      run: pnpm run build
 
     - name: Check package for packaging errors
-      run: npm_config_yes=true npx publint run
+      run: pnpm dlx publint run
 
     - name: Make a release on NPM and GitHub
-      run: npm_config_yes=true npx semantic-release
+      run: pnpm dlx semantic-release
       env:
         NPM_CONFIG_USERCONFIG: '/dev/null' # Ignore local .npmrc as semantic-release will use ONLY THAT if it finds one, leading to npm auth not working.
         NPM_USERNAME: 'gprasannah'
