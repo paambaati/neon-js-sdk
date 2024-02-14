@@ -25,6 +25,7 @@ export type { BranchCreateRequestEndpointOptions } from './models/BranchCreateRe
 export type { BranchesResponse } from './models/BranchesResponse';
 export type { BranchOperations } from './models/BranchOperations';
 export type { BranchResponse } from './models/BranchResponse';
+export type { BranchSchemaResponse } from './models/BranchSchemaResponse';
 export type { BranchState } from './models/BranchState';
 export type { BranchUpdateRequest } from './models/BranchUpdateRequest';
 export type { ComputeUnit } from './models/ComputeUnit';
