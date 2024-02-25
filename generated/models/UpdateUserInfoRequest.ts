@@ -3,10 +3,11 @@
 /* tslint:disable */
 /* eslint-disable */
 export type UpdateUserInfoRequest = {
-    email: string;
+    email?: string;
     id: string;
     image?: string;
     first_name?: string;
     last_name?: string;
+    password?: string;
 };
 
