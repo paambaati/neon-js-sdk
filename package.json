@@ -62,7 +62,7 @@
     "@semantic-release/npm": "11.0.2",
     "@semantic-release/release-notes-generator": "12.1.0",
     "openapi-typescript-codegen": "0.27.0",
-    "tsup": "8.0.1",
+    "tsup": "8.0.2",
     "typescript": "5.3.3"
   },
   "packageManager": "pnpm@8.15.0"
