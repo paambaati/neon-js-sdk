@@ -34,6 +34,7 @@ export type { ConnectionParameters } from './models/ConnectionParameters';
 export type { ConnectionURIsOptionalResponse } from './models/ConnectionURIsOptionalResponse';
 export type { ConnectionURIsResponse } from './models/ConnectionURIsResponse';
 export type { CurrentUserAuthAccount } from './models/CurrentUserAuthAccount';
+export type { CurrentUserInfoAuthResponse } from './models/CurrentUserInfoAuthResponse';
 export type { CurrentUserInfoResponse } from './models/CurrentUserInfoResponse';
 export type { Database } from './models/Database';
 export type { DatabaseCreateRequest } from './models/DatabaseCreateRequest';
@@ -98,6 +99,7 @@ export type { StatementResult } from './models/StatementResult';
 export type { SupportTicketSeverity } from './models/SupportTicketSeverity';
 export type { SuspendTimeoutSeconds } from './models/SuspendTimeoutSeconds';
 export type { UpdateUserInfoRequest } from './models/UpdateUserInfoRequest';
+export type { VerifyUserPasswordRequest } from './models/VerifyUserPasswordRequest';
 
 export { ApiKeyService } from './services/ApiKeyService';
 export { BranchService } from './services/BranchService';

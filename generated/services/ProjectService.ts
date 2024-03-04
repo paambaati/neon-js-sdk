@@ -29,6 +29,7 @@ export class ProjectService {
      *
      * @param cursor Specify the cursor value from the previous response to get the next batch of projects.
      * @param limit Specify a value from 1 to 400 to limit number of projects in the response.
+     * @param search Search query by name or id.
      * @returns any Returned a list of projects for the Neon account
      * @returns GeneralError General Error
      * @throws ApiError
@@ -36,6 +37,7 @@ export class ProjectService {
     public listProjects(
         cursor?: string,
         limit: number = 10,
+        search?: string,
     ): CancelablePromise<(ProjectsResponse & PaginationResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
@@ -43,6 +45,7 @@ export class ProjectService {
             query: {
                 'cursor': cursor,
                 'limit': limit,
+                'search': search,
             },
         });
     }
@@ -85,6 +88,7 @@ export class ProjectService {
      *
      * @param cursor Specify the cursor value from the previous response to get the next batch of projects.
      * @param limit Specify a value from 1 to 400 to limit number of projects in the response.
+     * @param search Search query by name or id.
      * @returns any Returned a list of shared projects for the Neon account
      * @returns GeneralError General Error
      * @throws ApiError
@@ -92,6 +96,7 @@ export class ProjectService {
     public listSharedProjects(
         cursor?: string,
         limit: number = 10,
+        search?: string,
     ): CancelablePromise<(ProjectsResponse & PaginationResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
@@ -99,6 +104,7 @@ export class ProjectService {
             query: {
                 'cursor': cursor,
                 'limit': limit,
+                'search': search,
             },
         });
     }
