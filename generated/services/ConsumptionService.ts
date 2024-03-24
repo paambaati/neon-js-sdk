@@ -7,12 +7,11 @@ import type { PaginationResponse } from '../models/PaginationResponse';
 import type { ProjectsConsumptionResponse } from '../models/ProjectsConsumptionResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
-export class PreviewService {
+export class ConsumptionService {
     constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * Retrieves a list consumption metrics for each project
      * Retrieves a list consumption metrics for each project for the current billing period.
-     * **Important:** This is a preview API and may be subject to changes.
      *
      * @param cursor Specify the cursor value from the previous response to get the next batch of projects.
      * @param limit Specify a value from 1 to 1000 to limit number of projects in the response.

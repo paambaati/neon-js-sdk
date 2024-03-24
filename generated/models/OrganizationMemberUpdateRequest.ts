@@ -2,10 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type BranchUpdateRequest = {
-    branch: {
-        name?: string;
-        protected?: boolean;
-    };
+import type { MemberRole } from './MemberRole';
+export type OrganizationMemberUpdateRequest = {
+    role: MemberRole;
 };
 

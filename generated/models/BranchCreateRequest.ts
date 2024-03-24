@@ -26,6 +26,11 @@ export type BranchCreateRequest = {
          *
          */
         parent_timestamp?: string;
+        /**
+         * Whether the branch is protected
+         *
+         */
+        protected?: boolean;
     };
 };
 

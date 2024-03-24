@@ -6,6 +6,7 @@ import type { BranchCreateRequest } from '../models/BranchCreateRequest';
 import type { BranchesResponse } from '../models/BranchesResponse';
 import type { BranchOperations } from '../models/BranchOperations';
 import type { BranchResponse } from '../models/BranchResponse';
+import type { BranchRestoreRequest } from '../models/BranchRestoreRequest';
 import type { BranchUpdateRequest } from '../models/BranchUpdateRequest';
 import type { ConnectionURIsOptionalResponse } from '../models/ConnectionURIsOptionalResponse';
 import type { DatabaseCreateRequest } from '../models/DatabaseCreateRequest';
@@ -167,6 +168,31 @@ export class BranchService {
         return this.httpRequest.request({
             method: 'PATCH',
             url: '/projects/{project_id}/branches/{branch_id}',
+            path: {
+                'project_id': projectId,
+                'branch_id': branchId,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+    /**
+     * Restore branch
+     * @param projectId The Neon project ID
+     * @param branchId The branch ID
+     * @param requestBody
+     * @returns BranchOperations Updated the specified branch
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public restoreProjectBranch(
+        projectId: string,
+        branchId: string,
+        requestBody: BranchRestoreRequest,
+    ): CancelablePromise<BranchOperations | GeneralError> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/projects/{project_id}/branches/{branch_id}/restore',
             path: {
                 'project_id': projectId,
                 'branch_id': branchId,
