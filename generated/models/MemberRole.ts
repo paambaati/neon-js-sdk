@@ -2,10 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type BranchUpdateRequest = {
-    branch: {
-        name?: string;
-        protected?: boolean;
-    };
-};
-
+/**
+ * The role of the organization member
+ */
+export type MemberRole = 'admin' | 'member';

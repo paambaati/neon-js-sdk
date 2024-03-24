@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { BranchResponse } from '../models/BranchResponse';
+import type { ConnectionURIResponse } from '../models/ConnectionURIResponse';
 import type { ConnectionURIsResponse } from '../models/ConnectionURIsResponse';
 import type { DatabasesResponse } from '../models/DatabasesResponse';
 import type { EndpointsResponse } from '../models/EndpointsResponse';
@@ -240,6 +241,43 @@ export class ProjectService {
             path: {
                 'project_id': projectId,
                 'permission_id': permissionId,
+            },
+        });
+    }
+    /**
+     * Get an URI
+     * Retrieves a Postgres connection URI.
+     *
+     * @param projectId The Neon project ID
+     * @param databaseName The database
+     * @param roleName The role name
+     * @param branchId The branch ID
+     * @param endpointId The endpoint ID
+     * @param pooled The pooler paramater
+     * @returns ConnectionURIResponse Successfully returned the connection URI
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public getConnectionUri(
+        projectId: string,
+        databaseName: string,
+        roleName: string,
+        branchId?: string,
+        endpointId?: string,
+        pooled?: boolean,
+    ): CancelablePromise<ConnectionURIResponse | GeneralError> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/projects/{project_id}/connection_uri',
+            path: {
+                'project_id': projectId,
+            },
+            query: {
+                'branch_id': branchId,
+                'endpoint_id': endpointId,
+                'database_name': databaseName,
+                'role_name': roleName,
+                'pooled': pooled,
             },
         });
     }
