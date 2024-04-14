@@ -3,9 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * A list of IP addresses that are allowed to connect to the endpoint.
+ * A list of IP addresses that are allowed to connect to the compute endpoint.
  * If the list is empty or not set, all IP addresses are allowed.
- * If primary_branch_only is true, the list will be applied only to the primary branch.
+ * If protected_branches_only is true, the list will be applied only to protected branches.
  *
  */
 export type AllowedIps = {
@@ -14,8 +14,12 @@ export type AllowedIps = {
      */
     ips?: Array<string>;
     /**
+     * If true, the list will be applied only to protected branches.
+     */
+    protected_branches_only?: boolean;
+    /**
      * If true, the list will be applied only to the primary branch.
      */
-    primary_branch_only: boolean;
+    primary_branch_only?: boolean;
 };
 

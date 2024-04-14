@@ -2,10 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type BranchUpdateRequest = {
-    branch: {
-        name?: string;
-        protected?: boolean;
-    };
+import type { Invitation } from './Invitation';
+export type OrganizationInvitationsResponse = {
+    invitations: Array<Invitation>;
 };
 

@@ -52,7 +52,12 @@ export type Branch = {
      */
     primary: boolean;
     /**
-     * CPU seconds used by all the endpoints of the branch, including deleted ones.
+     * Whether the branch is protected
+     *
+     */
+    protected: boolean;
+    /**
+     * CPU seconds used by all of the branch's compute endpoints, including deleted ones.
      * This value is reset at the beginning of each billing period.
      * Examples:
      * 1. A branch that uses 1 CPU for 1 second is equal to `cpu_used_sec=1`.

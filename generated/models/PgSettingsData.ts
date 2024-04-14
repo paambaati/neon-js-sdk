@@ -3,6 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * A raw representation of PostgreSQL settings
+ * A raw representation of Postgres settings
  */
 export type PgSettingsData = Record<string, string>;

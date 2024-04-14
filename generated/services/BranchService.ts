@@ -6,6 +6,7 @@ import type { BranchCreateRequest } from '../models/BranchCreateRequest';
 import type { BranchesResponse } from '../models/BranchesResponse';
 import type { BranchOperations } from '../models/BranchOperations';
 import type { BranchResponse } from '../models/BranchResponse';
+import type { BranchRestoreRequest } from '../models/BranchRestoreRequest';
 import type { BranchUpdateRequest } from '../models/BranchUpdateRequest';
 import type { ConnectionURIsOptionalResponse } from '../models/ConnectionURIsOptionalResponse';
 import type { DatabaseCreateRequest } from '../models/DatabaseCreateRequest';
@@ -30,8 +31,10 @@ export class BranchService {
      * Creates a branch in the specified project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      *
-     * This method does not require a request body, but you can specify one to create an endpoint for the branch or to select a non-default parent branch.
-     * The default behavior is to create a branch from the project's root branch (`main`) with no endpoint, and the branch name is auto-generated.
+     * This method does not require a request body, but you can specify one to create a compute endpoint for the branch or to select a non-default parent branch.
+     * The default behavior is to create a branch from the project's primary branch with no compute endpoint, and the branch name is auto-generated.
+     * There is a maximum of one read-write endpoint per branch.
+     * A branch can have multiple read-only endpoints.
      * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
      *
      * @param projectId The Neon project ID
@@ -88,8 +91,8 @@ export class BranchService {
      * You can obtain a `branch_id` by listing the project's branches.
      * A `branch_id` value has a `br-` prefix.
      *
-     * Each Neon project has a root branch named `main`.
-     * A project may contain child branches that were branched from `main` or from another branch.
+     * Each Neon project is initially created with a root and primary branch named `main`.
+     * A project can contain one or more branches.
      * A parent branch is identified by a `parent_id` value, which is the `id` of the parent branch.
      * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
      *
@@ -115,15 +118,15 @@ export class BranchService {
     /**
      * Delete a branch
      * Deletes the specified branch from a project, and places
-     * all endpoints into an idle state, breaking existing client connections.
+     * all compute endpoints into an idle state, breaking existing client connections.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain a `branch_id` by listing the project's branches.
      * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
      *
-     * When a successful response status is received, the endpoints are still active,
+     * When a successful response status is received, the compute endpoints are still active,
      * and the branch is not yet deleted from storage.
      * The deletion occurs after all operations finish.
-     * You cannot delete a branch if it is the only remaining branch in the project.
+     * You cannot delete a project's root or primary branch, and you cannot delete a branch that has a child branch.
      * A project must have at least one branch.
      *
      * @param projectId The Neon project ID
@@ -147,7 +150,7 @@ export class BranchService {
     }
     /**
      * Update a branch
-     * Updates the specified branch. Only changing the branch name is supported.
+     * Updates the specified branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
      * For more information, see [Manage branches](https://neon.tech/docs/manage/branches/).
@@ -176,8 +179,35 @@ export class BranchService {
         });
     }
     /**
-     * Set the branch as the primary branch of a project
-     * The primary mark is automatically removed from the previous primary branch.
+     * Restore a branch
+     * Restores a branch to an earlier state in its own or another branch's history
+     * @param projectId The Neon project ID
+     * @param branchId The branch ID
+     * @param requestBody
+     * @returns BranchOperations Updated the specified branch
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public restoreProjectBranch(
+        projectId: string,
+        branchId: string,
+        requestBody: BranchRestoreRequest,
+    ): CancelablePromise<BranchOperations | GeneralError> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/projects/{project_id}/branches/{branch_id}/restore',
+            path: {
+                'project_id': projectId,
+                'branch_id': branchId,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+    /**
+     * Set branch as primary
+     * Sets the specified branch as the project's primary branch.
+     * The primary designation is automatically removed from the previous primary branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
      * For more information, see [Manage branches](https://neon.tech/docs/manage/branches/).
@@ -203,8 +233,9 @@ export class BranchService {
     }
     /**
      * Get a list of branch endpoints
-     * Retrieves a list of endpoints for the specified branch.
-     * Currently, Neon permits only one endpoint per branch.
+     * Retrieves a list of compute endpoints for the specified branch.
+     * Neon permits only one read-write compute endpoint per branch.
+     * A branch can have multiple read-only compute endpoints.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
      *
@@ -289,7 +320,7 @@ export class BranchService {
      * Get database details
      * Retrieves information about the specified database.
      * You can obtain a `project_id` by listing the projects for your Neon account.
-     * You can obtain the `branch_id` and `database_name` by listing branch's databases.
+     * You can obtain the `branch_id` and `database_name` by listing the branch's databases.
      * For related information, see [Manage databases](https://neon.tech/docs/manage/databases/).
      *
      * @param projectId The Neon project ID
@@ -351,7 +382,7 @@ export class BranchService {
      * Delete a database
      * Deletes the specified database from the branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
-     * You can obtain the `branch_id` and `database_name` by listing branch's databases.
+     * You can obtain the `branch_id` and `database_name` by listing the branch's databases.
      * For related information, see [Manage databases](https://neon.tech/docs/manage/databases/).
      *
      * @param projectId The Neon project ID
@@ -378,10 +409,9 @@ export class BranchService {
     }
     /**
      * Get a list of roles
-     * Retrieves a list of roles from the specified branch.
+     * Retrieves a list of Postgres roles from the specified branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
-     * In Neon, the terms "role" and "user" are synonymous.
      * For related information, see [Manage roles](https://neon.tech/docs/manage/roles/).
      *
      * @param projectId The Neon project ID
@@ -405,10 +435,9 @@ export class BranchService {
     }
     /**
      * Create a role
-     * Creates a role in the specified branch.
+     * Creates a Postgres role in the specified branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
-     * In Neon, the terms "role" and "user" are synonymous.
      * For related information, see [Manage roles](https://neon.tech/docs/manage/roles/).
      *
      * Connections established to the active compute endpoint will be dropped.
@@ -449,7 +478,7 @@ export class BranchService {
      * @param projectId The Neon project ID
      * @param branchId The branch ID
      * @param roleName The role name
-     * @returns RoleResponse Successfully returned details for the specified role
+     * @returns RoleResponse Returned details for the specified role
      * @returns GeneralError General Error
      * @throws ApiError
      */
@@ -470,11 +499,10 @@ export class BranchService {
     }
     /**
      * Delete a role
-     * Deletes the specified role from the branch.
+     * Deletes the specified Postgres role from the branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
      * You can obtain the `role_name` by listing the roles for a branch.
-     * In Neon, the terms "role" and "user" are synonymous.
      * For related information, see [Manage roles](https://neon.tech/docs/manage/roles/).
      *
      * @param projectId The Neon project ID
@@ -501,17 +529,16 @@ export class BranchService {
     }
     /**
      * Get role password
-     * Retrieves the password for the specified role, if possible.
+     * Retrieves the password for the specified Postgres role, if possible.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
      * You can obtain the `role_name` by listing the roles for a branch.
-     * In Neon, the terms "role" and "user" are synonymous.
      * For related information, see [Manage roles](https://neon.tech/docs/manage/roles/).
      *
      * @param projectId The Neon project ID
      * @param branchId The branch ID
      * @param roleName The role name
-     * @returns RolePasswordResponse Successfully returned password for the specified role
+     * @returns RolePasswordResponse Returned password for the specified role
      * @returns GeneralError General Error
      * @throws ApiError
      */
@@ -536,7 +563,7 @@ export class BranchService {
     }
     /**
      * Reset the role password
-     * Resets the password for the specified role.
+     * Resets the password for the specified Postgres role.
      * Returns a new password and operations. The new password is ready to use when the last operation finishes.
      * The old password remains valid until last operation finishes.
      * Connections to the compute endpoint are dropped. If idle,
@@ -545,7 +572,6 @@ export class BranchService {
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
      * You can obtain the `role_name` by listing the roles for a branch.
-     * In Neon, the terms "role" and "user" are synonymous.
      * For related information, see [Manage roles](https://neon.tech/docs/manage/roles/).
      *
      * @param projectId The Neon project ID

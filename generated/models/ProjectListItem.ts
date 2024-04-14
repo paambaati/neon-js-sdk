@@ -106,5 +106,12 @@ export type ProjectListItem = {
      *
      */
     compute_last_active_at?: string;
+    /**
+     * Organization id if a project belongs to organization.
+     * Permissions for the project will be given to organization members as defined by the organization admins.
+     * The permissions of the project do not depend on the user that created the project if a project belongs to an organization.
+     *
+     */
+    org_id?: string;
 };
 

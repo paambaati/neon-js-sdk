@@ -2,10 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type BranchUpdateRequest = {
-    branch: {
-        name?: string;
-        protected?: boolean;
-    };
-};
-
+/**
+ * Identity provider id from keycloak
+ */
+export type IdentityProviderId = 'github' | 'google' | 'hasura' | 'keycloak';

@@ -3,11 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { IdentityProviderId } from './IdentityProviderId';
-export type CurrentUserAuthAccount = {
-    email: string;
-    image: string;
-    login: string;
-    name: string;
+export type LinkedAuthAccount = {
     provider: IdentityProviderId;
+    provider_display_name: string;
+    username: string;
 };
 

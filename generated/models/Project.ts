@@ -148,5 +148,6 @@ export type Project = {
      *
      */
     compute_last_active_at?: string;
+    org_id?: string;
 };
 

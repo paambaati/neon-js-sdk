@@ -2,10 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type BranchUpdateRequest = {
-    branch: {
-        name?: string;
-        protected?: boolean;
-    };
+export type MemberUserInfo = {
+    email: string;
+    name: string;
+    last_name: string;
 };
 

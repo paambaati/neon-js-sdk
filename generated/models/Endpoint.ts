@@ -96,5 +96,10 @@ export type Endpoint = {
     proxy_host: string;
     suspend_timeout_seconds: SuspendTimeoutSeconds;
     provisioner: Provisioner;
+    /**
+     * Attached compute's release version number.
+     *
+     */
+    compute_release_version?: string;
 };
 

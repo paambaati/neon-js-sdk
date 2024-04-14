@@ -23,9 +23,15 @@ export type BranchCreateRequest = {
         parent_lsn?: string;
         /**
          * A timestamp identifying a point in time on the parent branch. The branch will be created with data starting from this point in time.
+         * The timestamp must be provided in ISO 8601 format; for example: `2024-02-26T12:00:00Z`.
          *
          */
         parent_timestamp?: string;
+        /**
+         * Whether the branch is protected
+         *
+         */
+        protected?: boolean;
     };
 };
 

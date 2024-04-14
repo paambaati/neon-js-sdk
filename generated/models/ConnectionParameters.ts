@@ -4,27 +4,27 @@
 /* eslint-disable */
 export type ConnectionParameters = {
     /**
-     * Database name.
+     * Database name
      *
      */
     database: string;
     /**
-     * Password for the role.
+     * Password for the role
      *
      */
     password: string;
     /**
-     * Role name.
+     * Role name
      *
      */
     role: string;
     /**
-     * Host name.
+     * Hostname
      *
      */
     host: string;
     /**
-     * Pooler host name.
+     * Pooler hostname
      *
      */
     pooler_host: string;

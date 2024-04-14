@@ -9,6 +9,11 @@ export type BillingAccountUpdateRequest = {
          *
          */
         email?: string;
+        /**
+         * Organization id, to update the billing email of the organization account.
+         *
+         */
+        org_id?: string;
     };
 };
 
