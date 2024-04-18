@@ -770,7 +770,7 @@ packages:
       lodash-es: 4.17.21
       mime: 4.0.1
       p-filter: 4.1.0
-      semantic-release: 23.0.0(typescript@5.3.3)
+      semantic-release: 23.0.0(typescript@5.4.5)
       url-join: 5.0.0
     transitivePeerDependencies:
       - supports-color
