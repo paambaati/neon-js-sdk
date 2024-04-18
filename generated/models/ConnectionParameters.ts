@@ -1,30 +1,30 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 export type ConnectionParameters = {
     /**
-     * Database name.
+     * Database name
      *
      */
     database: string;
     /**
-     * Password for the role.
+     * Password for the role
      *
      */
     password: string;
     /**
-     * Role name.
+     * Role name
      *
      */
     role: string;
     /**
-     * Host name.
+     * Hostname
      *
      */
     host: string;
     /**
-     * Pooler host name.
+     * Pooler hostname
      *
      */
     pooler_host: string;

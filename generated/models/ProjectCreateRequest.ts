@@ -1,4 +1,4 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -69,6 +69,12 @@ export type ProjectCreateRequest = {
          *
          */
         history_retention_seconds?: number;
+        /**
+         * Organization id in case the project created belongs to an organization.
+         * If not present, project is owned by a user and not by org.
+         *
+         */
+        org_id?: string;
     };
 };
 

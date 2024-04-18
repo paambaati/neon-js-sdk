@@ -1,4 +1,4 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -148,5 +148,6 @@ export type Project = {
      *
      */
     compute_last_active_at?: string;
+    org_id?: string;
 };
 
