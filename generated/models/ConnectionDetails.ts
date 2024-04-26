@@ -1,12 +1,12 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 import type { ConnectionParameters } from './ConnectionParameters';
 export type ConnectionDetails = {
     /**
-     * Connection URI is same as specified in https://www.postgresql.org/docs/current/libpq-connect.html#id-1.7.3.8.3.6
-     * It is a ready to use string for psql or for DATABASE_URL environment variable.
+     * The connection URI is defined as specified here: [Connection URIs](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS)
+     * The connection URI can be used to connect to a Postgres database with psql or defined in a DATABASE_URL environment variable.
      *
      */
     connection_uri: string;

@@ -1,3 +1,28 @@
+# [1.19.0](https://github.com/paambaati/neon-js-sdk/compare/v1.18.0...v1.19.0) (2024-04-18)
+
+
+### Features
+
+* update generated files ([029460a](https://github.com/paambaati/neon-js-sdk/commit/029460a74718d6cf1855174f06f591250938d596))
+* update to track latest spec changes ([43797bf](https://github.com/paambaati/neon-js-sdk/commit/43797bface314f7b451277b5e71938e8e96f9ab5))
+* update to track latest spec changes ([3f75115](https://github.com/paambaati/neon-js-sdk/commit/3f751155989ee6e372854882795b1e2f8281733f))
+
+# [1.18.0](https://github.com/paambaati/neon-js-sdk/compare/v1.17.0...v1.18.0) (2024-03-04)
+
+
+### Features
+
+* update to track latest spec changes ([bdfcae7](https://github.com/paambaati/neon-js-sdk/commit/bdfcae7f39a5b6f92a0941e737b15d0283ebeb17))
+* update to track latest spec changes ([dd61b41](https://github.com/paambaati/neon-js-sdk/commit/dd61b412cc4f78085ef1453d4533c9b16abf6d45))
+
+# [1.17.0](https://github.com/paambaati/neon-js-sdk/compare/v1.16.0...v1.17.0) (2024-02-14)
+
+
+### Features
+
+* update to track latest spec changes ([ca05f17](https://github.com/paambaati/neon-js-sdk/commit/ca05f17cdc46a60a8d3410015202ab3f68100e90))
+* update to track latest spec changes ([cfa02ae](https://github.com/paambaati/neon-js-sdk/commit/cfa02ae451ecbf03e1df863ecf41a4f19fdb8c73))
+
 # [1.16.0](https://github.com/paambaati/neon-js-sdk/compare/v1.15.0...v1.16.0) (2023-12-03)
 
 

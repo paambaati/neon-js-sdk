@@ -1,4 +1,4 @@
-/* generated using openapi-typescript-codegen -- do no edit */
+/* generated using openapi-typescript-codegen -- do not edit */
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -9,6 +9,11 @@ export type BillingAccountUpdateRequest = {
          *
          */
         email?: string;
+        /**
+         * Organization id, to update the billing email of the organization account.
+         *
+         */
+        org_id?: string;
     };
 };
 
