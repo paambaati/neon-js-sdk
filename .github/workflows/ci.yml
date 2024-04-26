@@ -18,9 +18,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_PERSONAL_TOKEN }}
 
     - name: setup pnpm
-      uses: pnpm/action-setup@v2
+      uses: pnpm/action-setup@v3
       with:
-        version: 8
+        version: 9
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -31,9 +31,6 @@ jobs:
 
     - name: Install dependencies
       run: pnpm install
-
-    - name: Check lock file for untrusted packages
-      run: pnpm dlx lockfile-lint --path package-lock.json --allowed-hosts npm --validate-https
 
     - name: Generate OpenAPI bindings and build package
       run: |

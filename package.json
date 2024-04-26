@@ -1,6 +1,6 @@
 {
   "name": "neon-sdk",
-  "version": "1.16.0",
+  "version": "1.19.0",
   "description": "TypeScript SDK for managing your Neon Serverless PostgreSQL projects",
   "keywords": [
     "neon",
@@ -26,7 +26,7 @@
     "neonOpenApiSpec": "https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json"
   },
   "scripts": {
-    "generate": "npx openapi-typescript-codegen --useUnionTypes --name NeonClient --input $npm_package_config_neonOpenApiSpec --output ./generated",
+    "generate": "npx openapi-ts --name NeonClient --client fetch --input $npm_package_config_neonOpenApiSpec --output ./generated",
     "build": "tsup --config tsup.config.ts",
     "prepublishOnly": "npm run build"
   },
@@ -55,15 +55,15 @@
     "access": "public"
   },
   "devDependencies": {
+    "@hey-api/openapi-ts": "0.42.1",
     "@semantic-release/changelog": "6.0.3",
-    "@semantic-release/commit-analyzer": "11.1.0",
+    "@semantic-release/commit-analyzer": "12.0.0",
     "@semantic-release/git": "10.0.1",
-    "@semantic-release/github": "9.2.6",
-    "@semantic-release/npm": "11.0.2",
-    "@semantic-release/release-notes-generator": "12.1.0",
-    "openapi-typescript-codegen": "0.27.0",
-    "tsup": "8.0.1",
-    "typescript": "5.3.3"
+    "@semantic-release/github": "10.0.3",
+    "@semantic-release/npm": "12.0.0",
+    "@semantic-release/release-notes-generator": "13.0.0",
+    "tsup": "8.0.2",
+    "typescript": "5.4.5"
   },
-  "packageManager": "pnpm@8.15.0"
+  "packageManager": "pnpm@9.0.6"
 }
