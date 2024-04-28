@@ -91,6 +91,9 @@ export type { OrganizationMembersResponse } from './models/OrganizationMembersRe
 export type { OrganizationMemberUpdateRequest } from './models/OrganizationMemberUpdateRequest';
 export type { OrganizationsResponse } from './models/OrganizationsResponse';
 export type { OrganizationsUpdateRequest } from './models/OrganizationsUpdateRequest';
+export type { OuterbaseProjectResponse } from './models/OuterbaseProjectResponse';
+export type { OuterbaseWorkspace } from './models/OuterbaseWorkspace';
+export type { OuterbaseWorkspaceUpdateRequest } from './models/OuterbaseWorkspaceUpdateRequest';
 export type { Pagination } from './models/Pagination';
 export type { PaginationResponse } from './models/PaginationResponse';
 export type { PaymentSource } from './models/PaymentSource';
