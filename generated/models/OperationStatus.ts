@@ -5,4 +5,4 @@
 /**
  * The status of the operation
  */
-export type OperationStatus = 'running' | 'finished' | 'failed' | 'scheduling';
+export type OperationStatus = 'scheduling' | 'running' | 'finished' | 'failed' | 'error' | 'cancelling' | 'cancelled' | 'skipped';
