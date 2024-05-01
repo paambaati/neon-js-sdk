@@ -24,8 +24,8 @@ devDependencies:
     specifier: 13.0.0
     version: 13.0.0(semantic-release@23.0.0)
   openapi-typescript-codegen:
-    specifier: 0.28.0
-    version: 0.28.0
+    specifier: 0.29.0
+    version: 0.29.0
   tsup:
     specifier: 8.0.2
     version: 8.0.2(typescript@5.4.5)
@@ -2170,8 +2170,8 @@ packages:
       mimic-fn: 4.0.0
     dev: true
 
-  /openapi-typescript-codegen@0.28.0:
-    resolution: {integrity: sha512-BZTsMUwhA/h2zCzisjagLUPQNHE64N1EN074yGB+WqA0LFlJwy8sKQYrXH5G4phbjj9KSPx7xuWKO4hkPIOARw==}
+  /openapi-typescript-codegen@0.29.0:
+    resolution: {integrity: sha512-/wC42PkD0LGjDTEULa/XiWQbv4E9NwLjwLjsaJ/62yOsoYhwvmBR31kPttn1DzQ2OlGe5stACcF/EIkZk43M6w==}
     hasBin: true
     dependencies:
       '@apidevtools/json-schema-ref-parser': 11.5.4
