@@ -17,6 +17,18 @@ export type OuterbaseProjectResponse = {
      */
     current_workspace_id?: string;
     /**
+     * ID of "base" entity
+     */
+    base_id?: string;
+    /**
+     * ID of "connection" entity
+     */
+    connection_id?: string;
+    /**
+     * ID of "source" entity
+     */
+    source_id?: string;
+    /**
      * The neon database role
      */
     role?: string;
