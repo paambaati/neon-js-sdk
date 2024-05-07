@@ -70,4 +70,4 @@ node --experimental-fetch app.js
 
 ## Developer Notes
 
-This package is auto-generated from [Neon's OpenAPI reference](https://neon.tech/api-reference/v2/) using [`openapi-typescript-codegen`](https://www.npmjs.com/package/openapi-typescript-codegen).
+This package is auto-generated from [Neon's OpenAPI reference](https://neon.tech/api-reference/v2/) using [`@hey-api/openapi-ts`](https://github.com/hey-api/openapi-ts).
