@@ -1408,6 +1408,12 @@ export type PaymentSourceBankCard = {
     exp_year?: number;
 };
 
+/**
+ * Brand of credit card.
+ *
+ */
+export type brand = 'amex' | 'diners' | 'discover' | 'jcb' | 'mastercard' | 'unionpay' | 'unknown' | 'visa';
+
 export type PaymentSource = {
     /**
      * Type of payment source. E.g. "card".
@@ -2574,9 +2580,7 @@ export type $OpenApiTs = {
             };
         };
         post: {
-            req: {
-                requestBody: ApiKeyCreateRequest;
-            };
+            req: CreateApiKeyData;
             res: {
                 /**
                  * Created an API key
@@ -2591,12 +2595,7 @@ export type $OpenApiTs = {
     };
     '/api_keys/{key_id}': {
         delete: {
-            req: {
-                /**
-                 * The API key ID
-                 */
-                keyId: number;
-            };
+            req: RevokeApiKeyData;
             res: {
                 /**
                  * Revoked the specified API key
@@ -2611,16 +2610,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/operations/{operation_id}': {
         get: {
-            req: {
-                /**
-                 * The operation ID
-                 */
-                operationId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: GetProjectOperationData;
             res: {
                 /**
                  * Returned details for the specified operation
@@ -2635,20 +2625,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/operations': {
         get: {
-            req: {
-                /**
-                 * Specify the cursor value from the previous response to get the next batch of operations
-                 */
-                cursor?: string;
-                /**
-                 * Specify a value from 1 to 1000 to limit number of operations in the response
-                 */
-                limit?: number;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: ListProjectOperationsData;
             res: {
                 /**
                  * Returned a list of operations
@@ -2664,24 +2641,7 @@ export type $OpenApiTs = {
     };
     '/projects': {
         get: {
-            req: {
-                /**
-                 * Specify the cursor value from the previous response to retrieve the next batch of projects.
-                 */
-                cursor?: string;
-                /**
-                 * Specify a value from 1 to 400 to limit number of projects in the response.
-                 */
-                limit?: number;
-                /**
-                 * Search for projects by `org_id` (Comming soon).
-                 */
-                orgId?: string;
-                /**
-                 * Search by project `name` or `id`. You can specify partial `name` or `id` values to filter results.
-                 */
-                search?: string;
-            };
+            req: ListProjectsData;
             res: {
                 /**
                  * Returned a list of projects for the Neon account
@@ -2694,9 +2654,7 @@ export type $OpenApiTs = {
             };
         };
         post: {
-            req: {
-                requestBody: ProjectCreateRequest;
-            };
+            req: CreateProjectData;
             res: {
                 /**
                  * Created a project.
@@ -2715,20 +2673,7 @@ export type $OpenApiTs = {
     };
     '/projects/shared': {
         get: {
-            req: {
-                /**
-                 * Specify the cursor value from the previous response to get the next batch of projects.
-                 */
-                cursor?: string;
-                /**
-                 * Specify a value from 1 to 400 to limit number of projects in the response.
-                 */
-                limit?: number;
-                /**
-                 * Search query by name or id.
-                 */
-                search?: string;
-            };
+            req: ListSharedProjectsData;
             res: {
                 /**
                  * Returned a list of shared projects for the Neon account
@@ -2743,12 +2688,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}': {
         get: {
-            req: {
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: GetProjectData;
             res: {
                 /**
                  * Returned information about the specified project
@@ -2761,13 +2701,7 @@ export type $OpenApiTs = {
             };
         };
         patch: {
-            req: {
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-                requestBody: ProjectUpdateRequest;
-            };
+            req: UpdateProjectData;
             res: {
                 /**
                  * Updated the specified project
@@ -2780,12 +2714,7 @@ export type $OpenApiTs = {
             };
         };
         delete: {
-            req: {
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: DeleteProjectData;
             res: {
                 /**
                  * Deleted the specified project
@@ -2800,9 +2729,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/permissions': {
         get: {
-            req: {
-                projectId: string;
-            };
+            req: ListProjectPermissionsData;
             res: {
                 /**
                  * Returned project access details
@@ -2815,10 +2742,7 @@ export type $OpenApiTs = {
             };
         };
         post: {
-            req: {
-                projectId: string;
-                requestBody: GrantPermissionToProjectRequest;
-            };
+            req: GrantPermissionToProjectData;
             res: {
                 /**
                  * Granted project access
@@ -2833,10 +2757,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/permissions/{permission_id}': {
         delete: {
-            req: {
-                permissionId: string;
-                projectId: string;
-            };
+            req: RevokePermissionFromProjectData;
             res: {
                 /**
                  * Revoked project access
@@ -2851,32 +2772,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/connection_uri': {
         get: {
-            req: {
-                /**
-                 * The branch ID. Defaults to your project's primary `branch_id` if not specified.
-                 */
-                branchId?: string;
-                /**
-                 * The database name
-                 */
-                databaseName: string;
-                /**
-                 * The endpoint ID. Defaults to the read-write `endpoint_id` associated with the `branch_id` if not specified.
-                 */
-                endpointId?: string;
-                /**
-                 * Adds the `-pooler` option to the connection URI when set to `true`, creating a pooled connection URI.
-                 */
-                pooled?: boolean;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-                /**
-                 * The role name
-                 */
-                roleName: string;
-            };
+            req: GetConnectionUriData;
             res: {
                 /**
                  * Returned the connection URI
@@ -2891,13 +2787,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/branches': {
         post: {
-            req: {
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-                requestBody?: BranchCreateRequest;
-            };
+            req: CreateProjectBranchData;
             res: {
                 /**
                  * Created a branch. An endpoint is only created if it was specified in the request.
@@ -2910,12 +2800,7 @@ export type $OpenApiTs = {
             };
         };
         get: {
-            req: {
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: ListProjectBranchesData;
             res: {
                 /**
                  * Returned a list of branches for the specified project
@@ -2930,16 +2815,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/branches/{branch_id}': {
         get: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: GetProjectBranchData;
             res: {
                 /**
                  * Returned information about the specified branch
@@ -2952,16 +2828,7 @@ export type $OpenApiTs = {
             };
         };
         delete: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: DeleteProjectBranchData;
             res: {
                 /**
                  * Deleted the specified branch
@@ -2974,17 +2841,7 @@ export type $OpenApiTs = {
             };
         };
         patch: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-                requestBody: BranchUpdateRequest;
-            };
+            req: UpdateProjectBranchData;
             res: {
                 /**
                  * Updated the specified branch
@@ -2999,17 +2856,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/branches/{branch_id}/restore': {
         post: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-                requestBody: BranchRestoreRequest;
-            };
+            req: RestoreProjectBranchData;
             res: {
                 /**
                  * Updated the specified branch
@@ -3024,16 +2871,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/branches/{branch_id}/set_as_primary': {
         post: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: SetPrimaryProjectBranchData;
             res: {
                 /**
                  * Updated the specified branch
@@ -3048,16 +2886,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/branches/{branch_id}/endpoints': {
         get: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: ListProjectBranchEndpointsData;
             res: {
                 /**
                  * Returned a list of endpoints for the specified branch
@@ -3072,16 +2901,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/branches/{branch_id}/databases': {
         get: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: ListProjectBranchDatabasesData;
             res: {
                 /**
                  * Returned a list of databases of the specified branch
@@ -3094,17 +2914,7 @@ export type $OpenApiTs = {
             };
         };
         post: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-                requestBody: DatabaseCreateRequest;
-            };
+            req: CreateProjectBranchDatabaseData;
             res: {
                 /**
                  * Created a database in the specified branch
@@ -3119,20 +2929,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/branches/{branch_id}/databases/{database_name}': {
         get: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The database name
-                 */
-                databaseName: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: GetProjectBranchDatabaseData;
             res: {
                 /**
                  * Returned the database details
@@ -3145,21 +2942,7 @@ export type $OpenApiTs = {
             };
         };
         patch: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The database name
-                 */
-                databaseName: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-                requestBody: DatabaseUpdateRequest;
-            };
+            req: UpdateProjectBranchDatabaseData;
             res: {
                 /**
                  * Updated the database
@@ -3172,20 +2955,7 @@ export type $OpenApiTs = {
             };
         };
         delete: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The database name
-                 */
-                databaseName: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: DeleteProjectBranchDatabaseData;
             res: {
                 /**
                  * Deleted the specified database
@@ -3200,16 +2970,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/branches/{branch_id}/roles': {
         get: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: ListProjectBranchRolesData;
             res: {
                 /**
                  * Returned a list of roles from the specified branch.
@@ -3222,17 +2983,7 @@ export type $OpenApiTs = {
             };
         };
         post: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-                requestBody: RoleCreateRequest;
-            };
+            req: CreateProjectBranchRoleData;
             res: {
                 /**
                  * Created a role in the specified branch
@@ -3247,20 +2998,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/branches/{branch_id}/roles/{role_name}': {
         get: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-                /**
-                 * The role name
-                 */
-                roleName: string;
-            };
+            req: GetProjectBranchRoleData;
             res: {
                 /**
                  * Returned details for the specified role
@@ -3273,20 +3011,7 @@ export type $OpenApiTs = {
             };
         };
         delete: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-                /**
-                 * The role name
-                 */
-                roleName: string;
-            };
+            req: DeleteProjectBranchRoleData;
             res: {
                 /**
                  * Deleted the specified role from the branch
@@ -3301,29 +3026,12 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/branches/{branch_id}/roles/{role_name}/reveal_password': {
         get: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-                /**
-                 * The role name
-                 */
-                roleName: string;
-            };
+            req: GetProjectBranchRolePasswordData;
             res: {
                 /**
                  * Returned password for the specified role
                  */
                 200: RolePasswordResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
                 /**
                  * Role not found
                  */
@@ -3332,25 +3040,16 @@ export type $OpenApiTs = {
                  * Storing passwords is disabled
                  */
                 412: GeneralError;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
             };
         };
     };
     '/projects/{project_id}/branches/{branch_id}/roles/{role_name}/reset_password': {
         post: {
-            req: {
-                /**
-                 * The branch ID
-                 */
-                branchId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-                /**
-                 * The role nam
-                 */
-                roleName: string;
-            };
+            req: ResetProjectBranchRolePasswordData;
             res: {
                 /**
                  * Reset the passsword for the specified role
@@ -3365,13 +3064,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/endpoints': {
         post: {
-            req: {
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-                requestBody: EndpointCreateRequest;
-            };
+            req: CreateProjectEndpointData;
             res: {
                 /**
                  * Created a compute endpoint
@@ -3384,12 +3077,7 @@ export type $OpenApiTs = {
             };
         };
         get: {
-            req: {
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: ListProjectEndpointsData;
             res: {
                 /**
                  * Returned a list of endpoints for the specified project
@@ -3404,16 +3092,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/endpoints/{endpoint_id}': {
         get: {
-            req: {
-                /**
-                 * The endpoint ID
-                 */
-                endpointId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: GetProjectEndpointData;
             res: {
                 /**
                  * Returned information about the specified endpoint
@@ -3426,16 +3105,7 @@ export type $OpenApiTs = {
             };
         };
         delete: {
-            req: {
-                /**
-                 * The endpoint ID
-                 */
-                endpointId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: DeleteProjectEndpointData;
             res: {
                 /**
                  * Deleted the specified compute endpoint
@@ -3448,17 +3118,7 @@ export type $OpenApiTs = {
             };
         };
         patch: {
-            req: {
-                /**
-                 * The endpoint ID
-                 */
-                endpointId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-                requestBody: EndpointUpdateRequest;
-            };
+            req: UpdateProjectEndpointData;
             res: {
                 /**
                  * Updated the specified compute endpoint
@@ -3473,16 +3133,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/endpoints/{endpoint_id}/start': {
         post: {
-            req: {
-                /**
-                 * The endpoint ID
-                 */
-                endpointId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: StartProjectEndpointData;
             res: {
                 /**
                  * Started the specified compute endpoint
@@ -3497,16 +3148,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/endpoints/{endpoint_id}/suspend': {
         post: {
-            req: {
-                /**
-                 * The endpoint ID
-                 */
-                endpointId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: SuspendProjectEndpointData;
             res: {
                 /**
                  * Suspended the specified endpoint
@@ -3521,16 +3163,7 @@ export type $OpenApiTs = {
     };
     '/projects/{project_id}/endpoints/{endpoint_id}/restart': {
         post: {
-            req: {
-                /**
-                 * The endpoint ID
-                 */
-                endpointId: string;
-                /**
-                 * The Neon project ID
-                 */
-                projectId: string;
-            };
+            req: RestartProjectEndpointData;
             res: {
                 /**
                  * Restarted endpoint
@@ -3545,49 +3178,13 @@ export type $OpenApiTs = {
     };
     '/consumption_history/account': {
         get: {
-            req: {
-                /**
-                 * Specify the start `date-time` for the consumption period.
-                 * The `date-time` value is rounded according to the specified `granularity`.
-                 * For example, `2024-03-15T15:30:00Z` for `daily` granularity will be rounded to `2024-03-15T00:00:00Z`.
-                 * The specified `date-time` value must respect the specified granularity:
-                 * - For `hourly`, consumption metrics are limited to the last 168 hours.
-                 * - For `daily`, consumption metrics are limited to the last 60 days.
-                 * - For `monthly`, consumption metrics are limited to the past year.
-                 *
-                 * The consumption history is available starting from `March 1, 2024, at 00:00:00 UTC`.
-                 *
-                 */
-                from: string;
-                /**
-                 * Specify the granularity of consumption metrics.
-                 * Hourly, daily, and monthly metrics are available for the last 168 hours, 60 days,
-                 * and 1 year, respectively.
-                 *
-                 */
-                granularity: ConsumptionHistoryGranularity;
-                /**
-                 * Specify the end `date-time` for the consumption period.
-                 * The `date-time` value is rounded according to the specified granularity.
-                 * For example, `2024-03-15T15:30:00Z` for `daily` granularity will be rounded to `2024-03-15T00:00:00Z`.
-                 * The specified `date-time` value must respect the specified granularity:
-                 * - For `hourly`, consumption metrics are limited to the last 168 hours.
-                 * - For `daily`, consumption metrics are limited to the last 60 days.
-                 * - For `monthly`, consumption metrics are limited to the past year.
-                 *
-                 */
-                to: string;
-            };
+            req: GetConsumptionHistoryPerAccountData;
             res: {
                 /**
                  * Returned consumption metrics for the Neon account
                  */
                 200: ConsumptionHistoryPerAccountResponse;
                 /**
-                 * General Error
-                 */
-                default: GeneralError;
-                /**
                  * This endpoint is not available. It is only supported with Scale plan accounts.
                  */
                 403: GeneralError;
@@ -3601,68 +3198,22 @@ export type $OpenApiTs = {
                  * Too many requests
                  */
                 429: GeneralError;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
             };
         };
     };
     '/consumption_history/projects': {
         get: {
-            req: {
-                /**
-                 * Specify the cursor value from the previous response to get the next batch of projects.
-                 */
-                cursor?: string;
-                /**
-                 * Specify the start `date-time` for the consumption period.
-                 * The `date-time` value is rounded according to the specified `granularity`.
-                 * For example, `2024-03-15T15:30:00Z` for `daily` granularity will be rounded to `2024-03-15T00:00:00Z`.
-                 * The specified `date-time` value must respect the specified `granularity`:
-                 * - For `hourly`, consumption metrics are limited to the last 168 hours.
-                 * - For `daily`, consumption metrics are limited to the last 60 days.
-                 * - For `monthly`, consumption metrics are limited to the last year.
-                 *
-                 * The consumption history is available starting from `March 1, 2024, at 00:00:00 UTC`.
-                 *
-                 */
-                from: string;
-                /**
-                 * Specify the granularity of consumption metrics.
-                 * Hourly, daily, and monthly metrics are available for the last 168 hours, 60 days,
-                 * and 1 year, respectively.
-                 *
-                 */
-                granularity: ConsumptionHistoryGranularity;
-                /**
-                 * Specify a value from 1 to 100 to limit number of projects in the response.
-                 */
-                limit?: number;
-                /**
-                 * Specify a list of project IDs to filter the response.
-                 * If omitted, the response will contain all projects.
-                 *
-                 */
-                projectIds?: Array<(string)>;
-                /**
-                 * Specify the end `date-time` for the consumption period.
-                 * The `date-time` value is rounded according to the specified granularity.
-                 * For example, `2024-03-15T15:30:00Z` for `daily` granularity will be rounded to `2024-03-15T00:00:00Z`.
-                 * The specified `date-time` value must respect the specified `granularity`:
-                 * - For `hourly`, consumption metrics are limited to the last 168 hours.
-                 * - For `daily`, consumption metrics are limited to the last 60 days.
-                 * - For `monthly`, consumption metrics are limited to the last year.
-                 *
-                 */
-                to: string;
-            };
+            req: GetConsumptionHistoryPerProjectData;
             res: {
                 /**
                  * Returned project consumption metrics for the Neon account
                  */
                 200: ConsumptionHistoryPerProjectResponse & PaginationResponse;
                 /**
-                 * General Error
-                 */
-                default: GeneralError;
-                /**
                  * This endpoint is not available. It is only supported with Scale plan accounts.
                  */
                 403: GeneralError;
@@ -3676,35 +3227,16 @@ export type $OpenApiTs = {
                  * Too many requests
                  */
                 429: GeneralError;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
             };
         };
     };
     '/consumption/projects': {
         get: {
-            req: {
-                /**
-                 * Specify the cursor value from the previous response to get the next batch of projects
-                 */
-                cursor?: string;
-                /**
-                 * Specify the start date-time for the consumption period.
-                 * The time value must be provided in ISO 8601 format.
-                 * If `from` or `to` is not specified, we return only current consumption period.
-                 *
-                 */
-                from?: string;
-                /**
-                 * Specify a value from 1 to 1000 to limit number of projects in the response
-                 */
-                limit?: number;
-                /**
-                 * Specify the end date-time period for the consumption period.
-                 * The time value must be provided in ISO 8601 format.
-                 * If `from` or `to` is not specified, only the current consumption period is returned.
-                 *
-                 */
-                to?: string;
-            };
+            req: ListProjectsConsumptionData;
             res: {
                 /**
                  * Returned a list of project consumption metrics for the Neon account
