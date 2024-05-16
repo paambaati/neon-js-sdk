@@ -26,7 +26,7 @@
     "neonOpenApiSpec": "https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json"
   },
   "scripts": {
-    "generate": "npx openapi-ts --name NeonClient --client fetch --input $npm_package_config_neonOpenApiSpec --output ./generated",
+    "generate": "openapi-ts --name NeonClient --client fetch --input $npm_package_config_neonOpenApiSpec --output ./generated",
     "build": "tsup --config tsup.config.ts",
     "prepublishOnly": "npm run build"
   },
@@ -55,15 +55,15 @@
     "access": "public"
   },
   "devDependencies": {
-    "@hey-api/openapi-ts": "0.43.2",
+    "@hey-api/openapi-ts": "0.45.1",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "12.0.0",
     "@semantic-release/git": "10.0.1",
-    "@semantic-release/github": "10.0.3",
-    "@semantic-release/npm": "12.0.0",
+    "@semantic-release/github": "10.0.4",
+    "@semantic-release/npm": "12.0.1",
     "@semantic-release/release-notes-generator": "13.0.0",
     "tsup": "8.0.2",
     "typescript": "5.4.5"
   },
-  "packageManager": "pnpm@9.1.0"
+  "packageManager": "pnpm@9.1.1"
 }
