@@ -26,15 +26,14 @@ Fully-typed, zero-dependency Node.js and Deno SDK for managing your [Neon](https
 2. Initialize the client with your [Neon API token](https://neon.tech/docs/manage/api-keys#manage-api-keys-with-the-neon-api).
 
     ```typescript
-    import { ProjectService } from 'neon-sdk';
+    import { NeonClient } from 'neon-sdk';
 
-    // TODO: figure out how to init this.
     const neonClient = new NeonClient({
         TOKEN: '<INSERT NEON API KEY HERE>',
     });
 
     (async () => {
-        const projects = await ProjectService.listProjects();
+        const projects = await neonClient.project.listProjects();
         console.log(projects);
     })()
     ```
@@ -56,13 +55,12 @@ node --experimental-fetch app.js
 
     ```typescript
     // neon.ts
-    import { ProjectService } from "npm:neon-sdk";
+    import { NeonClient } from "npm:neon-sdk";
 
-    // TODO: figure out how to init this.
     const neonClient = new NeonClient({
         TOKEN: "<INSERT NEON API KEY HERE>",
     });
-    const projects = await ProjectService.listProjects();
+    const projects = await neonClient.project.listProjects();
     console.log(projects);
     ```
 
@@ -77,7 +75,7 @@ node --experimental-fetch app.js
 All API responses are typed as a union of the specific API's successful response and `GeneralError`. To narrow this type down –
 
 ```typescript
-import { ProjectService, type GeneralError } from 'neon-sdk';
+import { NeonClient, type GeneralError } from 'neon-sdk';
 
 function isNeonError(neonResponse: unknown): neonResponse is GeneralError {
     const allowedKeys = ['code', 'message'].sort();
@@ -88,7 +86,10 @@ function isNeonError(neonResponse: unknown): neonResponse is GeneralError {
             && (neonResponse as GeneralError).message !== undefined;
 }
 
-const response = await ProjectService.listProjects();
+const neonClient = new NeonClient({
+    TOKEN: "<INSERT NEON API KEY HERE>",
+});
+const response = await neonClient.project.listProjects();
 
 if (!isNeonError(response)) {
     // Correctly typed as `ProjectsResponse`
