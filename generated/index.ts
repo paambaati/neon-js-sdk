@@ -5,3 +5,13 @@ export { OpenAPI, type OpenAPIConfig } from './core/OpenAPI';
 export * from './schemas.gen';
 export * from './services.gen';
 export * from './types.gen';
+
+// NOTE: This is manually added by hand to help reproduce
+
+import { ProjectService } from './services.gen';
+
+(async () => {
+    // TODO: How do I initialize this client with the token?
+    const projects = await ProjectService.listProjects();
+    console.log(projects);
+})()
