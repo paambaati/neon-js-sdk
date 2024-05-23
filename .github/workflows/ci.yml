@@ -30,10 +30,11 @@ jobs:
     - name: Install dependencies
       run: pnpm install
 
-    - name: Generate OpenAPI bindings and build package
-      run: |
-        pnpm run generate
-        pnpm run build
+    - name: Generate OpenAPI bindings
+      run: pnpm run generate
+
+    - name: Type-check and build package
+      run: pnpm run build
 
     - name: Check package for packaging errors
       run: pnpm dlx publint run
