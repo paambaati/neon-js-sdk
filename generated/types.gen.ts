@@ -1941,6 +1941,23 @@ export type GetProjectOperationData = {
 
 export type GetProjectOperationResponse = OperationResponse | GeneralError;
 
+export type ListProjectOperationsData = {
+    /**
+     * Specify the cursor value from the previous response to get the next batch of operations
+     */
+    cursor?: string;
+    /**
+     * Specify a value from 1 to 1000 to limit number of operations in the response
+     */
+    limit?: number;
+    /**
+     * The Neon project ID
+     */
+    projectId: string;
+};
+
+export type ListProjectOperationsResponse = OperationsResponse & PaginationResponse | GeneralError;
+
 export type ListProjectsData = {
     /**
      * Specify the cursor value from the previous response to retrieve the next batch of projects.
@@ -2012,23 +2029,6 @@ export type DeleteProjectData = {
 };
 
 export type DeleteProjectResponse = ProjectResponse | GeneralError;
-
-export type ListProjectOperationsData = {
-    /**
-     * Specify the cursor value from the previous response to get the next batch of operations
-     */
-    cursor?: string;
-    /**
-     * Specify a value from 1 to 1000 to limit number of operations in the response
-     */
-    limit?: number;
-    /**
-     * The Neon project ID
-     */
-    projectId: string;
-};
-
-export type ListProjectOperationsResponse = OperationsResponse & PaginationResponse | GeneralError;
 
 export type ListProjectPermissionsData = {
     projectId: string;
@@ -2623,6 +2623,22 @@ export type $OpenApiTs = {
             };
         };
     };
+    '/projects/{project_id}/operations': {
+        get: {
+            req: ListProjectOperationsData;
+            res: {
+                /**
+                 * Returned a list of operations
+                 *
+                 */
+                200: OperationsResponse & PaginationResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
     '/projects': {
         get: {
             req: ListProjectsData;
@@ -2704,22 +2720,6 @@ export type $OpenApiTs = {
                  * Deleted the specified project
                  */
                 200: ProjectResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/operations': {
-        get: {
-            req: ListProjectOperationsData;
-            res: {
-                /**
-                 * Returned a list of operations
-                 *
-                 */
-                200: OperationsResponse & PaginationResponse;
                 /**
                  * General Error
                  */

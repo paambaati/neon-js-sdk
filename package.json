@@ -22,11 +22,8 @@
     "type": "git",
     "url": "https://github.com/paambaati/neon-js-sdk.git"
   },
-  "config": {
-    "neonOpenApiSpec": "https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json"
-  },
   "scripts": {
-    "generate": "openapi-ts --name NeonClient --client fetch --input $npm_package_config_neonOpenApiSpec --output ./generated",
+    "generate": "openapi-ts",
     "build": "tsup --config tsup.config.ts",
     "prepublishOnly": "npm run build"
   },
@@ -59,7 +56,7 @@
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "12.0.0",
     "@semantic-release/git": "10.0.1",
-    "@semantic-release/github": "10.0.4",
+    "@semantic-release/github": "10.0.5",
     "@semantic-release/npm": "12.0.1",
     "@semantic-release/release-notes-generator": "13.0.0",
     "tsup": "8.0.2",

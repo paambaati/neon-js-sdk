@@ -5,11 +5,13 @@
 
 Fully-typed, zero-dependency Node.js and Deno SDK for managing your [Neon](https://neon.tech/) Serverless Postgres projects.
 
-> **Note**
-
+> [!NOTE]
 > Neon is a fully managed serverless PostgreSQL with a generous free tier. Neon separates storage and compute and offers modern developer features such as serverless, branching, bottomless storage, and more. Neon is open source and written in Rust.
 > 
 > [Learn more about Neon](https://neon.tech/docs/introduction/about)
+
+> [!IMPORTANT]
+> Note that you're reading the documentation for v2.x of this package. If you're still using the legacy v1.x version, see the [v1.x documentation](https://github.com/paambaati/neon-js-sdk/blob/v1.21.0/README.md#usage).
 
 ## Usage
 
@@ -24,14 +26,15 @@ Fully-typed, zero-dependency Node.js and Deno SDK for managing your [Neon](https
 2. Initialize the client with your [Neon API token](https://neon.tech/docs/manage/api-keys#manage-api-keys-with-the-neon-api).
 
     ```typescript
-    import { NeonClient } from 'neon-sdk';
+    import { ProjectService } from 'neon-sdk';
 
+    // TODO: figure out how to init this.
     const neonClient = new NeonClient({
         TOKEN: '<INSERT NEON API KEY HERE>',
     });
 
     (async () => {
-        const projects = await neonClient.project.listProjects();
+        const projects = await ProjectService.listProjects();
         console.log(projects);
     })()
     ```
@@ -53,12 +56,13 @@ node --experimental-fetch app.js
 
     ```typescript
     // neon.ts
-    import { NeonClient } from "npm:neon-sdk";
+    import { ProjectService } from "npm:neon-sdk";
 
+    // TODO: figure out how to init this.
     const neonClient = new NeonClient({
         TOKEN: "<INSERT NEON API KEY HERE>",
     });
-    const projects = await neonClient.project.listProjects();
+    const projects = await ProjectService.listProjects();
     console.log(projects);
     ```
 
@@ -68,6 +72,29 @@ node --experimental-fetch app.js
     deno run --allow-net=console.neon.tech neon.ts
     ```
 
+## Recipes
+
+All API responses are typed as a union of the specific API's successful response and `GeneralError`. To narrow this type down –
+
+```typescript
+import { ProjectService, type GeneralError } from 'neon-sdk';
+
+function isNeonError(neonResponse: unknown): neonResponse is GeneralError {
+    const allowedKeys = ['code', 'message'].sort();
+    const foundKeys = Object.getOwnPropertyNames(neonResponse || {}).sort();
+    return foundKeys.length === allowedKeys.length
+            && foundKeys.every((value, index) => value === allowedKeys[index])
+            && (neonResponse as GeneralError).code !== undefined
+            && (neonResponse as GeneralError).message !== undefined;
+}
+
+const response = await ProjectService.listProjects();
+
+if (!isNeonError(response)) {
+    // Correctly typed as `ProjectsResponse`
+    response
+}
+```
 ## Developer Notes
 
 This package is auto-generated from [Neon's OpenAPI reference](https://neon.tech/api-reference/v2/) using [`@hey-api/openapi-ts`](https://github.com/hey-api/openapi-ts).
