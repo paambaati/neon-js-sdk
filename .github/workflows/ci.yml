@@ -37,7 +37,7 @@ jobs:
       run: pnpm run build
 
     - name: Check package for packaging errors
-      run: pnpm dlx publint run
+      run: pnpm dlx publint run --strict
 
     - name: Check for uncommitted changes
       # Ensure no changes, but ignore node_modules dir since dev/fresh ci deps installed.
