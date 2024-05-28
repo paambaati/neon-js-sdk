@@ -15,13 +15,15 @@ export class ApiKeyService {
      * For more information, see [Manage API keys](https://neon.tech/docs/manage/api-keys/).
      *
      * @returns ApiKeysListResponseItem Returned the API keys for the Neon account
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public listApiKeys(): CancelablePromise<ListApiKeysResponse> {
         return this.httpRequest.request({
             method: 'GET',
-            url: '/api_keys'
+            url: '/api_keys',
+            errors: {
+                default: 'General Error'
+            }
         });
     }
     
@@ -36,7 +38,6 @@ export class ApiKeyService {
      * @param data The data for the request.
      * @param data.requestBody
      * @returns ApiKeyCreateResponse Created an API key
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public createApiKey(data: CreateApiKeyData): CancelablePromise<CreateApiKeyResponse> {
@@ -44,7 +45,10 @@ export class ApiKeyService {
             method: 'POST',
             url: '/api_keys',
             body: data.requestBody,
-            mediaType: 'application/json'
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
         });
     }
     
@@ -60,7 +64,6 @@ export class ApiKeyService {
      * @param data The data for the request.
      * @param data.keyId The API key ID
      * @returns ApiKeyRevokeResponse Revoked the specified API key
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public revokeApiKey(data: RevokeApiKeyData): CancelablePromise<RevokeApiKeyResponse> {
@@ -69,6 +72,9 @@ export class ApiKeyService {
             url: '/api_keys/{key_id}',
             path: {
                 key_id: data.keyId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -89,7 +95,6 @@ export class OperationService {
      * @param data.projectId The Neon project ID
      * @param data.operationId The operation ID
      * @returns OperationResponse Returned details for the specified operation
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public getProjectOperation(data: GetProjectOperationData): CancelablePromise<GetProjectOperationResponse> {
@@ -99,6 +104,9 @@ export class OperationService {
             path: {
                 project_id: data.projectId,
                 operation_id: data.operationId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -117,7 +125,6 @@ export class OperationService {
      * @param data.limit Specify a value from 1 to 1000 to limit number of operations in the response
      * @returns unknown Returned a list of operations
      *
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public listProjectOperations(data: ListProjectOperationsData): CancelablePromise<ListProjectOperationsResponse> {
@@ -130,6 +137,9 @@ export class OperationService {
             query: {
                 cursor: data.cursor,
                 limit: data.limit
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -151,7 +161,6 @@ export class ProjectService {
      * @param data.search Search by project `name` or `id`. You can specify partial `name` or `id` values to filter results.
      * @param data.orgId Search for projects by `org_id` (Comming soon).
      * @returns unknown Returned a list of projects for the Neon account
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public listProjects(data: ListProjectsData = {}): CancelablePromise<ListProjectsResponse> {
@@ -163,6 +172,9 @@ export class ProjectService {
                 limit: data.limit,
                 search: data.search,
                 org_id: data.orgId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -186,7 +198,6 @@ export class ProjectService {
      * At least one non-protected role is created with a password.
      * Wait until the operations are finished before attempting to connect to a project database.
      *
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public createProject(data: CreateProjectData): CancelablePromise<CreateProjectResponse> {
@@ -194,7 +205,10 @@ export class ProjectService {
             method: 'POST',
             url: '/projects',
             body: data.requestBody,
-            mediaType: 'application/json'
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
         });
     }
     
@@ -209,7 +223,6 @@ export class ProjectService {
      * @param data.limit Specify a value from 1 to 400 to limit number of projects in the response.
      * @param data.search Search query by name or id.
      * @returns unknown Returned a list of shared projects for the Neon account
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public listSharedProjects(data: ListSharedProjectsData = {}): CancelablePromise<ListSharedProjectsResponse> {
@@ -220,6 +233,9 @@ export class ProjectService {
                 cursor: data.cursor,
                 limit: data.limit,
                 search: data.search
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -233,7 +249,6 @@ export class ProjectService {
      * @param data The data for the request.
      * @param data.projectId The Neon project ID
      * @returns ProjectResponse Returned information about the specified project
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public getProject(data: GetProjectData): CancelablePromise<GetProjectResponse> {
@@ -242,6 +257,9 @@ export class ProjectService {
             url: '/projects/{project_id}',
             path: {
                 project_id: data.projectId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -256,7 +274,6 @@ export class ProjectService {
      * @param data.requestBody
      * @param data.projectId The Neon project ID
      * @returns unknown Updated the specified project
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public updateProject(data: UpdateProjectData): CancelablePromise<UpdateProjectResponse> {
@@ -267,7 +284,10 @@ export class ProjectService {
                 project_id: data.projectId
             },
             body: data.requestBody,
-            mediaType: 'application/json'
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
         });
     }
     
@@ -281,7 +301,6 @@ export class ProjectService {
      * @param data The data for the request.
      * @param data.projectId The Neon project ID
      * @returns ProjectResponse Deleted the specified project
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public deleteProject(data: DeleteProjectData): CancelablePromise<DeleteProjectResponse> {
@@ -290,6 +309,9 @@ export class ProjectService {
             url: '/projects/{project_id}',
             path: {
                 project_id: data.projectId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -300,7 +322,6 @@ export class ProjectService {
      * @param data The data for the request.
      * @param data.projectId
      * @returns ProjectPermissions Returned project access details
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public listProjectPermissions(data: ListProjectPermissionsData): CancelablePromise<ListProjectPermissionsResponse> {
@@ -309,6 +330,9 @@ export class ProjectService {
             url: '/projects/{project_id}/permissions',
             path: {
                 project_id: data.projectId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -320,7 +344,6 @@ export class ProjectService {
      * @param data.requestBody
      * @param data.projectId
      * @returns ProjectPermission Granted project access
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public grantPermissionToProject(data: GrantPermissionToProjectData): CancelablePromise<GrantPermissionToProjectResponse> {
@@ -331,7 +354,10 @@ export class ProjectService {
                 project_id: data.projectId
             },
             body: data.requestBody,
-            mediaType: 'application/json'
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
         });
     }
     
@@ -342,7 +368,6 @@ export class ProjectService {
      * @param data.projectId
      * @param data.permissionId
      * @returns ProjectPermission Revoked project access
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public revokePermissionFromProject(data: RevokePermissionFromProjectData): CancelablePromise<RevokePermissionFromProjectResponse> {
@@ -352,6 +377,9 @@ export class ProjectService {
             path: {
                 project_id: data.projectId,
                 permission_id: data.permissionId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -371,7 +399,6 @@ export class ProjectService {
      * @param data.endpointId The endpoint ID. Defaults to the read-write `endpoint_id` associated with the `branch_id` if not specified.
      * @param data.pooled Adds the `-pooler` option to the connection URI when set to `true`, creating a pooled connection URI.
      * @returns ConnectionURIResponse Returned the connection URI
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public getConnectionUri(data: GetConnectionUriData): CancelablePromise<GetConnectionUriResponse> {
@@ -387,6 +414,9 @@ export class ProjectService {
                 database_name: data.databaseName,
                 role_name: data.roleName,
                 pooled: data.pooled
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -411,7 +441,6 @@ export class BranchService {
      * @param data.projectId The Neon project ID
      * @param data.requestBody
      * @returns unknown Created a branch. An endpoint is only created if it was specified in the request.
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public createProjectBranch(data: CreateProjectBranchData): CancelablePromise<CreateProjectBranchResponse> {
@@ -422,7 +451,10 @@ export class BranchService {
                 project_id: data.projectId
             },
             body: data.requestBody,
-            mediaType: 'application/json'
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
         });
     }
     
@@ -440,7 +472,6 @@ export class BranchService {
      * @param data The data for the request.
      * @param data.projectId The Neon project ID
      * @returns BranchesResponse Returned a list of branches for the specified project
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public listProjectBranches(data: ListProjectBranchesData): CancelablePromise<ListProjectBranchesResponse> {
@@ -449,6 +480,9 @@ export class BranchService {
             url: '/projects/{project_id}/branches',
             path: {
                 project_id: data.projectId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -469,7 +503,6 @@ export class BranchService {
      * @param data.projectId The Neon project ID
      * @param data.branchId The branch ID
      * @returns BranchResponse Returned information about the specified branch
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public getProjectBranch(data: GetProjectBranchData): CancelablePromise<GetProjectBranchResponse> {
@@ -479,6 +512,9 @@ export class BranchService {
             path: {
                 project_id: data.projectId,
                 branch_id: data.branchId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -501,7 +537,6 @@ export class BranchService {
      * @param data.projectId The Neon project ID
      * @param data.branchId The branch ID
      * @returns BranchOperations Deleted the specified branch
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public deleteProjectBranch(data: DeleteProjectBranchData): CancelablePromise<DeleteProjectBranchResponse> {
@@ -511,6 +546,9 @@ export class BranchService {
             path: {
                 project_id: data.projectId,
                 branch_id: data.branchId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -527,7 +565,6 @@ export class BranchService {
      * @param data.projectId The Neon project ID
      * @param data.branchId The branch ID
      * @returns BranchOperations Updated the specified branch
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public updateProjectBranch(data: UpdateProjectBranchData): CancelablePromise<UpdateProjectBranchResponse> {
@@ -539,7 +576,10 @@ export class BranchService {
                 branch_id: data.branchId
             },
             body: data.requestBody,
-            mediaType: 'application/json'
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
         });
     }
     
@@ -551,7 +591,6 @@ export class BranchService {
      * @param data.branchId The branch ID
      * @param data.requestBody
      * @returns BranchOperations Updated the specified branch
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public restoreProjectBranch(data: RestoreProjectBranchData): CancelablePromise<RestoreProjectBranchResponse> {
@@ -563,7 +602,10 @@ export class BranchService {
                 branch_id: data.branchId
             },
             body: data.requestBody,
-            mediaType: 'application/json'
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
         });
     }
     
@@ -579,7 +621,6 @@ export class BranchService {
      * @param data.projectId The Neon project ID
      * @param data.branchId The branch ID
      * @returns BranchOperations Updated the specified branch
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public setPrimaryProjectBranch(data: SetPrimaryProjectBranchData): CancelablePromise<SetPrimaryProjectBranchResponse> {
@@ -589,6 +630,9 @@ export class BranchService {
             path: {
                 project_id: data.projectId,
                 branch_id: data.branchId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -605,7 +649,6 @@ export class BranchService {
      * @param data.projectId The Neon project ID
      * @param data.branchId The branch ID
      * @returns EndpointsResponse Returned a list of endpoints for the specified branch
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public listProjectBranchEndpoints(data: ListProjectBranchEndpointsData): CancelablePromise<ListProjectBranchEndpointsResponse> {
@@ -615,6 +658,9 @@ export class BranchService {
             path: {
                 project_id: data.projectId,
                 branch_id: data.branchId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -631,7 +677,6 @@ export class BranchService {
      * @param data.projectId The Neon project ID
      * @param data.branchId The branch ID
      * @returns DatabasesResponse Returned a list of databases of the specified branch
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public listProjectBranchDatabases(data: ListProjectBranchDatabasesData): CancelablePromise<ListProjectBranchDatabasesResponse> {
@@ -641,6 +686,9 @@ export class BranchService {
             path: {
                 project_id: data.projectId,
                 branch_id: data.branchId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -658,7 +706,6 @@ export class BranchService {
      * @param data.projectId The Neon project ID
      * @param data.branchId The branch ID
      * @returns DatabaseOperations Created a database in the specified branch
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public createProjectBranchDatabase(data: CreateProjectBranchDatabaseData): CancelablePromise<CreateProjectBranchDatabaseResponse> {
@@ -670,7 +717,10 @@ export class BranchService {
                 branch_id: data.branchId
             },
             body: data.requestBody,
-            mediaType: 'application/json'
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
         });
     }
     
@@ -686,7 +736,6 @@ export class BranchService {
      * @param data.branchId The branch ID
      * @param data.databaseName The database name
      * @returns DatabaseResponse Returned the database details
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public getProjectBranchDatabase(data: GetProjectBranchDatabaseData): CancelablePromise<GetProjectBranchDatabaseResponse> {
@@ -697,6 +746,9 @@ export class BranchService {
                 project_id: data.projectId,
                 branch_id: data.branchId,
                 database_name: data.databaseName
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -714,7 +766,6 @@ export class BranchService {
      * @param data.branchId The branch ID
      * @param data.databaseName The database name
      * @returns DatabaseOperations Updated the database
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public updateProjectBranchDatabase(data: UpdateProjectBranchDatabaseData): CancelablePromise<UpdateProjectBranchDatabaseResponse> {
@@ -727,7 +778,10 @@ export class BranchService {
                 database_name: data.databaseName
             },
             body: data.requestBody,
-            mediaType: 'application/json'
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
         });
     }
     
@@ -743,7 +797,6 @@ export class BranchService {
      * @param data.branchId The branch ID
      * @param data.databaseName The database name
      * @returns DatabaseOperations Deleted the specified database
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public deleteProjectBranchDatabase(data: DeleteProjectBranchDatabaseData): CancelablePromise<DeleteProjectBranchDatabaseResponse> {
@@ -754,6 +807,9 @@ export class BranchService {
                 project_id: data.projectId,
                 branch_id: data.branchId,
                 database_name: data.databaseName
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -769,7 +825,6 @@ export class BranchService {
      * @param data.projectId The Neon project ID
      * @param data.branchId The branch ID
      * @returns RolesResponse Returned a list of roles from the specified branch.
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public listProjectBranchRoles(data: ListProjectBranchRolesData): CancelablePromise<ListProjectBranchRolesResponse> {
@@ -779,6 +834,9 @@ export class BranchService {
             path: {
                 project_id: data.projectId,
                 branch_id: data.branchId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -798,7 +856,6 @@ export class BranchService {
      * @param data.projectId The Neon project ID
      * @param data.branchId The branch ID
      * @returns RoleOperations Created a role in the specified branch
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public createProjectBranchRole(data: CreateProjectBranchRoleData): CancelablePromise<CreateProjectBranchRoleResponse> {
@@ -810,7 +867,10 @@ export class BranchService {
                 branch_id: data.branchId
             },
             body: data.requestBody,
-            mediaType: 'application/json'
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
         });
     }
     
@@ -828,7 +888,6 @@ export class BranchService {
      * @param data.branchId The branch ID
      * @param data.roleName The role name
      * @returns RoleResponse Returned details for the specified role
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public getProjectBranchRole(data: GetProjectBranchRoleData): CancelablePromise<GetProjectBranchRoleResponse> {
@@ -839,6 +898,9 @@ export class BranchService {
                 project_id: data.projectId,
                 branch_id: data.branchId,
                 role_name: data.roleName
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -856,7 +918,6 @@ export class BranchService {
      * @param data.branchId The branch ID
      * @param data.roleName The role name
      * @returns RoleOperations Deleted the specified role from the branch
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public deleteProjectBranchRole(data: DeleteProjectBranchRoleData): CancelablePromise<DeleteProjectBranchRoleResponse> {
@@ -867,6 +928,9 @@ export class BranchService {
                 project_id: data.projectId,
                 branch_id: data.branchId,
                 role_name: data.roleName
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -884,7 +948,6 @@ export class BranchService {
      * @param data.branchId The branch ID
      * @param data.roleName The role name
      * @returns RolePasswordResponse Returned password for the specified role
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public getProjectBranchRolePassword(data: GetProjectBranchRolePasswordData): CancelablePromise<GetProjectBranchRolePasswordResponse> {
@@ -898,7 +961,8 @@ export class BranchService {
             },
             errors: {
                 404: 'Role not found',
-                412: 'Storing passwords is disabled'
+                412: 'Storing passwords is disabled',
+                default: 'General Error'
             }
         });
     }
@@ -921,7 +985,6 @@ export class BranchService {
      * @param data.branchId The branch ID
      * @param data.roleName The role nam
      * @returns RoleOperations Reset the passsword for the specified role
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public resetProjectBranchRolePassword(data: ResetProjectBranchRolePasswordData): CancelablePromise<ResetProjectBranchRolePasswordResponse> {
@@ -932,6 +995,9 @@ export class BranchService {
                 project_id: data.projectId,
                 branch_id: data.branchId,
                 role_name: data.roleName
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -959,7 +1025,6 @@ export class EndpointService {
      * @param data.requestBody
      * @param data.projectId The Neon project ID
      * @returns EndpointOperations Created a compute endpoint
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public createProjectEndpoint(data: CreateProjectEndpointData): CancelablePromise<CreateProjectEndpointResponse> {
@@ -970,7 +1035,10 @@ export class EndpointService {
                 project_id: data.projectId
             },
             body: data.requestBody,
-            mediaType: 'application/json'
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
         });
     }
     
@@ -984,7 +1052,6 @@ export class EndpointService {
      * @param data The data for the request.
      * @param data.projectId The Neon project ID
      * @returns EndpointsResponse Returned a list of endpoints for the specified project
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public listProjectEndpoints(data: ListProjectEndpointsData): CancelablePromise<ListProjectEndpointsResponse> {
@@ -993,6 +1060,9 @@ export class EndpointService {
             url: '/projects/{project_id}/endpoints',
             path: {
                 project_id: data.projectId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -1010,7 +1080,6 @@ export class EndpointService {
      * @param data.projectId The Neon project ID
      * @param data.endpointId The endpoint ID
      * @returns EndpointResponse Returned information about the specified endpoint
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public getProjectEndpoint(data: GetProjectEndpointData): CancelablePromise<GetProjectEndpointResponse> {
@@ -1020,6 +1089,9 @@ export class EndpointService {
             path: {
                 project_id: data.projectId,
                 endpoint_id: data.endpointId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -1040,7 +1112,6 @@ export class EndpointService {
      * @param data.projectId The Neon project ID
      * @param data.endpointId The endpoint ID
      * @returns EndpointOperations Deleted the specified compute endpoint
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public deleteProjectEndpoint(data: DeleteProjectEndpointData): CancelablePromise<DeleteProjectEndpointResponse> {
@@ -1050,6 +1121,9 @@ export class EndpointService {
             path: {
                 project_id: data.projectId,
                 endpoint_id: data.endpointId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -1073,7 +1147,6 @@ export class EndpointService {
      * @param data.projectId The Neon project ID
      * @param data.endpointId The endpoint ID
      * @returns EndpointOperations Updated the specified compute endpoint
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public updateProjectEndpoint(data: UpdateProjectEndpointData): CancelablePromise<UpdateProjectEndpointResponse> {
@@ -1085,7 +1158,10 @@ export class EndpointService {
                 endpoint_id: data.endpointId
             },
             body: data.requestBody,
-            mediaType: 'application/json'
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
         });
     }
     
@@ -1103,7 +1179,6 @@ export class EndpointService {
      * @param data.projectId The Neon project ID
      * @param data.endpointId The endpoint ID
      * @returns EndpointOperations Started the specified compute endpoint
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public startProjectEndpoint(data: StartProjectEndpointData): CancelablePromise<StartProjectEndpointResponse> {
@@ -1113,6 +1188,9 @@ export class EndpointService {
             path: {
                 project_id: data.projectId,
                 endpoint_id: data.endpointId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -1129,7 +1207,6 @@ export class EndpointService {
      * @param data.projectId The Neon project ID
      * @param data.endpointId The endpoint ID
      * @returns EndpointOperations Suspended the specified endpoint
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public suspendProjectEndpoint(data: SuspendProjectEndpointData): CancelablePromise<SuspendProjectEndpointResponse> {
@@ -1139,6 +1216,9 @@ export class EndpointService {
             path: {
                 project_id: data.projectId,
                 endpoint_id: data.endpointId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -1155,7 +1235,6 @@ export class EndpointService {
      * @param data.projectId The Neon project ID
      * @param data.endpointId The endpoint ID
      * @returns EndpointOperations Restarted endpoint
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public restartProjectEndpoint(data: RestartProjectEndpointData): CancelablePromise<RestartProjectEndpointResponse> {
@@ -1165,6 +1244,9 @@ export class EndpointService {
             path: {
                 project_id: data.projectId,
                 endpoint_id: data.endpointId
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -1203,7 +1285,6 @@ export class ConsumptionService {
      * and 1 year, respectively.
      *
      * @returns ConsumptionHistoryPerAccountResponse Returned consumption metrics for the Neon account
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public getConsumptionHistoryPerAccount(data: GetConsumptionHistoryPerAccountData): CancelablePromise<GetConsumptionHistoryPerAccountResponse> {
@@ -1220,7 +1301,8 @@ export class ConsumptionService {
                 406: `The specified \`date-time\` range is outside the boundaries of the specified \`granularity\`.
 Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
 `,
-                429: 'Too many requests'
+                429: 'Too many requests',
+                default: 'General Error'
             }
         });
     }
@@ -1259,7 +1341,6 @@ Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
      * If omitted, the response will contain all projects.
      *
      * @returns unknown Returned project consumption metrics for the Neon account
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public getConsumptionHistoryPerProject(data: GetConsumptionHistoryPerProjectData): CancelablePromise<GetConsumptionHistoryPerProjectResponse> {
@@ -1279,7 +1360,8 @@ Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
                 406: `The specified \`date-time\` range is outside the boundaries of the specified \`granularity\`.
 Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
 `,
-                429: 'Too many requests'
+                429: 'Too many requests',
+                default: 'General Error'
             }
         });
     }
@@ -1301,7 +1383,6 @@ Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
      * If `from` or `to` is not specified, only the current consumption period is returned.
      *
      * @returns unknown Returned a list of project consumption metrics for the Neon account
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public listProjectsConsumption(data: ListProjectsConsumptionData = {}): CancelablePromise<ListProjectsConsumptionResponse> {
@@ -1313,6 +1394,9 @@ Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
                 limit: data.limit,
                 from: data.from,
                 to: data.to
+            },
+            errors: {
+                default: 'General Error'
             }
         });
     }
@@ -1328,13 +1412,15 @@ export class UsersService {
      *
      * @returns CurrentUserInfoResponse Returned information about the current user
      *
-     * @returns GeneralError General Error
      * @throws ApiError
      */
     public getCurrentUserInfo(): CancelablePromise<GetCurrentUserInfoResponse> {
         return this.httpRequest.request({
             method: 'GET',
-            url: '/users/me'
+            url: '/users/me',
+            errors: {
+                default: 'General Error'
+            }
         });
     }
     

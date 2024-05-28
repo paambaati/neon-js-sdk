@@ -1911,13 +1911,13 @@ export type RoleOperations = RoleResponse & OperationsResponse;
 
 export type SupportTicketSeverity = 'low' | 'normal' | 'high' | 'critical';
 
-export type ListApiKeysResponse = Array<ApiKeysListResponseItem> | GeneralError;
+export type ListApiKeysResponse = Array<ApiKeysListResponseItem>;
 
 export type CreateApiKeyData = {
     requestBody: ApiKeyCreateRequest;
 };
 
-export type CreateApiKeyResponse = ApiKeyCreateResponse | GeneralError;
+export type CreateApiKeyResponse = ApiKeyCreateResponse;
 
 export type RevokeApiKeyData = {
     /**
@@ -1926,7 +1926,7 @@ export type RevokeApiKeyData = {
     keyId: number;
 };
 
-export type RevokeApiKeyResponse = ApiKeyRevokeResponse | GeneralError;
+export type RevokeApiKeyResponse = ApiKeyRevokeResponse;
 
 export type GetProjectOperationData = {
     /**
@@ -1939,7 +1939,7 @@ export type GetProjectOperationData = {
     projectId: string;
 };
 
-export type GetProjectOperationResponse = OperationResponse | GeneralError;
+export type GetProjectOperationResponse = OperationResponse;
 
 export type ListProjectOperationsData = {
     /**
@@ -1956,7 +1956,7 @@ export type ListProjectOperationsData = {
     projectId: string;
 };
 
-export type ListProjectOperationsResponse = OperationsResponse & PaginationResponse | GeneralError;
+export type ListProjectOperationsResponse = OperationsResponse & PaginationResponse;
 
 export type ListProjectsData = {
     /**
@@ -1977,13 +1977,13 @@ export type ListProjectsData = {
     search?: string;
 };
 
-export type ListProjectsResponse = ProjectsResponse & PaginationResponse | GeneralError;
+export type ListProjectsResponse = ProjectsResponse & PaginationResponse;
 
 export type CreateProjectData = {
     requestBody: ProjectCreateRequest;
 };
 
-export type CreateProjectResponse = ProjectResponse & ConnectionURIsResponse & RolesResponse & DatabasesResponse & OperationsResponse & BranchResponse & EndpointsResponse | GeneralError;
+export type CreateProjectResponse = ProjectResponse & ConnectionURIsResponse & RolesResponse & DatabasesResponse & OperationsResponse & BranchResponse & EndpointsResponse;
 
 export type ListSharedProjectsData = {
     /**
@@ -2000,7 +2000,7 @@ export type ListSharedProjectsData = {
     search?: string;
 };
 
-export type ListSharedProjectsResponse = ProjectsResponse & PaginationResponse | GeneralError;
+export type ListSharedProjectsResponse = ProjectsResponse & PaginationResponse;
 
 export type GetProjectData = {
     /**
@@ -2009,7 +2009,7 @@ export type GetProjectData = {
     projectId: string;
 };
 
-export type GetProjectResponse = ProjectResponse | GeneralError;
+export type GetProjectResponse = ProjectResponse;
 
 export type UpdateProjectData = {
     /**
@@ -2019,7 +2019,7 @@ export type UpdateProjectData = {
     requestBody: ProjectUpdateRequest;
 };
 
-export type UpdateProjectResponse = ProjectResponse & OperationsResponse | GeneralError;
+export type UpdateProjectResponse = ProjectResponse & OperationsResponse;
 
 export type DeleteProjectData = {
     /**
@@ -2028,27 +2028,27 @@ export type DeleteProjectData = {
     projectId: string;
 };
 
-export type DeleteProjectResponse = ProjectResponse | GeneralError;
+export type DeleteProjectResponse = ProjectResponse;
 
 export type ListProjectPermissionsData = {
     projectId: string;
 };
 
-export type ListProjectPermissionsResponse = ProjectPermissions | GeneralError;
+export type ListProjectPermissionsResponse = ProjectPermissions;
 
 export type GrantPermissionToProjectData = {
     projectId: string;
     requestBody: GrantPermissionToProjectRequest;
 };
 
-export type GrantPermissionToProjectResponse = ProjectPermission | GeneralError;
+export type GrantPermissionToProjectResponse = ProjectPermission;
 
 export type RevokePermissionFromProjectData = {
     permissionId: string;
     projectId: string;
 };
 
-export type RevokePermissionFromProjectResponse = ProjectPermission | GeneralError;
+export type RevokePermissionFromProjectResponse = ProjectPermission;
 
 export type GetConnectionUriData = {
     /**
@@ -2077,7 +2077,7 @@ export type GetConnectionUriData = {
     roleName: string;
 };
 
-export type GetConnectionUriResponse = ConnectionURIResponse | GeneralError;
+export type GetConnectionUriResponse = ConnectionURIResponse;
 
 export type CreateProjectBranchData = {
     /**
@@ -2087,7 +2087,7 @@ export type CreateProjectBranchData = {
     requestBody?: BranchCreateRequest;
 };
 
-export type CreateProjectBranchResponse = BranchResponse & EndpointsResponse & OperationsResponse & RolesResponse & DatabasesResponse & ConnectionURIsOptionalResponse | GeneralError;
+export type CreateProjectBranchResponse = BranchResponse & EndpointsResponse & OperationsResponse & RolesResponse & DatabasesResponse & ConnectionURIsOptionalResponse;
 
 export type ListProjectBranchesData = {
     /**
@@ -2096,7 +2096,7 @@ export type ListProjectBranchesData = {
     projectId: string;
 };
 
-export type ListProjectBranchesResponse = BranchesResponse | GeneralError;
+export type ListProjectBranchesResponse = BranchesResponse;
 
 export type GetProjectBranchData = {
     /**
@@ -2109,7 +2109,7 @@ export type GetProjectBranchData = {
     projectId: string;
 };
 
-export type GetProjectBranchResponse = BranchResponse | GeneralError;
+export type GetProjectBranchResponse = BranchResponse;
 
 export type DeleteProjectBranchData = {
     /**
@@ -2122,7 +2122,7 @@ export type DeleteProjectBranchData = {
     projectId: string;
 };
 
-export type DeleteProjectBranchResponse = BranchOperations | GeneralError;
+export type DeleteProjectBranchResponse = BranchOperations;
 
 export type UpdateProjectBranchData = {
     /**
@@ -2136,7 +2136,7 @@ export type UpdateProjectBranchData = {
     requestBody: BranchUpdateRequest;
 };
 
-export type UpdateProjectBranchResponse = BranchOperations | GeneralError;
+export type UpdateProjectBranchResponse = BranchOperations;
 
 export type RestoreProjectBranchData = {
     /**
@@ -2150,7 +2150,7 @@ export type RestoreProjectBranchData = {
     requestBody: BranchRestoreRequest;
 };
 
-export type RestoreProjectBranchResponse = BranchOperations | GeneralError;
+export type RestoreProjectBranchResponse = BranchOperations;
 
 export type SetPrimaryProjectBranchData = {
     /**
@@ -2163,7 +2163,7 @@ export type SetPrimaryProjectBranchData = {
     projectId: string;
 };
 
-export type SetPrimaryProjectBranchResponse = BranchOperations | GeneralError;
+export type SetPrimaryProjectBranchResponse = BranchOperations;
 
 export type ListProjectBranchEndpointsData = {
     /**
@@ -2176,7 +2176,7 @@ export type ListProjectBranchEndpointsData = {
     projectId: string;
 };
 
-export type ListProjectBranchEndpointsResponse = EndpointsResponse | GeneralError;
+export type ListProjectBranchEndpointsResponse = EndpointsResponse;
 
 export type ListProjectBranchDatabasesData = {
     /**
@@ -2189,7 +2189,7 @@ export type ListProjectBranchDatabasesData = {
     projectId: string;
 };
 
-export type ListProjectBranchDatabasesResponse = DatabasesResponse | GeneralError;
+export type ListProjectBranchDatabasesResponse = DatabasesResponse;
 
 export type CreateProjectBranchDatabaseData = {
     /**
@@ -2203,7 +2203,7 @@ export type CreateProjectBranchDatabaseData = {
     requestBody: DatabaseCreateRequest;
 };
 
-export type CreateProjectBranchDatabaseResponse = DatabaseOperations | GeneralError;
+export type CreateProjectBranchDatabaseResponse = DatabaseOperations;
 
 export type GetProjectBranchDatabaseData = {
     /**
@@ -2220,7 +2220,7 @@ export type GetProjectBranchDatabaseData = {
     projectId: string;
 };
 
-export type GetProjectBranchDatabaseResponse = DatabaseResponse | GeneralError;
+export type GetProjectBranchDatabaseResponse = DatabaseResponse;
 
 export type UpdateProjectBranchDatabaseData = {
     /**
@@ -2238,7 +2238,7 @@ export type UpdateProjectBranchDatabaseData = {
     requestBody: DatabaseUpdateRequest;
 };
 
-export type UpdateProjectBranchDatabaseResponse = DatabaseOperations | GeneralError;
+export type UpdateProjectBranchDatabaseResponse = DatabaseOperations;
 
 export type DeleteProjectBranchDatabaseData = {
     /**
@@ -2255,7 +2255,7 @@ export type DeleteProjectBranchDatabaseData = {
     projectId: string;
 };
 
-export type DeleteProjectBranchDatabaseResponse = DatabaseOperations | GeneralError;
+export type DeleteProjectBranchDatabaseResponse = DatabaseOperations;
 
 export type ListProjectBranchRolesData = {
     /**
@@ -2268,7 +2268,7 @@ export type ListProjectBranchRolesData = {
     projectId: string;
 };
 
-export type ListProjectBranchRolesResponse = RolesResponse | GeneralError;
+export type ListProjectBranchRolesResponse = RolesResponse;
 
 export type CreateProjectBranchRoleData = {
     /**
@@ -2282,7 +2282,7 @@ export type CreateProjectBranchRoleData = {
     requestBody: RoleCreateRequest;
 };
 
-export type CreateProjectBranchRoleResponse = RoleOperations | GeneralError;
+export type CreateProjectBranchRoleResponse = RoleOperations;
 
 export type GetProjectBranchRoleData = {
     /**
@@ -2299,7 +2299,7 @@ export type GetProjectBranchRoleData = {
     roleName: string;
 };
 
-export type GetProjectBranchRoleResponse = RoleResponse | GeneralError;
+export type GetProjectBranchRoleResponse = RoleResponse;
 
 export type DeleteProjectBranchRoleData = {
     /**
@@ -2316,7 +2316,7 @@ export type DeleteProjectBranchRoleData = {
     roleName: string;
 };
 
-export type DeleteProjectBranchRoleResponse = RoleOperations | GeneralError;
+export type DeleteProjectBranchRoleResponse = RoleOperations;
 
 export type GetProjectBranchRolePasswordData = {
     /**
@@ -2333,7 +2333,7 @@ export type GetProjectBranchRolePasswordData = {
     roleName: string;
 };
 
-export type GetProjectBranchRolePasswordResponse = RolePasswordResponse | GeneralError;
+export type GetProjectBranchRolePasswordResponse = RolePasswordResponse;
 
 export type ResetProjectBranchRolePasswordData = {
     /**
@@ -2350,7 +2350,7 @@ export type ResetProjectBranchRolePasswordData = {
     roleName: string;
 };
 
-export type ResetProjectBranchRolePasswordResponse = RoleOperations | GeneralError;
+export type ResetProjectBranchRolePasswordResponse = RoleOperations;
 
 export type CreateProjectEndpointData = {
     /**
@@ -2360,7 +2360,7 @@ export type CreateProjectEndpointData = {
     requestBody: EndpointCreateRequest;
 };
 
-export type CreateProjectEndpointResponse = EndpointOperations | GeneralError;
+export type CreateProjectEndpointResponse = EndpointOperations;
 
 export type ListProjectEndpointsData = {
     /**
@@ -2369,7 +2369,7 @@ export type ListProjectEndpointsData = {
     projectId: string;
 };
 
-export type ListProjectEndpointsResponse = EndpointsResponse | GeneralError;
+export type ListProjectEndpointsResponse = EndpointsResponse;
 
 export type GetProjectEndpointData = {
     /**
@@ -2382,7 +2382,7 @@ export type GetProjectEndpointData = {
     projectId: string;
 };
 
-export type GetProjectEndpointResponse = EndpointResponse | GeneralError;
+export type GetProjectEndpointResponse = EndpointResponse;
 
 export type DeleteProjectEndpointData = {
     /**
@@ -2395,7 +2395,7 @@ export type DeleteProjectEndpointData = {
     projectId: string;
 };
 
-export type DeleteProjectEndpointResponse = EndpointOperations | GeneralError;
+export type DeleteProjectEndpointResponse = EndpointOperations;
 
 export type UpdateProjectEndpointData = {
     /**
@@ -2409,7 +2409,7 @@ export type UpdateProjectEndpointData = {
     requestBody: EndpointUpdateRequest;
 };
 
-export type UpdateProjectEndpointResponse = EndpointOperations | GeneralError;
+export type UpdateProjectEndpointResponse = EndpointOperations;
 
 export type StartProjectEndpointData = {
     /**
@@ -2422,7 +2422,7 @@ export type StartProjectEndpointData = {
     projectId: string;
 };
 
-export type StartProjectEndpointResponse = EndpointOperations | GeneralError;
+export type StartProjectEndpointResponse = EndpointOperations;
 
 export type SuspendProjectEndpointData = {
     /**
@@ -2435,7 +2435,7 @@ export type SuspendProjectEndpointData = {
     projectId: string;
 };
 
-export type SuspendProjectEndpointResponse = EndpointOperations | GeneralError;
+export type SuspendProjectEndpointResponse = EndpointOperations;
 
 export type RestartProjectEndpointData = {
     /**
@@ -2448,7 +2448,7 @@ export type RestartProjectEndpointData = {
     projectId: string;
 };
 
-export type RestartProjectEndpointResponse = EndpointOperations | GeneralError;
+export type RestartProjectEndpointResponse = EndpointOperations;
 
 export type GetConsumptionHistoryPerAccountData = {
     /**
@@ -2484,7 +2484,7 @@ export type GetConsumptionHistoryPerAccountData = {
     to: string;
 };
 
-export type GetConsumptionHistoryPerAccountResponse = ConsumptionHistoryPerAccountResponse | GeneralError;
+export type GetConsumptionHistoryPerAccountResponse = ConsumptionHistoryPerAccountResponse;
 
 export type GetConsumptionHistoryPerProjectData = {
     /**
@@ -2534,7 +2534,7 @@ export type GetConsumptionHistoryPerProjectData = {
     to: string;
 };
 
-export type GetConsumptionHistoryPerProjectResponse = ConsumptionHistoryPerProjectResponse & PaginationResponse | GeneralError;
+export type GetConsumptionHistoryPerProjectResponse = ConsumptionHistoryPerProjectResponse & PaginationResponse;
 
 export type ListProjectsConsumptionData = {
     /**
@@ -2561,9 +2561,9 @@ export type ListProjectsConsumptionData = {
     to?: string;
 };
 
-export type ListProjectsConsumptionResponse = ProjectsConsumptionResponse & PaginationResponse | GeneralError;
+export type ListProjectsConsumptionResponse = ProjectsConsumptionResponse & PaginationResponse;
 
-export type GetCurrentUserInfoResponse = CurrentUserInfoResponse | GeneralError;
+export type GetCurrentUserInfoResponse = CurrentUserInfoResponse;
 
 export type $OpenApiTs = {
     '/api_keys': {
