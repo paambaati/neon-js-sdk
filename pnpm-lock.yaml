@@ -15,8 +15,8 @@ devDependencies:
     specifier: 10.0.1
     version: 10.0.1(semantic-release@23.0.0)
   '@semantic-release/github':
-    specifier: 10.0.3
-    version: 10.0.3(semantic-release@23.0.0)
+    specifier: 10.0.5
+    version: 10.0.5(semantic-release@23.0.0)
   '@semantic-release/npm':
     specifier: 12.0.1
     version: 12.0.1(semantic-release@23.0.0)
@@ -754,8 +754,8 @@ packages:
       - supports-color
     dev: true
 
-  /@semantic-release/github@10.0.3(semantic-release@23.0.0):
-    resolution: {integrity: sha512-nSJQboKrG4xBn7hHpRMrK8lt5DgqJg50ZMz9UbrsfTxuRk55XVoQEadbGZ2L9M0xZAC6hkuwkDhQJKqfPU35Fw==}
+  /@semantic-release/github@10.0.5(semantic-release@23.0.0):
+    resolution: {integrity: sha512-hmuCDkfru/Uc9+ZBNOSremAupu6BCslvOVDiG0wYcL8TQodCycp6uvwDyeym1H0M4l3ob9c0s0xMBiZjjXQ2yA==}
     engines: {node: '>=20.8.1'}
     peerDependencies:
       semantic-release: '>=20.1.0'
@@ -821,7 +821,7 @@ packages:
       lodash-es: 4.17.21
       nerf-dart: 1.0.0
       normalize-url: 8.0.0
-      npm: 10.4.0
+      npm: 10.8.1
       rc: 1.2.8
       read-pkg: 9.0.1
       registry-auth-token: 5.0.2
@@ -1507,13 +1507,6 @@ packages:
       escape-string-regexp: 1.0.5
     dev: true
 
-  /figures@6.0.1:
-    resolution: {integrity: sha512-0oY/olScYD4IhQ8u//gCPA4F3mlTn2dacYmiDm/mbDQvpmLjV4uH+zhsQ5IyXRyvqkvtUkXkNdGvg5OFJTCsuQ==}
-    engines: {node: '>=18'}
-    dependencies:
-      is-unicode-supported: 2.0.0
-    dev: true
-
   /figures@6.1.0:
     resolution: {integrity: sha512-d+l3qxjSesT4V7v2fh+QnmFnUWv9lSpjarhShNTgBOfA0ttejbQUAlHLitbjkoRiDulW0OPoQPYIGhIC8ohejg==}
     engines: {node: '>=18'}
@@ -2189,83 +2182,6 @@ packages:
       path-key: 4.0.0
     dev: true
 
-  /npm@10.4.0:
-    resolution: {integrity: sha512-RS7Mx0OVfXlOcQLRePuDIYdFCVBPCNapWHplDK+mh7GDdP/Tvor4ocuybRRPSvfcRb2vjRJt1fHCqw3cr8qACQ==}
-    engines: {node: ^18.17.0 || >=20.5.0}
-    hasBin: true
-    dev: true
-    bundledDependencies:
-      - '@isaacs/string-locale-compare'
-      - '@npmcli/arborist'
-      - '@npmcli/config'
-      - '@npmcli/fs'
-      - '@npmcli/map-workspaces'
-      - '@npmcli/package-json'
-      - '@npmcli/promise-spawn'
-      - '@npmcli/run-script'
-      - '@sigstore/tuf'
-      - abbrev
-      - archy
-      - cacache
-      - chalk
-      - ci-info
-      - cli-columns
-      - cli-table3
-      - columnify
-      - fastest-levenshtein
-      - fs-minipass
-      - glob
-      - graceful-fs
-      - hosted-git-info
-      - ini
-      - init-package-json
-      - is-cidr
-      - json-parse-even-better-errors
-      - libnpmaccess
-      - libnpmdiff
-      - libnpmexec
-      - libnpmfund
-      - libnpmhook
-      - libnpmorg
-      - libnpmpack
-      - libnpmpublish
-      - libnpmsearch
-      - libnpmteam
-      - libnpmversion
-      - make-fetch-happen
-      - minimatch
-      - minipass
-      - minipass-pipeline
-      - ms
-      - node-gyp
-      - nopt
-      - normalize-package-data
-      - npm-audit-report
-      - npm-install-checks
-      - npm-package-arg
-      - npm-pick-manifest
-      - npm-profile
-      - npm-registry-fetch
-      - npm-user-validate
-      - npmlog
-      - p-map
-      - pacote
-      - parse-conflict-json
-      - proc-log
-      - qrcode-terminal
-      - read
-      - semver
-      - spdx-expression-parse
-      - ssri
-      - supports-color
-      - tar
-      - text-table
-      - tiny-relative-date
-      - treeverse
-      - validate-npm-package-name
-      - which
-      - write-file-atomic
-
   /npm@10.8.1:
     resolution: {integrity: sha512-Dp1C6SvSMYQI7YHq/y2l94uvI+59Eqbu1EpuKQHQ8p16txXRuRit5gH3Lnaagk2aXDIjg/Iru9pd05bnneKgdw==}
     engines: {node: ^18.17.0 || >=20.5.0}
@@ -2694,7 +2610,7 @@ packages:
       debug: 4.3.4
       env-ci: 11.0.0
       execa: 8.0.1
-      figures: 6.0.1
+      figures: 6.1.0
       find-versions: 5.1.0
       get-stream: 6.0.1
       git-log-parser: 1.2.0
