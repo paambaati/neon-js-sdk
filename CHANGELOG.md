@@ -1,3 +1,21 @@
+# [2.0.0-beta.1](https://github.com/paambaati/neon-js-sdk/compare/v1.21.0...v2.0.0-beta.1) (2024-06-13)
+
+
+### Bug Fixes
+
+* fix publint warning ([26baab2](https://github.com/paambaati/neon-js-sdk/commit/26baab2712ecdbcaa0bb11502809f54c2a6c39f2))
+* make sure NeonClient is generated ([8edaf93](https://github.com/paambaati/neon-js-sdk/commit/8edaf9365041fe7c73ad6dd5e08a0d7dc89e6efc)), closes [/github.com/hey-api/openapi-ts/issues/606#issuecomment-2127263454](https://github.com//github.com/hey-api/openapi-ts/issues/606/issues/issuecomment-2127263454)
+
+
+### core
+
+* migrate to @hey-api/openapi-ts ([9ac0f0a](https://github.com/paambaati/neon-js-sdk/commit/9ac0f0a6dddc5340801058a39b77b07510858ea0))
+
+
+### BREAKING CHANGES
+
+* move to @hey-api/openapi-ts, as openapi-typescript-codegen is being deprecated
+
 # [1.21.0](https://github.com/paambaati/neon-js-sdk/compare/v1.20.0...v1.21.0) (2024-05-07)
 
 
