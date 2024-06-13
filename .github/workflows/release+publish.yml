@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - beta
     tags:
       - '!*'
 
@@ -22,9 +23,7 @@ jobs:
         token: ${{ secrets.CUSTOM_GITHUB_PERSONAL_TOKEN }}
 
     - name: setup pnpm
-      uses: pnpm/action-setup@v2
-      with:
-        version: 8
+      uses: pnpm/action-setup@v4
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -35,9 +34,6 @@ jobs:
 
     - name: Install dependencies
       run: pnpm install
-
-    - name: Check lock file for untrusted packages
-      run: pnpm dlx lockfile-lint --path package-lock.json --allowed-hosts npm --validate-https
 
     - name: Build package
       run: pnpm run build

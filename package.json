@@ -22,11 +22,8 @@
     "type": "git",
     "url": "https://github.com/paambaati/neon-js-sdk.git"
   },
-  "config": {
-    "neonOpenApiSpec": "https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json"
-  },
   "scripts": {
-    "generate": "npx openapi-typescript-codegen --useUnionTypes --name NeonClient --input $npm_package_config_neonOpenApiSpec --output ./generated",
+    "generate": "openapi-ts",
     "build": "tsup --config tsup.config.ts",
     "prepublishOnly": "npm run build"
   },
@@ -43,9 +40,14 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
     }
   },
   "publishConfig": {
@@ -55,15 +57,15 @@
     "access": "public"
   },
   "devDependencies": {
+    "@hey-api/openapi-ts": "0.46.3",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.0",
     "@semantic-release/git": "10.0.1",
-    "@semantic-release/github": "10.0.5",
+    "@semantic-release/github": "10.0.6",
     "@semantic-release/npm": "12.0.1",
     "@semantic-release/release-notes-generator": "14.0.0",
-    "openapi-typescript-codegen": "0.28.0",
-    "tsup": "8.0.2",
+    "tsup": "8.1.0",
     "typescript": "5.4.5"
   },
-  "packageManager": "pnpm@8.15.0"
+  "packageManager": "pnpm@9.3.0"
 }

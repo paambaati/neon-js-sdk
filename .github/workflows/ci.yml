@@ -18,9 +18,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_PERSONAL_TOKEN }}
 
     - name: setup pnpm
-      uses: pnpm/action-setup@v2
-      with:
-        version: 8
+      uses: pnpm/action-setup@v4
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -32,16 +30,14 @@ jobs:
     - name: Install dependencies
       run: pnpm install
 
-    - name: Check lock file for untrusted packages
-      run: pnpm dlx lockfile-lint --path package-lock.json --allowed-hosts npm --validate-https
+    - name: Generate OpenAPI bindings
+      run: pnpm run generate
 
-    - name: Generate OpenAPI bindings and build package
-      run: |
-        pnpm run generate
-        pnpm run build
+    - name: Type-check and build package
+      run: pnpm run build
 
     - name: Check package for packaging errors
-      run: pnpm dlx publint run
+      run: pnpm dlx publint run --strict
 
     - name: Check for uncommitted changes
       # Ensure no changes, but ignore node_modules dir since dev/fresh ci deps installed.
