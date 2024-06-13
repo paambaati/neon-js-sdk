@@ -2,7 +2,7 @@
 
 import type { CancelablePromise } from './core/CancelablePromise';
 import type { BaseHttpRequest } from './core/BaseHttpRequest';
-import type { ListApiKeysResponse, CreateApiKeyData, CreateApiKeyResponse, RevokeApiKeyData, RevokeApiKeyResponse, GetProjectOperationData, GetProjectOperationResponse, ListProjectOperationsData, ListProjectOperationsResponse, ListProjectsData, ListProjectsResponse, CreateProjectData, CreateProjectResponse, ListSharedProjectsData, ListSharedProjectsResponse, GetProjectData, GetProjectResponse, UpdateProjectData, UpdateProjectResponse, DeleteProjectData, DeleteProjectResponse, ListProjectPermissionsData, ListProjectPermissionsResponse, GrantPermissionToProjectData, GrantPermissionToProjectResponse, RevokePermissionFromProjectData, RevokePermissionFromProjectResponse, GetConnectionUriData, GetConnectionUriResponse, CreateProjectBranchData, CreateProjectBranchResponse, ListProjectBranchesData, ListProjectBranchesResponse, GetProjectBranchData, GetProjectBranchResponse, DeleteProjectBranchData, DeleteProjectBranchResponse, UpdateProjectBranchData, UpdateProjectBranchResponse, RestoreProjectBranchData, RestoreProjectBranchResponse, SetPrimaryProjectBranchData, SetPrimaryProjectBranchResponse, ListProjectBranchEndpointsData, ListProjectBranchEndpointsResponse, ListProjectBranchDatabasesData, ListProjectBranchDatabasesResponse, CreateProjectBranchDatabaseData, CreateProjectBranchDatabaseResponse, GetProjectBranchDatabaseData, GetProjectBranchDatabaseResponse, UpdateProjectBranchDatabaseData, UpdateProjectBranchDatabaseResponse, DeleteProjectBranchDatabaseData, DeleteProjectBranchDatabaseResponse, ListProjectBranchRolesData, ListProjectBranchRolesResponse, CreateProjectBranchRoleData, CreateProjectBranchRoleResponse, GetProjectBranchRoleData, GetProjectBranchRoleResponse, DeleteProjectBranchRoleData, DeleteProjectBranchRoleResponse, GetProjectBranchRolePasswordData, GetProjectBranchRolePasswordResponse, ResetProjectBranchRolePasswordData, ResetProjectBranchRolePasswordResponse, CreateProjectEndpointData, CreateProjectEndpointResponse, ListProjectEndpointsData, ListProjectEndpointsResponse, GetProjectEndpointData, GetProjectEndpointResponse, DeleteProjectEndpointData, DeleteProjectEndpointResponse, UpdateProjectEndpointData, UpdateProjectEndpointResponse, StartProjectEndpointData, StartProjectEndpointResponse, SuspendProjectEndpointData, SuspendProjectEndpointResponse, RestartProjectEndpointData, RestartProjectEndpointResponse, GetConsumptionHistoryPerAccountData, GetConsumptionHistoryPerAccountResponse, GetConsumptionHistoryPerProjectData, GetConsumptionHistoryPerProjectResponse, ListProjectsConsumptionData, ListProjectsConsumptionResponse, GetCurrentUserInfoResponse } from './types.gen';
+import type { ListApiKeysResponse, CreateApiKeyData, CreateApiKeyResponse, RevokeApiKeyData, RevokeApiKeyResponse, GetProjectOperationData, GetProjectOperationResponse, ListProjectOperationsData, ListProjectOperationsResponse, ListProjectsData, ListProjectsResponse, CreateProjectData, CreateProjectResponse, ListSharedProjectsData, ListSharedProjectsResponse, GetProjectData, GetProjectResponse, UpdateProjectData, UpdateProjectResponse, DeleteProjectData, DeleteProjectResponse, ListProjectPermissionsData, ListProjectPermissionsResponse, GrantPermissionToProjectData, GrantPermissionToProjectResponse, RevokePermissionFromProjectData, RevokePermissionFromProjectResponse, GetConnectionUriData, GetConnectionUriResponse, CreateProjectBranchData, CreateProjectBranchResponse, ListProjectBranchesData, ListProjectBranchesResponse, GetProjectBranchData, GetProjectBranchResponse, DeleteProjectBranchData, DeleteProjectBranchResponse, UpdateProjectBranchData, UpdateProjectBranchResponse, RestoreProjectBranchData, RestoreProjectBranchResponse, GetProjectBranchSchemaData, GetProjectBranchSchemaResponse, SetPrimaryProjectBranchData, SetPrimaryProjectBranchResponse, SetDefaultProjectBranchData, SetDefaultProjectBranchResponse, ListProjectBranchEndpointsData, ListProjectBranchEndpointsResponse, ListProjectBranchDatabasesData, ListProjectBranchDatabasesResponse, CreateProjectBranchDatabaseData, CreateProjectBranchDatabaseResponse, GetProjectBranchDatabaseData, GetProjectBranchDatabaseResponse, UpdateProjectBranchDatabaseData, UpdateProjectBranchDatabaseResponse, DeleteProjectBranchDatabaseData, DeleteProjectBranchDatabaseResponse, ListProjectBranchRolesData, ListProjectBranchRolesResponse, CreateProjectBranchRoleData, CreateProjectBranchRoleResponse, GetProjectBranchRoleData, GetProjectBranchRoleResponse, DeleteProjectBranchRoleData, DeleteProjectBranchRoleResponse, GetProjectBranchRolePasswordData, GetProjectBranchRolePasswordResponse, ResetProjectBranchRolePasswordData, ResetProjectBranchRolePasswordResponse, CreateProjectEndpointData, CreateProjectEndpointResponse, ListProjectEndpointsData, ListProjectEndpointsResponse, GetProjectEndpointData, GetProjectEndpointResponse, DeleteProjectEndpointData, DeleteProjectEndpointResponse, UpdateProjectEndpointData, UpdateProjectEndpointResponse, StartProjectEndpointData, StartProjectEndpointResponse, SuspendProjectEndpointData, SuspendProjectEndpointResponse, RestartProjectEndpointData, RestartProjectEndpointResponse, GetConsumptionHistoryPerAccountData, GetConsumptionHistoryPerAccountResponse, GetConsumptionHistoryPerProjectData, GetConsumptionHistoryPerProjectResponse, ListProjectsConsumptionData, ListProjectsConsumptionResponse, GetCurrentUserInfoResponse, GetCurrentUserOrganizationsResponse } from './types.gen';
 
 export class ApiKeyService {
     constructor(public readonly httpRequest: BaseHttpRequest) { }
@@ -159,7 +159,7 @@ export class ProjectService {
      * @param data.cursor Specify the cursor value from the previous response to retrieve the next batch of projects.
      * @param data.limit Specify a value from 1 to 400 to limit number of projects in the response.
      * @param data.search Search by project `name` or `id`. You can specify partial `name` or `id` values to filter results.
-     * @param data.orgId Search for projects by `org_id` (Comming soon).
+     * @param data.orgId Search for projects by `org_id`.
      * @returns unknown Returned a list of projects for the Neon account
      * @throws ApiError
      */
@@ -610,6 +610,41 @@ export class BranchService {
     }
     
     /**
+     * Get the database schema
+     * Retrieves the schema from the specified database. The `lsn` and `timestamp` values cannot be specified at the same time. If both are omitted, the database schema is retrieved from database's head .
+     * @param data The data for the request.
+     * @param data.projectId The Neon project ID
+     * @param data.branchId The branch ID
+     * @param data.role The role on whose behalf the schema is retrieved
+     * @param data.dbName Name of the database for which the schema is retrieved
+     * @param data.lsn The Log Sequence Number (LSN) for which the schema is retrieved
+     *
+     * @param data.timestamp The point in time for which the schema is retrieved
+     *
+     * @returns BranchSchemaResponse Schema definition
+     * @throws ApiError
+     */
+    public getProjectBranchSchema(data: GetProjectBranchSchemaData): CancelablePromise<GetProjectBranchSchemaResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/projects/{project_id}/branches/{branch_id}/schema',
+            path: {
+                project_id: data.projectId,
+                branch_id: data.branchId
+            },
+            query: {
+                role: data.role,
+                db_name: data.dbName,
+                lsn: data.lsn,
+                timestamp: data.timestamp
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
      * Set branch as primary
      * Sets the specified branch as the project's primary branch.
      * The primary designation is automatically removed from the previous primary branch.
@@ -627,6 +662,34 @@ export class BranchService {
         return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project_id}/branches/{branch_id}/set_as_primary',
+            path: {
+                project_id: data.projectId,
+                branch_id: data.branchId
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Set branch as default
+     * Sets the specified branch as the project's default branch.
+     * The default designation is automatically removed from the previous default branch.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` by listing the project's branches.
+     * For more information, see [Manage branches](https://neon.tech/docs/manage/branches/).
+     *
+     * @param data The data for the request.
+     * @param data.projectId The Neon project ID
+     * @param data.branchId The branch ID
+     * @returns BranchOperations Updated the specified branch
+     * @throws ApiError
+     */
+    public setDefaultProjectBranch(data: SetDefaultProjectBranchData): CancelablePromise<SetDefaultProjectBranchResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/projects/{project_id}/branches/{branch_id}/set_as_default',
             path: {
                 project_id: data.projectId,
                 branch_id: data.branchId
@@ -1284,6 +1347,10 @@ export class ConsumptionService {
      * Hourly, daily, and monthly metrics are available for the last 168 hours, 60 days,
      * and 1 year, respectively.
      *
+     * @param data.orgId Specify the organization for which the consumption metrics should be returned.
+     * If this parameter is not provided, the endpoint will return the metrics for the
+     * authenticated user's account.
+     *
      * @returns ConsumptionHistoryPerAccountResponse Returned consumption metrics for the Neon account
      * @throws ApiError
      */
@@ -1294,10 +1361,12 @@ export class ConsumptionService {
             query: {
                 from: data.from,
                 to: data.to,
-                granularity: data.granularity
+                granularity: data.granularity,
+                org_id: data.orgId
             },
             errors: {
                 403: 'This endpoint is not available. It is only supported with Scale plan accounts.',
+                404: 'Account is not a member of the organization specified by `org_id`.',
                 406: `The specified \`date-time\` range is outside the boundaries of the specified \`granularity\`.
 Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
 `,
@@ -1340,6 +1409,10 @@ Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
      * @param data.projectIds Specify a list of project IDs to filter the response.
      * If omitted, the response will contain all projects.
      *
+     * @param data.orgId Specify the organization for which the project consumption metrics should be returned.
+     * If this parameter is not provided, the endpoint will return the metrics for the
+     * authenticated user's projects.
+     *
      * @returns unknown Returned project consumption metrics for the Neon account
      * @throws ApiError
      */
@@ -1353,10 +1426,12 @@ Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
                 project_ids: data.projectIds,
                 from: data.from,
                 to: data.to,
-                granularity: data.granularity
+                granularity: data.granularity,
+                org_id: data.orgId
             },
             errors: {
                 403: 'This endpoint is not available. It is only supported with Scale plan accounts.',
+                404: 'Account is not a member of the organization specified by `org_id`.',
                 406: `The specified \`date-time\` range is outside the boundaries of the specified \`granularity\`.
 Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
 `,
@@ -1382,6 +1457,10 @@ Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
      * The time value must be provided in ISO 8601 format.
      * If `from` or `to` is not specified, only the current consumption period is returned.
      *
+     * @param data.orgId Specify the organization for which the project consumption metrics should be returned.
+     * If this parameter is not provided, the endpoint will return the metrics for the authenticated
+     * user's projects.
+     *
      * @returns unknown Returned a list of project consumption metrics for the Neon account
      * @throws ApiError
      */
@@ -1393,9 +1472,11 @@ Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
                 cursor: data.cursor,
                 limit: data.limit,
                 from: data.from,
-                to: data.to
+                to: data.to,
+                org_id: data.orgId
             },
             errors: {
+                404: 'Account is not a member of the organization specified by `org_id`.',
                 default: 'General Error'
             }
         });
@@ -1418,6 +1499,29 @@ export class UsersService {
         return this.httpRequest.request({
             method: 'GET',
             url: '/users/me',
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+}
+
+export class DefaultService {
+    constructor(public readonly httpRequest: BaseHttpRequest) { }
+    
+    /**
+     * Get current user organizations list
+     * Retrieves information about the current Neon user's organizations
+     *
+     * @returns OrganizationsResponse Returned information about the current user organizations
+     *
+     * @throws ApiError
+     */
+    public getCurrentUserOrganizations(): CancelablePromise<GetCurrentUserOrganizationsResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/users/me/organizations',
             errors: {
                 default: 'General Error'
             }
