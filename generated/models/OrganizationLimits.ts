@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { Features } from './Features';
 export type OrganizationLimits = {
     limits: {
         active_time: number;
@@ -15,6 +16,8 @@ export type OrganizationLimits = {
         max_monitoring_retention_hours: number;
         max_history_retention_seconds: number;
         max_compute_time_non_primary: number;
+        min_autosuspend_seconds: number;
     };
+    features: Features;
 };
 

@@ -39,6 +39,10 @@ export class ConsumptionService {
      * Hourly, daily, and monthly metrics are available for the last 168 hours, 60 days,
      * and 1 year, respectively.
      *
+     * @param orgId Specify the organization for which the consumption metrics should be returned.
+     * If this parameter is not provided, the endpoint will return the metrics for the
+     * authenticated user's account.
+     *
      * @returns ConsumptionHistoryPerAccountResponse Returned consumption metrics for the Neon account
      * @returns GeneralError General Error
      * @throws ApiError
@@ -47,6 +51,7 @@ export class ConsumptionService {
         from: string,
         to: string,
         granularity: ConsumptionHistoryGranularity,
+        orgId?: string,
     ): CancelablePromise<ConsumptionHistoryPerAccountResponse | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
@@ -55,9 +60,11 @@ export class ConsumptionService {
                 'from': from,
                 'to': to,
                 'granularity': granularity,
+                'org_id': orgId,
             },
             errors: {
                 403: `This endpoint is not available. It is only supported with Scale plan accounts.`,
+                404: `Account is not a member of the organization specified by \`org_id\`.`,
                 406: `The specified \`date-time\` range is outside the boundaries of the specified \`granularity\`.
                 Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
                 `,
@@ -97,6 +104,10 @@ export class ConsumptionService {
      * @param projectIds Specify a list of project IDs to filter the response.
      * If omitted, the response will contain all projects.
      *
+     * @param orgId Specify the organization for which the project consumption metrics should be returned.
+     * If this parameter is not provided, the endpoint will return the metrics for the
+     * authenticated user's projects.
+     *
      * @returns any Returned project consumption metrics for the Neon account
      * @returns GeneralError General Error
      * @throws ApiError
@@ -108,6 +119,7 @@ export class ConsumptionService {
         cursor?: string,
         limit: number = 10,
         projectIds?: Array<string>,
+        orgId?: string,
     ): CancelablePromise<(ConsumptionHistoryPerProjectResponse & PaginationResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
@@ -119,9 +131,11 @@ export class ConsumptionService {
                 'from': from,
                 'to': to,
                 'granularity': granularity,
+                'org_id': orgId,
             },
             errors: {
                 403: `This endpoint is not available. It is only supported with Scale plan accounts.`,
+                404: `Account is not a member of the organization specified by \`org_id\`.`,
                 406: `The specified \`date-time\` range is outside the boundaries of the specified \`granularity\`.
                 Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
                 `,
@@ -144,6 +158,10 @@ export class ConsumptionService {
      * The time value must be provided in ISO 8601 format.
      * If `from` or `to` is not specified, only the current consumption period is returned.
      *
+     * @param orgId Specify the organization for which the project consumption metrics should be returned.
+     * If this parameter is not provided, the endpoint will return the metrics for the authenticated
+     * user's projects.
+     *
      * @returns any Returned a list of project consumption metrics for the Neon account
      * @returns GeneralError General Error
      * @throws ApiError
@@ -153,6 +171,7 @@ export class ConsumptionService {
         limit: number = 10,
         from?: string,
         to?: string,
+        orgId?: string,
     ): CancelablePromise<(ProjectsConsumptionResponse & PaginationResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
@@ -162,6 +181,10 @@ export class ConsumptionService {
                 'limit': limit,
                 'from': from,
                 'to': to,
+                'org_id': orgId,
+            },
+            errors: {
+                404: `Account is not a member of the organization specified by \`org_id\`.`,
             },
         });
     }

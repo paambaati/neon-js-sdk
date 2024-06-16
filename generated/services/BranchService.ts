@@ -7,6 +7,7 @@ import type { BranchesResponse } from '../models/BranchesResponse';
 import type { BranchOperations } from '../models/BranchOperations';
 import type { BranchResponse } from '../models/BranchResponse';
 import type { BranchRestoreRequest } from '../models/BranchRestoreRequest';
+import type { BranchSchemaResponse } from '../models/BranchSchemaResponse';
 import type { BranchUpdateRequest } from '../models/BranchUpdateRequest';
 import type { ConnectionURIsOptionalResponse } from '../models/ConnectionURIsOptionalResponse';
 import type { DatabaseCreateRequest } from '../models/DatabaseCreateRequest';
@@ -205,6 +206,44 @@ export class BranchService {
         });
     }
     /**
+     * Get the database schema
+     * Retrieves the schema from the specified database. The `lsn` and `timestamp` values cannot be specified at the same time. If both are omitted, the database schema is retrieved from database's head .
+     * @param projectId The Neon project ID
+     * @param branchId The branch ID
+     * @param role The role on whose behalf the schema is retrieved
+     * @param dbName Name of the database for which the schema is retrieved
+     * @param lsn The Log Sequence Number (LSN) for which the schema is retrieved
+     *
+     * @param timestamp The point in time for which the schema is retrieved
+     *
+     * @returns BranchSchemaResponse Schema definition
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public getProjectBranchSchema(
+        projectId: string,
+        branchId: string,
+        role: string,
+        dbName: string,
+        lsn?: string,
+        timestamp?: string,
+    ): CancelablePromise<BranchSchemaResponse | GeneralError> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/projects/{project_id}/branches/{branch_id}/schema',
+            path: {
+                'project_id': projectId,
+                'branch_id': branchId,
+            },
+            query: {
+                'role': role,
+                'db_name': dbName,
+                'lsn': lsn,
+                'timestamp': timestamp,
+            },
+        });
+    }
+    /**
      * Set branch as primary
      * Sets the specified branch as the project's primary branch.
      * The primary designation is automatically removed from the previous primary branch.
@@ -225,6 +264,33 @@ export class BranchService {
         return this.httpRequest.request({
             method: 'POST',
             url: '/projects/{project_id}/branches/{branch_id}/set_as_primary',
+            path: {
+                'project_id': projectId,
+                'branch_id': branchId,
+            },
+        });
+    }
+    /**
+     * Set branch as default
+     * Sets the specified branch as the project's default branch.
+     * The default designation is automatically removed from the previous default branch.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain the `branch_id` by listing the project's branches.
+     * For more information, see [Manage branches](https://neon.tech/docs/manage/branches/).
+     *
+     * @param projectId The Neon project ID
+     * @param branchId The branch ID
+     * @returns BranchOperations Updated the specified branch
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public setDefaultProjectBranch(
+        projectId: string,
+        branchId: string,
+    ): CancelablePromise<BranchOperations | GeneralError> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/projects/{project_id}/branches/{branch_id}/set_as_default',
             path: {
                 'project_id': projectId,
                 'branch_id': branchId,
