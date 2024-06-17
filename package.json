@@ -57,7 +57,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@hey-api/openapi-ts": "0.46.3",
+    "@hey-api/openapi-ts": "0.47.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.0",
     "@semantic-release/git": "10.0.1",
