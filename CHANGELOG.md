@@ -1,3 +1,10 @@
+# [2.0.0-beta.2](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2024-06-17)
+
+
+### Bug Fixes
+
+* upgrade to latest version of hey-api/openapi-ts ([f93934a](https://github.com/paambaati/neon-js-sdk/commit/f93934af9f4291d8480bc0cce3ceb60f4c884fb9))
+
 # [2.0.0-beta.1](https://github.com/paambaati/neon-js-sdk/compare/v1.21.0...v2.0.0-beta.1) (2024-06-13)
 
 
