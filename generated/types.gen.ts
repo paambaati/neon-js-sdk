@@ -568,6 +568,7 @@ export type ConsumptionHistoryPerTimeframe = {
     compute_time_seconds: number;
     written_data_bytes: number;
     synthetic_storage_size_bytes: number;
+    data_storage_bytes_hour?: number;
 };
 
 export type ConsumptionHistoryGranularity = 'hourly' | 'daily' | 'monthly';
@@ -687,11 +688,13 @@ export type ProjectLimits = {
         max_protected_branches: number;
         max_autoscaling_cu: number;
         cpu_seconds: number;
+        max_compute_time_non_primary: number;
         max_active_endpoints: number;
         max_read_only_endpoints: number;
         max_allowed_ips: number;
         max_monitoring_retention_hours: number;
         min_autosuspend_seconds: number;
+        max_data_transfer: number;
     };
     features: Features;
 };
@@ -2417,6 +2420,13 @@ export type GetConsumptionHistoryPerAccountData = {
      */
     granularity: ConsumptionHistoryGranularity;
     /**
+     * Include metrics utilized in previous pricing models.
+     * - **data_storage_bytes_hour**: The sum of the maximum observed storage values for each hour
+     * for each project, which never decreases.
+     *
+     */
+    includeV1Metrics?: boolean;
+    /**
      * Specify the organization for which the consumption metrics should be returned.
      * If this parameter is not provided, the endpoint will return the metrics for the
      * authenticated user's account.
@@ -2463,6 +2473,13 @@ export type GetConsumptionHistoryPerProjectData = {
      *
      */
     granularity: ConsumptionHistoryGranularity;
+    /**
+     * Include metrics utilized in previous pricing models.
+     * - **data_storage_bytes_hour**: The sum of the maximum observed storage values for each hour,
+     * which never decreases.
+     *
+     */
+    includeV1Metrics?: boolean;
     /**
      * Specify a value from 1 to 100 to limit number of projects in the response.
      */

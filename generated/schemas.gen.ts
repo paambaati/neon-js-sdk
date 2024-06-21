@@ -934,6 +934,10 @@ export const $ConsumptionHistoryPerTimeframe = {
         synthetic_storage_size_bytes: {
             type: 'integer',
             format: 'uint64'
+        },
+        data_storage_bytes_hour: {
+            type: 'integer',
+            format: 'uint64'
         }
     },
     required: ['timeframe_start', 'timeframe_end', 'active_time_seconds', 'compute_time_seconds', 'written_data_bytes', 'synthetic_storage_size_bytes']
@@ -1098,7 +1102,7 @@ export const $ProjectLimits = {
     properties: {
         limits: {
             type: 'object',
-            required: ['active_time', 'max_projects', 'max_branches', 'max_protected_branches', 'max_autoscaling_cu', 'cpu_seconds', 'max_active_endpoints', 'max_read_only_endpoints', 'max_allowed_ips', 'max_monitoring_retention_hours', 'min_autosuspend_seconds'],
+            required: ['active_time', 'max_projects', 'max_branches', 'max_protected_branches', 'max_autoscaling_cu', 'cpu_seconds', 'max_compute_time_non_primary', 'max_active_endpoints', 'max_read_only_endpoints', 'max_allowed_ips', 'max_monitoring_retention_hours', 'min_autosuspend_seconds', 'max_data_transfer'],
             properties: {
                 active_time: {
                     type: 'integer',
@@ -1121,6 +1125,10 @@ export const $ProjectLimits = {
                     type: 'integer',
                     format: 'int64'
                 },
+                max_compute_time_non_primary: {
+                    type: 'integer',
+                    format: 'int64'
+                },
                 max_active_endpoints: {
                     type: 'integer'
                 },
@@ -1135,6 +1143,10 @@ export const $ProjectLimits = {
                 },
                 min_autosuspend_seconds: {
                     type: 'integer'
+                },
+                max_data_transfer: {
+                    type: 'integer',
+                    format: 'int64'
                 }
             }
         },

@@ -1351,6 +1351,10 @@ export class ConsumptionService {
      * If this parameter is not provided, the endpoint will return the metrics for the
      * authenticated user's account.
      *
+     * @param data.includeV1Metrics Include metrics utilized in previous pricing models.
+     * - **data_storage_bytes_hour**: The sum of the maximum observed storage values for each hour
+     * for each project, which never decreases.
+     *
      * @returns ConsumptionHistoryPerAccountResponse Returned consumption metrics for the Neon account
      * @throws ApiError
      */
@@ -1362,7 +1366,8 @@ export class ConsumptionService {
                 from: data.from,
                 to: data.to,
                 granularity: data.granularity,
-                org_id: data.orgId
+                org_id: data.orgId,
+                include_v1_metrics: data.includeV1Metrics
             },
             errors: {
                 403: 'This endpoint is not available. It is only supported with Scale plan accounts.',
@@ -1413,6 +1418,10 @@ Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
      * If this parameter is not provided, the endpoint will return the metrics for the
      * authenticated user's projects.
      *
+     * @param data.includeV1Metrics Include metrics utilized in previous pricing models.
+     * - **data_storage_bytes_hour**: The sum of the maximum observed storage values for each hour,
+     * which never decreases.
+     *
      * @returns unknown Returned project consumption metrics for the Neon account
      * @throws ApiError
      */
@@ -1427,7 +1436,8 @@ Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
                 from: data.from,
                 to: data.to,
                 granularity: data.granularity,
-                org_id: data.orgId
+                org_id: data.orgId,
+                include_v1_metrics: data.includeV1Metrics
             },
             errors: {
                 403: 'This endpoint is not available. It is only supported with Scale plan accounts.',
