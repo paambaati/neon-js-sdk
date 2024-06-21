@@ -9,5 +9,6 @@ export type ConsumptionHistoryPerTimeframe = {
     compute_time_seconds: number;
     written_data_bytes: number;
     synthetic_storage_size_bytes: number;
+    data_storage_bytes_hour?: number;
 };
 
