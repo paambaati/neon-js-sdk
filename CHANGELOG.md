@@ -1,3 +1,10 @@
+## [1.22.1](https://github.com/paambaati/neon-js-sdk/compare/v1.22.0...v1.22.1) (2024-06-21)
+
+
+### Bug Fixes
+
+* regenerate from spec ([c1213fd](https://github.com/paambaati/neon-js-sdk/commit/c1213fd726405e415bd5815da813720d07e14608))
+
 # [1.22.0](https://github.com/paambaati/neon-js-sdk/compare/v1.21.0...v1.22.0) (2024-06-21)
 
 
