@@ -43,6 +43,10 @@ export class ConsumptionService {
      * If this parameter is not provided, the endpoint will return the metrics for the
      * authenticated user's account.
      *
+     * @param includeV1Metrics Include metrics utilized in previous pricing models.
+     * - **data_storage_bytes_hour**: The sum of the maximum observed storage values for each hour
+     * for each project, which never decreases.
+     *
      * @returns ConsumptionHistoryPerAccountResponse Returned consumption metrics for the Neon account
      * @returns GeneralError General Error
      * @throws ApiError
@@ -52,6 +56,7 @@ export class ConsumptionService {
         to: string,
         granularity: ConsumptionHistoryGranularity,
         orgId?: string,
+        includeV1Metrics?: boolean,
     ): CancelablePromise<ConsumptionHistoryPerAccountResponse | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
@@ -61,6 +66,7 @@ export class ConsumptionService {
                 'to': to,
                 'granularity': granularity,
                 'org_id': orgId,
+                'include_v1_metrics': includeV1Metrics,
             },
             errors: {
                 403: `This endpoint is not available. It is only supported with Scale plan accounts.`,
@@ -108,6 +114,10 @@ export class ConsumptionService {
      * If this parameter is not provided, the endpoint will return the metrics for the
      * authenticated user's projects.
      *
+     * @param includeV1Metrics Include metrics utilized in previous pricing models.
+     * - **data_storage_bytes_hour**: The sum of the maximum observed storage values for each hour,
+     * which never decreases.
+     *
      * @returns any Returned project consumption metrics for the Neon account
      * @returns GeneralError General Error
      * @throws ApiError
@@ -120,6 +130,7 @@ export class ConsumptionService {
         limit: number = 10,
         projectIds?: Array<string>,
         orgId?: string,
+        includeV1Metrics?: boolean,
     ): CancelablePromise<(ConsumptionHistoryPerProjectResponse & PaginationResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
@@ -132,6 +143,7 @@ export class ConsumptionService {
                 'to': to,
                 'granularity': granularity,
                 'org_id': orgId,
+                'include_v1_metrics': includeV1Metrics,
             },
             errors: {
                 403: `This endpoint is not available. It is only supported with Scale plan accounts.`,
