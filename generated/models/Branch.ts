@@ -52,6 +52,11 @@ export type Branch = {
      */
     primary: boolean;
     /**
+     * Whether the branch is the project's default branch
+     *
+     */
+    default: boolean;
+    /**
      * Whether the branch is protected
      *
      */

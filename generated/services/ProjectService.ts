@@ -31,7 +31,7 @@ export class ProjectService {
      * @param cursor Specify the cursor value from the previous response to retrieve the next batch of projects.
      * @param limit Specify a value from 1 to 400 to limit number of projects in the response.
      * @param search Search by project `name` or `id`. You can specify partial `name` or `id` values to filter results.
-     * @param orgId Search for projects by `org_id` (Comming soon).
+     * @param orgId Search for projects by `org_id`.
      * @returns any Returned a list of projects for the Neon account
      * @returns GeneralError General Error
      * @throws ApiError

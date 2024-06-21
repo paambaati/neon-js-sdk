@@ -13,6 +13,10 @@ export type BillingAccount = {
      */
     quota_reset_at_last: string;
     /**
+     * The full name of the individual or entity that owns the billing account. This name appears on invoices.
+     */
+    name: string;
+    /**
      * Billing email, to receive emails related to invoices and subscriptions.
      *
      */
@@ -23,10 +27,15 @@ export type BillingAccount = {
      */
     address_city: string;
     /**
-     * Billing address country.
+     * Billing address country code defined by ISO 3166-1 alpha-2.
      *
      */
     address_country: string;
+    /**
+     * Billing address country name.
+     *
+     */
+    address_country_name?: string;
     /**
      * Billing address line 1.
      *
@@ -52,5 +61,15 @@ export type BillingAccount = {
      *
      */
     orb_portal_url?: string;
+    /**
+     * The tax identification number for the billing account, displayed on invoices.
+     *
+     */
+    tax_id?: string;
+    /**
+     * The type of the tax identification number based on the country.
+     *
+     */
+    tax_id_type?: string;
 };
 
