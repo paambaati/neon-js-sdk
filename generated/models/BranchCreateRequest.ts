@@ -7,7 +7,7 @@ export type BranchCreateRequest = {
     endpoints?: Array<BranchCreateRequestEndpointOptions>;
     branch?: {
         /**
-         * The `branch_id` of the parent branch. If omitted or empty, the branch will be created from the project's primary branch.
+         * The `branch_id` of the parent branch. If omitted or empty, the branch will be created from the project's default branch.
          *
          */
         parent_id?: string;
