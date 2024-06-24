@@ -11,7 +11,7 @@ Fully-typed, zero-dependency Node.js and Deno SDK for managing your [Neon](https
 > [Learn more about Neon](https://neon.tech/docs/introduction/about)
 
 > [!IMPORTANT]
-> Note that you're reading the documentation for v2.x of this package. If you're still using the legacy v1.x version, see the [v1.x documentation](https://github.com/paambaati/neon-js-sdk/blob/v1.21.0/README.md#usage).
+> Note that you're reading the documentation for v2.x of this package. If you're still using the legacy v1.x version, see the [v1.x documentation](https://github.com/paambaati/neon-js-sdk/blob/v1.22.1/README.md#usage).
 
 ## Usage
 
