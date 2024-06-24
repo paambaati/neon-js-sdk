@@ -1209,7 +1209,9 @@ export const $Branch = {
             type: 'string'
         },
         primary: {
-            description: `Whether the branch is the project's primary branch
+            deprecated: true,
+            description: `DEPRECATED. Use \`default\` field.
+Whether the branch is the project's primary branch
 `,
             type: 'boolean'
         },
@@ -1334,7 +1336,7 @@ export const $BranchCreateRequest = {
             type: 'object',
             properties: {
                 parent_id: {
-                    description: `The \`branch_id\` of the parent branch. If omitted or empty, the branch will be created from the project's primary branch.
+                    description: `The \`branch_id\` of the parent branch. If omitted or empty, the branch will be created from the project's default branch.
 `,
                     type: 'string'
                 },
@@ -1701,7 +1703,7 @@ If protected_branches_only is true, the list will be applied only to protected b
             type: 'boolean'
         },
         primary_branch_only: {
-            description: 'If true, the list will be applied only to the primary branch.',
+            description: 'If true, the list will be applied only to the default branch.',
             type: 'boolean'
         }
     }

@@ -743,8 +743,10 @@ export type Branch = {
      */
     creation_source: string;
     /**
+     * DEPRECATED. Use `default` field.
      * Whether the branch is the project's primary branch
      *
+     * @deprecated
      */
     primary: boolean;
     /**
@@ -817,7 +819,7 @@ export type BranchCreateRequest = {
     endpoints?: Array<BranchCreateRequestEndpointOptions>;
     branch?: {
         /**
-         * The `branch_id` of the parent branch. If omitted or empty, the branch will be created from the project's primary branch.
+         * The `branch_id` of the parent branch. If omitted or empty, the branch will be created from the project's default branch.
          *
          */
         parent_id?: string;
@@ -1077,7 +1079,7 @@ export type AllowedIps = {
      */
     protected_branches_only?: boolean;
     /**
-     * If true, the list will be applied only to the primary branch.
+     * If true, the list will be applied only to the default branch.
      */
     primary_branch_only?: boolean;
 };
@@ -1956,7 +1958,7 @@ export type RevokePermissionFromProjectResponse = ProjectPermission;
 
 export type GetConnectionUriData = {
     /**
-     * The branch ID. Defaults to your project's primary `branch_id` if not specified.
+     * The branch ID. Defaults to your project's default `branch_id` if not specified.
      */
     branchId?: string;
     /**
