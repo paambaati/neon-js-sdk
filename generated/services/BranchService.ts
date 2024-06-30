@@ -33,7 +33,7 @@ export class BranchService {
      * You can obtain a `project_id` by listing the projects for your Neon account.
      *
      * This method does not require a request body, but you can specify one to create a compute endpoint for the branch or to select a non-default parent branch.
-     * The default behavior is to create a branch from the project's primary branch with no compute endpoint, and the branch name is auto-generated.
+     * The default behavior is to create a branch from the project's default branch with no compute endpoint, and the branch name is auto-generated.
      * There is a maximum of one read-write endpoint per branch.
      * A branch can have multiple read-only endpoints.
      * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
@@ -92,7 +92,7 @@ export class BranchService {
      * You can obtain a `branch_id` by listing the project's branches.
      * A `branch_id` value has a `br-` prefix.
      *
-     * Each Neon project is initially created with a root and primary branch named `main`.
+     * Each Neon project is initially created with a root and default branch named `main`.
      * A project can contain one or more branches.
      * A parent branch is identified by a `parent_id` value, which is the `id` of the parent branch.
      * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
@@ -127,7 +127,7 @@ export class BranchService {
      * When a successful response status is received, the compute endpoints are still active,
      * and the branch is not yet deleted from storage.
      * The deletion occurs after all operations finish.
-     * You cannot delete a project's root or primary branch, and you cannot delete a branch that has a child branch.
+     * You cannot delete a project's root or default branch, and you cannot delete a branch that has a child branch.
      * A project must have at least one branch.
      *
      * @param projectId The Neon project ID
@@ -244,7 +244,9 @@ export class BranchService {
         });
     }
     /**
+     * @deprecated
      * Set branch as primary
+     * DEPRECATED. Use `/set_as_default` endpoint.
      * Sets the specified branch as the project's primary branch.
      * The primary designation is automatically removed from the previous primary branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.

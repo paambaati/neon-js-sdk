@@ -47,8 +47,10 @@ export type Branch = {
      */
     creation_source: string;
     /**
+     * DEPRECATED. Use `default` field.
      * Whether the branch is the project's primary branch
      *
+     * @deprecated
      */
     primary: boolean;
     /**
