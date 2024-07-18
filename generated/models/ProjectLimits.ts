@@ -16,6 +16,7 @@ export type ProjectLimits = {
         max_read_only_endpoints: number;
         max_allowed_ips: number;
         max_monitoring_retention_hours: number;
+        max_history_retention_seconds: number;
         min_autosuspend_seconds: number;
         max_data_transfer: number;
     };

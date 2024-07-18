@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { CurrentUserInfoResponse } from '../models/CurrentUserInfoResponse';
 import type { GeneralError } from '../models/GeneralError';
+import type { OrganizationsResponse } from '../models/OrganizationsResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class UsersService {
@@ -21,6 +22,21 @@ export class UsersService {
         return this.httpRequest.request({
             method: 'GET',
             url: '/users/me',
+        });
+    }
+    /**
+     * Get current user organizations list
+     * Retrieves information about the current Neon user's organizations
+     *
+     * @returns OrganizationsResponse Returned information about the current user organizations
+     *
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public getCurrentUserOrganizations(): CancelablePromise<OrganizationsResponse | GeneralError> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/users/me/organizations',
         });
     }
 }
