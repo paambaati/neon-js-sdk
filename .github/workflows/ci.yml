@@ -1,5 +1,9 @@
 name: "PR checks"
-on: [pull_request, push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   check_pr:
@@ -14,6 +18,7 @@ jobs:
 
     - name: Check commits for leaks
       uses: gitleaks/gitleaks-action@v2
+      if: ${{ github.event_name == 'push' }}
       env:
         GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_PERSONAL_TOKEN }}
 
@@ -40,7 +45,10 @@ jobs:
       run: pnpm dlx publint run --strict
 
     - name: Check for uncommitted changes
-      # Ensure no changes, but ignore node_modules dir since dev/fresh ci deps installed.
+      # NOTE: Do not run this step for Dependabot PRs, because `pnpm run generate` might generate newer bindings (in case Neon's OpenAPI spec has had updates)
+      # which in turn will flag a "found changed files after build" error, which turns CI red.
+      if: ${{ !contains(github.event.pull_request.labels.*.name, 'dependencies') }}
+      # NOTE: Ensure no changes, but ignore node_modules dir since dev/fresh ci deps installed.
       run: |
         git diff --exit-code --stat -- . ':!node_modules' ':!dist' \
         || (echo "##[error] found changed files after build. please 'pnpm run generate && pnpm run build'" \

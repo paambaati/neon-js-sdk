@@ -1102,7 +1102,7 @@ export const $ProjectLimits = {
     properties: {
         limits: {
             type: 'object',
-            required: ['active_time', 'max_projects', 'max_branches', 'max_protected_branches', 'max_autoscaling_cu', 'cpu_seconds', 'max_compute_time_non_primary', 'max_active_endpoints', 'max_read_only_endpoints', 'max_allowed_ips', 'max_monitoring_retention_hours', 'min_autosuspend_seconds', 'max_data_transfer'],
+            required: ['active_time', 'max_projects', 'max_branches', 'max_protected_branches', 'max_autoscaling_cu', 'cpu_seconds', 'max_compute_time_non_primary', 'max_active_endpoints', 'max_read_only_endpoints', 'max_allowed_ips', 'max_monitoring_retention_hours', 'max_history_retention_seconds', 'min_autosuspend_seconds', 'max_data_transfer'],
             properties: {
                 active_time: {
                     type: 'integer',
@@ -1140,6 +1140,10 @@ export const $ProjectLimits = {
                 },
                 max_monitoring_retention_hours: {
                     type: 'integer'
+                },
+                max_history_retention_seconds: {
+                    type: 'integer',
+                    format: 'int32'
                 },
                 min_autosuspend_seconds: {
                     type: 'integer'
@@ -1703,7 +1707,10 @@ If protected_branches_only is true, the list will be applied only to protected b
             type: 'boolean'
         },
         primary_branch_only: {
-            description: 'If true, the list will be applied only to the default branch.',
+            deprecated: true,
+            description: `DEPRECATED: Use \`protected_branches_only\`.
+If true, the list will be applied only to the default branch.
+`,
             type: 'boolean'
         }
     }
@@ -2978,6 +2985,11 @@ export const $ProjectOwnerData = {
             '$ref': '#/components/schemas/BillingSubscriptionType'
         }
     }
+} as const;
+
+export const $UserDeletionConditionName = {
+    type: 'string',
+    enum: ['project_count', 'org_admin_membership_count', 'subscription_type']
 } as const;
 
 export const $GeneralError = {

@@ -1517,11 +1517,6 @@ export class UsersService {
         });
     }
     
-}
-
-export class DefaultService {
-    constructor(public readonly httpRequest: BaseHttpRequest) { }
-    
     /**
      * Get current user organizations list
      * Retrieves information about the current Neon user's organizations

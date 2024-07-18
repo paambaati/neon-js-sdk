@@ -693,6 +693,7 @@ export type ProjectLimits = {
         max_read_only_endpoints: number;
         max_allowed_ips: number;
         max_monitoring_retention_hours: number;
+        max_history_retention_seconds: number;
         min_autosuspend_seconds: number;
         max_data_transfer: number;
     };
@@ -1079,7 +1080,10 @@ export type AllowedIps = {
      */
     protected_branches_only?: boolean;
     /**
+     * DEPRECATED: Use `protected_branches_only`.
      * If true, the list will be applied only to the default branch.
+     *
+     * @deprecated
      */
     primary_branch_only?: boolean;
 };
@@ -1793,6 +1797,8 @@ export type ProjectOwnerData = {
     branches_limit: number;
     subscription_type: BillingSubscriptionType;
 };
+
+export type UserDeletionConditionName = 'project_count' | 'org_admin_membership_count' | 'subscription_type';
 
 /**
  * General Error
