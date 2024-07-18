@@ -127,12 +127,12 @@ export type { StatementResult } from './models/StatementResult';
 export type { SupportTicketSeverity } from './models/SupportTicketSeverity';
 export type { SuspendTimeoutSeconds } from './models/SuspendTimeoutSeconds';
 export type { UpdateUserInfoRequest } from './models/UpdateUserInfoRequest';
+export type { UserDeletionConditionName } from './models/UserDeletionConditionName';
 export type { VerifyUserPasswordRequest } from './models/VerifyUserPasswordRequest';
 
 export { ApiKeyService } from './services/ApiKeyService';
 export { BranchService } from './services/BranchService';
 export { ConsumptionService } from './services/ConsumptionService';
-export { DefaultService } from './services/DefaultService';
 export { EndpointService } from './services/EndpointService';
 export { OperationService } from './services/OperationService';
 export { ProjectService } from './services/ProjectService';

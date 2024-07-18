@@ -257,7 +257,7 @@ export class ProjectService {
      * @param projectId The Neon project ID
      * @param databaseName The database name
      * @param roleName The role name
-     * @param branchId The branch ID. Defaults to your project's primary `branch_id` if not specified.
+     * @param branchId The branch ID. Defaults to your project's default `branch_id` if not specified.
      * @param endpointId The endpoint ID. Defaults to the read-write `endpoint_id` associated with the `branch_id` if not specified.
      * @param pooled Adds the `-pooler` option to the connection URI when set to `true`, creating a pooled connection URI.
      * @returns ConnectionURIResponse Returned the connection URI

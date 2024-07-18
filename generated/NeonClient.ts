@@ -8,7 +8,6 @@ import { FetchHttpRequest } from './core/FetchHttpRequest';
 import { ApiKeyService } from './services/ApiKeyService';
 import { BranchService } from './services/BranchService';
 import { ConsumptionService } from './services/ConsumptionService';
-import { DefaultService } from './services/DefaultService';
 import { EndpointService } from './services/EndpointService';
 import { OperationService } from './services/OperationService';
 import { ProjectService } from './services/ProjectService';
@@ -18,7 +17,6 @@ export class NeonClient {
     public readonly apiKey: ApiKeyService;
     public readonly branch: BranchService;
     public readonly consumption: ConsumptionService;
-    public readonly default: DefaultService;
     public readonly endpoint: EndpointService;
     public readonly operation: OperationService;
     public readonly project: ProjectService;
@@ -39,7 +37,6 @@ export class NeonClient {
         this.apiKey = new ApiKeyService(this.request);
         this.branch = new BranchService(this.request);
         this.consumption = new ConsumptionService(this.request);
-        this.default = new DefaultService(this.request);
         this.endpoint = new EndpointService(this.request);
         this.operation = new OperationService(this.request);
         this.project = new ProjectService(this.request);
