@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/paambaati/neon-js-sdk.git"
+    "url": "git+https://github.com/paambaati/neon-js-sdk.git"
   },
   "config": {
     "neonOpenApiSpec": "https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json"
