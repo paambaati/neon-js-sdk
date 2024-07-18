@@ -15,7 +15,7 @@ Fully-typed, zero-dependency Node.js and Deno SDK for managing your [Neon](https
 
 ## Usage
 
-**Node.js (>= v18.x)**
+**Node.js**
 
 1. Install `neon-sdk` as a dependency using the package manager of your choice.
 
@@ -37,17 +37,6 @@ Fully-typed, zero-dependency Node.js and Deno SDK for managing your [Neon](https
         console.log(projects);
     })()
     ```
-
-<details><summary><strong>Node.js (>= v16.15.x)</strong></summary>
-
-You can use the same steps to use this package if you're on Node.js v16.15.x or above, with one minor change; when running your code, you will need to pass the `--experimental-fetch` flag to `node`.
-
-For example –
-
-```
-node --experimental-fetch app.js
-```
-</details>
 
 **Deno (>= v1.28.x)**
 
