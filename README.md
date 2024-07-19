@@ -39,7 +39,7 @@ Fully-typed, zero-dependency Node.js and Deno SDK for managing your [Neon](https
 
 ### Deno
 
-1. Add the `neon-sdk` package from JSR –
+1. Add the `neon-sdk` package from JSR.
 
     ```bash
     deno add @httgp/neon-sdk
