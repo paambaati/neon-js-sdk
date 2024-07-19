@@ -1,0 +1,14 @@
+{
+    "$schema": "https://jsr.io/schema/config-file.v1.json",
+    "name": "@httgp/neon-sdk",
+    "version": "2.0.0-beta.3",
+    "exports": "./generated/index.ts",
+    "publish": {
+        "include": [
+            "jsr.json",
+            "generated/**/*.ts",
+            "README.md",
+            "LICENSE"
+        ]
+    }
+}

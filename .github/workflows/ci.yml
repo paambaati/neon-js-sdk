@@ -47,7 +47,7 @@ jobs:
     - name: Check for uncommitted changes
       # NOTE: Do not run this step for Dependabot PRs, because `pnpm run generate` might generate newer bindings (in case Neon's OpenAPI spec has had updates)
       # which in turn will flag a "found changed files after build" error, which turns CI red.
-      if: ${{ !contains(github.event.pull_request.labels.*.name, 'dependencies') }}
+      if: "!contains(github.event.pull_request.labels.*.name, 'dependencies')"
       # NOTE: Ensure no changes, but ignore node_modules dir since dev/fresh ci deps installed.
       run: |
         git diff --exit-code --stat -- . ':!node_modules' ':!dist' \

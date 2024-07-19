@@ -2,20 +2,19 @@
 
 ![CI](https://github.com/paambaati/neon-js-sdk/actions/workflows/ci.yml/badge.svg)
 [![NPM Version](https://img.shields.io/npm/v/neon-sdk.svg?logo=npm)](https://www.npmjs.com/package/neon-sdk)
+![JSR Version](https://img.shields.io/jsr/v/%40httgp/neon-sdk)
 
 Fully-typed, zero-dependency Node.js and Deno SDK for managing your [Neon](https://neon.tech/) Serverless Postgres projects.
 
-> [!NOTE]
+> **Note**
+
 > Neon is a fully managed serverless PostgreSQL with a generous free tier. Neon separates storage and compute and offers modern developer features such as serverless, branching, bottomless storage, and more. Neon is open source and written in Rust.
 > 
 > [Learn more about Neon](https://neon.tech/docs/introduction/about)
 
-> [!IMPORTANT]
-> Note that you're reading the documentation for v2.x of this package. If you're still using the legacy v1.x version, see the [v1.x documentation](https://github.com/paambaati/neon-js-sdk/blob/v1.22.1/README.md#usage).
-
 ## Usage
 
-**Node.js**
+### Node.js
 
 1. Install `neon-sdk` as a dependency using the package manager of your choice.
 
@@ -38,13 +37,18 @@ Fully-typed, zero-dependency Node.js and Deno SDK for managing your [Neon](https
     })()
     ```
 
-**Deno (>= v1.28.x)**
+### Deno
 
-1. Simply import the `neon-sdk` from npm using the [`npm:` specifier](https://deno.land/manual@v1.30.3/node/npm_specifiers) and initialize the client with your [Neon API token](https://neon.tech/docs/manage/api-keys#manage-api-keys-with-the-neon-api).
+1. Add the `neon-sdk` package from JSR –
+
+    ```bash
+    deno add @httgp/neon-sdk
+    ```
+
+2. Now import the module and initialize the client with your [Neon API token](https://neon.tech/docs/manage/api-keys#manage-api-keys-with-the-neon-api).
 
     ```typescript
-    // neon.ts
-    import { NeonClient } from "npm:neon-sdk";
+    import { NeonClient } from "@httgp/neon-sdk";
 
     const neonClient = new NeonClient({
         TOKEN: "<INSERT NEON API KEY HERE>",
@@ -57,6 +61,18 @@ Fully-typed, zero-dependency Node.js and Deno SDK for managing your [Neon](https
 
     ```bash
     deno run --allow-net=console.neon.tech neon.ts
+    ```
+
+2. Alternatively, the `neon-sdk` package is also available from npm, which can be used with the [`npm:` specifier](https://deno.land/manual@v1.30.3/node/npm_specifiers).
+
+    ```typescript
+    import { NeonClient } from "npm:neon-sdk";
+
+    const neonClient = new NeonClient({
+        TOKEN: "<INSERT NEON API KEY HERE>",
+    });
+    const projects = await neonClient.project.listProjects();
+    console.log(projects);
     ```
 
 ## Recipes
@@ -76,7 +92,7 @@ function isNeonError(neonResponse: unknown): neonResponse is GeneralError {
 }
 
 const neonClient = new NeonClient({
-    TOKEN: "<INSERT NEON API KEY HERE>",
+    TOKEN: '<INSERT NEON API KEY HERE>',
 });
 const response = await neonClient.project.listProjects();
 
@@ -87,4 +103,4 @@ if (!isNeonError(response)) {
 ```
 ## Developer Notes
 
-This package is auto-generated from [Neon's OpenAPI reference](https://neon.tech/api-reference/v2/) using [`@hey-api/openapi-ts`](https://github.com/hey-api/openapi-ts).
+This package is auto-generated from [Neon's OpenAPI reference](https://neon.tech/api-reference/v2/) using [`openapi-typescript-codegen`](https://www.npmjs.com/package/openapi-typescript-codegen).

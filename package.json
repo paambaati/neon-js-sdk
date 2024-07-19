@@ -6,7 +6,8 @@
     "neon",
     "sdk",
     "postgresql",
-    "serverless"
+    "serverless",
+    "deno"
   ],
   "homepage": "https://github.com/paambaati/neon-js-sdk",
   "bugs": {
@@ -58,14 +59,16 @@
   },
   "devDependencies": {
     "@hey-api/openapi-ts": "0.49.0",
+    "@sebbo2002/semantic-release-jsr": "1.0.1",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.0",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/github": "10.1.0",
     "@semantic-release/npm": "12.0.1",
     "@semantic-release/release-notes-generator": "14.0.1",
-    "tsup": "8.1.2",
+    "tsup": "8.2.0",
     "typescript": "5.5.3"
   },
-  "packageManager": "pnpm@9.5.0"
+  "packageManager": "pnpm@9.5.0",
+  "$schema": "https://json.schemastore.org/package"
 }
