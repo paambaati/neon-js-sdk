@@ -1,3 +1,6 @@
+/**
+ * This file was then modified by a custom transform to make it ready to publish to JSR - see https://github.com/paambaati/neon-js-sdk/blob/main/scripts/transformers/jsr-fixes.ts
+ */
 export class CancelError extends Error {
 	constructor(message: string) {
 		super(message);
@@ -80,7 +83,7 @@ export class CancelablePromise<T> implements Promise<T> {
 		});
 	}
 
-	get [Symbol.toStringTag]() {
+	get [Symbol.toStringTag](): string {
 		return "Cancellable Promise";
 	}
 
