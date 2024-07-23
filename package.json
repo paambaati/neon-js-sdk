@@ -1,6 +1,6 @@
 {
   "name": "neon-sdk",
-  "version": "2.0.0-beta.4",
+  "version": "2.0.0-beta.3",
   "description": "TypeScript SDK for managing your Neon Serverless PostgreSQL projects",
   "keywords": [
     "neon",
@@ -71,8 +71,8 @@
     "@semantic-release/release-notes-generator": "14.0.1",
     "@types/jscodeshift": "0.11.11",
     "jscodeshift": "0.16.1",
-    "tsup": "8.2.1",
-    "typescript": "5.5.3"
+    "tsup": "8.2.2",
+    "typescript": "5.5.4"
   },
   "packageManager": "pnpm@9.6.0",
   "$schema": "https://json.schemastore.org/package"
