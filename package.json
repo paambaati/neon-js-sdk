@@ -26,6 +26,9 @@
   "scripts": {
     "generate": "openapi-ts",
     "build": "tsup --config tsup.config.ts",
+    "jsr:fix": "jscodeshift -t ./scripts/transformers/jsr-fixes.ts --extensions=ts --parser=ts './generated/core/CancelablePromise.ts' './generated/schemas.gen.ts'",
+    "jsr:publish:dry": "pnpm dlx jsr publish --allow-dirty --dry-run",
+    "jsr:publish": "pnpm dlx jsr publish",
     "prepublishOnly": "npm run build"
   },
   "engines": {
