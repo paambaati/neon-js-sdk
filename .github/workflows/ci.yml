@@ -41,8 +41,11 @@ jobs:
     - name: Type-check and build package
       run: pnpm run build
 
-    - name: Check package for packaging errors
+    - name: Check npm package for packaging/publishing errors
       run: pnpm dlx publint run --strict
+
+    - name: Check JSR package for packaging/publishing errors
+      run: pnpm dlx jsr publish --dry-run
 
     - name: Check for uncommitted changes
       # NOTE: Do not run this step for Dependabot PRs, because `pnpm run generate` might generate newer bindings (in case Neon's OpenAPI spec has had updates)

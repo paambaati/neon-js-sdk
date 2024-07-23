@@ -38,13 +38,13 @@ jobs:
     - name: Build package
       run: pnpm run build
 
-    - name: Check package for npm packaging errors
-      run: pnpm dlx publint run
+    - name: Check npm package for packaging/publishing errors
+      run: pnpm dlx publint run --strict
 
-    - name: Check package for jsr publishing errors
+    - name: Check JSR package for packaging/publishing errors
       run: pnpm dlx jsr publish --dry-run
 
-    - name: Make a release on NPM, JSR and GitHub
+    - name: Make a release on npm, JSR and GitHub
       run: pnpm dlx semantic-release
       env:
         NPM_CONFIG_USERCONFIG: '/dev/null' # Ignore local .npmrc as semantic-release will use ONLY THAT if it finds one, leading to npm auth not working.
