@@ -15,6 +15,7 @@
                 "changelogFile": "CHANGELOG.md"
             }
         ],
+        "@sebbo2002/semantic-release-jsr",
         "@semantic-release/npm",
         [
             "@semantic-release/git",

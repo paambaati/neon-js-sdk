@@ -6,7 +6,8 @@
     "neon",
     "sdk",
     "postgresql",
-    "serverless"
+    "serverless",
+    "deno"
   ],
   "homepage": "https://github.com/paambaati/neon-js-sdk",
   "bugs": {
@@ -25,11 +26,14 @@
   "scripts": {
     "generate": "openapi-ts",
     "build": "tsup --config tsup.config.ts",
+    "jsr:fix": "jscodeshift -t ./scripts/transformers/jsr-fixes.ts --extensions=ts --parser=ts './generated/core/CancelablePromise.ts' './generated/schemas.gen.ts'",
+    "jsr:publish:dry": "pnpm dlx jsr publish --allow-dirty --dry-run",
+    "jsr:publish": "pnpm dlx jsr publish",
     "prepublishOnly": "npm run build"
   },
   "engines": {
     "node": ">=18",
-    "deno": ">=1.28"
+    "deno": ">=1.42"
   },
   "engineStrict": true,
   "files": [
@@ -58,14 +62,18 @@
   },
   "devDependencies": {
     "@hey-api/openapi-ts": "0.50.0",
+    "@sebbo2002/semantic-release-jsr": "1.0.1",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.0",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/github": "10.1.1",
     "@semantic-release/npm": "12.0.1",
     "@semantic-release/release-notes-generator": "14.0.1",
+    "@types/jscodeshift": "0.11.11",
+    "jscodeshift": "0.16.1",
     "tsup": "8.2.1",
     "typescript": "5.5.3"
   },
-  "packageManager": "pnpm@9.6.0"
+  "packageManager": "pnpm@9.6.0",
+  "$schema": "https://json.schemastore.org/package"
 }
