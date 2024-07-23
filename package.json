@@ -33,7 +33,7 @@
   },
   "engines": {
     "node": ">=18",
-    "deno": ">=1.28"
+    "deno": ">=1.42"
   },
   "engineStrict": true,
   "files": [
