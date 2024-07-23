@@ -87,5 +87,5 @@ export default function transformer(file: FileInfo, api: API) {
         });
 
 
-    return root.toSource();
+    return `${root.toSource()}${file.source.endsWith('\n') ? '' : '\n'}`;
 }
