@@ -1,5 +1,5 @@
 /**
- * This file was then modified by a custom transform to make it ready to publish to JSR - see https://github.com/paambaati/neon-js-sdk/blob/main/scripts/transformers/jsr-fixes.ts
+ * This file was modified by a custom transform to make it ready to publish to JSR - see https://github.com/paambaati/neon-js-sdk/blob/main/scripts/transformers/jsr-fixes.ts
  */
 export class CancelError extends Error {
 	constructor(message: string) {
