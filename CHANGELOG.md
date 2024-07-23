@@ -1,3 +1,17 @@
+# [2.0.0-beta.4](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2024-07-23)
+
+
+### Bug Fixes
+
+* add a new-line to end of generated file ([8c1ba1b](https://github.com/paambaati/neon-js-sdk/commit/8c1ba1b8b4ad9f3f88f77f0dc783eb69db4e93ed))
+* **ci:** make sure JSR fixes are applied on auto-generated code ([7028fc0](https://github.com/paambaati/neon-js-sdk/commit/7028fc03c3af0623e4cbe0b7f904dfd60dd68d0a))
+
+
+### Features
+
+* **internal:** JSR publish ([2767f62](https://github.com/paambaati/neon-js-sdk/commit/2767f62bc22c6e20c993ab7f7d4f77f1111a2c25))
+* **internal:** JSR support ✨ ([8744bec](https://github.com/paambaati/neon-js-sdk/commit/8744bec14b8162f207144746073952ad3ba43949))
+
 # [2.0.0-beta.3](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2024-07-18)
 
 

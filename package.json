@@ -1,6 +1,6 @@
 {
   "name": "neon-sdk",
-  "version": "2.0.0-beta.3",
+  "version": "2.0.0-beta.4",
   "description": "TypeScript SDK for managing your Neon Serverless PostgreSQL projects",
   "keywords": [
     "neon",
