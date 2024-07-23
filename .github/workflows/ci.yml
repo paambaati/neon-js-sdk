@@ -38,6 +38,9 @@ jobs:
     - name: Generate OpenAPI bindings
       run: pnpm run generate
 
+    - name: Run JSR fixes
+      run: pnpm run jsr:fix
+
     - name: Type-check and build package
       run: pnpm run build
 
@@ -45,7 +48,7 @@ jobs:
       run: pnpm dlx publint run --strict
 
     - name: Check JSR package for packaging/publishing errors
-      run: pnpm dlx jsr publish --dry-run
+      run: pnpm dlx jsr publish --dry-run --allow-dirty
 
     - name: Check for uncommitted changes
       # NOTE: Do not run this step for Dependabot PRs, because `pnpm run generate` might generate newer bindings (in case Neon's OpenAPI spec has had updates)
