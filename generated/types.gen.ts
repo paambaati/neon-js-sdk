@@ -1823,6 +1823,38 @@ export type RoleOperations = RoleResponse & OperationsResponse;
 
 export type SupportTicketSeverity = 'low' | 'normal' | 'high' | 'critical';
 
+export type AnnotationData = {
+    object: AnnotationObjectData;
+    value: AnnotationValueData;
+    created_at?: string;
+    updated_at?: string;
+};
+
+export type AnnotationValueData = {
+    [key: string]: (string);
+};
+
+export type AnnotationObjectData = {
+    type: string;
+    id: string;
+};
+
+export type AnnotationObjectsData = Array<AnnotationObjectData>;
+
+export type AnnotationResponse = {
+    annotation?: AnnotationData;
+};
+
+export type AnnotationsResponse = {
+    annotations?: Array<AnnotationData>;
+};
+
+export type AnnotationsMapResponse = {
+    annotations?: {
+        [key: string]: AnnotationData;
+    };
+};
+
 export type ListApiKeysResponse = Array<ApiKeysListResponseItem>;
 
 export type CreateApiKeyData = {
@@ -2008,7 +2040,7 @@ export type ListProjectBranchesData = {
     projectId: string;
 };
 
-export type ListProjectBranchesResponse = BranchesResponse;
+export type ListProjectBranchesResponse = BranchesResponse & AnnotationsMapResponse;
 
 export type GetProjectBranchData = {
     /**
@@ -2021,7 +2053,7 @@ export type GetProjectBranchData = {
     projectId: string;
 };
 
-export type GetProjectBranchResponse = BranchResponse;
+export type GetProjectBranchResponse = BranchResponse & AnnotationResponse;
 
 export type DeleteProjectBranchData = {
     /**
@@ -2307,6 +2339,15 @@ export type ResetProjectBranchRolePasswordData = {
 };
 
 export type ResetProjectBranchRolePasswordResponse = RoleOperations;
+
+export type ListAnnotationsData = {
+    /**
+     * A list of annotation objects to query the annotations.
+     */
+    objects: AnnotationObjectsData;
+};
+
+export type ListAnnotationsResponse = AnnotationsResponse;
 
 export type CreateProjectEndpointData = {
     /**
@@ -2798,7 +2839,7 @@ export type $OpenApiTs = {
                 /**
                  * Returned a list of branches for the specified project
                  */
-                200: BranchesResponse;
+                200: BranchesResponse & AnnotationsMapResponse;
                 /**
                  * General Error
                  */
@@ -2813,7 +2854,7 @@ export type $OpenApiTs = {
                 /**
                  * Returned information about the specified branch
                  */
-                200: BranchResponse;
+                200: BranchResponse & AnnotationResponse;
                 /**
                  * General Error
                  */
@@ -3078,6 +3119,21 @@ export type $OpenApiTs = {
                  * Reset the passsword for the specified role
                  */
                 200: RoleOperations;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/annotations': {
+        get: {
+            req: ListAnnotationsData;
+            res: {
+                /**
+                 * Annotations provided
+                 */
+                200: AnnotationsResponse;
                 /**
                  * General Error
                  */

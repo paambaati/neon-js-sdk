@@ -2767,3 +2767,91 @@ export const $SupportTicketSeverity = {
     type: 'string',
     enum: ['low', 'normal', 'high', 'critical']
 } as const;
+
+export const $AnnotationData = {
+    type: 'object',
+    'x-tags': ['Branch'],
+    required: ['object', 'value'],
+    properties: {
+        object: {
+            '$ref': '#/components/schemas/AnnotationObjectData'
+        },
+        value: {
+            '$ref': '#/components/schemas/AnnotationValueData'
+        },
+        created_at: {
+            type: 'string',
+            format: 'date-time'
+        },
+        updated_at: {
+            type: 'string',
+            format: 'date-time'
+        }
+    }
+} as const;
+
+export const $AnnotationValueData = {
+    type: 'object',
+    'x-tags': ['Branch'],
+    additionalProperties: {
+        type: 'string'
+    }
+} as const;
+
+export const $AnnotationObjectData = {
+    type: 'object',
+    'x-tags': ['Branch'],
+    required: ['type', 'id'],
+    properties: {
+        type: {
+            type: 'string'
+        },
+        id: {
+            type: 'string'
+        }
+    }
+} as const;
+
+export const $AnnotationObjectsData = {
+    type: 'array',
+    'x-tags': ['Branch'],
+    items: {
+        '$ref': '#/components/schemas/AnnotationObjectData'
+    }
+} as const;
+
+export const $AnnotationResponse = {
+    type: 'object',
+    'x-tags': ['Branch'],
+    properties: {
+        annotation: {
+            '$ref': '#/components/schemas/AnnotationData'
+        }
+    }
+} as const;
+
+export const $AnnotationsResponse = {
+    type: 'object',
+    'x-tags': ['Branch'],
+    properties: {
+        annotations: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/AnnotationData'
+            }
+        }
+    }
+} as const;
+
+export const $AnnotationsMapResponse = {
+    type: 'object',
+    'x-tags': ['Branch'],
+    properties: {
+        annotations: {
+            type: 'object',
+            additionalProperties: {
+                '$ref': '#/components/schemas/AnnotationData'
+            }
+        }
+    }
+} as const;
