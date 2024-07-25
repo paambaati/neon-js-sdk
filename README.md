@@ -1,6 +1,6 @@
 # `neon-sdk`
 
-![CI](https://github.com/paambaati/neon-js-sdk/actions/workflows/ci.yml/badge.svg)
+[![CI](https://github.com/paambaati/neon-js-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/paambaati/neon-js-sdk/actions/workflows/ci.yml)
 [![NPM Version](https://img.shields.io/npm/v/neon-sdk.svg?logo=npm)](https://www.npmjs.com/package/neon-sdk)
 
 Fully-typed, zero-dependency Node.js and Deno SDK for managing your [Neon](https://neon.tech/) Serverless Postgres projects.
