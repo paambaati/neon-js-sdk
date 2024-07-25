@@ -1,3 +1,10 @@
+# [2.0.0-beta.5](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2024-07-25)
+
+
+### Features
+
+* track latest spec and regenerate bindings ([f28d12c](https://github.com/paambaati/neon-js-sdk/commit/f28d12c5469d429bfa422a4112c19a8c0cb65f86))
+
 # [2.0.0-beta.4](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2024-07-23)
 
 
