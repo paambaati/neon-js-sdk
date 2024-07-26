@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@hey-api/openapi-ts": "0.50.2",
-    "@sebbo2002/semantic-release-jsr": "1.0.1",
+    "@sebbo2002/semantic-release-jsr": "1.0.2-develop.1",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.0",
     "@semantic-release/git": "10.0.1",
