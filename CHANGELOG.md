@@ -1,3 +1,10 @@
+# [2.0.0-beta.6](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2024-07-26)
+
+
+### Bug Fixes
+
+* **ci:** try to reorder npm and jsr publish steps ([6d16932](https://github.com/paambaati/neon-js-sdk/commit/6d1693245349e1e50bd87b03760c770da34040e4))
+
 # [2.0.0-beta.5](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2024-07-25)
 
 
