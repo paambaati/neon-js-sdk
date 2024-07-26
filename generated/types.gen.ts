@@ -30,7 +30,9 @@ export type Pagination = {
 /**
  * Empty response.
  */
-export type EmptyResponse = unknown;
+export type EmptyResponse = {
+    [key: string]: unknown;
+};
 
 export type ApiKeyCreateRequest = {
     /**
