@@ -15,14 +15,14 @@
                 "changelogFile": "CHANGELOG.md"
             }
         ],
-        "@sebbo2002/semantic-release-jsr",
         "@semantic-release/npm",
+        "@sebbo2002/semantic-release-jsr",
         [
             "@semantic-release/git",
             {
                 "assets": [
                     "package.json",
-                    "package-lock.json",
+                    "jsr.json",
                     "CHANGELOG.md"
                 ],
                 "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
