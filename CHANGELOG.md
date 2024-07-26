@@ -1,3 +1,10 @@
+# [2.0.0-beta.7](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2024-07-26)
+
+
+### Bug Fixes
+
+* **ci:** apply JSR semantic-release plugin fixes ([497ae97](https://github.com/paambaati/neon-js-sdk/commit/497ae979bca1bdf9b1b66af8cbfefb9db1bfe6f6))
+
 # [2.0.0-beta.6](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2024-07-26)
 
 
