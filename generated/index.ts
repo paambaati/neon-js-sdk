@@ -11,6 +11,13 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { AllowedIps } from './models/AllowedIps';
+export type { AnnotationData } from './models/AnnotationData';
+export type { AnnotationObjectData } from './models/AnnotationObjectData';
+export type { AnnotationObjectsData } from './models/AnnotationObjectsData';
+export type { AnnotationResponse } from './models/AnnotationResponse';
+export type { AnnotationsMapResponse } from './models/AnnotationsMapResponse';
+export type { AnnotationsResponse } from './models/AnnotationsResponse';
+export type { AnnotationValueData } from './models/AnnotationValueData';
 export type { ApiKeyCreateRequest } from './models/ApiKeyCreateRequest';
 export type { ApiKeyCreateResponse } from './models/ApiKeyCreateResponse';
 export type { ApiKeyRevokeResponse } from './models/ApiKeyRevokeResponse';
