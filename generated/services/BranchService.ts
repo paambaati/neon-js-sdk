@@ -2,6 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { AnnotationResponse } from '../models/AnnotationResponse';
+import type { AnnotationsMapResponse } from '../models/AnnotationsMapResponse';
+import type { AnnotationsResponse } from '../models/AnnotationsResponse';
 import type { BranchCreateRequest } from '../models/BranchCreateRequest';
 import type { BranchesResponse } from '../models/BranchesResponse';
 import type { BranchOperations } from '../models/BranchOperations';
@@ -70,13 +73,13 @@ export class BranchService {
      * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
      *
      * @param projectId The Neon project ID
-     * @returns BranchesResponse Returned a list of branches for the specified project
+     * @returns any Returned a list of branches for the specified project
      * @returns GeneralError General Error
      * @throws ApiError
      */
     public listProjectBranches(
         projectId: string,
-    ): CancelablePromise<BranchesResponse | GeneralError> {
+    ): CancelablePromise<(BranchesResponse & AnnotationsMapResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project_id}/branches',
@@ -99,14 +102,14 @@ export class BranchService {
      *
      * @param projectId The Neon project ID
      * @param branchId The branch ID
-     * @returns BranchResponse Returned information about the specified branch
+     * @returns any Returned information about the specified branch
      * @returns GeneralError General Error
      * @throws ApiError
      */
     public getProjectBranch(
         projectId: string,
         branchId: string,
-    ): CancelablePromise<BranchResponse | GeneralError> {
+    ): CancelablePromise<(BranchResponse & AnnotationResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project_id}/branches/{branch_id}',
@@ -661,6 +664,26 @@ export class BranchService {
                 'project_id': projectId,
                 'branch_id': branchId,
                 'role_name': roleName,
+            },
+        });
+    }
+    /**
+     * List annotations
+     * List annotations
+     *
+     * @param objects A list of annotation objects to query the annotations.
+     * @returns AnnotationsResponse Annotations provided
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public listAnnotations(
+        objects: any,
+    ): CancelablePromise<AnnotationsResponse | GeneralError> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/annotations',
+            query: {
+                'objects': objects,
             },
         });
     }

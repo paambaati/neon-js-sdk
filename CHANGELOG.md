@@ -74,6 +74,14 @@
 
 * move to @hey-api/openapi-ts, as openapi-typescript-codegen is being deprecated
 
+# [1.24.0](https://github.com/paambaati/neon-js-sdk/compare/v1.23.0...v1.24.0) (2024-07-29)
+
+
+### Features
+
+* update to track latest spec changes ([a82bacc](https://github.com/paambaati/neon-js-sdk/commit/a82bacc41cf63482bfe1bedfab6857eb86f1d4bc))
+* update to track latest spec changes ([2678232](https://github.com/paambaati/neon-js-sdk/commit/2678232a3566895beaceec7e0bb9eda3ad502497))
+
 # [1.23.0](https://github.com/paambaati/neon-js-sdk/compare/v1.22.1...v1.23.0) (2024-07-18)
 
 
