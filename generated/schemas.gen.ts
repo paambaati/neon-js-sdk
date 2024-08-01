@@ -1478,7 +1478,7 @@ export const $EndpointState = {
 } as const;
 
 export const $EndpointType = {
-    description: "The compute endpoint type. Either \"read_write\" or \"read_only\".\nThe \"read_only\" compute endpoint type is not yet supported.",
+    description: "The compute endpoint type. Either \"read_write\" or \"read_only\".",
     type: 'string',
     enum: ['read_only', 'read_write']
 } as const;
