@@ -4,6 +4,6 @@
 /* eslint-disable */
 import type { AnnotationData } from './AnnotationData';
 export type AnnotationResponse = {
-    annotation?: AnnotationData;
+    annotation: AnnotationData;
 };
 

@@ -11,6 +11,7 @@ export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { AllowedIps } from './models/AllowedIps';
+export type { AnnotationCreateValueRequest } from './models/AnnotationCreateValueRequest';
 export type { AnnotationData } from './models/AnnotationData';
 export type { AnnotationObjectData } from './models/AnnotationObjectData';
 export type { AnnotationObjectsData } from './models/AnnotationObjectsData';
@@ -101,6 +102,7 @@ export type { OrganizationMembersResponse } from './models/OrganizationMembersRe
 export type { OrganizationMemberUpdateRequest } from './models/OrganizationMemberUpdateRequest';
 export type { OrganizationsResponse } from './models/OrganizationsResponse';
 export type { OrganizationsUpdateRequest } from './models/OrganizationsUpdateRequest';
+export type { OrgDeletionConditionName } from './models/OrgDeletionConditionName';
 export type { Pagination } from './models/Pagination';
 export type { PaginationResponse } from './models/PaginationResponse';
 export type { PaymentSource } from './models/PaymentSource';

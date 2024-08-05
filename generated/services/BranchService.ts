@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { AnnotationCreateValueRequest } from '../models/AnnotationCreateValueRequest';
 import type { AnnotationResponse } from '../models/AnnotationResponse';
 import type { AnnotationsMapResponse } from '../models/AnnotationsMapResponse';
 import type { AnnotationsResponse } from '../models/AnnotationsResponse';
@@ -49,7 +50,7 @@ export class BranchService {
      */
     public createProjectBranch(
         projectId: string,
-        requestBody?: BranchCreateRequest,
+        requestBody?: (BranchCreateRequest & AnnotationCreateValueRequest),
     ): CancelablePromise<GeneralError | (BranchResponse & EndpointsResponse & OperationsResponse & RolesResponse & DatabasesResponse & ConnectionURIsOptionalResponse)> {
         return this.httpRequest.request({
             method: 'POST',
