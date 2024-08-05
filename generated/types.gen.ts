@@ -1801,6 +1801,8 @@ export type ProjectOwnerData = {
 
 export type UserDeletionConditionName = 'project_count' | 'org_admin_membership_count' | 'subscription_type';
 
+export type OrgDeletionConditionName = 'project_count';
+
 /**
  * General Error
  */
@@ -1831,6 +1833,9 @@ export type AnnotationData = {
     updated_at?: string;
 };
 
+/**
+ * Annotation properties.
+ */
 export type AnnotationValueData = {
     [key: string]: (string);
 };
@@ -1842,8 +1847,12 @@ export type AnnotationObjectData = {
 
 export type AnnotationObjectsData = Array<AnnotationObjectData>;
 
+export type AnnotationCreateValueRequest = {
+    annotation_value?: AnnotationValueData;
+};
+
 export type AnnotationResponse = {
-    annotation?: AnnotationData;
+    annotation: AnnotationData;
 };
 
 export type AnnotationsResponse = {
@@ -2029,7 +2038,7 @@ export type CreateProjectBranchData = {
      * The Neon project ID
      */
     projectId: string;
-    requestBody?: BranchCreateRequest;
+    requestBody?: BranchCreateRequest & AnnotationCreateValueRequest;
 };
 
 export type CreateProjectBranchResponse = BranchResponse & EndpointsResponse & OperationsResponse & RolesResponse & DatabasesResponse & ConnectionURIsOptionalResponse;

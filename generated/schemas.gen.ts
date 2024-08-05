@@ -2700,6 +2700,11 @@ export const $UserDeletionConditionName = {
     enum: ['project_count', 'org_admin_membership_count', 'subscription_type']
 } as const;
 
+export const $OrgDeletionConditionName = {
+    type: 'string',
+    enum: ['project_count']
+} as const;
+
 export const $GeneralError = {
     type: 'object',
     description: 'General Error',
@@ -2792,9 +2797,16 @@ export const $AnnotationData = {
 
 export const $AnnotationValueData = {
     type: 'object',
+    description: 'Annotation properties.',
     'x-tags': ['Branch'],
+    maxProperties: 50,
     additionalProperties: {
-        type: 'string'
+        type: 'string',
+        minLength: 1,
+        maxLength: 200,
+        example: {
+            'github-commit-ref': 'github-branch-name'
+        }
     }
 } as const;
 
@@ -2820,9 +2832,20 @@ export const $AnnotationObjectsData = {
     }
 } as const;
 
+export const $AnnotationCreateValueRequest = {
+    type: 'object',
+    'x-tags': ['Branch'],
+    properties: {
+        annotation_value: {
+            '$ref': '#/components/schemas/AnnotationValueData'
+        }
+    }
+} as const;
+
 export const $AnnotationResponse = {
     type: 'object',
     'x-tags': ['Branch'],
+    required: ['annotation'],
     properties: {
         annotation: {
             '$ref': '#/components/schemas/AnnotationData'
