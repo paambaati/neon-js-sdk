@@ -1,12 +1,13 @@
 {
   "name": "neon-sdk",
-  "version": "1.25.0",
+  "version": "2.0.0-beta.9",
   "description": "TypeScript SDK for managing your Neon Serverless PostgreSQL projects",
   "keywords": [
     "neon",
     "sdk",
     "postgresql",
-    "serverless"
+    "serverless",
+    "deno"
   ],
   "homepage": "https://github.com/paambaati/neon-js-sdk",
   "bugs": {
@@ -22,17 +23,17 @@
     "type": "git",
     "url": "git+https://github.com/paambaati/neon-js-sdk.git"
   },
-  "config": {
-    "neonOpenApiSpec": "https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json"
-  },
   "scripts": {
-    "generate": "npx openapi-typescript-codegen --useUnionTypes --name NeonClient --input $npm_package_config_neonOpenApiSpec --output ./generated",
+    "generate": "openapi-ts",
     "build": "tsup --config tsup.config.ts",
+    "jsr:fix": "jscodeshift -t ./scripts/transformers/jsr-fixes.ts --extensions=ts --parser=ts './generated/core/CancelablePromise.ts' './generated/schemas.gen.ts'",
+    "jsr:publish:dry": "pnpm dlx jsr publish --allow-dirty --dry-run",
+    "jsr:publish": "pnpm dlx jsr publish",
     "prepublishOnly": "npm run build"
   },
   "engines": {
     "node": ">=18",
-    "deno": ">=1.28"
+    "deno": ">=1.42"
   },
   "engineStrict": true,
   "files": [
@@ -60,15 +61,19 @@
     "access": "public"
   },
   "devDependencies": {
+    "@hey-api/openapi-ts": "0.52.3",
+    "@sebbo2002/semantic-release-jsr": "1.1.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.0",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/github": "10.1.3",
     "@semantic-release/npm": "12.0.1",
     "@semantic-release/release-notes-generator": "14.0.1",
-    "openapi-typescript-codegen": "0.28.0",
-    "tsup": "8.2.3",
+    "@types/jscodeshift": "0.11.11",
+    "jscodeshift": "17.0.0",
+    "tsup": "8.2.4",
     "typescript": "5.5.4"
   },
-  "packageManager": "pnpm@9.5.0"
+  "packageManager": "pnpm@9.7.0",
+  "$schema": "https://json.schemastore.org/package"
 }

@@ -1,3 +1,94 @@
+# [2.0.0-beta.9](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.8...v2.0.0-beta.9) (2024-08-08)
+
+
+### Features
+
+* update to track latest spec changes ([d02f771](https://github.com/paambaati/neon-js-sdk/commit/d02f771491aeaa6a72d4caa4140148f83c1ccc86))
+
+# [2.0.0-beta.8](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.7...v2.0.0-beta.8) (2024-07-29)
+
+
+### Features
+
+* update to track latest spec changes ([a82bacc](https://github.com/paambaati/neon-js-sdk/commit/a82bacc41cf63482bfe1bedfab6857eb86f1d4bc))
+* update to track latest spec changes ([2678232](https://github.com/paambaati/neon-js-sdk/commit/2678232a3566895beaceec7e0bb9eda3ad502497))
+
+# [2.0.0-beta.7](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.6...v2.0.0-beta.7) (2024-07-26)
+
+
+### Bug Fixes
+
+* **ci:** apply JSR semantic-release plugin fixes ([497ae97](https://github.com/paambaati/neon-js-sdk/commit/497ae979bca1bdf9b1b66af8cbfefb9db1bfe6f6))
+
+# [2.0.0-beta.6](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.5...v2.0.0-beta.6) (2024-07-26)
+
+
+### Bug Fixes
+
+* **ci:** try to reorder npm and jsr publish steps ([6d16932](https://github.com/paambaati/neon-js-sdk/commit/6d1693245349e1e50bd87b03760c770da34040e4))
+
+# [2.0.0-beta.5](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.4...v2.0.0-beta.5) (2024-07-25)
+
+
+### Features
+
+* track latest spec and regenerate bindings ([f28d12c](https://github.com/paambaati/neon-js-sdk/commit/f28d12c5469d429bfa422a4112c19a8c0cb65f86))
+
+# [2.0.0-beta.4](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.3...v2.0.0-beta.4) (2024-07-23)
+
+
+### Bug Fixes
+
+* add a new-line to end of generated file ([8c1ba1b](https://github.com/paambaati/neon-js-sdk/commit/8c1ba1b8b4ad9f3f88f77f0dc783eb69db4e93ed))
+* **ci:** make sure JSR fixes are applied on auto-generated code ([7028fc0](https://github.com/paambaati/neon-js-sdk/commit/7028fc03c3af0623e4cbe0b7f904dfd60dd68d0a))
+
+
+### Features
+
+* **internal:** JSR publish ([2767f62](https://github.com/paambaati/neon-js-sdk/commit/2767f62bc22c6e20c993ab7f7d4f77f1111a2c25))
+* **internal:** JSR support ✨ ([8744bec](https://github.com/paambaati/neon-js-sdk/commit/8744bec14b8162f207144746073952ad3ba43949))
+
+# [2.0.0-beta.3](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.2...v2.0.0-beta.3) (2024-07-18)
+
+
+### Bug Fixes
+
+* merge with master and regenerate bindings ([9ea84fd](https://github.com/paambaati/neon-js-sdk/commit/9ea84fd093ae6ae933b95dc7fc3f8728f6b7f001))
+* regenerate from spec ([c1213fd](https://github.com/paambaati/neon-js-sdk/commit/c1213fd726405e415bd5815da813720d07e14608))
+
+
+### Features
+
+* update to track latest spec changes ([9747d03](https://github.com/paambaati/neon-js-sdk/commit/9747d0385d574dc39d0e5e7b8e915c008d4467f8))
+* update to track latest spec changes ([cb26eba](https://github.com/paambaati/neon-js-sdk/commit/cb26eba7c4f722c6c7e9c6b3b41ed01ba843295b))
+* update to track latest spec changes ([6b3ee04](https://github.com/paambaati/neon-js-sdk/commit/6b3ee0463d46a562159711e7de10838e247b6410))
+* update to track latest spec changes ([58793dd](https://github.com/paambaati/neon-js-sdk/commit/58793ddc3bbdbcc8614378d34182979452a407cc))
+
+# [2.0.0-beta.2](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.1...v2.0.0-beta.2) (2024-06-17)
+
+
+### Bug Fixes
+
+* upgrade to latest version of hey-api/openapi-ts ([f93934a](https://github.com/paambaati/neon-js-sdk/commit/f93934af9f4291d8480bc0cce3ceb60f4c884fb9))
+
+# [2.0.0-beta.1](https://github.com/paambaati/neon-js-sdk/compare/v1.21.0...v2.0.0-beta.1) (2024-06-13)
+
+
+### Bug Fixes
+
+* fix publint warning ([26baab2](https://github.com/paambaati/neon-js-sdk/commit/26baab2712ecdbcaa0bb11502809f54c2a6c39f2))
+* make sure NeonClient is generated ([8edaf93](https://github.com/paambaati/neon-js-sdk/commit/8edaf9365041fe7c73ad6dd5e08a0d7dc89e6efc)), closes [/github.com/hey-api/openapi-ts/issues/606#issuecomment-2127263454](https://github.com//github.com/hey-api/openapi-ts/issues/606/issues/issuecomment-2127263454)
+
+
+### core
+
+* migrate to @hey-api/openapi-ts ([9ac0f0a](https://github.com/paambaati/neon-js-sdk/commit/9ac0f0a6dddc5340801058a39b77b07510858ea0))
+
+
+### BREAKING CHANGES
+
+* move to @hey-api/openapi-ts, as openapi-typescript-codegen is being deprecated
+
 # [1.25.0](https://github.com/paambaati/neon-js-sdk/compare/v1.24.0...v1.25.0) (2024-08-05)
 
 
