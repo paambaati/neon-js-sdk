@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@hey-api/openapi-ts':
-        specifier: 0.52.1
-        version: 0.52.1(typescript@5.5.4)
+        specifier: 0.52.3
+        version: 0.52.3(typescript@5.5.4)
       '@sebbo2002/semantic-release-jsr':
         specifier: 1.1.0
         version: 1.1.0
@@ -422,8 +422,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@hey-api/openapi-ts@0.52.1':
-    resolution: {integrity: sha512-1RZ8sJNTzhq45VZMfF6Wfhf4uynIf5INQy7nkgnjVBELPr6yNBf95Kpel6mfMrNVlSAAEQphmYfaJZPQ5yy5nQ==}
+  '@hey-api/openapi-ts@0.52.3':
+    resolution: {integrity: sha512-9zZo72XNKlnQlv+9gIQxdwfS7vqnY8WIbvF2HTfwyVXIc0n36J0o2NMDEmV82/NHBmcr5zhoXtdh50Y6V3eWVw==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -2800,7 +2800,7 @@ snapshots:
   '@esbuild/win32-x64@0.23.0':
     optional: true
 
-  '@hey-api/openapi-ts@0.52.1(typescript@5.5.4)':
+  '@hey-api/openapi-ts@0.52.3(typescript@5.5.4)':
     dependencies:
       '@apidevtools/json-schema-ref-parser': 11.7.0
       c12: 1.11.1
