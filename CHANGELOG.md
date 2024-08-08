@@ -1,3 +1,10 @@
+# [2.0.0-beta.9](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.8...v2.0.0-beta.9) (2024-08-08)
+
+
+### Features
+
+* update to track latest spec changes ([d02f771](https://github.com/paambaati/neon-js-sdk/commit/d02f771491aeaa6a72d4caa4140148f83c1ccc86))
+
 # [2.0.0-beta.8](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.7...v2.0.0-beta.8) (2024-07-29)
 
 
