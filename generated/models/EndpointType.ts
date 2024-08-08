@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Annotation properties.
+ * The compute endpoint type. Either `read_write` or `read_only`.
+ *
  */
-export type AnnotationValueData = Record<string, string>;
+export type EndpointType = 'read_only' | 'read_write';

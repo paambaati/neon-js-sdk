@@ -9,6 +9,20 @@ export const $Features = {
     }
 } as const;
 
+export const $FeatureFlags = {
+    type: 'object',
+    additionalProperties: {
+        oneOf: [
+            {
+                type: 'boolean'
+            },
+            {
+                type: 'string'
+            }
+        ]
+    }
+} as const;
+
 export const $ComputeUnit = {
     type: 'number',
     minimum: 0.25
@@ -1747,6 +1761,30 @@ export const $ExplainData = {
     }
 } as const;
 
+export const $NotificationMetricType = {
+    type: 'string',
+    description: "The metric type for a given notification",
+    enum: ['database_size', 'connections', 'cpu', 'ram', 'compute_over_limit']
+} as const;
+
+export const $NotificationCategoryType = {
+    type: 'string',
+    description: "The category type for a given notification",
+    enum: ['usage', 'performance']
+} as const;
+
+export const $NotificationType = {
+    type: 'string',
+    description: "The type of the notification",
+    enum: ['info', 'warning']
+} as const;
+
+export const $NotificationActionType = {
+    type: 'string',
+    description: "The action type for a given notification",
+    enum: ['upgrade_plan', 'upgrade_cu']
+} as const;
+
 export const $Role = {
     type: 'object',
     required: ['branch_id', 'name', 'created_at', 'updated_at'],
@@ -1880,13 +1918,16 @@ export const $PaymentSource = {
 
 export const $BillingAccount = {
     type: 'object',
-    required: ['payment_source', 'subscription_type', 'quota_reset_at_last', 'name', 'email', 'address_city', 'address_country', 'address_line1', 'address_line2', 'address_postal_code', 'address_state'],
+    required: ['payment_source', 'subscription_type', 'payment_method', 'quota_reset_at_last', 'name', 'email', 'address_city', 'address_country', 'address_line1', 'address_line2', 'address_postal_code', 'address_state'],
     properties: {
         payment_source: {
             '$ref': '#/components/schemas/PaymentSource'
         },
         subscription_type: {
             '$ref': '#/components/schemas/BillingSubscriptionType'
+        },
+        payment_method: {
+            '$ref': '#/components/schemas/BillingPaymentMethod'
         },
         quota_reset_at_last: {
             description: "The last time the quota was reset. Defaults to the date-time the account is created.",
@@ -1948,6 +1989,12 @@ export const $BillingSubscriptionType = {
     type: 'string',
     description: "Type of subscription to Neon Cloud.\nNotice that for users without billing account this will be \"UNKNOWN\"",
     enum: ['UNKNOWN', 'direct_sales', 'aws_marketplace', 'free_v2', 'launch', 'scale']
+} as const;
+
+export const $BillingPaymentMethod = {
+    type: 'string',
+    description: "Indicates whether and how an account makes payments.",
+    enum: ['UNKNOWN', 'none', 'stripe', 'direct_payment', 'aws_mp', 'vercel_mp']
 } as const;
 
 export const $Database = {
@@ -2824,14 +2871,6 @@ export const $AnnotationObjectData = {
     }
 } as const;
 
-export const $AnnotationObjectsData = {
-    type: 'array',
-    'x-tags': ['Branch'],
-    items: {
-        '$ref': '#/components/schemas/AnnotationObjectData'
-    }
-} as const;
-
 export const $AnnotationCreateValueRequest = {
     type: 'object',
     'x-tags': ['Branch'],
@@ -2853,22 +2892,10 @@ export const $AnnotationResponse = {
     }
 } as const;
 
-export const $AnnotationsResponse = {
-    type: 'object',
-    'x-tags': ['Branch'],
-    properties: {
-        annotations: {
-            type: 'array',
-            items: {
-                '$ref': '#/components/schemas/AnnotationData'
-            }
-        }
-    }
-} as const;
-
 export const $AnnotationsMapResponse = {
     type: 'object',
     'x-tags': ['Branch'],
+    required: ['annotations'],
     properties: {
         annotations: {
             type: 'object',

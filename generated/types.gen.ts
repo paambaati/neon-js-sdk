@@ -4,6 +4,10 @@ export type Features = {
     [key: string]: (boolean);
 };
 
+export type FeatureFlags = {
+    [key: string]: (boolean | string);
+};
+
 export type ComputeUnit = number;
 
 /**
@@ -1235,6 +1239,30 @@ export type ExplainData = {
     'QUERY PLAN': string;
 };
 
+/**
+ * The metric type for a given notification
+ *
+ */
+export type NotificationMetricType = 'database_size' | 'connections' | 'cpu' | 'ram' | 'compute_over_limit';
+
+/**
+ * The category type for a given notification
+ *
+ */
+export type NotificationCategoryType = 'usage' | 'performance';
+
+/**
+ * The type of the notification
+ *
+ */
+export type NotificationType = 'info' | 'warning';
+
+/**
+ * The action type for a given notification
+ *
+ */
+export type NotificationActionType = 'upgrade_plan' | 'upgrade_cu';
+
 export type Role = {
     /**
      * The ID of the branch to which the role belongs
@@ -1335,6 +1363,7 @@ export type PaymentSource = {
 export type BillingAccount = {
     payment_source: PaymentSource;
     subscription_type: BillingSubscriptionType;
+    payment_method: BillingPaymentMethod;
     /**
      * The last time the quota was reset. Defaults to the date-time the account is created.
      *
@@ -1407,6 +1436,12 @@ export type BillingAccount = {
  *
  */
 export type BillingSubscriptionType = 'UNKNOWN' | 'direct_sales' | 'aws_marketplace' | 'free_v2' | 'launch' | 'scale';
+
+/**
+ * Indicates whether and how an account makes payments.
+ *
+ */
+export type BillingPaymentMethod = 'UNKNOWN' | 'none' | 'stripe' | 'direct_payment' | 'aws_mp' | 'vercel_mp';
 
 export type Database = {
     /**
@@ -1845,8 +1880,6 @@ export type AnnotationObjectData = {
     id: string;
 };
 
-export type AnnotationObjectsData = Array<AnnotationObjectData>;
-
 export type AnnotationCreateValueRequest = {
     annotation_value?: AnnotationValueData;
 };
@@ -1855,12 +1888,8 @@ export type AnnotationResponse = {
     annotation: AnnotationData;
 };
 
-export type AnnotationsResponse = {
-    annotations?: Array<AnnotationData>;
-};
-
 export type AnnotationsMapResponse = {
-    annotations?: {
+    annotations: {
         [key: string]: AnnotationData;
     };
 };
@@ -2349,15 +2378,6 @@ export type ResetProjectBranchRolePasswordData = {
 };
 
 export type ResetProjectBranchRolePasswordResponse = RoleOperations;
-
-export type ListAnnotationsData = {
-    /**
-     * A list of annotation objects to query the annotations.
-     */
-    objects: AnnotationObjectsData;
-};
-
-export type ListAnnotationsResponse = AnnotationsResponse;
 
 export type CreateProjectEndpointData = {
     /**
@@ -3129,21 +3149,6 @@ export type $OpenApiTs = {
                  * Reset the passsword for the specified role
                  */
                 200: RoleOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/annotations': {
-        get: {
-            req: ListAnnotationsData;
-            res: {
-                /**
-                 * Annotations provided
-                 */
-                200: AnnotationsResponse;
                 /**
                  * General Error
                  */

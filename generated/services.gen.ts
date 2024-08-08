@@ -2,7 +2,7 @@
 
 import type { CancelablePromise } from './core/CancelablePromise';
 import type { BaseHttpRequest } from './core/BaseHttpRequest';
-import type { ListApiKeysResponse, CreateApiKeyData, CreateApiKeyResponse, RevokeApiKeyData, RevokeApiKeyResponse, GetProjectOperationData, GetProjectOperationResponse, ListProjectOperationsData, ListProjectOperationsResponse, ListProjectsData, ListProjectsResponse, CreateProjectData, CreateProjectResponse, ListSharedProjectsData, ListSharedProjectsResponse, GetProjectData, GetProjectResponse, UpdateProjectData, UpdateProjectResponse, DeleteProjectData, DeleteProjectResponse, ListProjectPermissionsData, ListProjectPermissionsResponse, GrantPermissionToProjectData, GrantPermissionToProjectResponse, RevokePermissionFromProjectData, RevokePermissionFromProjectResponse, GetConnectionUriData, GetConnectionUriResponse, CreateProjectBranchData, CreateProjectBranchResponse, ListProjectBranchesData, ListProjectBranchesResponse, GetProjectBranchData, GetProjectBranchResponse, DeleteProjectBranchData, DeleteProjectBranchResponse, UpdateProjectBranchData, UpdateProjectBranchResponse, RestoreProjectBranchData, RestoreProjectBranchResponse, GetProjectBranchSchemaData, GetProjectBranchSchemaResponse, SetPrimaryProjectBranchData, SetPrimaryProjectBranchResponse, SetDefaultProjectBranchData, SetDefaultProjectBranchResponse, ListProjectBranchEndpointsData, ListProjectBranchEndpointsResponse, ListProjectBranchDatabasesData, ListProjectBranchDatabasesResponse, CreateProjectBranchDatabaseData, CreateProjectBranchDatabaseResponse, GetProjectBranchDatabaseData, GetProjectBranchDatabaseResponse, UpdateProjectBranchDatabaseData, UpdateProjectBranchDatabaseResponse, DeleteProjectBranchDatabaseData, DeleteProjectBranchDatabaseResponse, ListProjectBranchRolesData, ListProjectBranchRolesResponse, CreateProjectBranchRoleData, CreateProjectBranchRoleResponse, GetProjectBranchRoleData, GetProjectBranchRoleResponse, DeleteProjectBranchRoleData, DeleteProjectBranchRoleResponse, GetProjectBranchRolePasswordData, GetProjectBranchRolePasswordResponse, ResetProjectBranchRolePasswordData, ResetProjectBranchRolePasswordResponse, ListAnnotationsData, ListAnnotationsResponse, CreateProjectEndpointData, CreateProjectEndpointResponse, ListProjectEndpointsData, ListProjectEndpointsResponse, GetProjectEndpointData, GetProjectEndpointResponse, DeleteProjectEndpointData, DeleteProjectEndpointResponse, UpdateProjectEndpointData, UpdateProjectEndpointResponse, StartProjectEndpointData, StartProjectEndpointResponse, SuspendProjectEndpointData, SuspendProjectEndpointResponse, RestartProjectEndpointData, RestartProjectEndpointResponse, GetConsumptionHistoryPerAccountData, GetConsumptionHistoryPerAccountResponse, GetConsumptionHistoryPerProjectData, GetConsumptionHistoryPerProjectResponse, ListProjectsConsumptionData, ListProjectsConsumptionResponse, GetCurrentUserInfoResponse, GetCurrentUserOrganizationsResponse } from './types.gen';
+import type { ListApiKeysResponse, CreateApiKeyData, CreateApiKeyResponse, RevokeApiKeyData, RevokeApiKeyResponse, GetProjectOperationData, GetProjectOperationResponse, ListProjectOperationsData, ListProjectOperationsResponse, ListProjectsData, ListProjectsResponse, CreateProjectData, CreateProjectResponse, ListSharedProjectsData, ListSharedProjectsResponse, GetProjectData, GetProjectResponse, UpdateProjectData, UpdateProjectResponse, DeleteProjectData, DeleteProjectResponse, ListProjectPermissionsData, ListProjectPermissionsResponse, GrantPermissionToProjectData, GrantPermissionToProjectResponse, RevokePermissionFromProjectData, RevokePermissionFromProjectResponse, GetConnectionUriData, GetConnectionUriResponse, CreateProjectBranchData, CreateProjectBranchResponse, ListProjectBranchesData, ListProjectBranchesResponse, GetProjectBranchData, GetProjectBranchResponse, DeleteProjectBranchData, DeleteProjectBranchResponse, UpdateProjectBranchData, UpdateProjectBranchResponse, RestoreProjectBranchData, RestoreProjectBranchResponse, GetProjectBranchSchemaData, GetProjectBranchSchemaResponse, SetPrimaryProjectBranchData, SetPrimaryProjectBranchResponse, SetDefaultProjectBranchData, SetDefaultProjectBranchResponse, ListProjectBranchEndpointsData, ListProjectBranchEndpointsResponse, ListProjectBranchDatabasesData, ListProjectBranchDatabasesResponse, CreateProjectBranchDatabaseData, CreateProjectBranchDatabaseResponse, GetProjectBranchDatabaseData, GetProjectBranchDatabaseResponse, UpdateProjectBranchDatabaseData, UpdateProjectBranchDatabaseResponse, DeleteProjectBranchDatabaseData, DeleteProjectBranchDatabaseResponse, ListProjectBranchRolesData, ListProjectBranchRolesResponse, CreateProjectBranchRoleData, CreateProjectBranchRoleResponse, GetProjectBranchRoleData, GetProjectBranchRoleResponse, DeleteProjectBranchRoleData, DeleteProjectBranchRoleResponse, GetProjectBranchRolePasswordData, GetProjectBranchRolePasswordResponse, ResetProjectBranchRolePasswordData, ResetProjectBranchRolePasswordResponse, CreateProjectEndpointData, CreateProjectEndpointResponse, ListProjectEndpointsData, ListProjectEndpointsResponse, GetProjectEndpointData, GetProjectEndpointResponse, DeleteProjectEndpointData, DeleteProjectEndpointResponse, UpdateProjectEndpointData, UpdateProjectEndpointResponse, StartProjectEndpointData, StartProjectEndpointResponse, SuspendProjectEndpointData, SuspendProjectEndpointResponse, RestartProjectEndpointData, RestartProjectEndpointResponse, GetConsumptionHistoryPerAccountData, GetConsumptionHistoryPerAccountResponse, GetConsumptionHistoryPerProjectData, GetConsumptionHistoryPerProjectResponse, ListProjectsConsumptionData, ListProjectsConsumptionResponse, GetCurrentUserInfoResponse, GetCurrentUserOrganizationsResponse } from './types.gen';
 
 export class ApiKeyService {
     constructor(public readonly httpRequest: BaseHttpRequest) { }
@@ -1067,28 +1067,6 @@ export class BranchService {
         });
     }
     
-    /**
-     * List annotations
-     * List annotations
-     *
-     * @param data The data for the request.
-     * @param data.objects A list of annotation objects to query the annotations.
-     * @returns AnnotationsResponse Annotations provided
-     * @throws ApiError
-     */
-    public listAnnotations(data: ListAnnotationsData): CancelablePromise<ListAnnotationsResponse> {
-        return this.httpRequest.request({
-            method: 'GET',
-            url: '/annotations',
-            query: {
-                objects: data.objects
-            },
-            errors: {
-                default: 'General Error'
-            }
-        });
-    }
-    
 }
 
 export class EndpointService {
@@ -1476,6 +1454,7 @@ Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
     }
     
     /**
+     * @deprecated
      * Get project consumption metrics
      * Retrieves consumption metrics for each project for the current billing period.
      * For usage information, see [Retrieving metrics for all projects](https://neon.tech/docs/guides/partner-billing#retrieving-metrics-for-all-projects).
