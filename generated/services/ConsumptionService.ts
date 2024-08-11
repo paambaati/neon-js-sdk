@@ -156,6 +156,7 @@ export class ConsumptionService {
         });
     }
     /**
+     * @deprecated
      * Get project consumption metrics
      * Retrieves consumption metrics for each project for the current billing period.
      * For usage information, see [Retrieving metrics for all projects](https://neon.tech/docs/guides/partner-billing#retrieving-metrics-for-all-projects).

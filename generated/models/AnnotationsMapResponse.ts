@@ -4,6 +4,6 @@
 /* eslint-disable */
 import type { AnnotationData } from './AnnotationData';
 export type AnnotationsMapResponse = {
-    annotations?: Record<string, AnnotationData>;
+    annotations: Record<string, AnnotationData>;
 };
 
