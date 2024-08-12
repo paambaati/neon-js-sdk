@@ -2,5 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { AnnotationObjectData } from './AnnotationObjectData';
-export type AnnotationObjectsData = Array<AnnotationObjectData>;
+/**
+ * The type of the notification
+ *
+ */
+export type NotificationType = 'info' | 'warning';

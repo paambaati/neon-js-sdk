@@ -2,11 +2,13 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { BillingPaymentMethod } from './BillingPaymentMethod';
 import type { BillingSubscriptionType } from './BillingSubscriptionType';
 import type { PaymentSource } from './PaymentSource';
 export type BillingAccount = {
     payment_source: PaymentSource;
     subscription_type: BillingSubscriptionType;
+    payment_method: BillingPaymentMethod;
     /**
      * The last time the quota was reset. Defaults to the date-time the account is created.
      *
