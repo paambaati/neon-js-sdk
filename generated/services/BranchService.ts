@@ -5,7 +5,6 @@
 import type { AnnotationCreateValueRequest } from '../models/AnnotationCreateValueRequest';
 import type { AnnotationResponse } from '../models/AnnotationResponse';
 import type { AnnotationsMapResponse } from '../models/AnnotationsMapResponse';
-import type { AnnotationsResponse } from '../models/AnnotationsResponse';
 import type { BranchCreateRequest } from '../models/BranchCreateRequest';
 import type { BranchesResponse } from '../models/BranchesResponse';
 import type { BranchOperations } from '../models/BranchOperations';
@@ -665,26 +664,6 @@ export class BranchService {
                 'project_id': projectId,
                 'branch_id': branchId,
                 'role_name': roleName,
-            },
-        });
-    }
-    /**
-     * List annotations
-     * List annotations
-     *
-     * @param objects A list of annotation objects to query the annotations.
-     * @returns AnnotationsResponse Annotations provided
-     * @returns GeneralError General Error
-     * @throws ApiError
-     */
-    public listAnnotations(
-        objects: any,
-    ): CancelablePromise<AnnotationsResponse | GeneralError> {
-        return this.httpRequest.request({
-            method: 'GET',
-            url: '/annotations',
-            query: {
-                'objects': objects,
             },
         });
     }
