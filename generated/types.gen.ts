@@ -38,6 +38,58 @@ export type EmptyResponse = {
     [key: string]: unknown;
 };
 
+/**
+ * Add a new JWKS to a specific endpoint of a project
+ */
+export type AddEndpointJWKSRequest = {
+    /**
+     * The URL that lists the JWKS
+     */
+    jwks_url: string;
+    /**
+     * The name of the authentication provider (e.g., Clerk, Stytch, Auth0)
+     */
+    provider_name: string;
+};
+
+export type JWKS = {
+    /**
+     * JWKS ID
+     */
+    id: string;
+    /**
+     * Project ID
+     */
+    project_id: string;
+    /**
+     * Endpoint ID
+     */
+    endpoint_id: string;
+    /**
+     * The URL that lists the JWKS
+     */
+    jwks_url: string;
+    /**
+     * The name of the authentication provider (e.g., Clerk, Stytch, Auth0)
+     */
+    provider_name: string;
+    /**
+     * The date and time when the JWKS was created
+     */
+    created_at: string;
+    /**
+     * The date and time when the JWKS was last modified
+     */
+    updated_at: string;
+};
+
+/**
+ * The list of configured JWKS definitions for a project
+ */
+export type ProjectJWKSResponse = {
+    jwks: Array<JWKS>;
+};
+
 export type ApiKeyCreateRequest = {
     /**
      * A user-specified API key name. This value is required when creating an API key.
@@ -1441,7 +1493,7 @@ export type BillingSubscriptionType = 'UNKNOWN' | 'direct_sales' | 'aws_marketpl
  * Indicates whether and how an account makes payments.
  *
  */
-export type BillingPaymentMethod = 'UNKNOWN' | 'none' | 'stripe' | 'direct_payment' | 'aws_mp' | 'vercel_mp';
+export type BillingPaymentMethod = 'UNKNOWN' | 'none' | 'stripe' | 'direct_payment' | 'aws_mp' | 'vercel_mp' | 'staff' | 'trial' | 'sponsorship';
 
 export type Database = {
     /**
@@ -2062,6 +2114,29 @@ export type GetConnectionUriData = {
 
 export type GetConnectionUriResponse = ConnectionURIResponse;
 
+export type GetProjectJwksData = {
+    /**
+     * The Neon project ID
+     */
+    projectId: string;
+};
+
+export type GetProjectJwksResponse = ProjectJWKSResponse;
+
+export type AddEndpointJwksData = {
+    /**
+     * The endpoint ID
+     */
+    endpointId: string;
+    /**
+     * The Neon project ID
+     */
+    projectId: string;
+    requestBody: AddEndpointJWKSRequest;
+};
+
+export type AddEndpointJwksResponse = JWKS;
+
 export type CreateProjectBranchData = {
     /**
      * The Neon project ID
@@ -2628,761 +2703,3 @@ export type ListProjectsConsumptionResponse = ProjectsConsumptionResponse & Pagi
 export type GetCurrentUserInfoResponse = CurrentUserInfoResponse;
 
 export type GetCurrentUserOrganizationsResponse = OrganizationsResponse;
-
-export type $OpenApiTs = {
-    '/api_keys': {
-        get: {
-            res: {
-                /**
-                 * Returned the API keys for the Neon account
-                 */
-                200: Array<ApiKeysListResponseItem>;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        post: {
-            req: CreateApiKeyData;
-            res: {
-                /**
-                 * Created an API key
-                 */
-                200: ApiKeyCreateResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/api_keys/{key_id}': {
-        delete: {
-            req: RevokeApiKeyData;
-            res: {
-                /**
-                 * Revoked the specified API key
-                 */
-                200: ApiKeyRevokeResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/operations/{operation_id}': {
-        get: {
-            req: GetProjectOperationData;
-            res: {
-                /**
-                 * Returned details for the specified operation
-                 */
-                200: OperationResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/operations': {
-        get: {
-            req: ListProjectOperationsData;
-            res: {
-                /**
-                 * Returned a list of operations
-                 *
-                 */
-                200: OperationsResponse & PaginationResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects': {
-        get: {
-            req: ListProjectsData;
-            res: {
-                /**
-                 * Returned a list of projects for the Neon account
-                 */
-                200: ProjectsResponse & PaginationResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        post: {
-            req: CreateProjectData;
-            res: {
-                /**
-                 * Created a project.
-                 * The project includes a connection URI with a database, password, and role.
-                 * At least one non-protected role is created with a password.
-                 * Wait until the operations are finished before attempting to connect to a project database.
-                 *
-                 */
-                201: ProjectResponse & ConnectionURIsResponse & RolesResponse & DatabasesResponse & OperationsResponse & BranchResponse & EndpointsResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/shared': {
-        get: {
-            req: ListSharedProjectsData;
-            res: {
-                /**
-                 * Returned a list of shared projects for the Neon account
-                 */
-                200: ProjectsResponse & PaginationResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}': {
-        get: {
-            req: GetProjectData;
-            res: {
-                /**
-                 * Returned information about the specified project
-                 */
-                200: ProjectResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        patch: {
-            req: UpdateProjectData;
-            res: {
-                /**
-                 * Updated the specified project
-                 */
-                200: ProjectResponse & OperationsResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        delete: {
-            req: DeleteProjectData;
-            res: {
-                /**
-                 * Deleted the specified project
-                 */
-                200: ProjectResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/permissions': {
-        get: {
-            req: ListProjectPermissionsData;
-            res: {
-                /**
-                 * Returned project access details
-                 */
-                200: ProjectPermissions;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        post: {
-            req: GrantPermissionToProjectData;
-            res: {
-                /**
-                 * Granted project access
-                 */
-                200: ProjectPermission;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/permissions/{permission_id}': {
-        delete: {
-            req: RevokePermissionFromProjectData;
-            res: {
-                /**
-                 * Revoked project access
-                 */
-                200: ProjectPermission;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/connection_uri': {
-        get: {
-            req: GetConnectionUriData;
-            res: {
-                /**
-                 * Returned the connection URI
-                 */
-                200: ConnectionURIResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/branches': {
-        post: {
-            req: CreateProjectBranchData;
-            res: {
-                /**
-                 * Created a branch. An endpoint is only created if it was specified in the request.
-                 */
-                201: BranchResponse & EndpointsResponse & OperationsResponse & RolesResponse & DatabasesResponse & ConnectionURIsOptionalResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        get: {
-            req: ListProjectBranchesData;
-            res: {
-                /**
-                 * Returned a list of branches for the specified project
-                 */
-                200: BranchesResponse & AnnotationsMapResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/branches/{branch_id}': {
-        get: {
-            req: GetProjectBranchData;
-            res: {
-                /**
-                 * Returned information about the specified branch
-                 */
-                200: BranchResponse & AnnotationResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        delete: {
-            req: DeleteProjectBranchData;
-            res: {
-                /**
-                 * Deleted the specified branch
-                 */
-                200: BranchOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        patch: {
-            req: UpdateProjectBranchData;
-            res: {
-                /**
-                 * Updated the specified branch
-                 */
-                200: BranchOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/branches/{branch_id}/restore': {
-        post: {
-            req: RestoreProjectBranchData;
-            res: {
-                /**
-                 * Updated the specified branch
-                 */
-                200: BranchOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/branches/{branch_id}/schema': {
-        get: {
-            req: GetProjectBranchSchemaData;
-            res: {
-                /**
-                 * Schema definition
-                 */
-                200: BranchSchemaResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/branches/{branch_id}/set_as_primary': {
-        post: {
-            req: SetPrimaryProjectBranchData;
-            res: {
-                /**
-                 * Updated the specified branch
-                 */
-                200: BranchOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/branches/{branch_id}/set_as_default': {
-        post: {
-            req: SetDefaultProjectBranchData;
-            res: {
-                /**
-                 * Updated the specified branch
-                 */
-                200: BranchOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/branches/{branch_id}/endpoints': {
-        get: {
-            req: ListProjectBranchEndpointsData;
-            res: {
-                /**
-                 * Returned a list of endpoints for the specified branch
-                 */
-                200: EndpointsResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/branches/{branch_id}/databases': {
-        get: {
-            req: ListProjectBranchDatabasesData;
-            res: {
-                /**
-                 * Returned a list of databases of the specified branch
-                 */
-                200: DatabasesResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        post: {
-            req: CreateProjectBranchDatabaseData;
-            res: {
-                /**
-                 * Created a database in the specified branch
-                 */
-                201: DatabaseOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/branches/{branch_id}/databases/{database_name}': {
-        get: {
-            req: GetProjectBranchDatabaseData;
-            res: {
-                /**
-                 * Returned the database details
-                 */
-                200: DatabaseResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        patch: {
-            req: UpdateProjectBranchDatabaseData;
-            res: {
-                /**
-                 * Updated the database
-                 */
-                200: DatabaseOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        delete: {
-            req: DeleteProjectBranchDatabaseData;
-            res: {
-                /**
-                 * Deleted the specified database
-                 */
-                200: DatabaseOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/branches/{branch_id}/roles': {
-        get: {
-            req: ListProjectBranchRolesData;
-            res: {
-                /**
-                 * Returned a list of roles from the specified branch.
-                 */
-                200: RolesResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        post: {
-            req: CreateProjectBranchRoleData;
-            res: {
-                /**
-                 * Created a role in the specified branch
-                 */
-                201: RoleOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/branches/{branch_id}/roles/{role_name}': {
-        get: {
-            req: GetProjectBranchRoleData;
-            res: {
-                /**
-                 * Returned details for the specified role
-                 */
-                200: RoleResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        delete: {
-            req: DeleteProjectBranchRoleData;
-            res: {
-                /**
-                 * Deleted the specified role from the branch
-                 */
-                200: RoleOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/branches/{branch_id}/roles/{role_name}/reveal_password': {
-        get: {
-            req: GetProjectBranchRolePasswordData;
-            res: {
-                /**
-                 * Returned password for the specified role
-                 */
-                200: RolePasswordResponse;
-                /**
-                 * Role not found
-                 */
-                404: GeneralError;
-                /**
-                 * Storing passwords is disabled
-                 */
-                412: GeneralError;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/branches/{branch_id}/roles/{role_name}/reset_password': {
-        post: {
-            req: ResetProjectBranchRolePasswordData;
-            res: {
-                /**
-                 * Reset the passsword for the specified role
-                 */
-                200: RoleOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/endpoints': {
-        post: {
-            req: CreateProjectEndpointData;
-            res: {
-                /**
-                 * Created a compute endpoint
-                 */
-                201: EndpointOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        get: {
-            req: ListProjectEndpointsData;
-            res: {
-                /**
-                 * Returned a list of endpoints for the specified project
-                 */
-                200: EndpointsResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/endpoints/{endpoint_id}': {
-        get: {
-            req: GetProjectEndpointData;
-            res: {
-                /**
-                 * Returned information about the specified endpoint
-                 */
-                200: EndpointResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        delete: {
-            req: DeleteProjectEndpointData;
-            res: {
-                /**
-                 * Deleted the specified compute endpoint
-                 */
-                200: EndpointOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-        patch: {
-            req: UpdateProjectEndpointData;
-            res: {
-                /**
-                 * Updated the specified compute endpoint
-                 */
-                200: EndpointOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/endpoints/{endpoint_id}/start': {
-        post: {
-            req: StartProjectEndpointData;
-            res: {
-                /**
-                 * Started the specified compute endpoint
-                 */
-                200: EndpointOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/endpoints/{endpoint_id}/suspend': {
-        post: {
-            req: SuspendProjectEndpointData;
-            res: {
-                /**
-                 * Suspended the specified endpoint
-                 */
-                200: EndpointOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/projects/{project_id}/endpoints/{endpoint_id}/restart': {
-        post: {
-            req: RestartProjectEndpointData;
-            res: {
-                /**
-                 * Restarted endpoint
-                 */
-                200: EndpointOperations;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/consumption_history/account': {
-        get: {
-            req: GetConsumptionHistoryPerAccountData;
-            res: {
-                /**
-                 * Returned consumption metrics for the Neon account
-                 */
-                200: ConsumptionHistoryPerAccountResponse;
-                /**
-                 * This endpoint is not available. It is only supported with Scale plan accounts.
-                 */
-                403: GeneralError;
-                /**
-                 * Account is not a member of the organization specified by `org_id`.
-                 */
-                404: GeneralError;
-                /**
-                 * The specified `date-time` range is outside the boundaries of the specified `granularity`.
-                 * Adjust your `from` and `to` values or select a different `granularity`.
-                 *
-                 */
-                406: GeneralError;
-                /**
-                 * Too many requests
-                 */
-                429: GeneralError;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/consumption_history/projects': {
-        get: {
-            req: GetConsumptionHistoryPerProjectData;
-            res: {
-                /**
-                 * Returned project consumption metrics for the Neon account
-                 */
-                200: ConsumptionHistoryPerProjectResponse & PaginationResponse;
-                /**
-                 * This endpoint is not available. It is only supported with Scale plan accounts.
-                 */
-                403: GeneralError;
-                /**
-                 * Account is not a member of the organization specified by `org_id`.
-                 */
-                404: GeneralError;
-                /**
-                 * The specified `date-time` range is outside the boundaries of the specified `granularity`.
-                 * Adjust your `from` and `to` values or select a different `granularity`.
-                 *
-                 */
-                406: GeneralError;
-                /**
-                 * Too many requests
-                 */
-                429: GeneralError;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/consumption/projects': {
-        get: {
-            req: ListProjectsConsumptionData;
-            res: {
-                /**
-                 * Returned a list of project consumption metrics for the Neon account
-                 */
-                200: ProjectsConsumptionResponse & PaginationResponse;
-                /**
-                 * Account is not a member of the organization specified by `org_id`.
-                 */
-                404: GeneralError;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/users/me': {
-        get: {
-            res: {
-                /**
-                 * Returned information about the current user
-                 *
-                 */
-                200: CurrentUserInfoResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-    '/users/me/organizations': {
-        get: {
-            res: {
-                /**
-                 * Returned information about the current user organizations
-                 *
-                 */
-                200: OrganizationsResponse;
-                /**
-                 * General Error
-                 */
-                default: GeneralError;
-            };
-        };
-    };
-};

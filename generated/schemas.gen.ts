@@ -64,6 +64,73 @@ export const $EmptyResponse = {
     properties: {}
 } as const;
 
+export const $AddEndpointJWKSRequest = {
+    description: 'Add a new JWKS to a specific endpoint of a project',
+    type: 'object',
+    required: ['jwks_url', 'provider_name'],
+    properties: {
+        jwks_url: {
+            description: 'The URL that lists the JWKS',
+            type: 'string'
+        },
+        provider_name: {
+            description: 'The name of the authentication provider (e.g., Clerk, Stytch, Auth0)',
+            type: 'string'
+        }
+    }
+} as const;
+
+export const $JWKS = {
+    type: 'object',
+    required: ['id', 'project_id', 'endpoint_id', 'jwks_url', 'provider_name', 'created_at', 'updated_at'],
+    properties: {
+        id: {
+            description: 'JWKS ID',
+            type: 'string'
+        },
+        project_id: {
+            description: 'Project ID',
+            type: 'string'
+        },
+        endpoint_id: {
+            description: 'Endpoint ID',
+            type: 'string'
+        },
+        jwks_url: {
+            description: 'The URL that lists the JWKS',
+            type: 'string'
+        },
+        provider_name: {
+            description: 'The name of the authentication provider (e.g., Clerk, Stytch, Auth0)',
+            type: 'string'
+        },
+        created_at: {
+            description: 'The date and time when the JWKS was created',
+            type: 'string',
+            format: 'date-time'
+        },
+        updated_at: {
+            description: 'The date and time when the JWKS was last modified',
+            type: 'string',
+            format: 'date-time'
+        }
+    }
+} as const;
+
+export const $ProjectJWKSResponse = {
+    description: 'The list of configured JWKS definitions for a project',
+    type: 'object',
+    required: ['jwks'],
+    properties: {
+        jwks: {
+            type: 'array',
+            items: {
+                '$ref': '#/components/schemas/JWKS'
+            }
+        }
+    }
+} as const;
+
 export const $ApiKeyCreateRequest = {
     type: 'object',
     required: ['key_name'],
@@ -1994,7 +2061,7 @@ export const $BillingSubscriptionType = {
 export const $BillingPaymentMethod = {
     type: 'string',
     description: "Indicates whether and how an account makes payments.",
-    enum: ['UNKNOWN', 'none', 'stripe', 'direct_payment', 'aws_mp', 'vercel_mp']
+    enum: ['UNKNOWN', 'none', 'stripe', 'direct_payment', 'aws_mp', 'vercel_mp', 'staff', 'trial', 'sponsorship']
 } as const;
 
 export const $Database = {

@@ -2,7 +2,7 @@
 
 import type { CancelablePromise } from './core/CancelablePromise';
 import type { BaseHttpRequest } from './core/BaseHttpRequest';
-import type { ListApiKeysResponse, CreateApiKeyData, CreateApiKeyResponse, RevokeApiKeyData, RevokeApiKeyResponse, GetProjectOperationData, GetProjectOperationResponse, ListProjectOperationsData, ListProjectOperationsResponse, ListProjectsData, ListProjectsResponse, CreateProjectData, CreateProjectResponse, ListSharedProjectsData, ListSharedProjectsResponse, GetProjectData, GetProjectResponse, UpdateProjectData, UpdateProjectResponse, DeleteProjectData, DeleteProjectResponse, ListProjectPermissionsData, ListProjectPermissionsResponse, GrantPermissionToProjectData, GrantPermissionToProjectResponse, RevokePermissionFromProjectData, RevokePermissionFromProjectResponse, GetConnectionUriData, GetConnectionUriResponse, CreateProjectBranchData, CreateProjectBranchResponse, ListProjectBranchesData, ListProjectBranchesResponse, GetProjectBranchData, GetProjectBranchResponse, DeleteProjectBranchData, DeleteProjectBranchResponse, UpdateProjectBranchData, UpdateProjectBranchResponse, RestoreProjectBranchData, RestoreProjectBranchResponse, GetProjectBranchSchemaData, GetProjectBranchSchemaResponse, SetPrimaryProjectBranchData, SetPrimaryProjectBranchResponse, SetDefaultProjectBranchData, SetDefaultProjectBranchResponse, ListProjectBranchEndpointsData, ListProjectBranchEndpointsResponse, ListProjectBranchDatabasesData, ListProjectBranchDatabasesResponse, CreateProjectBranchDatabaseData, CreateProjectBranchDatabaseResponse, GetProjectBranchDatabaseData, GetProjectBranchDatabaseResponse, UpdateProjectBranchDatabaseData, UpdateProjectBranchDatabaseResponse, DeleteProjectBranchDatabaseData, DeleteProjectBranchDatabaseResponse, ListProjectBranchRolesData, ListProjectBranchRolesResponse, CreateProjectBranchRoleData, CreateProjectBranchRoleResponse, GetProjectBranchRoleData, GetProjectBranchRoleResponse, DeleteProjectBranchRoleData, DeleteProjectBranchRoleResponse, GetProjectBranchRolePasswordData, GetProjectBranchRolePasswordResponse, ResetProjectBranchRolePasswordData, ResetProjectBranchRolePasswordResponse, CreateProjectEndpointData, CreateProjectEndpointResponse, ListProjectEndpointsData, ListProjectEndpointsResponse, GetProjectEndpointData, GetProjectEndpointResponse, DeleteProjectEndpointData, DeleteProjectEndpointResponse, UpdateProjectEndpointData, UpdateProjectEndpointResponse, StartProjectEndpointData, StartProjectEndpointResponse, SuspendProjectEndpointData, SuspendProjectEndpointResponse, RestartProjectEndpointData, RestartProjectEndpointResponse, GetConsumptionHistoryPerAccountData, GetConsumptionHistoryPerAccountResponse, GetConsumptionHistoryPerProjectData, GetConsumptionHistoryPerProjectResponse, ListProjectsConsumptionData, ListProjectsConsumptionResponse, GetCurrentUserInfoResponse, GetCurrentUserOrganizationsResponse } from './types.gen';
+import type { ListApiKeysResponse, CreateApiKeyData, CreateApiKeyResponse, RevokeApiKeyData, RevokeApiKeyResponse, GetProjectOperationData, GetProjectOperationResponse, ListProjectOperationsData, ListProjectOperationsResponse, ListProjectsData, ListProjectsResponse, CreateProjectData, CreateProjectResponse, ListSharedProjectsData, ListSharedProjectsResponse, GetProjectData, GetProjectResponse, UpdateProjectData, UpdateProjectResponse, DeleteProjectData, DeleteProjectResponse, ListProjectPermissionsData, ListProjectPermissionsResponse, GrantPermissionToProjectData, GrantPermissionToProjectResponse, RevokePermissionFromProjectData, RevokePermissionFromProjectResponse, GetConnectionUriData, GetConnectionUriResponse, GetProjectJwksData, GetProjectJwksResponse, AddEndpointJwksData, AddEndpointJwksResponse, CreateProjectBranchData, CreateProjectBranchResponse, ListProjectBranchesData, ListProjectBranchesResponse, GetProjectBranchData, GetProjectBranchResponse, DeleteProjectBranchData, DeleteProjectBranchResponse, UpdateProjectBranchData, UpdateProjectBranchResponse, RestoreProjectBranchData, RestoreProjectBranchResponse, GetProjectBranchSchemaData, GetProjectBranchSchemaResponse, SetPrimaryProjectBranchData, SetPrimaryProjectBranchResponse, SetDefaultProjectBranchData, SetDefaultProjectBranchResponse, ListProjectBranchEndpointsData, ListProjectBranchEndpointsResponse, ListProjectBranchDatabasesData, ListProjectBranchDatabasesResponse, CreateProjectBranchDatabaseData, CreateProjectBranchDatabaseResponse, GetProjectBranchDatabaseData, GetProjectBranchDatabaseResponse, UpdateProjectBranchDatabaseData, UpdateProjectBranchDatabaseResponse, DeleteProjectBranchDatabaseData, DeleteProjectBranchDatabaseResponse, ListProjectBranchRolesData, ListProjectBranchRolesResponse, CreateProjectBranchRoleData, CreateProjectBranchRoleResponse, GetProjectBranchRoleData, GetProjectBranchRoleResponse, DeleteProjectBranchRoleData, DeleteProjectBranchRoleResponse, GetProjectBranchRolePasswordData, GetProjectBranchRolePasswordResponse, ResetProjectBranchRolePasswordData, ResetProjectBranchRolePasswordResponse, CreateProjectEndpointData, CreateProjectEndpointResponse, ListProjectEndpointsData, ListProjectEndpointsResponse, GetProjectEndpointData, GetProjectEndpointResponse, DeleteProjectEndpointData, DeleteProjectEndpointResponse, UpdateProjectEndpointData, UpdateProjectEndpointResponse, StartProjectEndpointData, StartProjectEndpointResponse, SuspendProjectEndpointData, SuspendProjectEndpointResponse, RestartProjectEndpointData, RestartProjectEndpointResponse, GetConsumptionHistoryPerAccountData, GetConsumptionHistoryPerAccountResponse, GetConsumptionHistoryPerProjectData, GetConsumptionHistoryPerProjectResponse, ListProjectsConsumptionData, ListProjectsConsumptionResponse, GetCurrentUserInfoResponse, GetCurrentUserOrganizationsResponse } from './types.gen';
 
 export class ApiKeyService {
     constructor(public readonly httpRequest: BaseHttpRequest) { }
@@ -415,6 +415,59 @@ export class ProjectService {
                 role_name: data.roleName,
                 pooled: data.pooled
             },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+}
+
+export class DefaultService {
+    constructor(public readonly httpRequest: BaseHttpRequest) { }
+    
+    /**
+     * Returns all JWKS definitions for a project
+     * Returns all JWKS definitions for a project
+     *
+     * @param data The data for the request.
+     * @param data.projectId The Neon project ID
+     * @returns ProjectJWKSResponse The JWKS definitions for the project
+     * @throws ApiError
+     */
+    public getProjectJwks(data: GetProjectJwksData): CancelablePromise<GetProjectJwksResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/projects/{project_id}/jwks',
+            path: {
+                project_id: data.projectId
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Adds a JWKS to project's endpoint
+     * Add a new JWKS to a specific endpoint of a project
+     * @param data The data for the request.
+     * @param data.projectId The Neon project ID
+     * @param data.endpointId The endpoint ID
+     * @param data.requestBody
+     * @returns JWKS The JWKS URL was added to the project authentication connections
+     * @throws ApiError
+     */
+    public addEndpointJwks(data: AddEndpointJwksData): CancelablePromise<AddEndpointJwksResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/projects/{project_id}/endpoints/{endpoint_id}/jwks',
+            path: {
+                project_id: data.projectId,
+                endpoint_id: data.endpointId
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
             errors: {
                 default: 'General Error'
             }
