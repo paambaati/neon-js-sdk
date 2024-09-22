@@ -2,7 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type MemberUserInfo = {
-    email: string;
+import type { JWKS } from './JWKS';
+export type JWKSResponse = {
+    jwks: JWKS;
 };
 

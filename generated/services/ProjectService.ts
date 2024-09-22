@@ -62,7 +62,7 @@ export class ProjectService {
      * For more information, see [Manage projects](https://neon.tech/docs/manage/projects/).
      *
      * You can specify a region and Postgres version in the request body.
-     * Neon currently supports PostgreSQL 14, 15, and 16.
+     * Neon currently supports PostgreSQL 14, 15 and 16. version 17 is coming soon.
      * For supported regions and `region_id` values, see [Regions](https://neon.tech/docs/introduction/regions/).
      *
      * @param requestBody

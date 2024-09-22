@@ -13,8 +13,8 @@ export type ProjectUpdateRequest = {
         name?: string;
         default_endpoint_settings?: DefaultEndpointSettings;
         /**
-         * The number of seconds to retain the point-in-time restore (PITR) backup history for this project.
-         * The default is 604800 seconds (7 days).
+         * The number of seconds to retain the shared history for all branches in this project.
+         * The default is 1 day (604800 seconds).
          *
          */
         history_retention_seconds?: number;

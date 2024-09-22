@@ -5,4 +5,4 @@
 /**
  * Identity provider id from keycloak
  */
-export type IdentityProviderId = 'github' | 'google' | 'hasura' | 'keycloak';
+export type IdentityProviderId = 'github' | 'google' | 'hasura' | 'microsoft' | 'keycloak' | 'test';
