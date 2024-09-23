@@ -1,3 +1,10 @@
+## [1.27.1](https://github.com/paambaati/neon-js-sdk/compare/v1.27.0...v1.27.1) (2024-09-23)
+
+
+### Bug Fixes
+
+* fix package.json exports ([ce5dc9e](https://github.com/paambaati/neon-js-sdk/commit/ce5dc9ec544d4cc0f64813861d7480bd428a80e8))
+
 # [1.27.0](https://github.com/paambaati/neon-js-sdk/compare/v1.26.0...v1.27.0) (2024-09-23)
 
 
