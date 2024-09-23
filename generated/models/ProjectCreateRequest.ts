@@ -16,17 +16,17 @@ export type ProjectCreateRequest = {
         name?: string;
         branch?: {
             /**
-             * The branch name. If not specified, the default branch name will be used.
+             * The default branch name. If not specified, the default branch name, `main`, will be used.
              *
              */
             name?: string;
             /**
-             * The role name. If not specified, the default role name will be used.
+             * The role name. If not specified, the default role name, `{database_name}_owner`, will be used.
              *
              */
             role_name?: string;
             /**
-             * The database name. If not specified, the default database name will be used.
+             * The database name. If not specified, the default database name, `neondb`, will be used.
              *
              */
             database_name?: string;
@@ -64,8 +64,8 @@ export type ProjectCreateRequest = {
          */
         store_passwords?: boolean;
         /**
-         * The number of seconds to retain the point-in-time restore (PITR) backup history for this project.
-         * The default is 604800 seconds (7 days).
+         * The number of seconds to retain the shared history for all branches in this project.
+         * The default is 1 day (86400 seconds).
          *
          */
         history_retention_seconds?: number;

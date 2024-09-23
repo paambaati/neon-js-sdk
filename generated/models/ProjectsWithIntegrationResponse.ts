@@ -2,7 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type MemberUserInfo = {
-    email: string;
+export type ProjectsWithIntegrationResponse = {
+    projects: Array<{
+        id: string;
+        integration: string;
+    }>;
 };
 

@@ -103,7 +103,7 @@ export type Project = {
      */
     creation_source: string;
     /**
-     * The number of seconds to retain point-in-time restore (PITR) backup history for this project.
+     * The number of seconds to retain the shared history for all branches in this project. The default for all plans is 1 day (86400 seconds).
      *
      */
     history_retention_seconds: number;
