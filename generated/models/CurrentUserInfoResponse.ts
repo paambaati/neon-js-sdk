@@ -16,6 +16,11 @@ export type CurrentUserInfoResponse = {
     email: string;
     id: string;
     image: string;
+    /**
+     * DEPRECATED. Use `email` field.
+     *
+     * @deprecated
+     */
     login: string;
     name: string;
     last_name: string;

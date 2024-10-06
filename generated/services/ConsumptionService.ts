@@ -82,6 +82,7 @@ export class ConsumptionService {
      * Get consumption metrics for each project
      * Retrieves consumption metrics for Scale and Business plan projects. History begins at the time of upgrade.
      * Available for Scale and Business plan users only.
+     * Issuing a call to this API does not wake a project's compute endpoint.
      *
      * @param from Specify the start `date-time` for the consumption period.
      * The `date-time` value is rounded according to the specified `granularity`.
@@ -160,6 +161,7 @@ export class ConsumptionService {
      * Get project consumption metrics
      * Retrieves consumption metrics for each project for the current billing period.
      * For usage information, see [Retrieving metrics for all projects](https://neon.tech/docs/guides/partner-billing#retrieving-metrics-for-all-projects).
+     * Issuing a call to this API does not wake a project's compute endpoint.
      *
      * @param cursor Specify the cursor value from the previous response to get the next batch of projects
      * @param limit Specify a value from 1 to 1000 to limit number of projects in the response

@@ -6,6 +6,11 @@ import type { IdentityProviderId } from './IdentityProviderId';
 export type CurrentUserAuthAccount = {
     email: string;
     image: string;
+    /**
+     * DEPRECATED. Use `email` field.
+     *
+     * @deprecated
+     */
     login: string;
     name: string;
     provider: IdentityProviderId;
