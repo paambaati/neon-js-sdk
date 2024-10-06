@@ -15,6 +15,7 @@ import type { ProjectCreateRequest } from '../models/ProjectCreateRequest';
 import type { ProjectPermission } from '../models/ProjectPermission';
 import type { ProjectPermissions } from '../models/ProjectPermissions';
 import type { ProjectResponse } from '../models/ProjectResponse';
+import type { ProjectsApplicationsMapResponse } from '../models/ProjectsApplicationsMapResponse';
 import type { ProjectsResponse } from '../models/ProjectsResponse';
 import type { ProjectUpdateRequest } from '../models/ProjectUpdateRequest';
 import type { RolesResponse } from '../models/RolesResponse';
@@ -41,7 +42,7 @@ export class ProjectService {
         limit: number = 10,
         search?: string,
         orgId?: string,
-    ): CancelablePromise<(ProjectsResponse & PaginationResponse) | GeneralError> {
+    ): CancelablePromise<(ProjectsResponse & PaginationResponse & ProjectsApplicationsMapResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects',

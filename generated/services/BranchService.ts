@@ -213,7 +213,6 @@ export class BranchService {
      * Retrieves the schema from the specified database. The `lsn` and `timestamp` values cannot be specified at the same time. If both are omitted, the database schema is retrieved from database's head .
      * @param projectId The Neon project ID
      * @param branchId The branch ID
-     * @param role The role on whose behalf the schema is retrieved
      * @param dbName Name of the database for which the schema is retrieved
      * @param lsn The Log Sequence Number (LSN) for which the schema is retrieved
      *
@@ -226,7 +225,6 @@ export class BranchService {
     public getProjectBranchSchema(
         projectId: string,
         branchId: string,
-        role: string,
         dbName: string,
         lsn?: string,
         timestamp?: string,
@@ -239,7 +237,6 @@ export class BranchService {
                 'branch_id': branchId,
             },
             query: {
-                'role': role,
                 'db_name': dbName,
                 'lsn': lsn,
                 'timestamp': timestamp,
