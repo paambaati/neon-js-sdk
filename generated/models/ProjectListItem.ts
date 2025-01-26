@@ -13,7 +13,6 @@ import type { Provisioner } from './Provisioner';
 export type ProjectListItem = {
     /**
      * The project ID
-     *
      */
     id: string;
     /**

@@ -4,7 +4,7 @@
 /* eslint-disable */
 import type { OrganizationGuest } from './OrganizationGuest';
 /**
- * A list of details for guests of an organisation
+ * A list of details for guests of an organization
  *
  */
 export type OrganizationGuestsResponse = Array<OrganizationGuest>;

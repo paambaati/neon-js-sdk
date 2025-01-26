@@ -32,6 +32,17 @@ export type BranchCreateRequest = {
          *
          */
         protected?: boolean;
+        /**
+         * Whether to create the branch as archived
+         *
+         */
+        archived?: boolean;
+        /**
+         * The initialization source type for the branch. Valid values are `import`, `empty`, `schema` and `parent-data`.
+         * This parameter is under active development and may change its semantics in the future.
+         *
+         */
+        init_source?: string;
     };
 };
 

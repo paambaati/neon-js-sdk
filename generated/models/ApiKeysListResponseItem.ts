@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { ApiKeyCreatorData } from './ApiKeyCreatorData';
 export type ApiKeysListResponseItem = {
     /**
      * The API key ID
@@ -15,6 +16,7 @@ export type ApiKeysListResponseItem = {
      * A timestamp indicating when the API key was created
      */
     created_at: string;
+    created_by: ApiKeyCreatorData;
     /**
      * A timestamp indicating when the API was last used
      */

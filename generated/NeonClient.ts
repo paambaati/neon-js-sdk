@@ -10,7 +10,9 @@ import { BranchService } from './services/BranchService';
 import { ConsumptionService } from './services/ConsumptionService';
 import { EndpointService } from './services/EndpointService';
 import { OperationService } from './services/OperationService';
+import { OrganizationsService } from './services/OrganizationsService';
 import { ProjectService } from './services/ProjectService';
+import { RegionService } from './services/RegionService';
 import { UsersService } from './services/UsersService';
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 export class NeonClient {
@@ -19,7 +21,9 @@ export class NeonClient {
     public readonly consumption: ConsumptionService;
     public readonly endpoint: EndpointService;
     public readonly operation: OperationService;
+    public readonly organizations: OrganizationsService;
     public readonly project: ProjectService;
+    public readonly region: RegionService;
     public readonly users: UsersService;
     public readonly request: BaseHttpRequest;
     constructor(config?: Partial<OpenAPIConfig>, HttpRequest: HttpRequestConstructor = FetchHttpRequest) {
@@ -39,7 +43,9 @@ export class NeonClient {
         this.consumption = new ConsumptionService(this.request);
         this.endpoint = new EndpointService(this.request);
         this.operation = new OperationService(this.request);
+        this.organizations = new OrganizationsService(this.request);
         this.project = new ProjectService(this.request);
+        this.region = new RegionService(this.request);
         this.users = new UsersService(this.request);
     }
 }

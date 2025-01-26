@@ -3,7 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * The category type for a given notification
- *
+ * The maximum number of records to be returned in the response
  */
-export type NotificationCategoryType = 'usage' | 'performance';
+export type LimitParam = number;

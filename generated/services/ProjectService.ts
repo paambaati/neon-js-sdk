@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { AddProjectJWKSRequest } from '../models/AddProjectJWKSRequest';
 import type { BranchResponse } from '../models/BranchResponse';
 import type { ConnectionURIResponse } from '../models/ConnectionURIResponse';
 import type { ConnectionURIsResponse } from '../models/ConnectionURIsResponse';
@@ -9,15 +10,22 @@ import type { DatabasesResponse } from '../models/DatabasesResponse';
 import type { EndpointsResponse } from '../models/EndpointsResponse';
 import type { GeneralError } from '../models/GeneralError';
 import type { GrantPermissionToProjectRequest } from '../models/GrantPermissionToProjectRequest';
+import type { JWKS } from '../models/JWKS';
+import type { JWKSCreationOperation } from '../models/JWKSCreationOperation';
 import type { OperationsResponse } from '../models/OperationsResponse';
 import type { PaginationResponse } from '../models/PaginationResponse';
 import type { ProjectCreateRequest } from '../models/ProjectCreateRequest';
+import type { ProjectJWKSResponse } from '../models/ProjectJWKSResponse';
 import type { ProjectPermission } from '../models/ProjectPermission';
 import type { ProjectPermissions } from '../models/ProjectPermissions';
 import type { ProjectResponse } from '../models/ProjectResponse';
+import type { ProjectsApplicationsMapResponse } from '../models/ProjectsApplicationsMapResponse';
+import type { ProjectsIntegrationsMapResponse } from '../models/ProjectsIntegrationsMapResponse';
 import type { ProjectsResponse } from '../models/ProjectsResponse';
 import type { ProjectUpdateRequest } from '../models/ProjectUpdateRequest';
 import type { RolesResponse } from '../models/RolesResponse';
+import type { VPCEndpointAssignment } from '../models/VPCEndpointAssignment';
+import type { VPCEndpointsResponse } from '../models/VPCEndpointsResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class ProjectService {
@@ -32,6 +40,11 @@ export class ProjectService {
      * @param limit Specify a value from 1 to 400 to limit number of projects in the response.
      * @param search Search by project `name` or `id`. You can specify partial `name` or `id` values to filter results.
      * @param orgId Search for projects by `org_id`.
+     * @param timeout Specify an explicit timeout in milliseconds to limit response delay.
+     * After timing out, the incomplete list of project data fetched so far will be returned.
+     * Projects still being fetched when the timeout occurred are listed in the "unavailable" attribute of the response.
+     * If not specified, an implicit implementation defined timeout is chosen with the same behaviour as above
+     *
      * @returns any Returned a list of projects for the Neon account
      * @returns GeneralError General Error
      * @throws ApiError
@@ -41,7 +54,8 @@ export class ProjectService {
         limit: number = 10,
         search?: string,
         orgId?: string,
-    ): CancelablePromise<(ProjectsResponse & PaginationResponse) | GeneralError> {
+        timeout?: number,
+    ): CancelablePromise<(ProjectsResponse & PaginationResponse & ProjectsApplicationsMapResponse & ProjectsIntegrationsMapResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects',
@@ -50,6 +64,7 @@ export class ProjectService {
                 'limit': limit,
                 'search': search,
                 'org_id': orgId,
+                'timeout': timeout,
             },
         });
     }
@@ -58,11 +73,10 @@ export class ProjectService {
      * Creates a Neon project.
      * A project is the top-level object in the Neon object hierarchy.
      * Plan limits define how many projects you can create.
-     * Neon's Free plan permits one project per Neon account.
      * For more information, see [Manage projects](https://neon.tech/docs/manage/projects/).
      *
      * You can specify a region and Postgres version in the request body.
-     * Neon currently supports PostgreSQL 14, 15 and 16. version 17 is coming soon.
+     * Neon currently supports PostgreSQL 14, 15, 16, and 17.
      * For supported regions and `region_id` values, see [Regions](https://neon.tech/docs/introduction/regions/).
      *
      * @param requestBody
@@ -248,6 +262,82 @@ export class ProjectService {
         });
     }
     /**
+     * Returns all available JWKS URLs for a project
+     * Returns all the available JWKS URLs that can be used for verifying JWTs used as the authentication mechanism for the specified project.
+     *
+     * @param projectId The Neon project ID
+     * @returns ProjectJWKSResponse The JWKS URLs available for the project
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public getProjectJwks(
+        projectId: string,
+    ): CancelablePromise<ProjectJWKSResponse | GeneralError> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/projects/{project_id}/jwks',
+            path: {
+                'project_id': projectId,
+            },
+        });
+    }
+    /**
+     * Adds a JWKS URL to a project
+     * Add a new JWKS URL to a project, such that it can be used for verifying JWTs used as the authentication mechanism for the specified project.
+     *
+     * The URL must be a valid HTTPS URL that returns a JSON Web Key Set.
+     *
+     * The `provider_name` field allows you to specify which authentication provider you're using (e.g., Clerk, Auth0, AWS Cognito, etc.).
+     *
+     * The `branch_id` can be used to specify on which branches the JWKS URL will be accepted. If not specified, then it will work on any branch.
+     *
+     * The `role_names` can be used to specify for which roles the JWKS URL will be accepted.
+     *
+     * The `jwt_audience` can be used to specify which "aud" values should be accepted by Neon in the JWTs that are used for authentication.
+     *
+     * @param projectId The Neon project ID
+     * @param requestBody
+     * @returns GeneralError General Error
+     * @returns JWKSCreationOperation The JWKS URL was added to the project's authentication connections
+     * @throws ApiError
+     */
+    public addProjectJwks(
+        projectId: string,
+        requestBody: AddProjectJWKSRequest,
+    ): CancelablePromise<GeneralError | JWKSCreationOperation> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/projects/{project_id}/jwks',
+            path: {
+                'project_id': projectId,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+    /**
+     * Delete a JWKS URL
+     * Deletes a JWKS URL from the specified project
+     * @param projectId The Neon project ID
+     * @param jwksId The JWKS ID
+     * @returns JWKS Deleted a JWKS URL from the project
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public deleteProjectJwks(
+        projectId: string,
+        jwksId: string,
+    ): CancelablePromise<JWKS | GeneralError> {
+        return this.httpRequest.request({
+            method: 'DELETE',
+            url: '/projects/{project_id}/jwks/{jwks_id}',
+            path: {
+                'project_id': projectId,
+                'jwks_id': jwksId,
+            },
+        });
+    }
+    /**
      * Get a connection URI
      * Retrieves a connection URI for the specified database.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -284,6 +374,83 @@ export class ProjectService {
                 'database_name': databaseName,
                 'role_name': roleName,
                 'pooled': pooled,
+            },
+        });
+    }
+    /**
+     * Get the list of VPC endpoint restrictions
+     * Retrieves the list of VPC endpoint restrictions for the specified project.
+     * This endpoint is under active development and its semantics may change in the future.
+     *
+     * @param projectId The Neon project ID
+     * @returns VPCEndpointsResponse The list of configured VPC endpoint restrictions for the specified project
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public listProjectVpcEndpoints(
+        projectId: string,
+    ): CancelablePromise<VPCEndpointsResponse | GeneralError> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/projects/{project_id}/vpc_endpoints',
+            path: {
+                'project_id': projectId,
+            },
+        });
+    }
+    /**
+     * Assign or update a VPC endpoint restriction
+     * Configures the specified VPC endpoint as restriction for the project,
+     * or updates the existing restriction. When a VPC endpoint is assigned
+     * as a restriction, only connections from this specific VPC are accepted.
+     * Note that a VPC endpoint can only used as a restriction on a project
+     * after it has been assigned to the parent organization.
+     * This endpoint is under active development and its semantics may change in the future.
+     *
+     * @param projectId The Neon project ID
+     * @param vpcEndpointId The VPC endpoint ID
+     * @param requestBody
+     * @returns any Configured the specified VPC endpoint as a restriction for the specified project.
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public assignProjectVpcEndpoint(
+        projectId: string,
+        vpcEndpointId: string,
+        requestBody: VPCEndpointAssignment,
+    ): CancelablePromise<any | GeneralError> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/projects/{project_id}/vpc_endpoints/{vpc_endpoint_id}',
+            path: {
+                'project_id': projectId,
+                'vpc_endpoint_id': vpcEndpointId,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+    /**
+     * Delete a VPC endpoint
+     * Deletes the specified VPC endpoint restriction from the specified project.
+     * This endpoint is under active development and its semantics may change in the future.
+     *
+     * @param projectId The Neon project ID
+     * @param vpcEndpointId The VPC endpoint ID
+     * @returns any Deleted the specified VPC endpoint restriction from the specified project
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public deleteProjectVpcEndpoint(
+        projectId: string,
+        vpcEndpointId: string,
+    ): CancelablePromise<any | GeneralError> {
+        return this.httpRequest.request({
+            method: 'DELETE',
+            url: '/projects/{project_id}/vpc_endpoints/{vpc_endpoint_id}',
+            path: {
+                'project_id': projectId,
+                'vpc_endpoint_id': vpcEndpointId,
             },
         });
     }

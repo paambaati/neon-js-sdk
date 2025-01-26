@@ -44,7 +44,6 @@ export class UsersService {
     /**
      * Transfer projects from your personal account to a specified destination account
      * Transfers selected projects, identified by their IDs, from your personal account to a specified organization.
-     * This API is only available for early access users.
      *
      * @param requestBody
      * @returns EmptyResponse Projects successfully transferred from personal account to organization
@@ -61,7 +60,7 @@ export class UsersService {
             mediaType: 'application/json',
             errors: {
                 406: `Transfer failed - the organization has too many projects or its plan is incompatible with the source account. Reduce projects or upgrade the organization.`,
-                501: `One or more of project ids provided is linked by Github or Vercel integration. Transferring integration projects is currently not supported`,
+                422: `One or more of project ids provided is linked by GitHub or Vercel integration. Transferring integration projects is currently not supported`,
             },
         });
     }

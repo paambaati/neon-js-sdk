@@ -25,6 +25,6 @@ export type AddProjectJWKSRequest = {
     /**
      * The roles the JWKS should be mapped to
      */
-    role_names?: Array<string>;
+    role_names: Array<string>;
 };
 
