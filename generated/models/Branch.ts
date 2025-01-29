@@ -37,6 +37,11 @@ export type Branch = {
     current_state: BranchState;
     pending_state?: BranchState;
     /**
+     * A UTC timestamp indicating when the `current_state` began
+     *
+     */
+    state_changed_at: string;
+    /**
      * The logical size of the branch, in bytes
      *
      */
@@ -52,7 +57,7 @@ export type Branch = {
      *
      * @deprecated
      */
-    primary: boolean;
+    primary?: boolean;
     /**
      * Whether the branch is the project's default branch
      *

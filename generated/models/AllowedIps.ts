@@ -17,12 +17,5 @@ export type AllowedIps = {
      * If true, the list will be applied only to protected branches.
      */
     protected_branches_only?: boolean;
-    /**
-     * DEPRECATED: Use `protected_branches_only`.
-     * If true, the list will be applied only to the default branch.
-     *
-     * @deprecated
-     */
-    primary_branch_only?: boolean;
 };
 

@@ -7,6 +7,7 @@ import type { ErrorCode } from './ErrorCode';
  * General Error
  */
 export type GeneralError = {
+    request_id?: string;
     code: ErrorCode;
     /**
      * Error message

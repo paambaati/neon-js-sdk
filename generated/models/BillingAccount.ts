@@ -2,10 +2,12 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { BillingAccountState } from './BillingAccountState';
 import type { BillingPaymentMethod } from './BillingPaymentMethod';
 import type { BillingSubscriptionType } from './BillingSubscriptionType';
 import type { PaymentSource } from './PaymentSource';
 export type BillingAccount = {
+    state: BillingAccountState;
     payment_source: PaymentSource;
     subscription_type: BillingSubscriptionType;
     payment_method: BillingPaymentMethod;

@@ -3,8 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Details of an organisation guest, who is not directly a member of
- * an organisation but has been shared one of the projects it owns
+ * Details of an organization guest, who is not directly a member of
+ * an organization but has been shared one of the projects it owns
  *
  */
 export type OrganizationGuest = {

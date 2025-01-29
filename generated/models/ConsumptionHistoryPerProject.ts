@@ -4,6 +4,9 @@
 /* eslint-disable */
 import type { ConsumptionHistoryPerPeriod } from './ConsumptionHistoryPerPeriod';
 export type ConsumptionHistoryPerProject = {
+    /**
+     * The project ID
+     */
     project_id: string;
     periods: Array<ConsumptionHistoryPerPeriod>;
 };

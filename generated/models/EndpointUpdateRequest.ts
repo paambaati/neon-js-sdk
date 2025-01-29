@@ -10,8 +10,10 @@ import type { SuspendTimeoutSeconds } from './SuspendTimeoutSeconds';
 export type EndpointUpdateRequest = {
     endpoint: {
         /**
+         * DEPRECATED: This field will be removed in a future release.
          * The destination branch ID. The destination branch must not have an exsiting read-write endpoint.
          *
+         * @deprecated
          */
         branch_id?: string;
         /**

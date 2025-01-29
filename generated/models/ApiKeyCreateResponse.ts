@@ -19,5 +19,9 @@ export type ApiKeyCreateResponse = {
      * A timestamp indicating when the API key was created
      */
     created_at: string;
+    /**
+     * ID of the user who created this API key
+     */
+    created_by: string;
 };
 

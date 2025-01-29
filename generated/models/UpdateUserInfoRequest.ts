@@ -5,6 +5,11 @@
 export type UpdateUserInfoRequest = {
     email?: string;
     id: string;
+    /**
+     * DEPRECATED. This field is ignored.
+     *
+     * @deprecated
+     */
     image?: string;
     first_name?: string;
     last_name?: string;

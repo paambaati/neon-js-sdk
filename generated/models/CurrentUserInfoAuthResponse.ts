@@ -8,5 +8,6 @@ export type CurrentUserInfoAuthResponse = {
     password_stored: boolean;
     auth_accounts: Array<CurrentUserAuthAccount>;
     linked_accounts: Array<LinkedAuthAccount>;
+    provider: string;
 };
 

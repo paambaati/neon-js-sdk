@@ -50,7 +50,6 @@ export type Project = {
     cpu_used_sec: number;
     /**
      * The project ID
-     *
      */
     id: string;
     /**
@@ -149,5 +148,10 @@ export type Project = {
      */
     compute_last_active_at?: string;
     org_id?: string;
+    /**
+     * A timestamp indicating when project update begins. If set, computes might experience a brief restart around this time.
+     *
+     */
+    maintenance_scheduled_for?: string;
 };
 

@@ -12,9 +12,13 @@ export type ApiKeyRevokeResponse = {
      */
     name: string;
     /**
-     * A `true` or `false` value indicating whether the API key is revoked
+     * A timestamp indicating when the API key was created
      */
-    revoked: boolean;
+    created_at: string;
+    /**
+     * ID of the user who created this API key
+     */
+    created_by: string;
     /**
      * A timestamp indicating when the API was last used
      */
@@ -23,5 +27,9 @@ export type ApiKeyRevokeResponse = {
      * The IP address from which the API key was last used
      */
     last_used_from_addr: string;
+    /**
+     * A `true` or `false` value indicating whether the API key is revoked
+     */
+    revoked: boolean;
 };
 

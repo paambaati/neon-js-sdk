@@ -5,6 +5,7 @@
 import type { BillingSubscriptionType } from './BillingSubscriptionType';
 export type ProjectOwnerData = {
     email: string;
+    name: string;
     branches_limit: number;
     subscription_type: BillingSubscriptionType;
 };
