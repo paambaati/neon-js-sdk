@@ -15,6 +15,7 @@ import type { OrgApiKeyCreateRequest } from '../models/OrgApiKeyCreateRequest';
 import type { OrgApiKeyCreateResponse } from '../models/OrgApiKeyCreateResponse';
 import type { OrgApiKeyRevokeResponse } from '../models/OrgApiKeyRevokeResponse';
 import type { OrgApiKeysListResponseItem } from '../models/OrgApiKeysListResponseItem';
+import type { TransferProjectsToOrganizationRequest } from '../models/TransferProjectsToOrganizationRequest';
 import type { VPCEndpointAssignment } from '../models/VPCEndpointAssignment';
 import type { VPCEndpointDetails } from '../models/VPCEndpointDetails';
 import type { VPCEndpointsResponse } from '../models/VPCEndpointsResponse';
@@ -261,6 +262,34 @@ export class OrganizationsService {
             },
             body: requestBody,
             mediaType: 'application/json',
+        });
+    }
+    /**
+     * Transfer projects from organization to a specified destination organization
+     * Transfers selected projects, identified by their IDs, from your organization to another specified organization.
+     *
+     * @param orgId The Neon organization ID (destination org, where projects will be moved to)
+     * @param requestBody
+     * @returns EmptyResponse Projects successfully transferred from organization to organization
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public transferProjectsFromOrgToOrg(
+        orgId: string,
+        requestBody: TransferProjectsToOrganizationRequest,
+    ): CancelablePromise<EmptyResponse | GeneralError> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/organizations/{org_id}/projects/transfer',
+            path: {
+                'org_id': orgId,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                406: `Transfer failed - the target organization has too many projects or its plan is incompatible with the source organization. Reduce projects or upgrade the organization.`,
+                422: `One or more of the provided project IDs have GitHub or Vercel integrations installed. Transferring integration projects is currently not supported`,
+            },
         });
     }
     /**

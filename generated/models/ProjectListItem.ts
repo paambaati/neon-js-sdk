@@ -101,7 +101,7 @@ export type ProjectListItem = {
     /**
      * The most recent time when any endpoint of this project was active.
      *
-     * Omitted when observed no actitivy for endpoints of this project.
+     * Omitted when observed no activity for endpoints of this project.
      *
      */
     compute_last_active_at?: string;

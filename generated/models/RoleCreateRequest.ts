@@ -9,6 +9,11 @@ export type RoleCreateRequest = {
          *
          */
         name: string;
+        /**
+         * Whether to create a role that cannot login.
+         *
+         */
+        no_login?: boolean;
     };
 };
 

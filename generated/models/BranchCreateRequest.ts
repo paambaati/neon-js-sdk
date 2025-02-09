@@ -38,8 +38,9 @@ export type BranchCreateRequest = {
          */
         archived?: boolean;
         /**
-         * The initialization source type for the branch. Valid values are `import`, `empty`, `schema` and `parent-data`.
-         * This parameter is under active development and may change its semantics in the future.
+         * The source of initialization for the branch. Valid values are `schema-only` and `parent-data` (default).
+         * * `schema-only` - creates a new root branch containing only the schema. Use `parent_id` to specify the source branch. Optionally, you can provide `parent_lsn` or `parent_timestamp` to branch from a specific point in time or LSN. These fields define which branch to copy the schema from and at what point—they do not establish a parent-child relationship between the `parent_id` branch and the new schema-only branch.
+         * * `parent-data` - creates the branch with both schema and data from the parent.
          *
          */
         init_source?: string;

@@ -107,6 +107,11 @@ export class ProjectService {
      * @param cursor Specify the cursor value from the previous response to get the next batch of projects.
      * @param limit Specify a value from 1 to 400 to limit number of projects in the response.
      * @param search Search query by name or id.
+     * @param timeout Specify an explicit timeout in milliseconds to limit response delay.
+     * After timing out, the incomplete list of project data fetched so far will be returned.
+     * Projects still being fetched when the timeout occurred are listed in the "unavailable" attribute of the response.
+     * If not specified, an implicit implementation defined timeout is chosen with the same behaviour as above
+     *
      * @returns any Returned a list of shared projects for the Neon account
      * @returns GeneralError General Error
      * @throws ApiError
@@ -115,6 +120,7 @@ export class ProjectService {
         cursor?: string,
         limit: number = 10,
         search?: string,
+        timeout?: number,
     ): CancelablePromise<(ProjectsResponse & PaginationResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
@@ -123,6 +129,7 @@ export class ProjectService {
                 'cursor': cursor,
                 'limit': limit,
                 'search': search,
+                'timeout': timeout,
             },
         });
     }
@@ -152,7 +159,6 @@ export class ProjectService {
      * Update a project
      * Updates the specified project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
-     * Neon permits updating the project name only.
      *
      * @param projectId The Neon project ID
      * @param requestBody
@@ -241,7 +247,7 @@ export class ProjectService {
     }
     /**
      * Revoke project access
-     * Revokes project access from the user associted with the specified permisison `id`. You can retrieve a user's permission `id` by listing project access.
+     * Revokes project access from the user associated with the specified permission `id`. You can retrieve a user's permission `id` by listing project access.
      * @param projectId
      * @param permissionId
      * @returns ProjectPermission Revoked project access

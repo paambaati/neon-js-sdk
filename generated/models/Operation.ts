@@ -24,7 +24,7 @@ export type Operation = {
     action: OperationAction;
     status: OperationStatus;
     /**
-     * The error that occured
+     * The error that occurred
      */
     error?: string;
     /**
