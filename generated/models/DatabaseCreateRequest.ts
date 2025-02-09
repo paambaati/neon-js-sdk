@@ -5,7 +5,7 @@
 export type DatabaseCreateRequest = {
     database: {
         /**
-         * The name of the datbase
+         * The name of the database
          *
          */
         name: string;

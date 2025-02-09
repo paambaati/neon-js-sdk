@@ -59,8 +59,8 @@ export class UsersService {
             body: requestBody,
             mediaType: 'application/json',
             errors: {
-                406: `Transfer failed - the organization has too many projects or its plan is incompatible with the source account. Reduce projects or upgrade the organization.`,
-                422: `One or more of project ids provided is linked by GitHub or Vercel integration. Transferring integration projects is currently not supported`,
+                406: `Transfer failed - the target organization has too many projects or its plan is incompatible with the source account. Reduce the number of projects or upgrade the target organization to increase its capacity.`,
+                422: `One or more of the provided project IDs have GitHub or Vercel integrations installed. Transferring integration projects is currently not supported`,
             },
         });
     }

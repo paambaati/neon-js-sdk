@@ -708,7 +708,7 @@ export class BranchService {
      * @param projectId The Neon project ID
      * @param branchId The branch ID
      * @param roleName The role nam
-     * @returns RoleOperations Reset the passsword for the specified role
+     * @returns RoleOperations Reset the password for the specified role
      * @returns GeneralError General Error
      * @throws ApiError
      */
