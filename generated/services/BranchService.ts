@@ -34,7 +34,7 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class BranchService {
     constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
-     * Create a branch
+     * Create branch
      * Creates a branch in the specified project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      *
@@ -65,7 +65,7 @@ export class BranchService {
         });
     }
     /**
-     * Get a list of branches
+     * List branches
      * Retrieves a list of branches for the specified project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      *
@@ -109,7 +109,7 @@ export class BranchService {
         });
     }
     /**
-     * Get the total number of branches in a project
+     * Retrieve number of branches
      * Retrieves the total number of branches in the specified project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      *
@@ -135,7 +135,7 @@ export class BranchService {
         });
     }
     /**
-     * Get branch details
+     * Retrieve branch details
      * Retrieves information about the specified branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain a `branch_id` by listing the project's branches.
@@ -166,7 +166,7 @@ export class BranchService {
         });
     }
     /**
-     * Delete a branch
+     * Delete branch
      * Deletes the specified branch from a project, and places
      * all compute endpoints into an idle state, breaking existing client connections.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -199,7 +199,7 @@ export class BranchService {
         });
     }
     /**
-     * Update a branch
+     * Update branch
      * Updates the specified branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -229,7 +229,7 @@ export class BranchService {
         });
     }
     /**
-     * Restore a branch
+     * Restore branch
      * Restores a branch to an earlier state in its own or another branch's history
      * @param projectId The Neon project ID
      * @param branchId The branch ID
@@ -255,7 +255,7 @@ export class BranchService {
         });
     }
     /**
-     * Get the database schema
+     * Retrieve database schema
      * Retrieves the schema from the specified database. The `lsn` and `timestamp` values cannot be specified at the same time. If both are omitted, the database schema is retrieved from database's head.
      * @param projectId The Neon project ID
      * @param branchId The branch ID
@@ -290,8 +290,8 @@ export class BranchService {
         });
     }
     /**
-     * Compare the database schema with another branch's schema
-     * Compares the schema from the specified database with another branch's schema. Hidden from the public spec.
+     * Compare database schema
+     * Compares the schema from the specified database with another branch's schema.
      * @param projectId The Neon project ID
      * @param branchId The branch ID
      * @param dbName Name of the database for which the schema is retrieved
@@ -363,7 +363,7 @@ export class BranchService {
         });
     }
     /**
-     * Get a list of branch endpoints
+     * List branch endpoints
      * Retrieves a list of compute endpoints for the specified branch.
      * Neon permits only one read-write compute endpoint per branch.
      * A branch can have multiple read-only compute endpoints.
@@ -390,7 +390,7 @@ export class BranchService {
         });
     }
     /**
-     * Get a list of databases
+     * List databases
      * Retrieves a list of databases for the specified branch.
      * A branch can have multiple databases.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -417,7 +417,7 @@ export class BranchService {
         });
     }
     /**
-     * Create a database
+     * Create database
      * Creates a database in the specified branch.
      * A branch can have multiple databases.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -448,7 +448,7 @@ export class BranchService {
         });
     }
     /**
-     * Get database details
+     * Retrieve database details
      * Retrieves information about the specified database.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` and `database_name` by listing the branch's databases.
@@ -477,7 +477,7 @@ export class BranchService {
         });
     }
     /**
-     * Update a database
+     * Update database
      * Updates the specified database in the branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` and `database_name` by listing the branch's databases.
@@ -510,7 +510,7 @@ export class BranchService {
         });
     }
     /**
-     * Delete a database
+     * Delete database
      * Deletes the specified database from the branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` and `database_name` by listing the branch's databases.
@@ -539,7 +539,7 @@ export class BranchService {
         });
     }
     /**
-     * Get a list of roles
+     * List roles
      * Retrieves a list of Postgres roles from the specified branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -565,7 +565,7 @@ export class BranchService {
         });
     }
     /**
-     * Create a role
+     * Create role
      * Creates a Postgres role in the specified branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -598,7 +598,7 @@ export class BranchService {
         });
     }
     /**
-     * Get role details
+     * Retrieve role details
      * Retrieves details about the specified role.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -629,7 +629,7 @@ export class BranchService {
         });
     }
     /**
-     * Delete a role
+     * Delete role
      * Deletes the specified Postgres role from the branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -659,7 +659,7 @@ export class BranchService {
         });
     }
     /**
-     * Get role password
+     * Retrieve role password
      * Retrieves the password for the specified Postgres role, if possible.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -693,7 +693,7 @@ export class BranchService {
         });
     }
     /**
-     * Reset the role password
+     * Reset role password
      * Resets the password for the specified Postgres role.
      * Returns a new password and operations. The new password is ready to use when the last operation finishes.
      * The old password remains valid until last operation finishes.
@@ -708,7 +708,7 @@ export class BranchService {
      * @param projectId The Neon project ID
      * @param branchId The branch ID
      * @param roleName The role nam
-     * @returns RoleOperations Reset the passsword for the specified role
+     * @returns RoleOperations Reset the password for the specified role
      * @returns GeneralError General Error
      * @throws ApiError
      */

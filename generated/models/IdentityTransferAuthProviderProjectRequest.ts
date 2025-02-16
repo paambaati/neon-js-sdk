@@ -3,13 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { IdentitySupportedAuthProvider } from './IdentitySupportedAuthProvider';
-export type IdentityCreateIntegrationResponse = {
+export type IdentityTransferAuthProviderProjectRequest = {
+    project_id: string;
     auth_provider: IdentitySupportedAuthProvider;
-    auth_provider_project_id: string;
-    pub_client_key: string;
-    secret_server_key: string;
-    jwks_url: string;
-    schema_name: string;
-    table_name: string;
 };
 

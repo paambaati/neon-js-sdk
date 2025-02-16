@@ -15,6 +15,7 @@ import type { OrgApiKeyCreateRequest } from '../models/OrgApiKeyCreateRequest';
 import type { OrgApiKeyCreateResponse } from '../models/OrgApiKeyCreateResponse';
 import type { OrgApiKeyRevokeResponse } from '../models/OrgApiKeyRevokeResponse';
 import type { OrgApiKeysListResponseItem } from '../models/OrgApiKeysListResponseItem';
+import type { TransferProjectsToOrganizationRequest } from '../models/TransferProjectsToOrganizationRequest';
 import type { VPCEndpointAssignment } from '../models/VPCEndpointAssignment';
 import type { VPCEndpointDetails } from '../models/VPCEndpointDetails';
 import type { VPCEndpointsResponse } from '../models/VPCEndpointsResponse';
@@ -23,7 +24,7 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class OrganizationsService {
     constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
-     * Get organization details
+     * Retrieve organization details
      * Retrieves information about the specified organization.
      *
      * @param orgId The Neon organization ID
@@ -43,7 +44,7 @@ export class OrganizationsService {
         });
     }
     /**
-     * Get a list of organization API keys
+     * List organization API keys
      * Retrieves the API keys for the specified organization.
      * The response does not include API key tokens. A token is only provided when creating an API key.
      * API keys can also be managed in the Neon Console.
@@ -66,7 +67,7 @@ export class OrganizationsService {
         });
     }
     /**
-     * Create an organization API key
+     * Create organization API key
      * Creates an API key for the specified organization.
      * The `key_name` is a user-specified name for the key.
      * This method returns an `id` and `key`. The `key` is a randomly generated, 64-bit token required to access the Neon API.
@@ -94,7 +95,7 @@ export class OrganizationsService {
         });
     }
     /**
-     * Revoke an organization API key
+     * Revoke organization API key
      * Revokes the specified organization API key.
      * An API key that is no longer needed can be revoked.
      * This action cannot be reversed.
@@ -122,7 +123,7 @@ export class OrganizationsService {
         });
     }
     /**
-     * Get organization members details
+     * Retrieve organization members details
      * Retrieves information about the specified organization members.
      *
      * @param orgId The Neon organization ID
@@ -142,7 +143,7 @@ export class OrganizationsService {
         });
     }
     /**
-     * Get organization member details
+     * Retrieve organization member details
      * Retrieves information about the specified organization member.
      *
      * @param orgId The Neon organization ID
@@ -165,7 +166,7 @@ export class OrganizationsService {
         });
     }
     /**
-     * Update the role for an organization member
+     * Update role for organization member
      * Only an admin can perform this action.
      *
      * @param orgId The Neon organization ID
@@ -217,7 +218,7 @@ export class OrganizationsService {
         });
     }
     /**
-     * Get organization invitation details
+     * Retrieve organization invitation details
      * Retrieves information about extended invitations for the specified organization
      *
      * @param orgId The Neon organization ID
@@ -264,9 +265,36 @@ export class OrganizationsService {
         });
     }
     /**
-     * Get the list of VPC endpoints
-     * Retrieves the list of VPC endpoints for the specified organization.
-     * This endpoint is under active development and its semantics may change in the future.
+     * Transfer projects between organizations
+     * Transfers selected projects, identified by their IDs, from your organization to another specified organization.
+     *
+     * @param orgId The Neon organization ID (destination org, where projects will be moved to)
+     * @param requestBody
+     * @returns EmptyResponse Projects successfully transferred from organization to organization
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public transferProjectsFromOrgToOrg(
+        orgId: string,
+        requestBody: TransferProjectsToOrganizationRequest,
+    ): CancelablePromise<EmptyResponse | GeneralError> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/organizations/{org_id}/projects/transfer',
+            path: {
+                'org_id': orgId,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                406: `Transfer failed - the target organization has too many projects or its plan is incompatible with the source organization. Reduce projects or upgrade the organization.`,
+                422: `One or more of the provided project IDs have GitHub or Vercel integrations installed. Transferring integration projects is currently not supported`,
+            },
+        });
+    }
+    /**
+     * List VPC endpoints
+     * Retrieves the list of VPC endpoints for the specified Neon organization.
      *
      * @param orgId The Neon organization ID
      * @param regionId The Neon region ID
@@ -288,16 +316,15 @@ export class OrganizationsService {
         });
     }
     /**
-     * Retrieve the state of a VPC endpoint configuration
-     * Retrieves detailed information about the VPC endpoint.
-     * This endpoint is under active development and its semantics may change in the future.
+     * Retrieve VPC endpoint details
+     * Retrieves the current state and configuration details of a specified VPC endpoint.
      *
      * @param orgId The Neon organization ID
      * @param regionId The Neon region ID.
-     * Note that Azure regions are not yet supported.
+     * Azure regions are currently not supported.
      *
      * @param vpcEndpointId The VPC endpoint ID
-     * @returns VPCEndpointDetails The detailed state of the VPC endpoint
+     * @returns VPCEndpointDetails Returned the current status and configuration details of the specified VPC endpoint.
      * @returns GeneralError General Error
      * @throws ApiError
      */
@@ -317,18 +344,16 @@ export class OrganizationsService {
         });
     }
     /**
-     * Assign or update a VPC endpoint
-     * Assigns the specified VPC endpoint to the specified organization
-     * or updates the existing assignment.
-     * This endpoint is under active development and its semantics may change in the future.
+     * Assign or update VPC endpoint
+     * Assigns a VPC endpoint to a Neon organization or updates its existing assignment.
      *
      * @param orgId The Neon organization ID
      * @param regionId The Neon region ID.
-     * Note that Azure regions are not yet supported.
+     * Azure regions are currently not supported.
      *
      * @param vpcEndpointId The VPC endpoint ID
      * @param requestBody
-     * @returns any Assigned the specified VPC endpoint to the specified organization
+     * @returns any Assigned the VPC endpoint to the specified Neon organization
      * @returns GeneralError General Error
      * @throws ApiError
      */
@@ -351,16 +376,15 @@ export class OrganizationsService {
         });
     }
     /**
-     * Delete a VPC endpoint
-     * Deletes the specified VPC endpoint from the specified organization.
-     * This endpoint is under active development and its semantics may change in the future.
+     * Delete VPC endpoint
+     * Deletes the VPC endpoint from the specified Neon organization.
      *
      * @param orgId The Neon organization ID
      * @param regionId The Neon region ID.
-     * Note that Azure regions are not yet supported.
+     * Azure regions are currently not supported.
      *
      * @param vpcEndpointId The VPC endpoint ID
-     * @returns any Deleted the specified VPC endpoint from the specified organization
+     * @returns any Deleted the VPC endpoint from the specified Neon organization
      * @returns GeneralError General Error
      * @throws ApiError
      */
@@ -380,7 +404,7 @@ export class OrganizationsService {
         });
     }
     /**
-     * Get current user organizations list
+     * Retrieve current user organizations list
      * Retrieves information about the current Neon user's organizations
      *
      * @returns OrganizationsResponse Returned information about the current user organizations

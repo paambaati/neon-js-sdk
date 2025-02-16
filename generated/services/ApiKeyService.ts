@@ -12,7 +12,7 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class ApiKeyService {
     constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
-     * Get a list of API keys
+     * List API keys
      * Retrieves the API keys for your Neon account.
      * The response does not include API key tokens. A token is only provided when creating an API key.
      * API keys can also be managed in the Neon Console.
@@ -29,7 +29,7 @@ export class ApiKeyService {
         });
     }
     /**
-     * Create an API key
+     * Create API key
      * Creates an API key.
      * The `key_name` is a user-specified name for the key.
      * This method returns an `id` and `key`. The `key` is a randomly generated, 64-bit token required to access the Neon API.
@@ -52,7 +52,7 @@ export class ApiKeyService {
         });
     }
     /**
-     * Revoke an API key
+     * Revoke API key
      * Revokes the specified API key.
      * An API key that is no longer needed can be revoked.
      * This action cannot be reversed.

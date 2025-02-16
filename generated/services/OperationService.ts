@@ -11,7 +11,7 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class OperationService {
     constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
-     * Get operation details
+     * Retrieve operation details
      * Retrieves details for the specified operation.
      * An operation is an action performed on a Neon project resource.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -37,7 +37,7 @@ export class OperationService {
         });
     }
     /**
-     * Get a list of operations
+     * List operations
      * Retrieves a list of operations for the specified Neon project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * The number of operations returned can be large.

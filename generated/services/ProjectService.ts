@@ -31,7 +31,7 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class ProjectService {
     constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
-     * Get a list of projects
+     * List projects
      * Retrieves a list of projects for the Neon account.
      * A project is the top-level object in the Neon object hierarchy.
      * For more information, see [Manage projects](https://neon.tech/docs/manage/projects/).
@@ -69,7 +69,7 @@ export class ProjectService {
         });
     }
     /**
-     * Create a project
+     * Create project
      * Creates a Neon project.
      * A project is the top-level object in the Neon object hierarchy.
      * Plan limits define how many projects you can create.
@@ -99,7 +99,7 @@ export class ProjectService {
         });
     }
     /**
-     * Get a list of shared projects
+     * List shared projects
      * Retrieves a list of shared projects for the Neon account.
      * A project is the top-level object in the Neon object hierarchy.
      * For more information, see [Manage projects](https://neon.tech/docs/manage/projects/).
@@ -107,6 +107,11 @@ export class ProjectService {
      * @param cursor Specify the cursor value from the previous response to get the next batch of projects.
      * @param limit Specify a value from 1 to 400 to limit number of projects in the response.
      * @param search Search query by name or id.
+     * @param timeout Specify an explicit timeout in milliseconds to limit response delay.
+     * After timing out, the incomplete list of project data fetched so far will be returned.
+     * Projects still being fetched when the timeout occurred are listed in the "unavailable" attribute of the response.
+     * If not specified, an implicit implementation defined timeout is chosen with the same behaviour as above
+     *
      * @returns any Returned a list of shared projects for the Neon account
      * @returns GeneralError General Error
      * @throws ApiError
@@ -115,6 +120,7 @@ export class ProjectService {
         cursor?: string,
         limit: number = 10,
         search?: string,
+        timeout?: number,
     ): CancelablePromise<(ProjectsResponse & PaginationResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
@@ -123,11 +129,12 @@ export class ProjectService {
                 'cursor': cursor,
                 'limit': limit,
                 'search': search,
+                'timeout': timeout,
             },
         });
     }
     /**
-     * Get project details
+     * Retrieve project details
      * Retrieves information about the specified project.
      * A project is the top-level object in the Neon object hierarchy.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -149,10 +156,9 @@ export class ProjectService {
         });
     }
     /**
-     * Update a project
+     * Update project
      * Updates the specified project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
-     * Neon permits updating the project name only.
      *
      * @param projectId The Neon project ID
      * @param requestBody
@@ -175,7 +181,7 @@ export class ProjectService {
         });
     }
     /**
-     * Delete a project
+     * Delete project
      * Deletes the specified project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * Deleting a project is a permanent action.
@@ -241,7 +247,7 @@ export class ProjectService {
     }
     /**
      * Revoke project access
-     * Revokes project access from the user associted with the specified permisison `id`. You can retrieve a user's permission `id` by listing project access.
+     * Revokes project access from the user associated with the specified permission `id`. You can retrieve a user's permission `id` by listing project access.
      * @param projectId
      * @param permissionId
      * @returns ProjectPermission Revoked project access
@@ -262,8 +268,8 @@ export class ProjectService {
         });
     }
     /**
-     * Returns all available JWKS URLs for a project
-     * Returns all the available JWKS URLs that can be used for verifying JWTs used as the authentication mechanism for the specified project.
+     * List JWKS URLs
+     * Returns the JWKS URLs available for verifying JWTs used as the authentication mechanism for the specified project.
      *
      * @param projectId The Neon project ID
      * @returns ProjectJWKSResponse The JWKS URLs available for the project
@@ -282,7 +288,7 @@ export class ProjectService {
         });
     }
     /**
-     * Adds a JWKS URL to a project
+     * Add JWKS URL
      * Add a new JWKS URL to a project, such that it can be used for verifying JWTs used as the authentication mechanism for the specified project.
      *
      * The URL must be a valid HTTPS URL that returns a JSON Web Key Set.
@@ -316,7 +322,7 @@ export class ProjectService {
         });
     }
     /**
-     * Delete a JWKS URL
+     * Delete JWKS URL
      * Deletes a JWKS URL from the specified project
      * @param projectId The Neon project ID
      * @param jwksId The JWKS ID
@@ -338,7 +344,7 @@ export class ProjectService {
         });
     }
     /**
-     * Get a connection URI
+     * Retrieve connection URI
      * Retrieves a connection URI for the specified database.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `database_name` by listing the databases for a branch.
@@ -378,12 +384,11 @@ export class ProjectService {
         });
     }
     /**
-     * Get the list of VPC endpoint restrictions
-     * Retrieves the list of VPC endpoint restrictions for the specified project.
-     * This endpoint is under active development and its semantics may change in the future.
+     * List VPC endpoint restrictions
+     * Lists VPC endpoint restrictions for the specified Neon project.
      *
      * @param projectId The Neon project ID
-     * @returns VPCEndpointsResponse The list of configured VPC endpoint restrictions for the specified project
+     * @returns VPCEndpointsResponse Returned VPC endpoint restrictions for the specified project
      * @returns GeneralError General Error
      * @throws ApiError
      */
@@ -399,13 +404,12 @@ export class ProjectService {
         });
     }
     /**
-     * Assign or update a VPC endpoint restriction
-     * Configures the specified VPC endpoint as restriction for the project,
-     * or updates the existing restriction. When a VPC endpoint is assigned
-     * as a restriction, only connections from this specific VPC are accepted.
-     * Note that a VPC endpoint can only used as a restriction on a project
-     * after it has been assigned to the parent organization.
-     * This endpoint is under active development and its semantics may change in the future.
+     * Set VPC endpoint restriction
+     * Sets or updates a VPC endpoint restriction for a Neon project.
+     * When a VPC endpoint restriction is set, the project only accepts connections
+     * from the specified VPC.
+     * A VPC endpoint can be set as a restriction only after it is assigned to the
+     * parent organization of the Neon project.
      *
      * @param projectId The Neon project ID
      * @param vpcEndpointId The VPC endpoint ID
@@ -431,13 +435,12 @@ export class ProjectService {
         });
     }
     /**
-     * Delete a VPC endpoint
-     * Deletes the specified VPC endpoint restriction from the specified project.
-     * This endpoint is under active development and its semantics may change in the future.
+     * Delete VPC endpoint restriction
+     * Removes the specified VPC endpoint restriction from a Neon project.
      *
      * @param projectId The Neon project ID
      * @param vpcEndpointId The VPC endpoint ID
-     * @returns any Deleted the specified VPC endpoint restriction from the specified project
+     * @returns any Removed the VPC endpoint restriction from the specified Neon project
      * @returns GeneralError General Error
      * @throws ApiError
      */

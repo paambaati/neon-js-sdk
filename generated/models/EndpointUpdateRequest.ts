@@ -11,7 +11,7 @@ export type EndpointUpdateRequest = {
     endpoint: {
         /**
          * DEPRECATED: This field will be removed in a future release.
-         * The destination branch ID. The destination branch must not have an exsiting read-write endpoint.
+         * The destination branch ID. The destination branch must not have an existing read-write endpoint.
          *
          * @deprecated
          */

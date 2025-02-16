@@ -9,8 +9,8 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class RegionService {
     constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
-     * Get current active regions
-     * Retrieves the list of supported Neon regions
+     * List supported regions
+     * Lists supported Neon regions
      *
      * @returns ActiveRegionsResponse The list of active regions
      * @returns GeneralError General Error
