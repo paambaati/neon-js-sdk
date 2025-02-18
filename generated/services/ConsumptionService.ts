@@ -12,9 +12,8 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class ConsumptionService {
     constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
-     * Get account consumption metrics
-     * Retrieves consumption metrics for Scale and Business plan accounts. History begins at the time of upgrade.
-     * Available for Scale and Business plan users only.
+     * Retrieve account consumption metrics
+     * Retrieves consumption metrics for Scale, Business, and Enterprise plan accounts. History begins at the time of upgrade.
      *
      * @param from Specify the start `date-time` for the consumption period.
      * The `date-time` value is rounded according to the specified `granularity`.
@@ -68,7 +67,7 @@ export class ConsumptionService {
                 'include_v1_metrics': includeV1Metrics,
             },
             errors: {
-                403: `This endpoint is not available. It is only supported for Scale and Business plan accounts.`,
+                403: `This endpoint is not available. It is only supported for Scale, Business, and Enterprise plan accounts.`,
                 404: `Account is not a member of the organization specified by \`org_id\`.`,
                 406: `The specified \`date-time\` range is outside the boundaries of the specified \`granularity\`.
                 Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
@@ -78,9 +77,8 @@ export class ConsumptionService {
         });
     }
     /**
-     * Get consumption metrics for each project
-     * Retrieves consumption metrics for Scale and Business plan projects. History begins at the time of upgrade.
-     * Available for Scale and Business plan users only.
+     * Retrieve project consumption metrics
+     * Retrieves consumption metrics for Scale, Business, and Enterprise plan projects. History begins at the time of upgrade.
      * Issuing a call to this API does not wake a project's compute endpoint.
      *
      * @param from Specify the start `date-time` for the consumption period.
@@ -149,7 +147,7 @@ export class ConsumptionService {
                 'include_v1_metrics': includeV1Metrics,
             },
             errors: {
-                403: `This endpoint is not available. It is only supported with Scale and Business plan accounts.`,
+                403: `This endpoint is not available. It is only supported with Scale, Business, and Enterprise plan accounts.`,
                 404: `Account is not a member of the organization specified by \`org_id\`.`,
                 406: `The specified \`date-time\` range is outside the boundaries of the specified \`granularity\`.
                 Adjust your \`from\` and \`to\` values or select a different \`granularity\`.

@@ -13,7 +13,7 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class EndpointService {
     constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
-     * Create a compute endpoint
+     * Create compute endpoint
      * Creates a compute endpoint for the specified branch.
      * An endpoint is a Neon compute instance.
      * There is a maximum of one read-write compute endpoint per branch.
@@ -47,7 +47,7 @@ export class EndpointService {
         });
     }
     /**
-     * Get a list of compute endpoints
+     * List compute endpoints
      * Retrieves a list of compute endpoints for the specified project.
      * A compute endpoint is a Neon compute instance.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -70,7 +70,7 @@ export class EndpointService {
         });
     }
     /**
-     * Get a compute endpoint
+     * Retrieve compute endpoint details
      * Retrieves information about the specified compute endpoint.
      * A compute endpoint is a Neon compute instance.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -98,7 +98,7 @@ export class EndpointService {
         });
     }
     /**
-     * Delete a compute endpoint
+     * Delete compute endpoint
      * Delete the specified compute endpoint.
      * A compute endpoint is a Neon compute instance.
      * Deleting a compute endpoint drops existing network connections to the compute endpoint.
@@ -129,7 +129,7 @@ export class EndpointService {
         });
     }
     /**
-     * Update a compute endpoint
+     * Update compute endpoint
      * Updates the specified compute endpoint.
      *
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -166,7 +166,7 @@ export class EndpointService {
         });
     }
     /**
-     * Start a compute endpoint
+     * Start compute endpoint
      * Starts a compute endpoint. The compute endpoint is ready to use
      * after the last operation in chain finishes successfully.
      *
@@ -195,7 +195,7 @@ export class EndpointService {
         });
     }
     /**
-     * Suspend a compute endpoint
+     * Suspend compute endpoint
      * Suspend the specified compute endpoint
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain an `endpoint_id` by listing your project's compute endpoints.
@@ -222,7 +222,7 @@ export class EndpointService {
         });
     }
     /**
-     * Restart a compute endpoint
+     * Restart compute endpoint
      * Restart the specified compute endpoint: suspend immediately followed by start operations.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain an `endpoint_id` by listing your project's compute endpoints.

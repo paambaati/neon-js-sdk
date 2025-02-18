@@ -11,7 +11,7 @@ export type ProjectCreateRequest = {
     project: {
         settings?: ProjectSettingsData;
         /**
-         * The project name
+         * The project name. If not specified, the name will be identical to the generated project ID
          */
         name?: string;
         branch?: {

@@ -4,11 +4,11 @@
 /* eslint-disable */
 export type VPCEndpointDetails = {
     /**
-     * The ID of the VPC endpoint
+     * The VPC endpoint ID
      */
     vpc_endpoint_id: string;
     /**
-     * The custom descriptive label for the VPC endpoint
+     * A descriptive label for the VPC endpoint
      */
     label: string;
     /**
