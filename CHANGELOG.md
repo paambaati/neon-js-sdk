@@ -1,3 +1,10 @@
+## [1.29.2](https://github.com/paambaati/neon-js-sdk/compare/v1.29.1...v1.29.2) (2025-02-19)
+
+
+### Bug Fixes
+
+* **ci:** revert dry run logic ([686c6e6](https://github.com/paambaati/neon-js-sdk/commit/686c6e627c31f872dae8c0cd6feaa1e31d568aab))
+
 ## [1.29.1](https://github.com/paambaati/neon-js-sdk/compare/v1.29.0...v1.29.1) (2025-02-19)
 
 
