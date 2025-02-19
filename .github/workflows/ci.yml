@@ -62,14 +62,17 @@ jobs:
 
     - name: Check semantic versioning
       id: semantic-release
+      shell: bash
       run: |
-          GITHUB_REF=${{ github.head_ref }}
-          pnpm dlx semantic-release --no-ci --dry-run --plugins @semantic-release/commit-analyzer,@semantic-release/release-notes-generator --branches ${{ github.head_ref }} > output.txt
-          OUTPUT=$(cat output.txt | base64 -w 0)
-          echo "::set-output name=releaseNote::$OUTPUT"
+        GITHUB_REF=$HEAD_REF
+        pnpm dlx semantic-release --no-ci --dry-run --plugins @semantic-release/commit-analyzer,@semantic-release/release-notes-generator --branches $HEAD_REF > output.txt
+        OUTPUT=$(cat output.txt | base64 -w 0)
+        echo "::set-output name=releaseNote::$OUTPUT"
+      env:
+        HEAD_REF: ${{ github.head_ref }}
 
     - name: Report semantic versioning
-      uses: actions/github-script@v3
+      uses: actions/github-script@v7
       if: ${{ steps.semantic-release.outputs.releaseNote != '' }}
       with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
