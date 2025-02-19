@@ -64,7 +64,7 @@ jobs:
       id: semantic-release
       run: |
           GITHUB_REF=${{ github.head_ref }}
-          npx semantic-release --no-ci --dry-run --plugins @semantic-release/commit-analyzer,@semantic-release/release-notes-generator --branches ${{ github.head_ref }} > output.txt
+          pnpm dlx semantic-release --no-ci --dry-run --plugins @semantic-release/commit-analyzer,@semantic-release/release-notes-generator --branches ${{ github.head_ref }} > output.txt
           OUTPUT=$(cat output.txt | base64 -w 0)
           echo "::set-output name=releaseNote::$OUTPUT"
 
