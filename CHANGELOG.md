@@ -1,3 +1,10 @@
+## [1.29.1](https://github.com/paambaati/neon-js-sdk/compare/v1.29.0...v1.29.1) (2025-02-19)
+
+
+### Bug Fixes
+
+* **ci:** rename workflow YAML to fix provenance problems ([032f643](https://github.com/paambaati/neon-js-sdk/commit/032f6431022b036d7f90d82a7320781faf4aa32e))
+
 # [1.29.0](https://github.com/paambaati/neon-js-sdk/compare/v1.28.0...v1.29.0) (2025-02-18)
 
 
