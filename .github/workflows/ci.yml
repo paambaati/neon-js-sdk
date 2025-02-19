@@ -5,6 +5,9 @@ on:
       - main
   pull_request:
 
+permissions: 
+  write-all
+
 jobs:
   check_pr:
     name: "PR checks"
@@ -56,3 +59,66 @@ jobs:
         || (echo "##[error] found changed files after build. please 'pnpm run generate && pnpm run build'" \
                  "and commit all changes" \
             && exit 1)
+
+    - name: Check semantic versioning
+      id: semantic-release
+      run: |
+          GITHUB_REF=${{ github.head_ref }}
+          npx semantic-release --no-ci --dry-run --plugins @semantic-release/commit-analyzer,@semantic-release/release-notes-generator --branches ${{ github.head_ref }} > output.txt
+          OUTPUT=$(cat output.txt | base64 -w 0)
+          echo "::set-output name=releaseNote::$OUTPUT"
+
+    - name: Report semantic versioning
+      uses: actions/github-script@v3
+      if: ${{ steps.semantic-release.outputs.releaseNote != '' }}
+      with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+              // Build release notes.
+              const semanticReleaseOutput = Buffer.from('${{ steps.semantic-release.outputs.releaseNote }}', 'base64').toString('utf8');
+              const semanticReleaseLogMatch = /^[[0-9:\sAMPM]+\]\s\[semantic-release\].*$/;
+              const lines = semanticReleaseOutput.split('\n');
+              const lastSemanticReleaseLogIndex = [...lines]
+                  .reverse()
+                  .findIndex((line) => line.match(semanticReleaseLogMatch));
+
+              const releaseNoteIndex = lines.length - lastSemanticReleaseLogIndex;
+              const releaseNote = lines.slice(releaseNoteIndex);
+
+              let res = releaseNote.join('\n');
+              if (!releaseNote.length || !res) {
+                  res = '### No release note would be generated.';
+              }
+
+              const SEMANTIC_RELEASE_BODY_HEADER = '## 📝 Semantic Release Report';
+              const body = [SEMANTIC_RELEASE_BODY_HEADER, res].join('\n');
+
+              // Get comments on the PR.
+              const comments = await github.issues.listComments({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo
+              });
+
+              // Find previous comments that were created by this step to delete.
+              const commentsToDelete = comments.data.filter((comment) =>
+                  comment.body.startsWith(SEMANTIC_RELEASE_BODY_HEADER)
+              );
+
+              // Delete eligible comments.
+              const prms = commentsToDelete.map((comment) =>
+                  github.issues.deleteComment({
+                      comment_id: comment.id,
+                      owner: context.repo.owner,
+                      repo: context.repo.repo
+                  })
+              );
+              await Promise.all(prms);
+
+              // Create fresh new comment for release notes.
+              github.issues.createComment({
+                  issue_number: context.issue.number,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  body
+              });
