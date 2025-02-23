@@ -26,5 +26,6 @@ export type Limits = {
     max_concurrent_scheduled_operation_chains_per_project: number;
     max_concurrent_executing_operation_chains_per_project: number;
     max_root_branches: number;
+    max_import_size: number;
 };
 

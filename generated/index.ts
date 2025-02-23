@@ -89,6 +89,7 @@ export type { HealthCheck } from './models/HealthCheck';
 export type { IdentityAuthProviderProjectOwnedBy } from './models/IdentityAuthProviderProjectOwnedBy';
 export type { IdentityAuthProviderProjectTransferStatus } from './models/IdentityAuthProviderProjectTransferStatus';
 export type { IdentityCreateAuthProviderSDKKeysRequest } from './models/IdentityCreateAuthProviderSDKKeysRequest';
+export type { IdentityCreateIntegrationRequest } from './models/IdentityCreateIntegrationRequest';
 export type { IdentityCreateIntegrationResponse } from './models/IdentityCreateIntegrationResponse';
 export type { IdentityCreateNewUserRequest } from './models/IdentityCreateNewUserRequest';
 export type { IdentityCreateNewUserResponse } from './models/IdentityCreateNewUserResponse';
@@ -182,6 +183,7 @@ export type { VPCEndpointDetails } from './models/VPCEndpointDetails';
 export type { VPCEndpointsResponse } from './models/VPCEndpointsResponse';
 
 export { ApiKeyService } from './services/ApiKeyService';
+export { AuthService } from './services/AuthService';
 export { BranchService } from './services/BranchService';
 export { ConsumptionService } from './services/ConsumptionService';
 export { EndpointService } from './services/EndpointService';
