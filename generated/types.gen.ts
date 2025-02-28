@@ -14,8 +14,14 @@ export type ComputeUnit = number;
  * The Neon compute provisioner.
  * Specify the `k8s-neonvm` provisioner to create a compute endpoint that supports Autoscaling.
  *
+ * Provisioner can be one of the following values:
+ * * k8s-pod
+ * * k8s-neonvm
+ *
+ * Clients must expect, that any string value that is not documented in the description above should be treated as a error. UNKNOWN value if safe to treat as an error too.
+ *
  */
-export type Provisioner = 'k8s-pod' | 'k8s-neonvm';
+export type Provisioner = string;
 
 export type PaginationResponse = {
     pagination?: Pagination;
@@ -41,7 +47,7 @@ export type EmptyResponse = {
 /**
  * Add a new JWKS to a specific endpoint of a project
  */
-export type AddEndpointJWKSRequest = {
+export type AddProjectJWKSRequest = {
     /**
      * The URL that lists the JWKS
      */
@@ -50,6 +56,18 @@ export type AddEndpointJWKSRequest = {
      * The name of the authentication provider (e.g., Clerk, Stytch, Auth0)
      */
     provider_name: string;
+    /**
+     * Branch ID
+     */
+    branch_id?: string;
+    /**
+     * The name of the required JWT Audience to be used
+     */
+    jwt_audience?: string;
+    /**
+     * The roles the JWKS should be mapped to
+     */
+    role_names: Array<(string)>;
 };
 
 export type JWKS = {
@@ -62,9 +80,9 @@ export type JWKS = {
      */
     project_id: string;
     /**
-     * Endpoint ID
+     * Branch ID
      */
-    endpoint_id: string;
+    branch_id?: string;
     /**
      * The URL that lists the JWKS
      */
@@ -81,6 +99,10 @@ export type JWKS = {
      * The date and time when the JWKS was last modified
      */
     updated_at: string;
+    /**
+     * The name of the required JWT Audience to be used
+     */
+    jwt_audience?: string;
 };
 
 /**
@@ -95,6 +117,13 @@ export type ApiKeyCreateRequest = {
      * A user-specified API key name. This value is required when creating an API key.
      */
     key_name: string;
+};
+
+export type OrgApiKeyCreateRequest = ApiKeyCreateRequest & {
+    /**
+     * If set, the API key can access only this project
+     */
+    project_id?: string;
 };
 
 export type ApiKeyCreateResponse = {
@@ -114,6 +143,17 @@ export type ApiKeyCreateResponse = {
      * A timestamp indicating when the API key was created
      */
     created_at: string;
+    /**
+     * ID of the user who created this API key
+     */
+    created_by: string;
+};
+
+export type OrgApiKeyCreateResponse = ApiKeyCreateResponse & {
+    /**
+     * If set, the API key can access only this project
+     */
+    project_id?: string;
 };
 
 export type ApiKeyRevokeResponse = {
@@ -126,9 +166,13 @@ export type ApiKeyRevokeResponse = {
      */
     name: string;
     /**
-     * A `true` or `false` value indicating whether the API key is revoked
+     * A timestamp indicating when the API key was created
      */
-    revoked: boolean;
+    created_at: string;
+    /**
+     * ID of the user who created this API key
+     */
+    created_by: string;
     /**
      * A timestamp indicating when the API was last used
      */
@@ -137,6 +181,17 @@ export type ApiKeyRevokeResponse = {
      * The IP address from which the API key was last used
      */
     last_used_from_addr: string;
+    /**
+     * A `true` or `false` value indicating whether the API key is revoked
+     */
+    revoked: boolean;
+};
+
+export type OrgApiKeyRevokeResponse = ApiKeyRevokeResponse & {
+    /**
+     * If set, the API key can access only this project
+     */
+    project_id?: string;
 };
 
 export type ApiKeysListResponseItem = {
@@ -152,6 +207,7 @@ export type ApiKeysListResponseItem = {
      * A timestamp indicating when the API key was created
      */
     created_at: string;
+    created_by: ApiKeyCreatorData;
     /**
      * A timestamp indicating when the API was last used
      */
@@ -160,6 +216,31 @@ export type ApiKeysListResponseItem = {
      * The IP address from which the API key was last used
      */
     last_used_from_addr: string;
+};
+
+export type OrgApiKeysListResponseItem = ApiKeysListResponseItem & {
+    /**
+     * If set, the API key can access only this project
+     */
+    project_id?: string;
+};
+
+/**
+ * The user data of the user that created this API key.
+ */
+export type ApiKeyCreatorData = {
+    /**
+     * ID of the user who created this API key
+     */
+    id: string;
+    /**
+     * The name of the user.
+     */
+    name: string;
+    /**
+     * The URL to the user's avatar image.
+     */
+    image: string;
 };
 
 export type Operation = {
@@ -182,7 +263,7 @@ export type Operation = {
     action: OperationAction;
     status: OperationStatus;
     /**
-     * The error that occured
+     * The error that occurred
      */
     error?: string;
     /**
@@ -218,7 +299,7 @@ export type OperationsResponse = {
 /**
  * The action performed by the operation
  */
-export type OperationAction = 'create_compute' | 'create_timeline' | 'start_compute' | 'suspend_compute' | 'apply_config' | 'check_availability' | 'delete_timeline' | 'create_branch' | 'tenant_ignore' | 'tenant_attach' | 'tenant_detach' | 'tenant_reattach' | 'replace_safekeeper' | 'disable_maintenance' | 'apply_storage_config' | 'prepare_secondary_pageserver' | 'switch_pageserver';
+export type OperationAction = 'create_compute' | 'create_timeline' | 'start_compute' | 'suspend_compute' | 'apply_config' | 'check_availability' | 'delete_timeline' | 'create_branch' | 'import_data' | 'tenant_ignore' | 'tenant_attach' | 'tenant_detach' | 'tenant_reattach' | 'replace_safekeeper' | 'disable_maintenance' | 'apply_storage_config' | 'prepare_secondary_pageserver' | 'switch_pageserver' | 'detach_parent_branch' | 'timeline_archive' | 'timeline_unarchive' | 'start_reserved_compute' | 'sync_dbs_and_roles_from_compute' | 'apply_schema_from_branch';
 
 /**
  * The status of the operation
@@ -232,7 +313,6 @@ export type OperationStatus = 'scheduling' | 'running' | 'finished' | 'failed' |
 export type ProjectListItem = {
     /**
      * The project ID
-     *
      */
     id: string;
     /**
@@ -321,7 +401,7 @@ export type ProjectListItem = {
     /**
      * The most recent time when any endpoint of this project was active.
      *
-     * Omitted when observed no actitivy for endpoints of this project.
+     * Omitted when observed no activity for endpoints of this project.
      *
      */
     compute_last_active_at?: string;
@@ -377,7 +457,6 @@ export type Project = {
     cpu_used_sec: number;
     /**
      * The project ID
-     *
      */
     id: string;
     /**
@@ -430,7 +509,7 @@ export type Project = {
      */
     creation_source: string;
     /**
-     * The number of seconds to retain point-in-time restore (PITR) backup history for this project.
+     * The number of seconds to retain the shared history for all branches in this project. The default for all plans is 1 day (86400 seconds).
      *
      */
     history_retention_seconds: number;
@@ -471,33 +550,38 @@ export type Project = {
     /**
      * The most recent time when any endpoint of this project was active.
      *
-     * Omitted when observed no actitivy for endpoints of this project.
+     * Omitted when observed no activity for endpoints of this project.
      *
      */
     compute_last_active_at?: string;
     org_id?: string;
+    /**
+     * A timestamp indicating when project update begins. If set, computes might experience a brief restart around this time.
+     *
+     */
+    maintenance_scheduled_for?: string;
 };
 
 export type ProjectCreateRequest = {
     project: {
         settings?: ProjectSettingsData;
         /**
-         * The project name
+         * The project name. If not specified, the name will be identical to the generated project ID
          */
         name?: string;
         branch?: {
             /**
-             * The branch name. If not specified, the default branch name will be used.
+             * The default branch name. If not specified, the default branch name, `main`, will be used.
              *
              */
             name?: string;
             /**
-             * The role name. If not specified, the default role name will be used.
+             * The role name. If not specified, the default role name, `{database_name}_owner`, will be used.
              *
              */
             role_name?: string;
             /**
-             * The database name. If not specified, the default database name will be used.
+             * The database name. If not specified, the default database name, `neondb`, will be used.
              *
              */
             database_name?: string;
@@ -535,8 +619,8 @@ export type ProjectCreateRequest = {
          */
         store_passwords?: boolean;
         /**
-         * The number of seconds to retain the point-in-time restore (PITR) backup history for this project.
-         * The default is 604800 seconds (7 days).
+         * The number of seconds to retain the shared history for all branches in this project.
+         * The default is 1 day (86400 seconds).
          *
          */
         history_retention_seconds?: number;
@@ -558,8 +642,8 @@ export type ProjectUpdateRequest = {
         name?: string;
         default_endpoint_settings?: DefaultEndpointSettings;
         /**
-         * The number of seconds to retain the point-in-time restore (PITR) backup history for this project.
-         * The default is 604800 seconds (7 days).
+         * The number of seconds to retain the shared history for all branches in this project.
+         * The default is 1 day (604800 seconds).
          *
          */
         history_retention_seconds?: number;
@@ -576,6 +660,21 @@ export type ProjectSettingsData = {
      *
      */
     enable_logical_replication?: boolean;
+    maintenance_window?: MaintenanceWindow;
+    /**
+     * When set, connections from the public internet
+     * are disallowed. This supersedes the AllowedIPs list.
+     * This parameter is under active development and its semantics may change in the future.
+     *
+     */
+    block_public_connections?: boolean;
+    /**
+     * When set, connections using VPC endpoints are disallowed.
+     * This parameter is under active development and its semantics may change in the future.
+     *
+     */
+    block_vpc_connections?: boolean;
+    audit_log_level?: ProjectAuditLogLevel;
 };
 
 export type ProjectResponse = {
@@ -584,6 +683,12 @@ export type ProjectResponse = {
 
 export type ProjectsResponse = {
     projects: Array<ProjectListItem>;
+    /**
+     * A list of project IDs indicating which projects are known to exist, but whose details could not
+     * be fetched within the requested (or implicit) time limit
+     *
+     */
+    unavailable_project_ids?: Array<(string)>;
 };
 
 export type ProjectPermission = {
@@ -610,153 +715,108 @@ export type ConsumptionHistoryPerProjectResponse = {
 };
 
 export type ConsumptionHistoryPerProject = {
+    /**
+     * The project ID
+     */
     project_id: string;
     periods: Array<ConsumptionHistoryPerPeriod>;
 };
 
 export type ConsumptionHistoryPerPeriod = {
+    /**
+     * The ID assigned to the specified billing period.
+     */
     period_id: string;
+    /**
+     * The billing plan applicable during the billing period.
+     */
+    period_plan: string;
+    /**
+     * The start date-time of the billing period.
+     *
+     */
+    period_start: string;
+    /**
+     * The end date-time of the billing period, available for the past periods only.
+     *
+     */
+    period_end?: string;
     consumption: Array<ConsumptionHistoryPerTimeframe>;
 };
 
 export type ConsumptionHistoryPerTimeframe = {
+    /**
+     * The specified start date-time for the reported consumption.
+     *
+     */
     timeframe_start: string;
+    /**
+     * The specified end date-time for the reported consumption.
+     *
+     */
     timeframe_end: string;
+    /**
+     * Seconds. The amount of time the compute endpoints have been active.
+     *
+     */
     active_time_seconds: number;
+    /**
+     * Seconds. The number of CPU seconds used by compute endpoints, including compute endpoints that have been deleted.
+     *
+     */
     compute_time_seconds: number;
+    /**
+     * Bytes. The amount of written data for all branches.
+     *
+     */
     written_data_bytes: number;
+    /**
+     * Bytes. The space occupied in storage. Synthetic storage size combines the logical data size and Write-Ahead Log (WAL) size for all branches.
+     *
+     */
     synthetic_storage_size_bytes: number;
+    /**
+     * Bytes-Hour. The amount of storage consumed hourly.
+     *
+     */
     data_storage_bytes_hour?: number;
 };
 
 export type ConsumptionHistoryGranularity = 'hourly' | 'daily' | 'monthly';
 
-export type ProjectsConsumptionResponse = {
-    projects: Array<ProjectConsumption>;
-    periods_in_response: number;
-};
-
-export type ProjectConsumption = {
-    /**
-     * The project ID
-     */
-    project_id: string;
-    /**
-     * The Id of the consumption period, used to reference the `previous_period_id` field.
-     *
-     */
-    period_id: string;
-    /**
-     * Bytes-Hour. The amount of storage the project consumed during the billing period. Expect some lag in the reported value.
-     * The value is reset at the beginning of each billing period.
-     *
-     */
-    data_storage_bytes_hour: number;
-    /**
-     * The timestamp of the last update of the `data_storage_bytes_hour` field.
-     *
-     */
-    data_storage_bytes_hour_updated_at?: string;
-    /**
-     * Bytes. The current space occupied by project in storage. Expect some lag in the reported value.
-     *
-     */
-    synthetic_storage_size: number;
-    /**
-     * The timestamp of the last update of the `synthetic_storage_size` field.
-     *
-     */
-    synthetic_storage_size_updated_at?: string;
-    /**
-     * Bytes. The egress traffic from the Neon cloud to the client for the project over the billing period.
-     * Includes egress traffic for deleted endpoints. Expect some lag in the reported value. The value is reset at the beginning of each billing period.
-     *
-     */
-    data_transfer_bytes: number;
-    /**
-     * Timestamp of the last update of `data_transfer_bytes` field
-     *
-     */
-    data_transfer_bytes_updated_at?: string;
-    /**
-     * Bytes. The Amount of WAL that travelled through storage for given project for all branches.
-     * Expect some lag in the reported value. The value is reset at the beginning of each billing period.
-     *
-     */
-    written_data_bytes: number;
-    /**
-     * The timestamp of the last update of `written_data_bytes` field.
-     *
-     */
-    written_data_bytes_updated_at?: string;
-    /**
-     * Seconds. The number of CPU seconds used by the project's compute endpoints, including compute endpoints that have been deleted.
-     * Expect some lag in the reported value. The value is reset at the beginning of each billing period.
-     * Examples:
-     * 1. An endpoint that uses 1 CPU for 1 second is equal to `compute_time=1`.
-     * 2. An endpoint that uses 2 CPUs simultaneously for 1 second is equal to `compute_time=2`.
-     *
-     */
-    compute_time_seconds: number;
-    /**
-     * The timestamp of the last update of `compute_time_seconds` field.
-     *
-     */
-    compute_time_seconds_updated_at?: string;
-    /**
-     * Seconds. The amount of time that compute endpoints in this project have been active.
-     * Expect some lag in the reported value.
-     *
-     * The value is reset at the beginning of each billing period.
-     *
-     */
-    active_time_seconds: number;
-    /**
-     * The timestamp of the last update of the `active_time_seconds` field.
-     *
-     */
-    active_time_seconds_updated_at?: string;
-    /**
-     * A timestamp indicating when the period was last updated.
-     *
-     */
-    updated_at: string;
-    /**
-     * The start of the consumption period.
-     *
-     */
-    period_start: string;
-    /**
-     * The end of the consumption period.
-     *
-     */
-    period_end: string | null;
-    /**
-     * The `period_id` of the previous consumption period.
-     *
-     */
-    previous_period_id: string | null;
-};
-
 export type ProjectLimits = {
-    limits: {
-        active_time: number;
-        max_projects: number;
-        max_branches: number;
-        max_protected_branches: number;
-        max_autoscaling_cu: number;
-        cpu_seconds: number;
-        max_compute_time_non_primary: number;
-        max_active_endpoints: number;
-        max_read_only_endpoints: number;
-        max_allowed_ips: number;
-        max_monitoring_retention_hours: number;
-        max_history_retention_seconds: number;
-        min_autosuspend_seconds: number;
-        max_data_transfer: number;
-    };
+    limits: Limits;
     features: Features;
 };
+
+export type Limits = {
+    active_time: number;
+    max_projects: number;
+    max_branches: number;
+    max_protected_branches: number;
+    max_autoscaling_cu: number;
+    max_fixed_size_cu: number;
+    cpu_seconds: number;
+    max_compute_time_non_primary: number;
+    max_active_endpoints: number;
+    max_read_only_endpoints: number;
+    max_allowed_ips: number;
+    max_vpc_endpoints_per_region: number;
+    max_monitoring_retention_hours: number;
+    max_history_retention_seconds: number;
+    min_autosuspend_seconds: number;
+    max_data_transfer: number;
+    min_idle_seconds_to_autoarchive: number;
+    min_age_seconds_to_autoarchive: number;
+    max_branch_roles: number;
+    max_branch_databases: number;
+    max_concurrent_scheduled_operation_chains_per_project: number;
+    max_concurrent_executing_operation_chains_per_project: number;
+    max_root_branches: number;
+    max_import_size: number;
+};
+
+export type ProjectAuditLogLevel = 'hipaa';
 
 export type Branch = {
     /**
@@ -792,6 +852,11 @@ export type Branch = {
     current_state: BranchState;
     pending_state?: BranchState;
     /**
+     * A UTC timestamp indicating when the `current_state` began
+     *
+     */
+    state_changed_at: string;
+    /**
      * The logical size of the branch, in bytes
      *
      */
@@ -807,7 +872,7 @@ export type Branch = {
      *
      * @deprecated
      */
-    primary: boolean;
+    primary?: boolean;
     /**
      * Whether the branch is the project's default branch
      *
@@ -847,12 +912,37 @@ export type Branch = {
      *
      */
     last_reset_at?: string;
+    /**
+     * The resolved user model that contains details of the user/org/integration/api_key used for branch creation. This field is filled only in listing/get/create/get/update/delete methods, if it is empty when calling other handlers, it does not mean that it is empty in the system.
+     *
+     */
+    created_by?: {
+        /**
+         * The name of the user.
+         */
+        name?: string;
+        /**
+         * The URL to the user's avatar image.
+         */
+        image?: string;
+    };
+    /**
+     * The source of initialization for the branch. Valid values are `schema-only` and `parent-data` (default).
+     * * `schema-only` - creates a new root branch containing only the schema. Use `parent_id` to specify the source branch. Optionally, you can provide `parent_lsn` or `parent_timestamp` to branch from a specific point in time or LSN. These fields define which branch to copy the schema from and at what point—they do not establish a parent-child relationship between the `parent_id` branch and the new schema-only branch.
+     * * `parent-data` - creates the branch with both schema and data from the parent.
+     *
+     */
+    init_source?: string;
 };
 
 /**
- * The branch state
+ * The branch’s state, indicating if it is initializing, ready for use, or archived.
+ * * 'init' - the branch is being created but is not available for querying.
+ * * 'ready' - the branch is fully operational and ready for querying. Expect normal query response times.
+ * * 'archived' - the branch is stored in cost-effective archival storage. Expect slow query response times.
+ *
  */
-export type BranchState = 'init' | 'ready';
+export type BranchState = string;
 
 export type BranchCreateRequestEndpointOptions = {
     type: EndpointType;
@@ -903,6 +993,18 @@ export type BranchCreateRequest = {
          *
          */
         protected?: boolean;
+        /**
+         * Whether to create the branch as archived
+         *
+         */
+        archived?: boolean;
+        /**
+         * The source of initialization for the branch. Valid values are `schema-only` and `parent-data` (default).
+         * * `schema-only` - creates a new root branch containing only the schema. Use `parent_id` to specify the source branch. Optionally, you can provide `parent_lsn` or `parent_timestamp` to branch from a specific point in time or LSN. These fields define which branch to copy the schema from and at what point—they do not establish a parent-child relationship between the `parent_id` branch and the new schema-only branch.
+         * * `parent-data` - creates the branch with both schema and data from the parent.
+         *
+         */
+        init_source?: string;
     };
 };
 
@@ -948,8 +1050,16 @@ export type BranchSchemaResponse = {
     sql?: string;
 };
 
+export type BranchSchemaCompareResponse = {
+    diff?: string;
+};
+
 export type BranchesResponse = {
     branches: Array<Branch>;
+};
+
+export type BranchesCountResponse = {
+    count: number;
 };
 
 export type ConnectionParameters = {
@@ -984,6 +1094,7 @@ export type ConnectionDetails = {
     /**
      * The connection URI is defined as specified here: [Connection URIs](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS)
      * The connection URI can be used to connect to a Postgres database with psql or defined in a DATABASE_URL environment variable.
+     * When creating a branch from a parent with more than one role or database, the response body does not include a connection URI.
      *
      */
     connection_uri: string;
@@ -1112,11 +1223,11 @@ export type EndpointPoolerMode = 'transaction';
 
 /**
  * Duration of inactivity in seconds after which the compute endpoint is
- * automatically suspended. The value `0` means use the global default.
+ * automatically suspended. The value `0` means use the default value.
  * The value `-1` means never suspend. The default value is `300` seconds (5 minutes).
  * The minimum value is `60` seconds (1 minute).
  * The maximum value is `604800` seconds (1 week). For more information, see
- * [Auto-suspend configuration](https://neon.tech/docs/manage/endpoints#auto-suspend-configuration).
+ * [Scale to zero configuration](https://neon.tech/docs/manage/endpoints#scale-to-zero-configuration).
  *
  */
 export type SuspendTimeoutSeconds = number;
@@ -1136,13 +1247,31 @@ export type AllowedIps = {
      * If true, the list will be applied only to protected branches.
      */
     protected_branches_only?: boolean;
+};
+
+/**
+ * A maintenance window is a time period during which Neon may perform maintenance on the project's infrastructure.
+ * During this time, the project's compute endpoints may be unavailable and existing connections can be
+ * interrupted.
+ *
+ */
+export type MaintenanceWindow = {
     /**
-     * DEPRECATED: Use `protected_branches_only`.
-     * If true, the list will be applied only to the default branch.
+     * A list of weekdays when the maintenance window is active.
+     * Encoded as ints, where 1 - Monday, and 7 - Sunday.
      *
-     * @deprecated
      */
-    primary_branch_only?: boolean;
+    weekdays: Array<(number)>;
+    /**
+     * Start time of the maintenance window, in the format of "HH:MM". Uses UTC.
+     *
+     */
+    start_time: string;
+    /**
+     * End time of the maintenance window, in the format of "HH:MM". Uses UTC.
+     *
+     */
+    end_time: string;
 };
 
 export type EndpointCreateRequest = {
@@ -1202,8 +1331,10 @@ export type EndpointCreateRequest = {
 export type EndpointUpdateRequest = {
     endpoint: {
         /**
-         * The destination branch ID. The destination branch must not have an exsiting read-write endpoint.
+         * DEPRECATED: This field will be removed in a future release.
+         * The destination branch ID. The destination branch must not have an existing read-write endpoint.
          *
+         * @deprecated
          */
         branch_id?: string;
         /**
@@ -1259,6 +1390,54 @@ export type ConnectionURIsOptionalResponse = {
     connection_uris?: Array<ConnectionDetails>;
 };
 
+export type VPCEndpointsResponse = {
+    endpoints: Array<VPCEndpoint>;
+};
+
+export type VPCEndpoint = {
+    /**
+     * The VPC endpoint ID
+     */
+    vpc_endpoint_id: string;
+    /**
+     * A descriptive label for the VPC endpoint
+     */
+    label: string;
+};
+
+export type VPCEndpointDetails = {
+    /**
+     * The VPC endpoint ID
+     */
+    vpc_endpoint_id: string;
+    /**
+     * A descriptive label for the VPC endpoint
+     */
+    label: string;
+    /**
+     * The current state of the VPC endpoint. Possible values are
+     * `new` (just configured, pending acceptance) or `accepted`
+     * (VPC connection was accepted by Neon).
+     *
+     */
+    state: string;
+    /**
+     * The number of projects that are restricted to use this VPC endpoint.
+     *
+     */
+    num_restricted_projects: number;
+    /**
+     * A list of example projects that are restricted to use this VPC endpoint.
+     * There are at most 3 projects in the list, even if more projects are restricted.
+     *
+     */
+    example_restricted_projects: Array<(string)>;
+};
+
+export type VPCEndpointAssignment = {
+    label: string;
+};
+
 export type EndpointsResponse = {
     endpoints: Array<Endpoint>;
 };
@@ -1290,30 +1469,6 @@ export type StatementData = {
 export type ExplainData = {
     'QUERY PLAN': string;
 };
-
-/**
- * The metric type for a given notification
- *
- */
-export type NotificationMetricType = 'database_size' | 'connections' | 'cpu' | 'ram' | 'compute_over_limit';
-
-/**
- * The category type for a given notification
- *
- */
-export type NotificationCategoryType = 'usage' | 'performance';
-
-/**
- * The type of the notification
- *
- */
-export type NotificationType = 'info' | 'warning';
-
-/**
- * The action type for a given notification
- *
- */
-export type NotificationActionType = 'upgrade_plan' | 'upgrade_cu';
 
 export type Role = {
     /**
@@ -1355,11 +1510,20 @@ export type RoleCreateRequest = {
          *
          */
         name: string;
+        /**
+         * Whether to create a role that cannot login.
+         *
+         */
+        no_login?: boolean;
     };
 };
 
 export type RoleResponse = {
     role: Role;
+};
+
+export type JWKSResponse = {
+    jwks: JWKS;
 };
 
 export type RolesResponse = {
@@ -1413,6 +1577,7 @@ export type PaymentSource = {
 };
 
 export type BillingAccount = {
+    state: BillingAccountState;
     payment_source: PaymentSource;
     subscription_type: BillingSubscriptionType;
     payment_method: BillingPaymentMethod;
@@ -1483,17 +1648,23 @@ export type BillingAccount = {
 };
 
 /**
+ * State of the billing account.
+ *
+ */
+export type BillingAccountState = 'UNKNOWN' | 'active' | 'suspended' | 'deactivated' | 'deleted';
+
+/**
  * Type of subscription to Neon Cloud.
  * Notice that for users without billing account this will be "UNKNOWN"
  *
  */
-export type BillingSubscriptionType = 'UNKNOWN' | 'direct_sales' | 'aws_marketplace' | 'free_v2' | 'launch' | 'scale';
+export type BillingSubscriptionType = 'UNKNOWN' | 'direct_sales' | 'aws_marketplace' | 'free_v2' | 'launch' | 'scale' | 'business' | 'vercel_pg_legacy';
 
 /**
  * Indicates whether and how an account makes payments.
  *
  */
-export type BillingPaymentMethod = 'UNKNOWN' | 'none' | 'stripe' | 'direct_payment' | 'aws_mp' | 'vercel_mp' | 'staff' | 'trial' | 'sponsorship';
+export type BillingPaymentMethod = 'UNKNOWN' | 'none' | 'stripe' | 'direct_payment' | 'aws_mp' | 'azure_mp' | 'vercel_mp' | 'staff' | 'trial' | 'sponsorship';
 
 export type Database = {
     /**
@@ -1531,7 +1702,7 @@ export type Database = {
 export type DatabaseCreateRequest = {
     database: {
         /**
-         * The name of the datbase
+         * The name of the database
          *
          */
         name: string;
@@ -1602,8 +1773,6 @@ export type Member = {
 
 export type MemberUserInfo = {
     email: string;
-    name: string;
-    last_name: string;
 };
 
 export type MemberWithUser = {
@@ -1615,11 +1784,18 @@ export type Organization = {
     id: string;
     name: string;
     handle: string;
+    plan: string;
     /**
      * A timestamp indicting when the organization was created
      *
      */
     created_at: string;
+    /**
+     * Organizations created via the Console or the API are managed by `console`.
+     * Organizations created by other methods can't be deleted via the Console or the API.
+     *
+     */
+    managed_by: string;
     /**
      * A timestamp indicating when the organization was updated
      *
@@ -1655,14 +1831,14 @@ export type OrganizationInviteUpdateRequest = {
 };
 
 /**
- * A list of details for guests of an organisation
+ * A list of details for guests of an organization
  *
  */
 export type OrganizationGuestsResponse = Array<OrganizationGuest>;
 
 /**
- * Details of an organisation guest, who is not directly a member of
- * an organisation but has been shared one of the projects it owns
+ * Details of an organization guest, who is not directly a member of
+ * an organization but has been shared one of the projects it owns
  *
  */
 export type OrganizationGuest = {
@@ -1703,26 +1879,48 @@ export type OrganizationCreateRequest = {
 };
 
 export type OrganizationLimits = {
-    limits: {
-        active_time: number;
-        max_projects: number;
-        max_branches: number;
-        max_autoscaling_cu: number;
-        cpu_seconds: number;
-        max_active_endpoints: number;
-        max_read_only_endpoints: number;
-        max_allowed_ips: number;
-        max_monitoring_retention_hours: number;
-        max_history_retention_seconds: number;
-        max_compute_time_non_primary: number;
-        min_autosuspend_seconds: number;
-    };
+    limits: Limits;
     features: Features;
+};
+
+export type ActiveRegionsResponse = {
+    /**
+     * The list of active regions
+     */
+    regions: Array<RegionResponse>;
+};
+
+export type RegionResponse = {
+    /**
+     * The region ID as used in other API endpoints
+     */
+    region_id: string;
+    /**
+     * A short description of the region.
+     */
+    name: string;
+    /**
+     * Whether this region is used by default in new projects.
+     */
+    default: boolean;
+    /**
+     * The geographical latitude (approximate) for the region. Empty if unknown.
+     */
+    geo_lat: string;
+    /**
+     * The geographical longitude (approximate) for the region. Empty if unknown.
+     */
+    geo_long: string;
 };
 
 export type CurrentUserAuthAccount = {
     email: string;
     image: string;
+    /**
+     * DEPRECATED. Use `email` field.
+     *
+     * @deprecated
+     */
     login: string;
     name: string;
     provider: IdentityProviderId;
@@ -1737,6 +1935,11 @@ export type LinkedAuthAccount = {
 export type UpdateUserInfoRequest = {
     email?: string;
     id: string;
+    /**
+     * DEPRECATED. This field is ignored.
+     *
+     * @deprecated
+     */
     image?: string;
     first_name?: string;
     last_name?: string;
@@ -1755,6 +1958,11 @@ export type CurrentUserInfoResponse = {
     email: string;
     id: string;
     image: string;
+    /**
+     * DEPRECATED. Use `email` field.
+     *
+     * @deprecated
+     */
     login: string;
     name: string;
     last_name: string;
@@ -1765,10 +1973,26 @@ export type CurrentUserInfoResponse = {
     plan: string;
 };
 
+export type ConvertUserToOrgRequest = {
+    name: string;
+};
+
 export type CurrentUserInfoAuthResponse = {
     password_stored: boolean;
     auth_accounts: Array<CurrentUserAuthAccount>;
     linked_accounts: Array<LinkedAuthAccount>;
+    provider: string;
+};
+
+export type TransferProjectsToOrganizationRequest = {
+    /**
+     * The destination organization identifier
+     */
+    destination_org_id: string;
+    /**
+     * The list of projects ids to transfer. Maximum of 400 project ids
+     */
+    project_ids: Array<(string)>;
 };
 
 export type VerifyUserPasswordRequest = {
@@ -1778,7 +2002,7 @@ export type VerifyUserPasswordRequest = {
 /**
  * Identity provider id from keycloak
  */
-export type IdentityProviderId = 'github' | 'google' | 'hasura' | 'keycloak';
+export type IdentityProviderId = 'github' | 'google' | 'hasura' | 'microsoft' | 'microsoftv2' | 'vercelmp' | 'keycloak' | 'test';
 
 /**
  * A collection of settings for a compute endpoint
@@ -1869,7 +2093,7 @@ export type PgbouncerSettingsData = {
 };
 
 /**
- * The major Postgres version number. Currently supported versions are `14`, `15`, and `16`.
+ * The major Postgres version number. Currently supported versions are `14`, `15`, `16`, and `17`.
  */
 export type PgVersion = number;
 
@@ -1882,18 +2106,105 @@ export type HealthCheck = {
 
 export type ProjectOwnerData = {
     email: string;
+    name: string;
     branches_limit: number;
     subscription_type: BillingSubscriptionType;
+};
+
+export type LimitsUnsatisfiedResponse = {
+    limits: Array<{
+        name: string;
+        expected: string;
+        actual: string;
+    }>;
+};
+
+export type ProjectsWithIntegrationResponse = {
+    projects: Array<{
+        id: string;
+        integration: string;
+    }>;
 };
 
 export type UserDeletionConditionName = 'project_count' | 'org_admin_membership_count' | 'subscription_type';
 
 export type OrgDeletionConditionName = 'project_count';
 
+export type IdentitySupportedAuthProvider = 'mock' | 'stack';
+
+export type IdentityAuthProviderProjectOwnedBy = 'user' | 'neon';
+
+export type IdentityAuthProviderProjectTransferStatus = 'initiated' | 'finished';
+
+export type IdentityCreateIntegrationRequest = {
+    auth_provider: IdentitySupportedAuthProvider;
+    project_id: string;
+    branch_id: string;
+    database_name: string;
+    role_name: string;
+};
+
+export type IdentityCreateIntegrationResponse = {
+    auth_provider: IdentitySupportedAuthProvider;
+    auth_provider_project_id: string;
+    pub_client_key: string;
+    secret_server_key: string;
+    jwks_url: string;
+    schema_name: string;
+    table_name: string;
+};
+
+export type IdentityCreateAuthProviderSDKKeysRequest = {
+    project_id: string;
+    auth_provider: IdentitySupportedAuthProvider;
+};
+
+export type IdentityCreateNewUserRequest = {
+    project_id: string;
+    auth_provider: IdentitySupportedAuthProvider;
+    email: string;
+    name?: string;
+};
+
+export type IdentityCreateNewUserResponse = {
+    /**
+     * ID of newly created user
+     */
+    id: string;
+};
+
+export type IdentityTransferAuthProviderProjectRequest = {
+    project_id: string;
+    auth_provider: IdentitySupportedAuthProvider;
+};
+
+export type IdentityTransferAuthProviderProjectResponse = {
+    /**
+     * URL for completing the process of ownership transfer
+     */
+    url: string;
+};
+
+export type ListProjectIdentityIntegrationsResponse = {
+    data: Array<IdentityIntegration>;
+};
+
+export type IdentityIntegration = {
+    auth_provider: string;
+    auth_provider_project_id: string;
+    branch_id: string;
+    db_name: string;
+    created_at: string;
+    owned_by: IdentityAuthProviderProjectOwnedBy;
+    transfer_status?: IdentityAuthProviderProjectTransferStatus;
+    jwks_url: string;
+};
+
 /**
  * General Error
  */
 export type GeneralError = {
+    request_id?: string;
     code: ErrorCode;
     /**
      * Error message
@@ -1910,6 +2221,8 @@ export type EndpointOperations = EndpointResponse & OperationsResponse;
 export type DatabaseOperations = DatabaseResponse & OperationsResponse;
 
 export type RoleOperations = RoleResponse & OperationsResponse;
+
+export type JWKSCreationOperation = JWKSResponse & OperationsResponse;
 
 export type SupportTicketSeverity = 'low' | 'normal' | 'high' | 'critical';
 
@@ -1945,6 +2258,74 @@ export type AnnotationsMapResponse = {
         [key: string]: AnnotationData;
     };
 };
+
+/**
+ * A map where key is a project ID and a value is a list of installed applications.
+ *
+ */
+export type ProjectsApplicationsMapResponse = {
+    applications: {
+        [key: string]: Array<('vercel' | 'github' | 'datadog')>;
+    };
+};
+
+/**
+ * A map where key is a project ID and a value is a list of installed integrations.
+ *
+ */
+export type ProjectsIntegrationsMapResponse = {
+    integrations: {
+        [key: string]: Array<('vercel' | 'github' | 'datadog')>;
+    };
+};
+
+export type CursorPaginationResponse = {
+    pagination?: CursorPagination;
+};
+
+/**
+ * To paginate the response, issue an initial request with `limit` value. Then, add the value returned in the response `.pagination.next` attribute into the request under the `cursor` query parameter to the subsequent request to retrieve next page in pagination. The contents on cursor `next` are opaque, clients are not expected to make any assumptions on the format of the data inside the cursor.
+ */
+export type CursorPagination = {
+    next?: string;
+    sort_by?: string;
+    sort_order?: string;
+};
+
+export type Snapshot = {
+    id: string;
+    name: string;
+    lsn?: string;
+    timestamp?: string;
+    source_branch_id?: string;
+    source_schedule_id?: string;
+    created_at: string;
+    expires_at?: string;
+};
+
+/**
+ * A cursor to use in pagination. A cursor defines your place in the data list. Include `response.pagination.next` in subsequent API calls to fetch next page of the list.
+ */
+export type ParameterCursorParam = string;
+
+/**
+ * The maximum number of records to be returned in the response
+ */
+export type ParameterLimitParam = number;
+
+/**
+ * Defines the sorting order of entities.
+ */
+export type ParameterSortOrderParam = 'asc' | 'desc';
+
+/**
+ * Specify an explicit timeout in milliseconds to limit response delay.
+ * After timing out, the incomplete list of project data fetched so far will be returned.
+ * Projects still being fetched when the timeout occurred are listed in the "unavailable" attribute of the response.
+ * If not specified, an implicit implementation defined timeout is chosen with the same behaviour as above
+ *
+ */
+export type ParameterTimeoutParam = number;
 
 export type ListApiKeysResponse = Array<ApiKeysListResponseItem>;
 
@@ -2010,9 +2391,17 @@ export type ListProjectsData = {
      * Search by project `name` or `id`. You can specify partial `name` or `id` values to filter results.
      */
     search?: string;
+    /**
+     * Specify an explicit timeout in milliseconds to limit response delay.
+     * After timing out, the incomplete list of project data fetched so far will be returned.
+     * Projects still being fetched when the timeout occurred are listed in the "unavailable" attribute of the response.
+     * If not specified, an implicit implementation defined timeout is chosen with the same behaviour as above
+     *
+     */
+    timeout?: number;
 };
 
-export type ListProjectsResponse = ProjectsResponse & PaginationResponse;
+export type ListProjectsResponse = ProjectsResponse & PaginationResponse & ProjectsApplicationsMapResponse & ProjectsIntegrationsMapResponse;
 
 export type CreateProjectData = {
     requestBody: ProjectCreateRequest;
@@ -2033,6 +2422,14 @@ export type ListSharedProjectsData = {
      * Search query by name or id.
      */
     search?: string;
+    /**
+     * Specify an explicit timeout in milliseconds to limit response delay.
+     * After timing out, the incomplete list of project data fetched so far will be returned.
+     * Projects still being fetched when the timeout occurred are listed in the "unavailable" attribute of the response.
+     * If not specified, an implicit implementation defined timeout is chosen with the same behaviour as above
+     *
+     */
+    timeout?: number;
 };
 
 export type ListSharedProjectsResponse = ProjectsResponse & PaginationResponse;
@@ -2085,6 +2482,38 @@ export type RevokePermissionFromProjectData = {
 
 export type RevokePermissionFromProjectResponse = ProjectPermission;
 
+export type GetProjectJwksData = {
+    /**
+     * The Neon project ID
+     */
+    projectId: string;
+};
+
+export type GetProjectJwksResponse = ProjectJWKSResponse;
+
+export type AddProjectJwksData = {
+    /**
+     * The Neon project ID
+     */
+    projectId: string;
+    requestBody: AddProjectJWKSRequest;
+};
+
+export type AddProjectJwksResponse = JWKSCreationOperation;
+
+export type DeleteProjectJwksData = {
+    /**
+     * The JWKS ID
+     */
+    jwksId: string;
+    /**
+     * The Neon project ID
+     */
+    projectId: string;
+};
+
+export type DeleteProjectJwksResponse = JWKS;
+
 export type GetConnectionUriData = {
     /**
      * The branch ID. Defaults to your project's default `branch_id` if not specified.
@@ -2114,28 +2543,81 @@ export type GetConnectionUriData = {
 
 export type GetConnectionUriResponse = ConnectionURIResponse;
 
-export type GetProjectJwksData = {
+export type ListProjectVpcEndpointsData = {
     /**
      * The Neon project ID
      */
     projectId: string;
 };
 
-export type GetProjectJwksResponse = ProjectJWKSResponse;
+export type ListProjectVpcEndpointsResponse = VPCEndpointsResponse;
 
-export type AddEndpointJwksData = {
-    /**
-     * The endpoint ID
-     */
-    endpointId: string;
+export type AssignProjectVpcEndpointData = {
     /**
      * The Neon project ID
      */
     projectId: string;
-    requestBody: AddEndpointJWKSRequest;
+    requestBody: VPCEndpointAssignment;
+    /**
+     * The VPC endpoint ID
+     */
+    vpcEndpointId: string;
 };
 
-export type AddEndpointJwksResponse = JWKS;
+export type AssignProjectVpcEndpointResponse = unknown;
+
+export type DeleteProjectVpcEndpointData = {
+    /**
+     * The Neon project ID
+     */
+    projectId: string;
+    /**
+     * The VPC endpoint ID
+     */
+    vpcEndpointId: string;
+};
+
+export type DeleteProjectVpcEndpointResponse = unknown;
+
+export type CreateProjectIdentityIntegrationData = {
+    requestBody: IdentityCreateIntegrationRequest;
+};
+
+export type CreateProjectIdentityIntegrationResponse = IdentityCreateIntegrationResponse;
+
+export type CreateProjectIdentityAuthProviderSdkKeysData = {
+    requestBody: IdentityCreateAuthProviderSDKKeysRequest;
+};
+
+export type CreateProjectIdentityAuthProviderSdkKeysResponse = IdentityCreateIntegrationResponse;
+
+export type TransferProjectIdentityAuthProviderProjectData = {
+    requestBody: IdentityTransferAuthProviderProjectRequest;
+};
+
+export type TransferProjectIdentityAuthProviderProjectResponse = IdentityTransferAuthProviderProjectResponse;
+
+export type ListProjectIdentityIntegrationsData = {
+    /**
+     * The Neon project ID
+     */
+    projectId: string;
+};
+
+export type ListProjectIdentityIntegrationsResponse2 = ListProjectIdentityIntegrationsResponse;
+
+export type DeleteProjectIdentityIntegrationData = {
+    /**
+     * The authentication provider name
+     */
+    authProvider: IdentitySupportedAuthProvider;
+    /**
+     * The Neon project ID
+     */
+    projectId: string;
+};
+
+export type DeleteProjectIdentityIntegrationResponse = unknown;
 
 export type CreateProjectBranchData = {
     /**
@@ -2149,12 +2631,45 @@ export type CreateProjectBranchResponse = BranchResponse & EndpointsResponse & O
 
 export type ListProjectBranchesData = {
     /**
+     * A cursor to use in pagination. A cursor defines your place in the data list. Include `response.pagination.next` in subsequent API calls to fetch next page of the list.
+     */
+    cursor?: string;
+    /**
+     * The maximum number of records to be returned in the response
+     */
+    limit?: number;
+    /**
      * The Neon project ID
      */
     projectId: string;
+    /**
+     * Search by branch `name` or `id`. You can specify partial `name` or `id` values to filter results.
+     */
+    search?: string;
+    /**
+     * Sort the branches by sort_field. If not provided, branches will be sorted by updated_at descending order
+     */
+    sortBy?: 'name' | 'created_at' | 'updated_at';
+    /**
+     * Defines the sorting order of entities.
+     */
+    sortOrder?: 'asc' | 'desc';
 };
 
-export type ListProjectBranchesResponse = BranchesResponse & AnnotationsMapResponse;
+export type ListProjectBranchesResponse = BranchesResponse & AnnotationsMapResponse & CursorPaginationResponse;
+
+export type CountProjectBranchesData = {
+    /**
+     * The Neon project ID
+     */
+    projectId: string;
+    /**
+     * Count branches matching the `name` in search query
+     */
+    search?: string;
+};
+
+export type CountProjectBranchesResponse = BranchesCountResponse;
 
 export type GetProjectBranchData = {
     /**
@@ -2180,7 +2695,7 @@ export type DeleteProjectBranchData = {
     projectId: string;
 };
 
-export type DeleteProjectBranchResponse = BranchOperations;
+export type DeleteProjectBranchResponse = BranchOperations | void;
 
 export type UpdateProjectBranchData = {
     /**
@@ -2229,10 +2744,6 @@ export type GetProjectBranchSchemaData = {
      */
     projectId: string;
     /**
-     * The role on whose behalf the schema is retrieved
-     */
-    role: string;
-    /**
      * The point in time for which the schema is retrieved
      *
      */
@@ -2241,18 +2752,46 @@ export type GetProjectBranchSchemaData = {
 
 export type GetProjectBranchSchemaResponse = BranchSchemaResponse;
 
-export type SetPrimaryProjectBranchData = {
+export type GetProjectBranchSchemaComparisonData = {
+    /**
+     * The branch ID to compare the schema with
+     */
+    baseBranchId?: string;
+    /**
+     * The Log Sequence Number (LSN) for the base branch schema
+     *
+     */
+    baseLsn?: string;
+    /**
+     * The point in time for the base branch schema
+     *
+     */
+    baseTimestamp?: string;
     /**
      * The branch ID
      */
     branchId: string;
     /**
+     * Name of the database for which the schema is retrieved
+     */
+    dbName: string;
+    /**
+     * The Log Sequence Number (LSN) for which the schema is retrieved
+     *
+     */
+    lsn?: string;
+    /**
      * The Neon project ID
      */
     projectId: string;
+    /**
+     * The point in time for which the schema is retrieved
+     *
+     */
+    timestamp?: string;
 };
 
-export type SetPrimaryProjectBranchResponse = BranchOperations;
+export type GetProjectBranchSchemaComparisonResponse = BranchSchemaCompareResponse;
 
 export type SetDefaultProjectBranchData = {
     /**
@@ -2357,7 +2896,7 @@ export type DeleteProjectBranchDatabaseData = {
     projectId: string;
 };
 
-export type DeleteProjectBranchDatabaseResponse = DatabaseOperations;
+export type DeleteProjectBranchDatabaseResponse = DatabaseOperations | void;
 
 export type ListProjectBranchRolesData = {
     /**
@@ -2418,7 +2957,7 @@ export type DeleteProjectBranchRoleData = {
     roleName: string;
 };
 
-export type DeleteProjectBranchRoleResponse = RoleOperations;
+export type DeleteProjectBranchRoleResponse = RoleOperations | void;
 
 export type GetProjectBranchRolePasswordData = {
     /**
@@ -2497,7 +3036,7 @@ export type DeleteProjectEndpointData = {
     projectId: string;
 };
 
-export type DeleteProjectEndpointResponse = EndpointOperations;
+export type DeleteProjectEndpointResponse = EndpointOperations | void;
 
 export type UpdateProjectEndpointData = {
     /**
@@ -2648,6 +3187,9 @@ export type GetConsumptionHistoryPerProjectData = {
     /**
      * Specify a list of project IDs to filter the response.
      * If omitted, the response will contain all projects.
+     * A list of project IDs can be specified as an array of parameter values or as a comma-separated list in a single parameter value.
+     * - As an array of parameter values: `project_ids=cold-poetry-09157238%20&project_ids=quiet-snow-71788278`
+     * - As a comma-separated list in a single parameter value: `project_ids=cold-poetry-09157238,quiet-snow-71788278`
      *
      */
     projectIds?: Array<(string)>;
@@ -2666,40 +3208,1393 @@ export type GetConsumptionHistoryPerProjectData = {
 
 export type GetConsumptionHistoryPerProjectResponse = ConsumptionHistoryPerProjectResponse & PaginationResponse;
 
-export type ListProjectsConsumptionData = {
+export type GetOrganizationData = {
     /**
-     * Specify the cursor value from the previous response to get the next batch of projects
+     * The Neon organization ID
      */
-    cursor?: string;
-    /**
-     * Specify the start date-time for the consumption period.
-     * The time value must be provided in ISO 8601 format.
-     * If `from` or `to` is not specified, we return only current consumption period.
-     *
-     */
-    from?: string;
-    /**
-     * Specify a value from 1 to 1000 to limit number of projects in the response
-     */
-    limit?: number;
-    /**
-     * Specify the organization for which the project consumption metrics should be returned.
-     * If this parameter is not provided, the endpoint will return the metrics for the authenticated
-     * user's projects.
-     *
-     */
-    orgId?: string;
-    /**
-     * Specify the end date-time period for the consumption period.
-     * The time value must be provided in ISO 8601 format.
-     * If `from` or `to` is not specified, only the current consumption period is returned.
-     *
-     */
-    to?: string;
+    orgId: string;
 };
 
-export type ListProjectsConsumptionResponse = ProjectsConsumptionResponse & PaginationResponse;
+export type GetOrganizationResponse = Organization;
+
+export type ListOrgApiKeysData = {
+    /**
+     * The Neon organization ID
+     */
+    orgId: string;
+};
+
+export type ListOrgApiKeysResponse = Array<OrgApiKeysListResponseItem>;
+
+export type CreateOrgApiKeyData = {
+    /**
+     * The Neon organization ID
+     */
+    orgId: string;
+    requestBody: OrgApiKeyCreateRequest;
+};
+
+export type CreateOrgApiKeyResponse = OrgApiKeyCreateResponse;
+
+export type RevokeOrgApiKeyData = {
+    /**
+     * The API key ID
+     */
+    keyId: number;
+    /**
+     * The Neon organization ID
+     */
+    orgId: string;
+};
+
+export type RevokeOrgApiKeyResponse = OrgApiKeyRevokeResponse;
+
+export type GetOrganizationMembersData = {
+    /**
+     * The Neon organization ID
+     */
+    orgId: string;
+};
+
+export type GetOrganizationMembersResponse = OrganizationMembersResponse;
+
+export type GetOrganizationMemberData = {
+    /**
+     * The Neon organization member ID
+     */
+    memberId: string;
+    /**
+     * The Neon organization ID
+     */
+    orgId: string;
+};
+
+export type GetOrganizationMemberResponse = Member;
+
+export type UpdateOrganizationMemberData = {
+    /**
+     * The Neon organization member ID
+     */
+    memberId: string;
+    /**
+     * The Neon organization ID
+     */
+    orgId: string;
+    requestBody: OrganizationMemberUpdateRequest;
+};
+
+export type UpdateOrganizationMemberResponse = Member;
+
+export type RemoveOrganizationMemberData = {
+    /**
+     * The Neon organization member ID
+     */
+    memberId: string;
+    /**
+     * The Neon organization ID
+     */
+    orgId: string;
+};
+
+export type RemoveOrganizationMemberResponse = EmptyResponse;
+
+export type GetOrganizationInvitationsData = {
+    /**
+     * The Neon organization ID
+     */
+    orgId: string;
+};
+
+export type GetOrganizationInvitationsResponse = OrganizationInvitationsResponse;
+
+export type CreateOrganizationInvitationsData = {
+    /**
+     * The Neon organization ID
+     */
+    orgId: string;
+    requestBody: OrganizationInvitesCreateRequest;
+};
+
+export type CreateOrganizationInvitationsResponse = OrganizationInvitationsResponse;
+
+export type TransferProjectsFromOrgToOrgData = {
+    requestBody: TransferProjectsToOrganizationRequest;
+    /**
+     * The Neon organization ID (source org, which currently owns the project)
+     */
+    sourceOrgId: string;
+};
+
+export type TransferProjectsFromOrgToOrgResponse = EmptyResponse;
+
+export type ListOrganizationVpcEndpointsData = {
+    /**
+     * The Neon organization ID
+     */
+    orgId: string;
+    /**
+     * The Neon region ID
+     */
+    regionId: string;
+};
+
+export type ListOrganizationVpcEndpointsResponse = VPCEndpointsResponse;
+
+export type GetOrganizationVpcEndpointDetailsData = {
+    /**
+     * The Neon organization ID
+     */
+    orgId: string;
+    /**
+     * The Neon region ID.
+     * Azure regions are currently not supported.
+     *
+     */
+    regionId: string;
+    /**
+     * The VPC endpoint ID
+     */
+    vpcEndpointId: string;
+};
+
+export type GetOrganizationVpcEndpointDetailsResponse = VPCEndpointDetails;
+
+export type AssignOrganizationVpcEndpointData = {
+    /**
+     * The Neon organization ID
+     */
+    orgId: string;
+    /**
+     * The Neon region ID.
+     * Azure regions are currently not supported.
+     *
+     */
+    regionId: string;
+    requestBody: VPCEndpointAssignment;
+    /**
+     * The VPC endpoint ID
+     */
+    vpcEndpointId: string;
+};
+
+export type AssignOrganizationVpcEndpointResponse = unknown;
+
+export type DeleteOrganizationVpcEndpointData = {
+    /**
+     * The Neon organization ID
+     */
+    orgId: string;
+    /**
+     * The Neon region ID.
+     * Azure regions are currently not supported.
+     *
+     */
+    regionId: string;
+    /**
+     * The VPC endpoint ID
+     */
+    vpcEndpointId: string;
+};
+
+export type DeleteOrganizationVpcEndpointResponse = unknown;
+
+export type GetCurrentUserOrganizationsResponse = OrganizationsResponse;
+
+export type GetActiveRegionsResponse = ActiveRegionsResponse;
 
 export type GetCurrentUserInfoResponse = CurrentUserInfoResponse;
 
-export type GetCurrentUserOrganizationsResponse = OrganizationsResponse;
+export type TransferProjectsFromUserToOrgData = {
+    requestBody: TransferProjectsToOrganizationRequest;
+};
+
+export type TransferProjectsFromUserToOrgResponse = EmptyResponse;
+
+export type $OpenApiTs = {
+    '/api_keys': {
+        get: {
+            res: {
+                /**
+                 * Returned the API keys for the Neon account
+                 */
+                200: Array<ApiKeysListResponseItem>;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        post: {
+            req: CreateApiKeyData;
+            res: {
+                /**
+                 * Created an API key
+                 */
+                200: ApiKeyCreateResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/api_keys/{key_id}': {
+        delete: {
+            req: RevokeApiKeyData;
+            res: {
+                /**
+                 * Revoked the specified API key
+                 */
+                200: ApiKeyRevokeResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/operations/{operation_id}': {
+        get: {
+            req: GetProjectOperationData;
+            res: {
+                /**
+                 * Returned details for the specified operation
+                 */
+                200: OperationResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/operations': {
+        get: {
+            req: ListProjectOperationsData;
+            res: {
+                /**
+                 * Returned a list of operations
+                 *
+                 */
+                200: OperationsResponse & PaginationResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects': {
+        get: {
+            req: ListProjectsData;
+            res: {
+                /**
+                 * Returned a list of projects for the Neon account
+                 */
+                200: ProjectsResponse & PaginationResponse & ProjectsApplicationsMapResponse & ProjectsIntegrationsMapResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        post: {
+            req: CreateProjectData;
+            res: {
+                /**
+                 * Created a project.
+                 * The project includes a connection URI with a database, password, and role.
+                 * At least one non-protected role is created with a password.
+                 * Wait until the operations are finished before attempting to connect to a project database.
+                 *
+                 */
+                201: ProjectResponse & ConnectionURIsResponse & RolesResponse & DatabasesResponse & OperationsResponse & BranchResponse & EndpointsResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/shared': {
+        get: {
+            req: ListSharedProjectsData;
+            res: {
+                /**
+                 * Returned a list of shared projects for the Neon account
+                 */
+                200: ProjectsResponse & PaginationResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}': {
+        get: {
+            req: GetProjectData;
+            res: {
+                /**
+                 * Returned information about the specified project
+                 */
+                200: ProjectResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        patch: {
+            req: UpdateProjectData;
+            res: {
+                /**
+                 * Updated the specified project
+                 */
+                200: ProjectResponse & OperationsResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        delete: {
+            req: DeleteProjectData;
+            res: {
+                /**
+                 * Deleted the specified project
+                 */
+                200: ProjectResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/permissions': {
+        get: {
+            req: ListProjectPermissionsData;
+            res: {
+                /**
+                 * Returned project access details
+                 */
+                200: ProjectPermissions;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        post: {
+            req: GrantPermissionToProjectData;
+            res: {
+                /**
+                 * Granted project access
+                 */
+                200: ProjectPermission;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/permissions/{permission_id}': {
+        delete: {
+            req: RevokePermissionFromProjectData;
+            res: {
+                /**
+                 * Revoked project access
+                 */
+                200: ProjectPermission;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/jwks': {
+        get: {
+            req: GetProjectJwksData;
+            res: {
+                /**
+                 * The JWKS URLs available for the project
+                 */
+                200: ProjectJWKSResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        post: {
+            req: AddProjectJwksData;
+            res: {
+                /**
+                 * The JWKS URL was added to the project's authentication connections
+                 */
+                201: JWKSCreationOperation;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/jwks/{jwks_id}': {
+        delete: {
+            req: DeleteProjectJwksData;
+            res: {
+                /**
+                 * Deleted a JWKS URL from the project
+                 */
+                200: JWKS;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/connection_uri': {
+        get: {
+            req: GetConnectionUriData;
+            res: {
+                /**
+                 * Returned the connection URI
+                 */
+                200: ConnectionURIResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/vpc_endpoints': {
+        get: {
+            req: ListProjectVpcEndpointsData;
+            res: {
+                /**
+                 * Returned VPC endpoint restrictions for the specified project
+                 */
+                200: VPCEndpointsResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/vpc_endpoints/{vpc_endpoint_id}': {
+        post: {
+            req: AssignProjectVpcEndpointData;
+            res: {
+                /**
+                 * Configured the specified VPC endpoint as a restriction for the specified project.
+                 */
+                200: unknown;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        delete: {
+            req: DeleteProjectVpcEndpointData;
+            res: {
+                /**
+                 * Removed the VPC endpoint restriction from the specified Neon project
+                 */
+                200: unknown;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/auth/create': {
+        post: {
+            req: CreateProjectIdentityIntegrationData;
+            res: {
+                /**
+                 * Creates Neon Auth integration
+                 */
+                201: IdentityCreateIntegrationResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/auth/keys': {
+        post: {
+            req: CreateProjectIdentityAuthProviderSdkKeysData;
+            res: {
+                /**
+                 * Creates Auth Provider SDK keys
+                 */
+                201: IdentityCreateIntegrationResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/auth/transfer_ownership': {
+        post: {
+            req: TransferProjectIdentityAuthProviderProjectData;
+            res: {
+                /**
+                 * Transfer initiated. Follow the URL to complete the process in your auth provider's UI.
+                 */
+                200: IdentityTransferAuthProviderProjectResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/auth/integrations': {
+        get: {
+            req: ListProjectIdentityIntegrationsData;
+            res: {
+                /**
+                 * Return management API keys metadata
+                 */
+                200: ListProjectIdentityIntegrationsResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/auth/integration/{auth_provider}': {
+        delete: {
+            req: DeleteProjectIdentityIntegrationData;
+            res: {
+                /**
+                 * Delete the integration with the authentication provider
+                 */
+                200: unknown;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/branches': {
+        post: {
+            req: CreateProjectBranchData;
+            res: {
+                /**
+                 * Created a branch. An endpoint is only created if it was specified in the request.
+                 */
+                201: BranchResponse & EndpointsResponse & OperationsResponse & RolesResponse & DatabasesResponse & ConnectionURIsOptionalResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        get: {
+            req: ListProjectBranchesData;
+            res: {
+                /**
+                 * Returned a list of branches for the specified project
+                 */
+                200: BranchesResponse & AnnotationsMapResponse & CursorPaginationResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/branches/count': {
+        get: {
+            req: CountProjectBranchesData;
+            res: {
+                /**
+                 * Returned a count of branches for the specified project
+                 */
+                200: BranchesCountResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/branches/{branch_id}': {
+        get: {
+            req: GetProjectBranchData;
+            res: {
+                /**
+                 * Returned information about the specified branch
+                 */
+                200: BranchResponse & AnnotationResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        delete: {
+            req: DeleteProjectBranchData;
+            res: {
+                /**
+                 * Deleted the specified branch
+                 */
+                200: BranchOperations;
+                /**
+                 * Returned if the branch doesn't exist or has already been deleted
+                 */
+                204: void;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        patch: {
+            req: UpdateProjectBranchData;
+            res: {
+                /**
+                 * Updated the specified branch
+                 */
+                200: BranchOperations;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/branches/{branch_id}/restore': {
+        post: {
+            req: RestoreProjectBranchData;
+            res: {
+                /**
+                 * Updated the specified branch
+                 */
+                200: BranchOperations;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/branches/{branch_id}/schema': {
+        get: {
+            req: GetProjectBranchSchemaData;
+            res: {
+                /**
+                 * Schema definition
+                 */
+                200: BranchSchemaResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/branches/{branch_id}/compare_schema': {
+        get: {
+            req: GetProjectBranchSchemaComparisonData;
+            res: {
+                /**
+                 * Difference between the schemas
+                 */
+                200: BranchSchemaCompareResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/branches/{branch_id}/set_as_default': {
+        post: {
+            req: SetDefaultProjectBranchData;
+            res: {
+                /**
+                 * Updated the specified branch
+                 */
+                200: BranchOperations;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/branches/{branch_id}/endpoints': {
+        get: {
+            req: ListProjectBranchEndpointsData;
+            res: {
+                /**
+                 * Returned a list of endpoints for the specified branch
+                 */
+                200: EndpointsResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/branches/{branch_id}/databases': {
+        get: {
+            req: ListProjectBranchDatabasesData;
+            res: {
+                /**
+                 * Returned a list of databases of the specified branch
+                 */
+                200: DatabasesResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        post: {
+            req: CreateProjectBranchDatabaseData;
+            res: {
+                /**
+                 * Created a database in the specified branch
+                 */
+                201: DatabaseOperations;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/branches/{branch_id}/databases/{database_name}': {
+        get: {
+            req: GetProjectBranchDatabaseData;
+            res: {
+                /**
+                 * Returned the database details
+                 */
+                200: DatabaseResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        patch: {
+            req: UpdateProjectBranchDatabaseData;
+            res: {
+                /**
+                 * Updated the database
+                 */
+                200: DatabaseOperations;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        delete: {
+            req: DeleteProjectBranchDatabaseData;
+            res: {
+                /**
+                 * Deleted the specified database
+                 */
+                200: DatabaseOperations;
+                /**
+                 * Returned if the database doesn't exist or has already been deleted
+                 */
+                204: void;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/branches/{branch_id}/roles': {
+        get: {
+            req: ListProjectBranchRolesData;
+            res: {
+                /**
+                 * Returned a list of roles from the specified branch.
+                 */
+                200: RolesResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        post: {
+            req: CreateProjectBranchRoleData;
+            res: {
+                /**
+                 * Created a role in the specified branch
+                 */
+                201: RoleOperations;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/branches/{branch_id}/roles/{role_name}': {
+        get: {
+            req: GetProjectBranchRoleData;
+            res: {
+                /**
+                 * Returned details for the specified role
+                 */
+                200: RoleResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        delete: {
+            req: DeleteProjectBranchRoleData;
+            res: {
+                /**
+                 * Deleted the specified role from the branch
+                 */
+                200: RoleOperations;
+                /**
+                 * Returned if the role doesn't exist or has already been deleted
+                 */
+                204: void;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/branches/{branch_id}/roles/{role_name}/reveal_password': {
+        get: {
+            req: GetProjectBranchRolePasswordData;
+            res: {
+                /**
+                 * Returned password for the specified role
+                 */
+                200: RolePasswordResponse;
+                /**
+                 * Role not found
+                 */
+                404: GeneralError;
+                /**
+                 * Storing passwords is disabled
+                 */
+                412: GeneralError;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/branches/{branch_id}/roles/{role_name}/reset_password': {
+        post: {
+            req: ResetProjectBranchRolePasswordData;
+            res: {
+                /**
+                 * Reset the password for the specified role
+                 */
+                200: RoleOperations;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/endpoints': {
+        post: {
+            req: CreateProjectEndpointData;
+            res: {
+                /**
+                 * Created a compute endpoint
+                 */
+                201: EndpointOperations;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        get: {
+            req: ListProjectEndpointsData;
+            res: {
+                /**
+                 * Returned a list of endpoints for the specified project
+                 */
+                200: EndpointsResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/endpoints/{endpoint_id}': {
+        get: {
+            req: GetProjectEndpointData;
+            res: {
+                /**
+                 * Returned information about the specified endpoint
+                 */
+                200: EndpointResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        delete: {
+            req: DeleteProjectEndpointData;
+            res: {
+                /**
+                 * Deleted the specified compute endpoint
+                 */
+                200: EndpointOperations;
+                /**
+                 * Returned if the endpoint doesn't exist or has already been deleted
+                 */
+                204: void;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        patch: {
+            req: UpdateProjectEndpointData;
+            res: {
+                /**
+                 * Updated the specified compute endpoint
+                 */
+                200: EndpointOperations;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/endpoints/{endpoint_id}/start': {
+        post: {
+            req: StartProjectEndpointData;
+            res: {
+                /**
+                 * Started the specified compute endpoint
+                 */
+                200: EndpointOperations;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/endpoints/{endpoint_id}/suspend': {
+        post: {
+            req: SuspendProjectEndpointData;
+            res: {
+                /**
+                 * Suspended the specified endpoint
+                 */
+                200: EndpointOperations;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/projects/{project_id}/endpoints/{endpoint_id}/restart': {
+        post: {
+            req: RestartProjectEndpointData;
+            res: {
+                /**
+                 * Restarted endpoint
+                 */
+                200: EndpointOperations;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/consumption_history/account': {
+        get: {
+            req: GetConsumptionHistoryPerAccountData;
+            res: {
+                /**
+                 * Returned consumption metrics for the Neon account
+                 */
+                200: ConsumptionHistoryPerAccountResponse;
+                /**
+                 * This endpoint is not available. It is only supported for Scale, Business, and Enterprise plan accounts.
+                 */
+                403: GeneralError;
+                /**
+                 * Account is not a member of the organization specified by `org_id`.
+                 */
+                404: GeneralError;
+                /**
+                 * The specified `date-time` range is outside the boundaries of the specified `granularity`.
+                 * Adjust your `from` and `to` values or select a different `granularity`.
+                 *
+                 */
+                406: GeneralError;
+                /**
+                 * Too many requests
+                 */
+                429: GeneralError;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/consumption_history/projects': {
+        get: {
+            req: GetConsumptionHistoryPerProjectData;
+            res: {
+                /**
+                 * Returned project consumption metrics for the Neon account
+                 */
+                200: ConsumptionHistoryPerProjectResponse & PaginationResponse;
+                /**
+                 * This endpoint is not available. It is only supported with Scale, Business, and Enterprise plan accounts.
+                 */
+                403: GeneralError;
+                /**
+                 * Account is not a member of the organization specified by `org_id`.
+                 */
+                404: GeneralError;
+                /**
+                 * The specified `date-time` range is outside the boundaries of the specified `granularity`.
+                 * Adjust your `from` and `to` values or select a different `granularity`.
+                 *
+                 */
+                406: GeneralError;
+                /**
+                 * Too many requests
+                 */
+                429: GeneralError;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/organizations/{org_id}': {
+        get: {
+            req: GetOrganizationData;
+            res: {
+                /**
+                 * Returned information about the organization
+                 */
+                200: Organization;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/organizations/{org_id}/api_keys': {
+        get: {
+            req: ListOrgApiKeysData;
+            res: {
+                /**
+                 * Returned the API keys for the specified organization
+                 */
+                200: Array<OrgApiKeysListResponseItem>;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        post: {
+            req: CreateOrgApiKeyData;
+            res: {
+                /**
+                 * Created an organization API key
+                 */
+                200: OrgApiKeyCreateResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/organizations/{org_id}/api_keys/{key_id}': {
+        delete: {
+            req: RevokeOrgApiKeyData;
+            res: {
+                /**
+                 * Revoked the specified organization API key
+                 */
+                200: OrgApiKeyRevokeResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/organizations/{org_id}/members': {
+        get: {
+            req: GetOrganizationMembersData;
+            res: {
+                /**
+                 * Returned information about organization members
+                 */
+                200: OrganizationMembersResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/organizations/{org_id}/members/{member_id}': {
+        get: {
+            req: GetOrganizationMemberData;
+            res: {
+                /**
+                 * Returned information about the organization member
+                 */
+                200: Member;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        patch: {
+            req: UpdateOrganizationMemberData;
+            res: {
+                /**
+                 * The updated organization member
+                 */
+                200: Member;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        delete: {
+            req: RemoveOrganizationMemberData;
+            res: {
+                /**
+                 * Removed organization member
+                 */
+                200: EmptyResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/organizations/{org_id}/invitations': {
+        get: {
+            req: GetOrganizationInvitationsData;
+            res: {
+                /**
+                 * Returned information about the organization invitations
+                 */
+                200: OrganizationInvitationsResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        post: {
+            req: CreateOrganizationInvitationsData;
+            res: {
+                /**
+                 * The created organization invitation
+                 */
+                200: OrganizationInvitationsResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/organizations/{source_org_id}/projects/transfer': {
+        post: {
+            req: TransferProjectsFromOrgToOrgData;
+            res: {
+                /**
+                 * Projects successfully transferred from organization to organization
+                 */
+                200: EmptyResponse;
+                /**
+                 * Transfer failed - the target organization has too many projects or its plan is incompatible with the source organization. Reduce projects or upgrade the organization.
+                 */
+                406: LimitsUnsatisfiedResponse;
+                /**
+                 * One or more of the provided project IDs have GitHub or Vercel integrations installed. Transferring integration projects is currently not supported
+                 */
+                422: ProjectsWithIntegrationResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/organizations/{org_id}/vpc/region/{region_id}/vpc_endpoints': {
+        get: {
+            req: ListOrganizationVpcEndpointsData;
+            res: {
+                /**
+                 * The list of configured VPC endpoint IDs for the specified organization
+                 */
+                200: VPCEndpointsResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/organizations/{org_id}/vpc/region/{region_id}/vpc_endpoints/{vpc_endpoint_id}': {
+        get: {
+            req: GetOrganizationVpcEndpointDetailsData;
+            res: {
+                /**
+                 * Returned the current status and configuration details of the specified VPC endpoint.
+                 */
+                200: VPCEndpointDetails;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        post: {
+            req: AssignOrganizationVpcEndpointData;
+            res: {
+                /**
+                 * Assigned the VPC endpoint to the specified Neon organization
+                 */
+                200: unknown;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+        delete: {
+            req: DeleteOrganizationVpcEndpointData;
+            res: {
+                /**
+                 * Deleted the VPC endpoint from the specified Neon organization
+                 */
+                200: unknown;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/users/me/organizations': {
+        get: {
+            res: {
+                /**
+                 * Returned information about the current user organizations
+                 *
+                 */
+                200: OrganizationsResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/regions': {
+        get: {
+            res: {
+                /**
+                 * The list of active regions
+                 */
+                200: ActiveRegionsResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/users/me': {
+        get: {
+            res: {
+                /**
+                 * Returned information about the current user
+                 *
+                 */
+                200: CurrentUserInfoResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+    '/users/me/projects/transfer': {
+        post: {
+            req: TransferProjectsFromUserToOrgData;
+            res: {
+                /**
+                 * Projects successfully transferred from personal account to organization
+                 */
+                200: EmptyResponse;
+                /**
+                 * Transfer failed - the target organization has too many projects or its plan is incompatible with the source account. Reduce the number of projects or upgrade the target organization to increase its capacity.
+                 */
+                406: LimitsUnsatisfiedResponse;
+                /**
+                 * One or more of the provided project IDs have GitHub or Vercel integrations installed. Transferring integration projects is currently not supported
+                 */
+                422: ProjectsWithIntegrationResponse;
+                /**
+                 * General Error
+                 */
+                default: GeneralError;
+            };
+        };
+    };
+};

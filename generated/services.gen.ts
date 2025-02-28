@@ -2,13 +2,13 @@
 
 import type { CancelablePromise } from './core/CancelablePromise';
 import type { BaseHttpRequest } from './core/BaseHttpRequest';
-import type { ListApiKeysResponse, CreateApiKeyData, CreateApiKeyResponse, RevokeApiKeyData, RevokeApiKeyResponse, GetProjectOperationData, GetProjectOperationResponse, ListProjectOperationsData, ListProjectOperationsResponse, ListProjectsData, ListProjectsResponse, CreateProjectData, CreateProjectResponse, ListSharedProjectsData, ListSharedProjectsResponse, GetProjectData, GetProjectResponse, UpdateProjectData, UpdateProjectResponse, DeleteProjectData, DeleteProjectResponse, ListProjectPermissionsData, ListProjectPermissionsResponse, GrantPermissionToProjectData, GrantPermissionToProjectResponse, RevokePermissionFromProjectData, RevokePermissionFromProjectResponse, GetConnectionUriData, GetConnectionUriResponse, GetProjectJwksData, GetProjectJwksResponse, AddEndpointJwksData, AddEndpointJwksResponse, CreateProjectBranchData, CreateProjectBranchResponse, ListProjectBranchesData, ListProjectBranchesResponse, GetProjectBranchData, GetProjectBranchResponse, DeleteProjectBranchData, DeleteProjectBranchResponse, UpdateProjectBranchData, UpdateProjectBranchResponse, RestoreProjectBranchData, RestoreProjectBranchResponse, GetProjectBranchSchemaData, GetProjectBranchSchemaResponse, SetPrimaryProjectBranchData, SetPrimaryProjectBranchResponse, SetDefaultProjectBranchData, SetDefaultProjectBranchResponse, ListProjectBranchEndpointsData, ListProjectBranchEndpointsResponse, ListProjectBranchDatabasesData, ListProjectBranchDatabasesResponse, CreateProjectBranchDatabaseData, CreateProjectBranchDatabaseResponse, GetProjectBranchDatabaseData, GetProjectBranchDatabaseResponse, UpdateProjectBranchDatabaseData, UpdateProjectBranchDatabaseResponse, DeleteProjectBranchDatabaseData, DeleteProjectBranchDatabaseResponse, ListProjectBranchRolesData, ListProjectBranchRolesResponse, CreateProjectBranchRoleData, CreateProjectBranchRoleResponse, GetProjectBranchRoleData, GetProjectBranchRoleResponse, DeleteProjectBranchRoleData, DeleteProjectBranchRoleResponse, GetProjectBranchRolePasswordData, GetProjectBranchRolePasswordResponse, ResetProjectBranchRolePasswordData, ResetProjectBranchRolePasswordResponse, CreateProjectEndpointData, CreateProjectEndpointResponse, ListProjectEndpointsData, ListProjectEndpointsResponse, GetProjectEndpointData, GetProjectEndpointResponse, DeleteProjectEndpointData, DeleteProjectEndpointResponse, UpdateProjectEndpointData, UpdateProjectEndpointResponse, StartProjectEndpointData, StartProjectEndpointResponse, SuspendProjectEndpointData, SuspendProjectEndpointResponse, RestartProjectEndpointData, RestartProjectEndpointResponse, GetConsumptionHistoryPerAccountData, GetConsumptionHistoryPerAccountResponse, GetConsumptionHistoryPerProjectData, GetConsumptionHistoryPerProjectResponse, ListProjectsConsumptionData, ListProjectsConsumptionResponse, GetCurrentUserInfoResponse, GetCurrentUserOrganizationsResponse } from './types.gen';
+import type { ListApiKeysResponse, CreateApiKeyData, CreateApiKeyResponse, RevokeApiKeyData, RevokeApiKeyResponse, GetProjectOperationData, GetProjectOperationResponse, ListProjectOperationsData, ListProjectOperationsResponse, ListProjectsData, ListProjectsResponse, CreateProjectData, CreateProjectResponse, ListSharedProjectsData, ListSharedProjectsResponse, GetProjectData, GetProjectResponse, UpdateProjectData, UpdateProjectResponse, DeleteProjectData, DeleteProjectResponse, ListProjectPermissionsData, ListProjectPermissionsResponse, GrantPermissionToProjectData, GrantPermissionToProjectResponse, RevokePermissionFromProjectData, RevokePermissionFromProjectResponse, GetProjectJwksData, GetProjectJwksResponse, AddProjectJwksData, AddProjectJwksResponse, DeleteProjectJwksData, DeleteProjectJwksResponse, GetConnectionUriData, GetConnectionUriResponse, ListProjectVpcEndpointsData, ListProjectVpcEndpointsResponse, AssignProjectVpcEndpointData, AssignProjectVpcEndpointResponse, DeleteProjectVpcEndpointData, DeleteProjectVpcEndpointResponse, CreateProjectIdentityIntegrationData, CreateProjectIdentityIntegrationResponse, CreateProjectIdentityAuthProviderSdkKeysData, CreateProjectIdentityAuthProviderSdkKeysResponse, TransferProjectIdentityAuthProviderProjectData, TransferProjectIdentityAuthProviderProjectResponse, ListProjectIdentityIntegrationsData, ListProjectIdentityIntegrationsResponse2, DeleteProjectIdentityIntegrationData, DeleteProjectIdentityIntegrationResponse, CreateProjectBranchData, CreateProjectBranchResponse, ListProjectBranchesData, ListProjectBranchesResponse, CountProjectBranchesData, CountProjectBranchesResponse, GetProjectBranchData, GetProjectBranchResponse, DeleteProjectBranchData, DeleteProjectBranchResponse, UpdateProjectBranchData, UpdateProjectBranchResponse, RestoreProjectBranchData, RestoreProjectBranchResponse, GetProjectBranchSchemaData, GetProjectBranchSchemaResponse, GetProjectBranchSchemaComparisonData, GetProjectBranchSchemaComparisonResponse, SetDefaultProjectBranchData, SetDefaultProjectBranchResponse, ListProjectBranchEndpointsData, ListProjectBranchEndpointsResponse, ListProjectBranchDatabasesData, ListProjectBranchDatabasesResponse, CreateProjectBranchDatabaseData, CreateProjectBranchDatabaseResponse, GetProjectBranchDatabaseData, GetProjectBranchDatabaseResponse, UpdateProjectBranchDatabaseData, UpdateProjectBranchDatabaseResponse, DeleteProjectBranchDatabaseData, DeleteProjectBranchDatabaseResponse, ListProjectBranchRolesData, ListProjectBranchRolesResponse, CreateProjectBranchRoleData, CreateProjectBranchRoleResponse, GetProjectBranchRoleData, GetProjectBranchRoleResponse, DeleteProjectBranchRoleData, DeleteProjectBranchRoleResponse, GetProjectBranchRolePasswordData, GetProjectBranchRolePasswordResponse, ResetProjectBranchRolePasswordData, ResetProjectBranchRolePasswordResponse, CreateProjectEndpointData, CreateProjectEndpointResponse, ListProjectEndpointsData, ListProjectEndpointsResponse, GetProjectEndpointData, GetProjectEndpointResponse, DeleteProjectEndpointData, DeleteProjectEndpointResponse, UpdateProjectEndpointData, UpdateProjectEndpointResponse, StartProjectEndpointData, StartProjectEndpointResponse, SuspendProjectEndpointData, SuspendProjectEndpointResponse, RestartProjectEndpointData, RestartProjectEndpointResponse, GetConsumptionHistoryPerAccountData, GetConsumptionHistoryPerAccountResponse, GetConsumptionHistoryPerProjectData, GetConsumptionHistoryPerProjectResponse, GetOrganizationData, GetOrganizationResponse, ListOrgApiKeysData, ListOrgApiKeysResponse, CreateOrgApiKeyData, CreateOrgApiKeyResponse, RevokeOrgApiKeyData, RevokeOrgApiKeyResponse, GetOrganizationMembersData, GetOrganizationMembersResponse, GetOrganizationMemberData, GetOrganizationMemberResponse, UpdateOrganizationMemberData, UpdateOrganizationMemberResponse, RemoveOrganizationMemberData, RemoveOrganizationMemberResponse, GetOrganizationInvitationsData, GetOrganizationInvitationsResponse, CreateOrganizationInvitationsData, CreateOrganizationInvitationsResponse, TransferProjectsFromOrgToOrgData, TransferProjectsFromOrgToOrgResponse, ListOrganizationVpcEndpointsData, ListOrganizationVpcEndpointsResponse, GetOrganizationVpcEndpointDetailsData, GetOrganizationVpcEndpointDetailsResponse, AssignOrganizationVpcEndpointData, AssignOrganizationVpcEndpointResponse, DeleteOrganizationVpcEndpointData, DeleteOrganizationVpcEndpointResponse, GetCurrentUserOrganizationsResponse, GetActiveRegionsResponse, GetCurrentUserInfoResponse, TransferProjectsFromUserToOrgData, TransferProjectsFromUserToOrgResponse } from './types.gen';
 
 export class ApiKeyService {
     constructor(public readonly httpRequest: BaseHttpRequest) { }
     
     /**
-     * Get a list of API keys
+     * List API keys
      * Retrieves the API keys for your Neon account.
      * The response does not include API key tokens. A token is only provided when creating an API key.
      * API keys can also be managed in the Neon Console.
@@ -28,7 +28,7 @@ export class ApiKeyService {
     }
     
     /**
-     * Create an API key
+     * Create API key
      * Creates an API key.
      * The `key_name` is a user-specified name for the key.
      * This method returns an `id` and `key`. The `key` is a randomly generated, 64-bit token required to access the Neon API.
@@ -53,7 +53,7 @@ export class ApiKeyService {
     }
     
     /**
-     * Revoke an API key
+     * Revoke API key
      * Revokes the specified API key.
      * An API key that is no longer needed can be revoked.
      * This action cannot be reversed.
@@ -85,7 +85,7 @@ export class OperationService {
     constructor(public readonly httpRequest: BaseHttpRequest) { }
     
     /**
-     * Get operation details
+     * Retrieve operation details
      * Retrieves details for the specified operation.
      * An operation is an action performed on a Neon project resource.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -112,7 +112,7 @@ export class OperationService {
     }
     
     /**
-     * Get a list of operations
+     * List operations
      * Retrieves a list of operations for the specified Neon project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * The number of operations returned can be large.
@@ -150,7 +150,7 @@ export class ProjectService {
     constructor(public readonly httpRequest: BaseHttpRequest) { }
     
     /**
-     * Get a list of projects
+     * List projects
      * Retrieves a list of projects for the Neon account.
      * A project is the top-level object in the Neon object hierarchy.
      * For more information, see [Manage projects](https://neon.tech/docs/manage/projects/).
@@ -160,6 +160,11 @@ export class ProjectService {
      * @param data.limit Specify a value from 1 to 400 to limit number of projects in the response.
      * @param data.search Search by project `name` or `id`. You can specify partial `name` or `id` values to filter results.
      * @param data.orgId Search for projects by `org_id`.
+     * @param data.timeout Specify an explicit timeout in milliseconds to limit response delay.
+     * After timing out, the incomplete list of project data fetched so far will be returned.
+     * Projects still being fetched when the timeout occurred are listed in the "unavailable" attribute of the response.
+     * If not specified, an implicit implementation defined timeout is chosen with the same behaviour as above
+     *
      * @returns unknown Returned a list of projects for the Neon account
      * @throws ApiError
      */
@@ -171,7 +176,8 @@ export class ProjectService {
                 cursor: data.cursor,
                 limit: data.limit,
                 search: data.search,
-                org_id: data.orgId
+                org_id: data.orgId,
+                timeout: data.timeout
             },
             errors: {
                 default: 'General Error'
@@ -180,15 +186,14 @@ export class ProjectService {
     }
     
     /**
-     * Create a project
+     * Create project
      * Creates a Neon project.
      * A project is the top-level object in the Neon object hierarchy.
      * Plan limits define how many projects you can create.
-     * Neon's Free plan permits one project per Neon account.
      * For more information, see [Manage projects](https://neon.tech/docs/manage/projects/).
      *
      * You can specify a region and Postgres version in the request body.
-     * Neon currently supports PostgreSQL 14, 15, and 16.
+     * Neon currently supports PostgreSQL 14, 15, 16, and 17.
      * For supported regions and `region_id` values, see [Regions](https://neon.tech/docs/introduction/regions/).
      *
      * @param data The data for the request.
@@ -213,7 +218,7 @@ export class ProjectService {
     }
     
     /**
-     * Get a list of shared projects
+     * List shared projects
      * Retrieves a list of shared projects for the Neon account.
      * A project is the top-level object in the Neon object hierarchy.
      * For more information, see [Manage projects](https://neon.tech/docs/manage/projects/).
@@ -222,6 +227,11 @@ export class ProjectService {
      * @param data.cursor Specify the cursor value from the previous response to get the next batch of projects.
      * @param data.limit Specify a value from 1 to 400 to limit number of projects in the response.
      * @param data.search Search query by name or id.
+     * @param data.timeout Specify an explicit timeout in milliseconds to limit response delay.
+     * After timing out, the incomplete list of project data fetched so far will be returned.
+     * Projects still being fetched when the timeout occurred are listed in the "unavailable" attribute of the response.
+     * If not specified, an implicit implementation defined timeout is chosen with the same behaviour as above
+     *
      * @returns unknown Returned a list of shared projects for the Neon account
      * @throws ApiError
      */
@@ -232,7 +242,8 @@ export class ProjectService {
             query: {
                 cursor: data.cursor,
                 limit: data.limit,
-                search: data.search
+                search: data.search,
+                timeout: data.timeout
             },
             errors: {
                 default: 'General Error'
@@ -241,7 +252,7 @@ export class ProjectService {
     }
     
     /**
-     * Get project details
+     * Retrieve project details
      * Retrieves information about the specified project.
      * A project is the top-level object in the Neon object hierarchy.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -265,10 +276,9 @@ export class ProjectService {
     }
     
     /**
-     * Update a project
+     * Update project
      * Updates the specified project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
-     * Neon permits updating the project name only.
      *
      * @param data The data for the request.
      * @param data.requestBody
@@ -292,7 +302,7 @@ export class ProjectService {
     }
     
     /**
-     * Delete a project
+     * Delete project
      * Deletes the specified project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * Deleting a project is a permanent action.
@@ -363,7 +373,7 @@ export class ProjectService {
     
     /**
      * Revoke project access
-     * Revokes project access from the user associted with the specified permisison `id`. You can retrieve a user's permission `id` by listing project access.
+     * Revokes project access from the user associated with the specified permission `id`. You can retrieve a user's permission `id` by listing project access.
      * @param data The data for the request.
      * @param data.projectId
      * @param data.permissionId
@@ -385,7 +395,87 @@ export class ProjectService {
     }
     
     /**
-     * Get a connection URI
+     * List JWKS URLs
+     * Returns the JWKS URLs available for verifying JWTs used as the authentication mechanism for the specified project.
+     *
+     * @param data The data for the request.
+     * @param data.projectId The Neon project ID
+     * @returns ProjectJWKSResponse The JWKS URLs available for the project
+     * @throws ApiError
+     */
+    public getProjectJwks(data: GetProjectJwksData): CancelablePromise<GetProjectJwksResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/projects/{project_id}/jwks',
+            path: {
+                project_id: data.projectId
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Add JWKS URL
+     * Add a new JWKS URL to a project, such that it can be used for verifying JWTs used as the authentication mechanism for the specified project.
+     *
+     * The URL must be a valid HTTPS URL that returns a JSON Web Key Set.
+     *
+     * The `provider_name` field allows you to specify which authentication provider you're using (e.g., Clerk, Auth0, AWS Cognito, etc.).
+     *
+     * The `branch_id` can be used to specify on which branches the JWKS URL will be accepted. If not specified, then it will work on any branch.
+     *
+     * The `role_names` can be used to specify for which roles the JWKS URL will be accepted.
+     *
+     * The `jwt_audience` can be used to specify which "aud" values should be accepted by Neon in the JWTs that are used for authentication.
+     *
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @param data.projectId The Neon project ID
+     * @returns JWKSCreationOperation The JWKS URL was added to the project's authentication connections
+     * @throws ApiError
+     */
+    public addProjectJwks(data: AddProjectJwksData): CancelablePromise<AddProjectJwksResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/projects/{project_id}/jwks',
+            path: {
+                project_id: data.projectId
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Delete JWKS URL
+     * Deletes a JWKS URL from the specified project
+     * @param data The data for the request.
+     * @param data.projectId The Neon project ID
+     * @param data.jwksId The JWKS ID
+     * @returns JWKS Deleted a JWKS URL from the project
+     * @throws ApiError
+     */
+    public deleteProjectJwks(data: DeleteProjectJwksData): CancelablePromise<DeleteProjectJwksResponse> {
+        return this.httpRequest.request({
+            method: 'DELETE',
+            url: '/projects/{project_id}/jwks/{jwks_id}',
+            path: {
+                project_id: data.projectId,
+                jwks_id: data.jwksId
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Retrieve connection URI
      * Retrieves a connection URI for the specified database.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `database_name` by listing the databases for a branch.
@@ -421,24 +511,19 @@ export class ProjectService {
         });
     }
     
-}
-
-export class DefaultService {
-    constructor(public readonly httpRequest: BaseHttpRequest) { }
-    
     /**
-     * Returns all JWKS definitions for a project
-     * Returns all JWKS definitions for a project
+     * List VPC endpoint restrictions
+     * Lists VPC endpoint restrictions for the specified Neon project.
      *
      * @param data The data for the request.
      * @param data.projectId The Neon project ID
-     * @returns ProjectJWKSResponse The JWKS definitions for the project
+     * @returns VPCEndpointsResponse Returned VPC endpoint restrictions for the specified project
      * @throws ApiError
      */
-    public getProjectJwks(data: GetProjectJwksData): CancelablePromise<GetProjectJwksResponse> {
+    public listProjectVpcEndpoints(data: ListProjectVpcEndpointsData): CancelablePromise<ListProjectVpcEndpointsResponse> {
         return this.httpRequest.request({
             method: 'GET',
-            url: '/projects/{project_id}/jwks',
+            url: '/projects/{project_id}/vpc_endpoints',
             path: {
                 project_id: data.projectId
             },
@@ -449,25 +534,166 @@ export class DefaultService {
     }
     
     /**
-     * Adds a JWKS to project's endpoint
-     * Add a new JWKS to a specific endpoint of a project
+     * Set VPC endpoint restriction
+     * Sets or updates a VPC endpoint restriction for a Neon project.
+     * When a VPC endpoint restriction is set, the project only accepts connections
+     * from the specified VPC.
+     * A VPC endpoint can be set as a restriction only after it is assigned to the
+     * parent organization of the Neon project.
+     *
      * @param data The data for the request.
-     * @param data.projectId The Neon project ID
-     * @param data.endpointId The endpoint ID
      * @param data.requestBody
-     * @returns JWKS The JWKS URL was added to the project authentication connections
+     * @param data.projectId The Neon project ID
+     * @param data.vpcEndpointId The VPC endpoint ID
+     * @returns unknown Configured the specified VPC endpoint as a restriction for the specified project.
      * @throws ApiError
      */
-    public addEndpointJwks(data: AddEndpointJwksData): CancelablePromise<AddEndpointJwksResponse> {
+    public assignProjectVpcEndpoint(data: AssignProjectVpcEndpointData): CancelablePromise<AssignProjectVpcEndpointResponse> {
         return this.httpRequest.request({
             method: 'POST',
-            url: '/projects/{project_id}/endpoints/{endpoint_id}/jwks',
+            url: '/projects/{project_id}/vpc_endpoints/{vpc_endpoint_id}',
             path: {
                 project_id: data.projectId,
-                endpoint_id: data.endpointId
+                vpc_endpoint_id: data.vpcEndpointId
             },
             body: data.requestBody,
             mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Delete VPC endpoint restriction
+     * Removes the specified VPC endpoint restriction from a Neon project.
+     *
+     * @param data The data for the request.
+     * @param data.projectId The Neon project ID
+     * @param data.vpcEndpointId The VPC endpoint ID
+     * @returns unknown Removed the VPC endpoint restriction from the specified Neon project
+     * @throws ApiError
+     */
+    public deleteProjectVpcEndpoint(data: DeleteProjectVpcEndpointData): CancelablePromise<DeleteProjectVpcEndpointResponse> {
+        return this.httpRequest.request({
+            method: 'DELETE',
+            url: '/projects/{project_id}/vpc_endpoints/{vpc_endpoint_id}',
+            path: {
+                project_id: data.projectId,
+                vpc_endpoint_id: data.vpcEndpointId
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+}
+
+export class AuthService {
+    constructor(public readonly httpRequest: BaseHttpRequest) { }
+    
+    /**
+     * Create Neon Auth integration
+     * Creates a project on a third-party authentication provider's platform for use with Neon Auth.
+     * Use this endpoint if the frontend integration flow can't be used.
+     *
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @returns IdentityCreateIntegrationResponse Creates Neon Auth integration
+     * @throws ApiError
+     */
+    public createProjectIdentityIntegration(data: CreateProjectIdentityIntegrationData): CancelablePromise<CreateProjectIdentityIntegrationResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/projects/auth/create',
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Create Auth Provider SDK keys
+     * Generates SDK or API Keys for the auth provider. These might be called different things depending
+     * on the auth provider you're using, but are generally used for setting up the frontend and backend SDKs.
+     *
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @returns IdentityCreateIntegrationResponse Creates Auth Provider SDK keys
+     * @throws ApiError
+     */
+    public createProjectIdentityAuthProviderSdkKeys(data: CreateProjectIdentityAuthProviderSdkKeysData): CancelablePromise<CreateProjectIdentityAuthProviderSdkKeysResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/projects/auth/keys',
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Transfer Neon-managed auth project to your own account
+     * Transfer ownership of your Neon-managed auth project to your own auth provider account.
+     *
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @returns IdentityTransferAuthProviderProjectResponse Transfer initiated. Follow the URL to complete the process in your auth provider's UI.
+     * @throws ApiError
+     */
+    public transferProjectIdentityAuthProviderProject(data: TransferProjectIdentityAuthProviderProjectData): CancelablePromise<TransferProjectIdentityAuthProviderProjectResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/projects/auth/transfer_ownership',
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Lists active integrations with auth providers
+     * @param data The data for the request.
+     * @param data.projectId The Neon project ID
+     * @returns ListProjectIdentityIntegrationsResponse Return management API keys metadata
+     * @throws ApiError
+     */
+    public listProjectIdentityIntegrations(data: ListProjectIdentityIntegrationsData): CancelablePromise<ListProjectIdentityIntegrationsResponse2> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/projects/{project_id}/auth/integrations',
+            path: {
+                project_id: data.projectId
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Delete integration with auth provider
+     * @param data The data for the request.
+     * @param data.projectId The Neon project ID
+     * @param data.authProvider The authentication provider name
+     * @returns unknown Delete the integration with the authentication provider
+     * @throws ApiError
+     */
+    public deleteProjectIdentityIntegration(data: DeleteProjectIdentityIntegrationData): CancelablePromise<DeleteProjectIdentityIntegrationResponse> {
+        return this.httpRequest.request({
+            method: 'DELETE',
+            url: '/projects/{project_id}/auth/integration/{auth_provider}',
+            path: {
+                project_id: data.projectId,
+                auth_provider: data.authProvider
+            },
             errors: {
                 default: 'General Error'
             }
@@ -480,7 +706,7 @@ export class BranchService {
     constructor(public readonly httpRequest: BaseHttpRequest) { }
     
     /**
-     * Create a branch
+     * Create branch
      * Creates a branch in the specified project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      *
@@ -512,7 +738,7 @@ export class BranchService {
     }
     
     /**
-     * Get a list of branches
+     * List branches
      * Retrieves a list of branches for the specified project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      *
@@ -524,6 +750,11 @@ export class BranchService {
      *
      * @param data The data for the request.
      * @param data.projectId The Neon project ID
+     * @param data.search Search by branch `name` or `id`. You can specify partial `name` or `id` values to filter results.
+     * @param data.sortBy Sort the branches by sort_field. If not provided, branches will be sorted by updated_at descending order
+     * @param data.cursor A cursor to use in pagination. A cursor defines your place in the data list. Include `response.pagination.next` in subsequent API calls to fetch next page of the list.
+     * @param data.sortOrder Defines the sorting order of entities.
+     * @param data.limit The maximum number of records to be returned in the response
      * @returns unknown Returned a list of branches for the specified project
      * @throws ApiError
      */
@@ -534,6 +765,13 @@ export class BranchService {
             path: {
                 project_id: data.projectId
             },
+            query: {
+                search: data.search,
+                sort_by: data.sortBy,
+                cursor: data.cursor,
+                sort_order: data.sortOrder,
+                limit: data.limit
+            },
             errors: {
                 default: 'General Error'
             }
@@ -541,7 +779,34 @@ export class BranchService {
     }
     
     /**
-     * Get branch details
+     * Retrieve number of branches
+     * Retrieves the total number of branches in the specified project.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     *
+     * @param data The data for the request.
+     * @param data.projectId The Neon project ID
+     * @param data.search Count branches matching the `name` in search query
+     * @returns unknown Returned a count of branches for the specified project
+     * @throws ApiError
+     */
+    public countProjectBranches(data: CountProjectBranchesData): CancelablePromise<CountProjectBranchesResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/projects/{project_id}/branches/count',
+            path: {
+                project_id: data.projectId
+            },
+            query: {
+                search: data.search
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Retrieve branch details
      * Retrieves information about the specified branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain a `branch_id` by listing the project's branches.
@@ -573,7 +838,7 @@ export class BranchService {
     }
     
     /**
-     * Delete a branch
+     * Delete branch
      * Deletes the specified branch from a project, and places
      * all compute endpoints into an idle state, breaking existing client connections.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -590,6 +855,7 @@ export class BranchService {
      * @param data.projectId The Neon project ID
      * @param data.branchId The branch ID
      * @returns BranchOperations Deleted the specified branch
+     * @returns void Returned if the branch doesn't exist or has already been deleted
      * @throws ApiError
      */
     public deleteProjectBranch(data: DeleteProjectBranchData): CancelablePromise<DeleteProjectBranchResponse> {
@@ -607,7 +873,7 @@ export class BranchService {
     }
     
     /**
-     * Update a branch
+     * Update branch
      * Updates the specified branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -637,7 +903,7 @@ export class BranchService {
     }
     
     /**
-     * Restore a branch
+     * Restore branch
      * Restores a branch to an earlier state in its own or another branch's history
      * @param data The data for the request.
      * @param data.projectId The Neon project ID
@@ -663,12 +929,11 @@ export class BranchService {
     }
     
     /**
-     * Get the database schema
-     * Retrieves the schema from the specified database. The `lsn` and `timestamp` values cannot be specified at the same time. If both are omitted, the database schema is retrieved from database's head .
+     * Retrieve database schema
+     * Retrieves the schema from the specified database. The `lsn` and `timestamp` values cannot be specified at the same time. If both are omitted, the database schema is retrieved from database's head.
      * @param data The data for the request.
      * @param data.projectId The Neon project ID
      * @param data.branchId The branch ID
-     * @param data.role The role on whose behalf the schema is retrieved
      * @param data.dbName Name of the database for which the schema is retrieved
      * @param data.lsn The Log Sequence Number (LSN) for which the schema is retrieved
      *
@@ -686,7 +951,6 @@ export class BranchService {
                 branch_id: data.branchId
             },
             query: {
-                role: data.role,
                 db_name: data.dbName,
                 lsn: data.lsn,
                 timestamp: data.timestamp
@@ -698,28 +962,39 @@ export class BranchService {
     }
     
     /**
-     * @deprecated
-     * Set branch as primary
-     * DEPRECATED. Use `/set_as_default` endpoint.
-     * Sets the specified branch as the project's primary branch.
-     * The primary designation is automatically removed from the previous primary branch.
-     * You can obtain a `project_id` by listing the projects for your Neon account.
-     * You can obtain the `branch_id` by listing the project's branches.
-     * For more information, see [Manage branches](https://neon.tech/docs/manage/branches/).
-     *
+     * Compare database schema
+     * Compares the schema from the specified database with another branch's schema.
      * @param data The data for the request.
      * @param data.projectId The Neon project ID
      * @param data.branchId The branch ID
-     * @returns BranchOperations Updated the specified branch
+     * @param data.dbName Name of the database for which the schema is retrieved
+     * @param data.baseBranchId The branch ID to compare the schema with
+     * @param data.lsn The Log Sequence Number (LSN) for which the schema is retrieved
+     *
+     * @param data.timestamp The point in time for which the schema is retrieved
+     *
+     * @param data.baseLsn The Log Sequence Number (LSN) for the base branch schema
+     *
+     * @param data.baseTimestamp The point in time for the base branch schema
+     *
+     * @returns BranchSchemaCompareResponse Difference between the schemas
      * @throws ApiError
      */
-    public setPrimaryProjectBranch(data: SetPrimaryProjectBranchData): CancelablePromise<SetPrimaryProjectBranchResponse> {
+    public getProjectBranchSchemaComparison(data: GetProjectBranchSchemaComparisonData): CancelablePromise<GetProjectBranchSchemaComparisonResponse> {
         return this.httpRequest.request({
-            method: 'POST',
-            url: '/projects/{project_id}/branches/{branch_id}/set_as_primary',
+            method: 'GET',
+            url: '/projects/{project_id}/branches/{branch_id}/compare_schema',
             path: {
                 project_id: data.projectId,
                 branch_id: data.branchId
+            },
+            query: {
+                base_branch_id: data.baseBranchId,
+                db_name: data.dbName,
+                lsn: data.lsn,
+                timestamp: data.timestamp,
+                base_lsn: data.baseLsn,
+                base_timestamp: data.baseTimestamp
             },
             errors: {
                 default: 'General Error'
@@ -756,7 +1031,7 @@ export class BranchService {
     }
     
     /**
-     * Get a list of branch endpoints
+     * List branch endpoints
      * Retrieves a list of compute endpoints for the specified branch.
      * Neon permits only one read-write compute endpoint per branch.
      * A branch can have multiple read-only compute endpoints.
@@ -784,7 +1059,7 @@ export class BranchService {
     }
     
     /**
-     * Get a list of databases
+     * List databases
      * Retrieves a list of databases for the specified branch.
      * A branch can have multiple databases.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -812,7 +1087,7 @@ export class BranchService {
     }
     
     /**
-     * Create a database
+     * Create database
      * Creates a database in the specified branch.
      * A branch can have multiple databases.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -843,7 +1118,7 @@ export class BranchService {
     }
     
     /**
-     * Get database details
+     * Retrieve database details
      * Retrieves information about the specified database.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` and `database_name` by listing the branch's databases.
@@ -872,7 +1147,7 @@ export class BranchService {
     }
     
     /**
-     * Update a database
+     * Update database
      * Updates the specified database in the branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` and `database_name` by listing the branch's databases.
@@ -904,7 +1179,7 @@ export class BranchService {
     }
     
     /**
-     * Delete a database
+     * Delete database
      * Deletes the specified database from the branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` and `database_name` by listing the branch's databases.
@@ -915,6 +1190,7 @@ export class BranchService {
      * @param data.branchId The branch ID
      * @param data.databaseName The database name
      * @returns DatabaseOperations Deleted the specified database
+     * @returns void Returned if the database doesn't exist or has already been deleted
      * @throws ApiError
      */
     public deleteProjectBranchDatabase(data: DeleteProjectBranchDatabaseData): CancelablePromise<DeleteProjectBranchDatabaseResponse> {
@@ -933,7 +1209,7 @@ export class BranchService {
     }
     
     /**
-     * Get a list of roles
+     * List roles
      * Retrieves a list of Postgres roles from the specified branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -960,7 +1236,7 @@ export class BranchService {
     }
     
     /**
-     * Create a role
+     * Create role
      * Creates a Postgres role in the specified branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -993,7 +1269,7 @@ export class BranchService {
     }
     
     /**
-     * Get role details
+     * Retrieve role details
      * Retrieves details about the specified role.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -1024,7 +1300,7 @@ export class BranchService {
     }
     
     /**
-     * Delete a role
+     * Delete role
      * Deletes the specified Postgres role from the branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -1036,6 +1312,7 @@ export class BranchService {
      * @param data.branchId The branch ID
      * @param data.roleName The role name
      * @returns RoleOperations Deleted the specified role from the branch
+     * @returns void Returned if the role doesn't exist or has already been deleted
      * @throws ApiError
      */
     public deleteProjectBranchRole(data: DeleteProjectBranchRoleData): CancelablePromise<DeleteProjectBranchRoleResponse> {
@@ -1054,7 +1331,7 @@ export class BranchService {
     }
     
     /**
-     * Get role password
+     * Retrieve role password
      * Retrieves the password for the specified Postgres role, if possible.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -1086,7 +1363,7 @@ export class BranchService {
     }
     
     /**
-     * Reset the role password
+     * Reset role password
      * Resets the password for the specified Postgres role.
      * Returns a new password and operations. The new password is ready to use when the last operation finishes.
      * The old password remains valid until last operation finishes.
@@ -1102,7 +1379,7 @@ export class BranchService {
      * @param data.projectId The Neon project ID
      * @param data.branchId The branch ID
      * @param data.roleName The role nam
-     * @returns RoleOperations Reset the passsword for the specified role
+     * @returns RoleOperations Reset the password for the specified role
      * @throws ApiError
      */
     public resetProjectBranchRolePassword(data: ResetProjectBranchRolePasswordData): CancelablePromise<ResetProjectBranchRolePasswordResponse> {
@@ -1126,7 +1403,7 @@ export class EndpointService {
     constructor(public readonly httpRequest: BaseHttpRequest) { }
     
     /**
-     * Create a compute endpoint
+     * Create compute endpoint
      * Creates a compute endpoint for the specified branch.
      * An endpoint is a Neon compute instance.
      * There is a maximum of one read-write compute endpoint per branch.
@@ -1161,7 +1438,7 @@ export class EndpointService {
     }
     
     /**
-     * Get a list of compute endpoints
+     * List compute endpoints
      * Retrieves a list of compute endpoints for the specified project.
      * A compute endpoint is a Neon compute instance.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -1186,7 +1463,7 @@ export class EndpointService {
     }
     
     /**
-     * Get a compute endpoint
+     * Retrieve compute endpoint details
      * Retrieves information about the specified compute endpoint.
      * A compute endpoint is a Neon compute instance.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -1215,7 +1492,7 @@ export class EndpointService {
     }
     
     /**
-     * Delete a compute endpoint
+     * Delete compute endpoint
      * Delete the specified compute endpoint.
      * A compute endpoint is a Neon compute instance.
      * Deleting a compute endpoint drops existing network connections to the compute endpoint.
@@ -1230,6 +1507,7 @@ export class EndpointService {
      * @param data.projectId The Neon project ID
      * @param data.endpointId The endpoint ID
      * @returns EndpointOperations Deleted the specified compute endpoint
+     * @returns void Returned if the endpoint doesn't exist or has already been deleted
      * @throws ApiError
      */
     public deleteProjectEndpoint(data: DeleteProjectEndpointData): CancelablePromise<DeleteProjectEndpointResponse> {
@@ -1247,7 +1525,7 @@ export class EndpointService {
     }
     
     /**
-     * Update a compute endpoint
+     * Update compute endpoint
      * Updates the specified compute endpoint.
      *
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -1284,7 +1562,7 @@ export class EndpointService {
     }
     
     /**
-     * Start a compute endpoint
+     * Start compute endpoint
      * Starts a compute endpoint. The compute endpoint is ready to use
      * after the last operation in chain finishes successfully.
      *
@@ -1314,7 +1592,7 @@ export class EndpointService {
     }
     
     /**
-     * Suspend a compute endpoint
+     * Suspend compute endpoint
      * Suspend the specified compute endpoint
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain an `endpoint_id` by listing your project's compute endpoints.
@@ -1342,7 +1620,7 @@ export class EndpointService {
     }
     
     /**
-     * Restart a compute endpoint
+     * Restart compute endpoint
      * Restart the specified compute endpoint: suspend immediately followed by start operations.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain an `endpoint_id` by listing your project's compute endpoints.
@@ -1375,9 +1653,8 @@ export class ConsumptionService {
     constructor(public readonly httpRequest: BaseHttpRequest) { }
     
     /**
-     * Get account consumption metrics
-     * Retrieves consumption metrics for Scale plan accounts. History begins at the time of upgrade.
-     * Available for Scale plan users only.
+     * Retrieve account consumption metrics
+     * Retrieves consumption metrics for Scale, Business, and Enterprise plan accounts. History begins at the time of upgrade.
      *
      * @param data The data for the request.
      * @param data.from Specify the start `date-time` for the consumption period.
@@ -1425,7 +1702,7 @@ export class ConsumptionService {
                 include_v1_metrics: data.includeV1Metrics
             },
             errors: {
-                403: 'This endpoint is not available. It is only supported with Scale plan accounts.',
+                403: 'This endpoint is not available. It is only supported for Scale, Business, and Enterprise plan accounts.',
                 404: 'Account is not a member of the organization specified by `org_id`.',
                 406: `The specified \`date-time\` range is outside the boundaries of the specified \`granularity\`.
 Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
@@ -1437,9 +1714,9 @@ Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
     }
     
     /**
-     * Get consumption metrics for each project
-     * Retrieves consumption metrics for Scale plan projects. History begins at the time of upgrade.
-     * Available for Scale plan users only.
+     * Retrieve project consumption metrics
+     * Retrieves consumption metrics for Scale, Business, and Enterprise plan projects. History begins at the time of upgrade.
+     * Issuing a call to this API does not wake a project's compute endpoint.
      *
      * @param data The data for the request.
      * @param data.from Specify the start `date-time` for the consumption period.
@@ -1468,6 +1745,9 @@ Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
      * @param data.limit Specify a value from 1 to 100 to limit number of projects in the response.
      * @param data.projectIds Specify a list of project IDs to filter the response.
      * If omitted, the response will contain all projects.
+     * A list of project IDs can be specified as an array of parameter values or as a comma-separated list in a single parameter value.
+     * - As an array of parameter values: `project_ids=cold-poetry-09157238%20&project_ids=quiet-snow-71788278`
+     * - As a comma-separated list in a single parameter value: `project_ids=cold-poetry-09157238,quiet-snow-71788278`
      *
      * @param data.orgId Specify the organization for which the project consumption metrics should be returned.
      * If this parameter is not provided, the endpoint will return the metrics for the
@@ -1495,7 +1775,7 @@ Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
                 include_v1_metrics: data.includeV1Metrics
             },
             errors: {
-                403: 'This endpoint is not available. It is only supported with Scale plan accounts.',
+                403: 'This endpoint is not available. It is only supported with Scale, Business, and Enterprise plan accounts.',
                 404: 'Account is not a member of the organization specified by `org_id`.',
                 406: `The specified \`date-time\` range is outside the boundaries of the specified \`granularity\`.
 Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
@@ -1506,43 +1786,438 @@ Adjust your \`from\` and \`to\` values or select a different \`granularity\`.
         });
     }
     
+}
+
+export class OrganizationsService {
+    constructor(public readonly httpRequest: BaseHttpRequest) { }
+    
     /**
-     * @deprecated
-     * Get project consumption metrics
-     * Retrieves consumption metrics for each project for the current billing period.
-     * For usage information, see [Retrieving metrics for all projects](https://neon.tech/docs/guides/partner-billing#retrieving-metrics-for-all-projects).
+     * Retrieve organization details
+     * Retrieves information about the specified organization.
      *
      * @param data The data for the request.
-     * @param data.cursor Specify the cursor value from the previous response to get the next batch of projects
-     * @param data.limit Specify a value from 1 to 1000 to limit number of projects in the response
-     * @param data.from Specify the start date-time for the consumption period.
-     * The time value must be provided in ISO 8601 format.
-     * If `from` or `to` is not specified, we return only current consumption period.
-     *
-     * @param data.to Specify the end date-time period for the consumption period.
-     * The time value must be provided in ISO 8601 format.
-     * If `from` or `to` is not specified, only the current consumption period is returned.
-     *
-     * @param data.orgId Specify the organization for which the project consumption metrics should be returned.
-     * If this parameter is not provided, the endpoint will return the metrics for the authenticated
-     * user's projects.
-     *
-     * @returns unknown Returned a list of project consumption metrics for the Neon account
+     * @param data.orgId The Neon organization ID
+     * @returns Organization Returned information about the organization
      * @throws ApiError
      */
-    public listProjectsConsumption(data: ListProjectsConsumptionData = {}): CancelablePromise<ListProjectsConsumptionResponse> {
+    public getOrganization(data: GetOrganizationData): CancelablePromise<GetOrganizationResponse> {
         return this.httpRequest.request({
             method: 'GET',
-            url: '/consumption/projects',
-            query: {
-                cursor: data.cursor,
-                limit: data.limit,
-                from: data.from,
-                to: data.to,
+            url: '/organizations/{org_id}',
+            path: {
                 org_id: data.orgId
             },
             errors: {
-                404: 'Account is not a member of the organization specified by `org_id`.',
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * List organization API keys
+     * Retrieves the API keys for the specified organization.
+     * The response does not include API key tokens. A token is only provided when creating an API key.
+     * API keys can also be managed in the Neon Console.
+     * For more information, see [Manage API keys](https://neon.tech/docs/manage/api-keys/).
+     *
+     * @param data The data for the request.
+     * @param data.orgId The Neon organization ID
+     * @returns OrgApiKeysListResponseItem Returned the API keys for the specified organization
+     * @throws ApiError
+     */
+    public listOrgApiKeys(data: ListOrgApiKeysData): CancelablePromise<ListOrgApiKeysResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/organizations/{org_id}/api_keys',
+            path: {
+                org_id: data.orgId
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Create organization API key
+     * Creates an API key for the specified organization.
+     * The `key_name` is a user-specified name for the key.
+     * This method returns an `id` and `key`. The `key` is a randomly generated, 64-bit token required to access the Neon API.
+     * API keys can also be managed in the Neon Console.
+     * See [Manage API keys](https://neon.tech/docs/manage/api-keys/).
+     *
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @param data.orgId The Neon organization ID
+     * @returns OrgApiKeyCreateResponse Created an organization API key
+     * @throws ApiError
+     */
+    public createOrgApiKey(data: CreateOrgApiKeyData): CancelablePromise<CreateOrgApiKeyResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/organizations/{org_id}/api_keys',
+            path: {
+                org_id: data.orgId
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Revoke organization API key
+     * Revokes the specified organization API key.
+     * An API key that is no longer needed can be revoked.
+     * This action cannot be reversed.
+     * You can obtain `key_id` values by listing the API keys for an organization.
+     * API keys can also be managed in the Neon Console.
+     * See [Manage API keys](https://neon.tech/docs/manage/api-keys/).
+     *
+     * @param data The data for the request.
+     * @param data.keyId The API key ID
+     * @param data.orgId The Neon organization ID
+     * @returns OrgApiKeyRevokeResponse Revoked the specified organization API key
+     * @throws ApiError
+     */
+    public revokeOrgApiKey(data: RevokeOrgApiKeyData): CancelablePromise<RevokeOrgApiKeyResponse> {
+        return this.httpRequest.request({
+            method: 'DELETE',
+            url: '/organizations/{org_id}/api_keys/{key_id}',
+            path: {
+                key_id: data.keyId,
+                org_id: data.orgId
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Retrieve organization members details
+     * Retrieves information about the specified organization members.
+     *
+     * @param data The data for the request.
+     * @param data.orgId The Neon organization ID
+     * @returns OrganizationMembersResponse Returned information about organization members
+     * @throws ApiError
+     */
+    public getOrganizationMembers(data: GetOrganizationMembersData): CancelablePromise<GetOrganizationMembersResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/organizations/{org_id}/members',
+            path: {
+                org_id: data.orgId
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Retrieve organization member details
+     * Retrieves information about the specified organization member.
+     *
+     * @param data The data for the request.
+     * @param data.orgId The Neon organization ID
+     * @param data.memberId The Neon organization member ID
+     * @returns Member Returned information about the organization member
+     * @throws ApiError
+     */
+    public getOrganizationMember(data: GetOrganizationMemberData): CancelablePromise<GetOrganizationMemberResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/organizations/{org_id}/members/{member_id}',
+            path: {
+                org_id: data.orgId,
+                member_id: data.memberId
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Update role for organization member
+     * Only an admin can perform this action.
+     *
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @param data.orgId The Neon organization ID
+     * @param data.memberId The Neon organization member ID
+     * @returns Member The updated organization member
+     * @throws ApiError
+     */
+    public updateOrganizationMember(data: UpdateOrganizationMemberData): CancelablePromise<UpdateOrganizationMemberResponse> {
+        return this.httpRequest.request({
+            method: 'PATCH',
+            url: '/organizations/{org_id}/members/{member_id}',
+            path: {
+                org_id: data.orgId,
+                member_id: data.memberId
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Remove member from the organization
+     * Remove member from the organization.
+     * Only an admin of the organization can perform this action.
+     * If another admin is being removed, it will not be allows in case it is the only admin left in the organization.
+     *
+     * @param data The data for the request.
+     * @param data.orgId The Neon organization ID
+     * @param data.memberId The Neon organization member ID
+     * @returns EmptyResponse Removed organization member
+     * @throws ApiError
+     */
+    public removeOrganizationMember(data: RemoveOrganizationMemberData): CancelablePromise<RemoveOrganizationMemberResponse> {
+        return this.httpRequest.request({
+            method: 'DELETE',
+            url: '/organizations/{org_id}/members/{member_id}',
+            path: {
+                org_id: data.orgId,
+                member_id: data.memberId
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Retrieve organization invitation details
+     * Retrieves information about extended invitations for the specified organization
+     *
+     * @param data The data for the request.
+     * @param data.orgId The Neon organization ID
+     * @returns OrganizationInvitationsResponse Returned information about the organization invitations
+     * @throws ApiError
+     */
+    public getOrganizationInvitations(data: GetOrganizationInvitationsData): CancelablePromise<GetOrganizationInvitationsResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/organizations/{org_id}/invitations',
+            path: {
+                org_id: data.orgId
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Create organization invitations
+     * Creates invitations for a specific organization.
+     * If the invited user has an existing account, they automatically join as a member.
+     * If they don't yet have an account, they are invited to create one, after which they become a member.
+     * Each invited user receives an email notification.
+     *
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @param data.orgId The Neon organization ID
+     * @returns OrganizationInvitationsResponse The created organization invitation
+     * @throws ApiError
+     */
+    public createOrganizationInvitations(data: CreateOrganizationInvitationsData): CancelablePromise<CreateOrganizationInvitationsResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/organizations/{org_id}/invitations',
+            path: {
+                org_id: data.orgId
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Transfer projects between organizations
+     * Transfers selected projects, identified by their IDs, from your organization to another specified organization.
+     *
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @param data.sourceOrgId The Neon organization ID (source org, which currently owns the project)
+     * @returns EmptyResponse Projects successfully transferred from organization to organization
+     * @throws ApiError
+     */
+    public transferProjectsFromOrgToOrg(data: TransferProjectsFromOrgToOrgData): CancelablePromise<TransferProjectsFromOrgToOrgResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/organizations/{source_org_id}/projects/transfer',
+            path: {
+                source_org_id: data.sourceOrgId
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                406: 'Transfer failed - the target organization has too many projects or its plan is incompatible with the source organization. Reduce projects or upgrade the organization.',
+                422: 'One or more of the provided project IDs have GitHub or Vercel integrations installed. Transferring integration projects is currently not supported',
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * List VPC endpoints
+     * Retrieves the list of VPC endpoints for the specified Neon organization.
+     *
+     * @param data The data for the request.
+     * @param data.orgId The Neon organization ID
+     * @param data.regionId The Neon region ID
+     * @returns VPCEndpointsResponse The list of configured VPC endpoint IDs for the specified organization
+     * @throws ApiError
+     */
+    public listOrganizationVpcEndpoints(data: ListOrganizationVpcEndpointsData): CancelablePromise<ListOrganizationVpcEndpointsResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/organizations/{org_id}/vpc/region/{region_id}/vpc_endpoints',
+            path: {
+                org_id: data.orgId,
+                region_id: data.regionId
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Retrieve VPC endpoint details
+     * Retrieves the current state and configuration details of a specified VPC endpoint.
+     *
+     * @param data The data for the request.
+     * @param data.orgId The Neon organization ID
+     * @param data.regionId The Neon region ID.
+     * Azure regions are currently not supported.
+     *
+     * @param data.vpcEndpointId The VPC endpoint ID
+     * @returns VPCEndpointDetails Returned the current status and configuration details of the specified VPC endpoint.
+     * @throws ApiError
+     */
+    public getOrganizationVpcEndpointDetails(data: GetOrganizationVpcEndpointDetailsData): CancelablePromise<GetOrganizationVpcEndpointDetailsResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/organizations/{org_id}/vpc/region/{region_id}/vpc_endpoints/{vpc_endpoint_id}',
+            path: {
+                org_id: data.orgId,
+                region_id: data.regionId,
+                vpc_endpoint_id: data.vpcEndpointId
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Assign or update VPC endpoint
+     * Assigns a VPC endpoint to a Neon organization or updates its existing assignment.
+     *
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @param data.orgId The Neon organization ID
+     * @param data.regionId The Neon region ID.
+     * Azure regions are currently not supported.
+     *
+     * @param data.vpcEndpointId The VPC endpoint ID
+     * @returns unknown Assigned the VPC endpoint to the specified Neon organization
+     * @throws ApiError
+     */
+    public assignOrganizationVpcEndpoint(data: AssignOrganizationVpcEndpointData): CancelablePromise<AssignOrganizationVpcEndpointResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/organizations/{org_id}/vpc/region/{region_id}/vpc_endpoints/{vpc_endpoint_id}',
+            path: {
+                org_id: data.orgId,
+                region_id: data.regionId,
+                vpc_endpoint_id: data.vpcEndpointId
+            },
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Delete VPC endpoint
+     * Deletes the VPC endpoint from the specified Neon organization.
+     *
+     * @param data The data for the request.
+     * @param data.orgId The Neon organization ID
+     * @param data.regionId The Neon region ID.
+     * Azure regions are currently not supported.
+     *
+     * @param data.vpcEndpointId The VPC endpoint ID
+     * @returns unknown Deleted the VPC endpoint from the specified Neon organization
+     * @throws ApiError
+     */
+    public deleteOrganizationVpcEndpoint(data: DeleteOrganizationVpcEndpointData): CancelablePromise<DeleteOrganizationVpcEndpointResponse> {
+        return this.httpRequest.request({
+            method: 'DELETE',
+            url: '/organizations/{org_id}/vpc/region/{region_id}/vpc_endpoints/{vpc_endpoint_id}',
+            path: {
+                org_id: data.orgId,
+                region_id: data.regionId,
+                vpc_endpoint_id: data.vpcEndpointId
+            },
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Retrieve current user organizations list
+     * Retrieves information about the current Neon user's organizations
+     *
+     * @returns OrganizationsResponse Returned information about the current user organizations
+     *
+     * @throws ApiError
+     */
+    public getCurrentUserOrganizations(): CancelablePromise<GetCurrentUserOrganizationsResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/users/me/organizations',
+            errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+}
+
+export class RegionService {
+    constructor(public readonly httpRequest: BaseHttpRequest) { }
+    
+    /**
+     * List supported regions
+     * Lists supported Neon regions
+     *
+     * @returns ActiveRegionsResponse The list of active regions
+     * @throws ApiError
+     */
+    public getActiveRegions(): CancelablePromise<GetActiveRegionsResponse> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/regions',
+            errors: {
                 default: 'General Error'
             }
         });
@@ -1554,7 +2229,7 @@ export class UsersService {
     constructor(public readonly httpRequest: BaseHttpRequest) { }
     
     /**
-     * Get current user details
+     * Retrieve current user details
      * Retrieves information about the current Neon user account.
      *
      * @returns CurrentUserInfoResponse Returned information about the current user
@@ -1572,7 +2247,7 @@ export class UsersService {
     }
     
     /**
-     * Get current user organizations list
+     * Retrieve current user organizations list
      * Retrieves information about the current Neon user's organizations
      *
      * @returns OrganizationsResponse Returned information about the current user organizations
@@ -1584,6 +2259,29 @@ export class UsersService {
             method: 'GET',
             url: '/users/me/organizations',
             errors: {
+                default: 'General Error'
+            }
+        });
+    }
+    
+    /**
+     * Transfer projects from personal account to organization
+     * Transfers selected projects, identified by their IDs, from your personal account to a specified organization.
+     *
+     * @param data The data for the request.
+     * @param data.requestBody
+     * @returns EmptyResponse Projects successfully transferred from personal account to organization
+     * @throws ApiError
+     */
+    public transferProjectsFromUserToOrg(data: TransferProjectsFromUserToOrgData): CancelablePromise<TransferProjectsFromUserToOrgResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/users/me/projects/transfer',
+            body: data.requestBody,
+            mediaType: 'application/json',
+            errors: {
+                406: 'Transfer failed - the target organization has too many projects or its plan is incompatible with the source account. Reduce the number of projects or upgrade the target organization to increase its capacity.',
+                422: 'One or more of the provided project IDs have GitHub or Vercel integrations installed. Transferring integration projects is currently not supported',
                 default: 'General Error'
             }
         });

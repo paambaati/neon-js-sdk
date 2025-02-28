@@ -4,12 +4,14 @@ import { Interceptors } from './core/OpenAPI';
 import { FetchHttpRequest } from './core/FetchHttpRequest';
 
 import { ApiKeyService } from './services.gen';
+import { AuthService } from './services.gen';
 import { BranchService } from './services.gen';
 import { ConsumptionService } from './services.gen';
-import { DefaultService } from './services.gen';
 import { EndpointService } from './services.gen';
 import { OperationService } from './services.gen';
+import { OrganizationsService } from './services.gen';
 import { ProjectService } from './services.gen';
+import { RegionService } from './services.gen';
 import { UsersService } from './services.gen';
 
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
@@ -17,12 +19,14 @@ type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 export class NeonClient {
 
 	public readonly apiKey: ApiKeyService;
+	public readonly auth: AuthService;
 	public readonly branch: BranchService;
 	public readonly consumption: ConsumptionService;
-	public readonly default: DefaultService;
 	public readonly endpoint: EndpointService;
 	public readonly operation: OperationService;
+	public readonly organizations: OrganizationsService;
 	public readonly project: ProjectService;
+	public readonly region: RegionService;
 	public readonly users: UsersService;
 
 	public readonly request: BaseHttpRequest;
@@ -45,12 +49,14 @@ export class NeonClient {
 		});
 
 		this.apiKey = new ApiKeyService(this.request);
+		this.auth = new AuthService(this.request);
 		this.branch = new BranchService(this.request);
 		this.consumption = new ConsumptionService(this.request);
-		this.default = new DefaultService(this.request);
 		this.endpoint = new EndpointService(this.request);
 		this.operation = new OperationService(this.request);
+		this.organizations = new OrganizationsService(this.request);
 		this.project = new ProjectService(this.request);
+		this.region = new RegionService(this.request);
 		this.users = new UsersService(this.request);
 	}
 }
