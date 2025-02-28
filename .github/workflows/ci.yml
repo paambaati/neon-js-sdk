@@ -50,7 +50,7 @@ jobs:
     - name: Check JSR package for packaging/publishing errors
       run: pnpm dlx jsr publish --dry-run --allow-dirty
 
-    - name: Check for uncommitted changes
+    - name: Check for uncommitted changes and upstream API changes from Neon
       # NOTE: Do not run this step for Dependabot PRs, because `pnpm run generate` might generate newer bindings (in case Neon's OpenAPI spec has had updates)
       # which in turn will flag a "found changed files after build" error, which turns CI red.
       if: "!contains(github.event.pull_request.labels.*.name, 'dependencies')"
