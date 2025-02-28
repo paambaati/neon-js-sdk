@@ -1,3 +1,26 @@
+# [2.0.0-beta.10](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.9...v2.0.0-beta.10) (2025-02-28)
+
+
+### Bug Fixes
+
+* **ci:** rename workflow YAML to fix provenance problems ([032f643](https://github.com/paambaati/neon-js-sdk/commit/032f6431022b036d7f90d82a7320781faf4aa32e))
+* **ci:** revert dry run logic ([686c6e6](https://github.com/paambaati/neon-js-sdk/commit/686c6e627c31f872dae8c0cd6feaa1e31d568aab))
+* fix package.json exports ([ce5dc9e](https://github.com/paambaati/neon-js-sdk/commit/ce5dc9ec544d4cc0f64813861d7480bd428a80e8))
+
+
+### Features
+
+* update to track latest spec changes ([d4fc052](https://github.com/paambaati/neon-js-sdk/commit/d4fc052897fca06c76dafd61e4b893df8986faf8))
+* update to track latest spec changes ([b7ce7d4](https://github.com/paambaati/neon-js-sdk/commit/b7ce7d45751da368c1e02b27c6db6c7f6856474c))
+* update to track latest spec changes ([373a795](https://github.com/paambaati/neon-js-sdk/commit/373a79549bae8d04217c38c8c95025ee6fd76012))
+* update to track latest spec changes ([7ada7b1](https://github.com/paambaati/neon-js-sdk/commit/7ada7b1e5213351caa69fc1ad64db1e5cf199d09))
+* update to track latest spec changes ([26c1a7d](https://github.com/paambaati/neon-js-sdk/commit/26c1a7d3ef904205d6a2202a663670801137516e))
+* update to track latest spec changes ([d71b720](https://github.com/paambaati/neon-js-sdk/commit/d71b7205fa8d2d9502b1bc77b373f92be67b7157))
+* update to track latest spec changes ([68810e4](https://github.com/paambaati/neon-js-sdk/commit/68810e429c06ebff789d1da3caaf1c6a019a9131))
+* update to track latest spec changes ([bbb16e0](https://github.com/paambaati/neon-js-sdk/commit/bbb16e055035060fec8ec742ea9a283d656162b0))
+* update to track latest spec changes ([580a589](https://github.com/paambaati/neon-js-sdk/commit/580a5898c9b9f6a67a9ec2d9e1201c655b77d216))
+* update to track latest spec changes ([6819517](https://github.com/paambaati/neon-js-sdk/commit/681951730becf54edfd57a4e226caf96b7ef0059))
+
 # [2.0.0-beta.9](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.8...v2.0.0-beta.9) (2024-08-08)
 
 
