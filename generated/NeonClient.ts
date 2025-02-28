@@ -3,16 +3,16 @@ import type { OpenAPIConfig } from './core/OpenAPI';
 import { Interceptors } from './core/OpenAPI';
 import { FetchHttpRequest } from './core/FetchHttpRequest';
 
-import { ApiKeyService } from './services.gen';
-import { AuthService } from './services.gen';
-import { BranchService } from './services.gen';
-import { ConsumptionService } from './services.gen';
-import { EndpointService } from './services.gen';
-import { OperationService } from './services.gen';
-import { OrganizationsService } from './services.gen';
-import { ProjectService } from './services.gen';
-import { RegionService } from './services.gen';
-import { UsersService } from './services.gen';
+import { ApiKeyService } from './sdk.gen';
+import { AuthService } from './sdk.gen';
+import { BranchService } from './sdk.gen';
+import { ConsumptionService } from './sdk.gen';
+import { EndpointService } from './sdk.gen';
+import { OperationService } from './sdk.gen';
+import { OrganizationsService } from './sdk.gen';
+import { ProjectService } from './sdk.gen';
+import { RegionService } from './sdk.gen';
+import { UsersService } from './sdk.gen';
 
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 
