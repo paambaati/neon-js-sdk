@@ -57,6 +57,6 @@ jobs:
       # NOTE: Ensure no changes, but ignore node_modules dir since dev/fresh ci deps installed.
       run: |
         git diff --exit-code --stat -- . ':!node_modules' ':!dist' \
-        || (echo "##[error] found changed files after build. please 'pnpm run generate && pnpm run build'" \
+        || (echo "##[error] found changed files after build. please 'pnpm run generate && pnpm run build && pnpm run jsr:fix'" \
                  "and commit all changes" \
             && exit 1)
