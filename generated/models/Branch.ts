@@ -37,6 +37,11 @@ export type Branch = {
     current_state: BranchState;
     pending_state?: BranchState;
     /**
+     * A UTC timestamp indicating when the `current_state` began
+     *
+     */
+    state_changed_at: string;
+    /**
      * The logical size of the branch, in bytes
      *
      */
@@ -52,7 +57,7 @@ export type Branch = {
      *
      * @deprecated
      */
-    primary: boolean;
+    primary?: boolean;
     /**
      * Whether the branch is the project's default branch
      *
@@ -92,5 +97,19 @@ export type Branch = {
      *
      */
     last_reset_at?: string;
+    /**
+     * The resolved user model that contains details of the user/org/integration/api_key used for branch creation. This field is filled only in listing/get/create/get/update/delete methods, if it is empty when calling other handlers, it does not mean that it is empty in the system.
+     *
+     */
+    created_by?: {
+        /**
+         * The name of the user.
+         */
+        name?: string;
+        /**
+         * The URL to the user's avatar image.
+         */
+        image?: string;
+    };
 };
 

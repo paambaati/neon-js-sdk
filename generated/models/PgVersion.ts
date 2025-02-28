@@ -3,7 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * The action type for a given notification
- *
+ * The major Postgres version number. Currently supported versions are `14`, `15`, `16`, and `17`.
  */
-export type NotificationActionType = 'upgrade_plan' | 'upgrade_cu';
+export type PgVersion = number;

@@ -6,13 +6,16 @@ import type { AnnotationCreateValueRequest } from '../models/AnnotationCreateVal
 import type { AnnotationResponse } from '../models/AnnotationResponse';
 import type { AnnotationsMapResponse } from '../models/AnnotationsMapResponse';
 import type { BranchCreateRequest } from '../models/BranchCreateRequest';
+import type { BranchesCountResponse } from '../models/BranchesCountResponse';
 import type { BranchesResponse } from '../models/BranchesResponse';
 import type { BranchOperations } from '../models/BranchOperations';
 import type { BranchResponse } from '../models/BranchResponse';
 import type { BranchRestoreRequest } from '../models/BranchRestoreRequest';
+import type { BranchSchemaCompareResponse } from '../models/BranchSchemaCompareResponse';
 import type { BranchSchemaResponse } from '../models/BranchSchemaResponse';
 import type { BranchUpdateRequest } from '../models/BranchUpdateRequest';
 import type { ConnectionURIsOptionalResponse } from '../models/ConnectionURIsOptionalResponse';
+import type { CursorPaginationResponse } from '../models/CursorPaginationResponse';
 import type { DatabaseCreateRequest } from '../models/DatabaseCreateRequest';
 import type { DatabaseOperations } from '../models/DatabaseOperations';
 import type { DatabaseResponse } from '../models/DatabaseResponse';
@@ -31,7 +34,7 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class BranchService {
     constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
-     * Create a branch
+     * Create branch
      * Creates a branch in the specified project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      *
@@ -62,7 +65,7 @@ export class BranchService {
         });
     }
     /**
-     * Get a list of branches
+     * List branches
      * Retrieves a list of branches for the specified project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      *
@@ -73,23 +76,66 @@ export class BranchService {
      * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
      *
      * @param projectId The Neon project ID
+     * @param search Search by branch `name` or `id`. You can specify partial `name` or `id` values to filter results.
+     * @param sortBy Sort the branches by sort_field. If not provided, branches will be sorted by updated_at descending order
+     * @param cursor A cursor to use in pagination. A cursor defines your place in the data list. Include `response.pagination.next` in subsequent API calls to fetch next page of the list.
+     * @param sortOrder Defines the sorting order of entities.
+     * @param limit The maximum number of records to be returned in the response
      * @returns any Returned a list of branches for the specified project
      * @returns GeneralError General Error
      * @throws ApiError
      */
     public listProjectBranches(
         projectId: string,
-    ): CancelablePromise<(BranchesResponse & AnnotationsMapResponse) | GeneralError> {
+        search?: string,
+        sortBy: 'name' | 'created_at' | 'updated_at' = 'updated_at',
+        cursor?: string,
+        sortOrder: 'asc' | 'desc' = 'desc',
+        limit?: number,
+    ): CancelablePromise<(BranchesResponse & AnnotationsMapResponse & CursorPaginationResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project_id}/branches',
             path: {
                 'project_id': projectId,
             },
+            query: {
+                'search': search,
+                'sort_by': sortBy,
+                'cursor': cursor,
+                'sort_order': sortOrder,
+                'limit': limit,
+            },
         });
     }
     /**
-     * Get branch details
+     * Retrieve number of branches
+     * Retrieves the total number of branches in the specified project.
+     * You can obtain a `project_id` by listing the projects for your Neon account.
+     *
+     * @param projectId The Neon project ID
+     * @param search Count branches matching the `name` in search query
+     * @returns any Returned a count of branches for the specified project
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public countProjectBranches(
+        projectId: string,
+        search?: string,
+    ): CancelablePromise<BranchesCountResponse | GeneralError> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/projects/{project_id}/branches/count',
+            path: {
+                'project_id': projectId,
+            },
+            query: {
+                'search': search,
+            },
+        });
+    }
+    /**
+     * Retrieve branch details
      * Retrieves information about the specified branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain a `branch_id` by listing the project's branches.
@@ -120,7 +166,7 @@ export class BranchService {
         });
     }
     /**
-     * Delete a branch
+     * Delete branch
      * Deletes the specified branch from a project, and places
      * all compute endpoints into an idle state, breaking existing client connections.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -153,7 +199,7 @@ export class BranchService {
         });
     }
     /**
-     * Update a branch
+     * Update branch
      * Updates the specified branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -183,7 +229,7 @@ export class BranchService {
         });
     }
     /**
-     * Restore a branch
+     * Restore branch
      * Restores a branch to an earlier state in its own or another branch's history
      * @param projectId The Neon project ID
      * @param branchId The branch ID
@@ -209,11 +255,10 @@ export class BranchService {
         });
     }
     /**
-     * Get the database schema
-     * Retrieves the schema from the specified database. The `lsn` and `timestamp` values cannot be specified at the same time. If both are omitted, the database schema is retrieved from database's head .
+     * Retrieve database schema
+     * Retrieves the schema from the specified database. The `lsn` and `timestamp` values cannot be specified at the same time. If both are omitted, the database schema is retrieved from database's head.
      * @param projectId The Neon project ID
      * @param branchId The branch ID
-     * @param role The role on whose behalf the schema is retrieved
      * @param dbName Name of the database for which the schema is retrieved
      * @param lsn The Log Sequence Number (LSN) for which the schema is retrieved
      *
@@ -226,7 +271,6 @@ export class BranchService {
     public getProjectBranchSchema(
         projectId: string,
         branchId: string,
-        role: string,
         dbName: string,
         lsn?: string,
         timestamp?: string,
@@ -239,7 +283,6 @@ export class BranchService {
                 'branch_id': branchId,
             },
             query: {
-                'role': role,
                 'db_name': dbName,
                 'lsn': lsn,
                 'timestamp': timestamp,
@@ -247,31 +290,48 @@ export class BranchService {
         });
     }
     /**
-     * @deprecated
-     * Set branch as primary
-     * DEPRECATED. Use `/set_as_default` endpoint.
-     * Sets the specified branch as the project's primary branch.
-     * The primary designation is automatically removed from the previous primary branch.
-     * You can obtain a `project_id` by listing the projects for your Neon account.
-     * You can obtain the `branch_id` by listing the project's branches.
-     * For more information, see [Manage branches](https://neon.tech/docs/manage/branches/).
-     *
+     * Compare database schema
+     * Compares the schema from the specified database with another branch's schema.
      * @param projectId The Neon project ID
      * @param branchId The branch ID
-     * @returns BranchOperations Updated the specified branch
+     * @param dbName Name of the database for which the schema is retrieved
+     * @param baseBranchId The branch ID to compare the schema with
+     * @param lsn The Log Sequence Number (LSN) for which the schema is retrieved
+     *
+     * @param timestamp The point in time for which the schema is retrieved
+     *
+     * @param baseLsn The Log Sequence Number (LSN) for the base branch schema
+     *
+     * @param baseTimestamp The point in time for the base branch schema
+     *
+     * @returns BranchSchemaCompareResponse Difference between the schemas
      * @returns GeneralError General Error
      * @throws ApiError
      */
-    public setPrimaryProjectBranch(
+    public getProjectBranchSchemaComparison(
         projectId: string,
         branchId: string,
-    ): CancelablePromise<BranchOperations | GeneralError> {
+        dbName: string,
+        baseBranchId?: string,
+        lsn?: string,
+        timestamp?: string,
+        baseLsn?: string,
+        baseTimestamp?: string,
+    ): CancelablePromise<BranchSchemaCompareResponse | GeneralError> {
         return this.httpRequest.request({
-            method: 'POST',
-            url: '/projects/{project_id}/branches/{branch_id}/set_as_primary',
+            method: 'GET',
+            url: '/projects/{project_id}/branches/{branch_id}/compare_schema',
             path: {
                 'project_id': projectId,
                 'branch_id': branchId,
+            },
+            query: {
+                'base_branch_id': baseBranchId,
+                'db_name': dbName,
+                'lsn': lsn,
+                'timestamp': timestamp,
+                'base_lsn': baseLsn,
+                'base_timestamp': baseTimestamp,
             },
         });
     }
@@ -303,7 +363,7 @@ export class BranchService {
         });
     }
     /**
-     * Get a list of branch endpoints
+     * List branch endpoints
      * Retrieves a list of compute endpoints for the specified branch.
      * Neon permits only one read-write compute endpoint per branch.
      * A branch can have multiple read-only compute endpoints.
@@ -330,7 +390,7 @@ export class BranchService {
         });
     }
     /**
-     * Get a list of databases
+     * List databases
      * Retrieves a list of databases for the specified branch.
      * A branch can have multiple databases.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -357,7 +417,7 @@ export class BranchService {
         });
     }
     /**
-     * Create a database
+     * Create database
      * Creates a database in the specified branch.
      * A branch can have multiple databases.
      * You can obtain a `project_id` by listing the projects for your Neon account.
@@ -388,7 +448,7 @@ export class BranchService {
         });
     }
     /**
-     * Get database details
+     * Retrieve database details
      * Retrieves information about the specified database.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` and `database_name` by listing the branch's databases.
@@ -417,7 +477,7 @@ export class BranchService {
         });
     }
     /**
-     * Update a database
+     * Update database
      * Updates the specified database in the branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` and `database_name` by listing the branch's databases.
@@ -450,7 +510,7 @@ export class BranchService {
         });
     }
     /**
-     * Delete a database
+     * Delete database
      * Deletes the specified database from the branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` and `database_name` by listing the branch's databases.
@@ -479,7 +539,7 @@ export class BranchService {
         });
     }
     /**
-     * Get a list of roles
+     * List roles
      * Retrieves a list of Postgres roles from the specified branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -505,7 +565,7 @@ export class BranchService {
         });
     }
     /**
-     * Create a role
+     * Create role
      * Creates a Postgres role in the specified branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -538,7 +598,7 @@ export class BranchService {
         });
     }
     /**
-     * Get role details
+     * Retrieve role details
      * Retrieves details about the specified role.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -569,7 +629,7 @@ export class BranchService {
         });
     }
     /**
-     * Delete a role
+     * Delete role
      * Deletes the specified Postgres role from the branch.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -599,7 +659,7 @@ export class BranchService {
         });
     }
     /**
-     * Get role password
+     * Retrieve role password
      * Retrieves the password for the specified Postgres role, if possible.
      * You can obtain a `project_id` by listing the projects for your Neon account.
      * You can obtain the `branch_id` by listing the project's branches.
@@ -633,7 +693,7 @@ export class BranchService {
         });
     }
     /**
-     * Reset the role password
+     * Reset role password
      * Resets the password for the specified Postgres role.
      * Returns a new password and operations. The new password is ready to use when the last operation finishes.
      * The old password remains valid until last operation finishes.
@@ -648,7 +708,7 @@ export class BranchService {
      * @param projectId The Neon project ID
      * @param branchId The branch ID
      * @param roleName The role nam
-     * @returns RoleOperations Reset the passsword for the specified role
+     * @returns RoleOperations Reset the password for the specified role
      * @returns GeneralError General Error
      * @throws ApiError
      */

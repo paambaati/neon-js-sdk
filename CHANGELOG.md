@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # [2.0.0-beta.9](https://github.com/paambaati/neon-js-sdk/compare/v2.0.0-beta.8...v2.0.0-beta.9) (2024-08-08)
 
 
@@ -89,6 +90,62 @@
 
 * move to @hey-api/openapi-ts, as openapi-typescript-codegen is being deprecated
 
+||||||| e7dd037
+=======
+# [1.30.0](https://github.com/paambaati/neon-js-sdk/compare/v1.29.2...v1.30.0) (2025-02-28)
+
+
+### Features
+
+* update to track latest spec changes ([d4fc052](https://github.com/paambaati/neon-js-sdk/commit/d4fc052897fca06c76dafd61e4b893df8986faf8))
+* update to track latest spec changes ([b7ce7d4](https://github.com/paambaati/neon-js-sdk/commit/b7ce7d45751da368c1e02b27c6db6c7f6856474c))
+
+## [1.29.2](https://github.com/paambaati/neon-js-sdk/compare/v1.29.1...v1.29.2) (2025-02-19)
+
+
+### Bug Fixes
+
+* **ci:** revert dry run logic ([686c6e6](https://github.com/paambaati/neon-js-sdk/commit/686c6e627c31f872dae8c0cd6feaa1e31d568aab))
+
+## [1.29.1](https://github.com/paambaati/neon-js-sdk/compare/v1.29.0...v1.29.1) (2025-02-19)
+
+
+### Bug Fixes
+
+* **ci:** rename workflow YAML to fix provenance problems ([032f643](https://github.com/paambaati/neon-js-sdk/commit/032f6431022b036d7f90d82a7320781faf4aa32e))
+
+# [1.29.0](https://github.com/paambaati/neon-js-sdk/compare/v1.28.0...v1.29.0) (2025-02-18)
+
+
+### Features
+
+* update to track latest spec changes ([373a795](https://github.com/paambaati/neon-js-sdk/commit/373a79549bae8d04217c38c8c95025ee6fd76012))
+* update to track latest spec changes ([7ada7b1](https://github.com/paambaati/neon-js-sdk/commit/7ada7b1e5213351caa69fc1ad64db1e5cf199d09))
+
+# [1.28.0](https://github.com/paambaati/neon-js-sdk/compare/v1.27.1...v1.28.0) (2025-01-29)
+
+
+### Features
+
+* update to track latest spec changes ([26c1a7d](https://github.com/paambaati/neon-js-sdk/commit/26c1a7d3ef904205d6a2202a663670801137516e))
+* update to track latest spec changes ([d71b720](https://github.com/paambaati/neon-js-sdk/commit/d71b7205fa8d2d9502b1bc77b373f92be67b7157))
+
+## [1.27.1](https://github.com/paambaati/neon-js-sdk/compare/v1.27.0...v1.27.1) (2024-09-23)
+
+
+### Bug Fixes
+
+* fix package.json exports ([ce5dc9e](https://github.com/paambaati/neon-js-sdk/commit/ce5dc9ec544d4cc0f64813861d7480bd428a80e8))
+
+# [1.27.0](https://github.com/paambaati/neon-js-sdk/compare/v1.26.0...v1.27.0) (2024-09-23)
+
+
+### Features
+
+* update to track latest spec changes ([68810e4](https://github.com/paambaati/neon-js-sdk/commit/68810e429c06ebff789d1da3caaf1c6a019a9131))
+* update to track latest spec changes ([bbb16e0](https://github.com/paambaati/neon-js-sdk/commit/bbb16e055035060fec8ec742ea9a283d656162b0))
+
+>>>>>>> main
 # [1.26.0](https://github.com/paambaati/neon-js-sdk/compare/v1.25.0...v1.26.0) (2024-08-12)
 
 
