@@ -6,6 +6,7 @@ import type { BaseHttpRequest } from './core/BaseHttpRequest';
 import type { OpenAPIConfig } from './core/OpenAPI';
 import { FetchHttpRequest } from './core/FetchHttpRequest';
 import { ApiKeyService } from './services/ApiKeyService';
+import { AuthService } from './services/AuthService';
 import { BranchService } from './services/BranchService';
 import { ConsumptionService } from './services/ConsumptionService';
 import { EndpointService } from './services/EndpointService';
@@ -17,6 +18,7 @@ import { UsersService } from './services/UsersService';
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 export class NeonClient {
     public readonly apiKey: ApiKeyService;
+    public readonly auth: AuthService;
     public readonly branch: BranchService;
     public readonly consumption: ConsumptionService;
     public readonly endpoint: EndpointService;
@@ -39,6 +41,7 @@ export class NeonClient {
             ENCODE_PATH: config?.ENCODE_PATH,
         });
         this.apiKey = new ApiKeyService(this.request);
+        this.auth = new AuthService(this.request);
         this.branch = new BranchService(this.request);
         this.consumption = new ConsumptionService(this.request);
         this.endpoint = new EndpointService(this.request);
