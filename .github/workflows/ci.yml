@@ -41,6 +41,9 @@ jobs:
     - name: Run JSR fixes
       run: pnpm run jsr:fix
 
+    - name: Check lint & formatting
+      run: pnpm run ci
+
     - name: Type-check and build package
       run: pnpm run build
 

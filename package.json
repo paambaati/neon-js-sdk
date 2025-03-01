@@ -1,77 +1,81 @@
 {
-  "name": "neon-sdk",
-  "version": "2.0.0-beta.10",
-  "description": "TypeScript SDK for managing your Neon Serverless PostgreSQL projects",
-  "keywords": [
-    "neon",
-    "sdk",
-    "postgresql",
-    "serverless",
-    "deno"
-  ],
-  "homepage": "https://github.com/paambaati/neon-js-sdk",
-  "bugs": {
-    "url": "https://github.com/paambaati/neon-js-sdk/issues"
-  },
-  "license": "MIT",
-  "author": {
-    "name": "GP",
-    "email": "me@httgp.com",
-    "url": "https://httgp.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/paambaati/neon-js-sdk.git"
-  },
-  "scripts": {
-    "generate": "openapi-ts",
-    "build": "tsup --config tsup.config.ts",
-    "jsr:fix": "jscodeshift -t ./scripts/transformers/jsr-fixes.ts --extensions=ts --parser=ts './generated/core/CancelablePromise.ts' './generated/schemas.gen.ts'",
-    "jsr:publish:dry": "pnpm dlx jsr publish --allow-dirty --dry-run",
-    "jsr:publish": "pnpm dlx jsr publish",
-    "prepublishOnly": "npm run build"
-  },
-  "engines": {
-    "node": ">=18",
-    "deno": ">=1.42"
-  },
-  "engineStrict": true,
-  "files": [
-    "dist/"
-  ],
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    "import": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    },
-    "require": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "tag": "latest",
-    "provenance": true,
-    "access": "public"
-  },
-  "devDependencies": {
-    "@hey-api/openapi-ts": "0.64.7",
-    "@sebbo2002/semantic-release-jsr": "2.0.4",
-    "@semantic-release/changelog": "6.0.3",
-    "@semantic-release/commit-analyzer": "13.0.1",
-    "@semantic-release/git": "10.0.1",
-    "@semantic-release/github": "11.0.1",
-    "@semantic-release/npm": "12.0.1",
-    "@semantic-release/release-notes-generator": "14.0.3",
-    "@types/jscodeshift": "0.12.0",
-    "jscodeshift": "17.1.2",
-    "tsup": "8.4.0",
-    "typescript": "5.7.3"
-  },
-  "packageManager": "pnpm@9.7.1",
-  "$schema": "https://json.schemastore.org/package"
+	"name": "neon-sdk",
+	"version": "2.0.0-beta.10",
+	"description": "TypeScript SDK for managing your Neon Serverless PostgreSQL projects",
+	"keywords": ["neon", "sdk", "postgresql", "serverless", "deno"],
+	"homepage": "https://github.com/paambaati/neon-js-sdk",
+	"bugs": {
+		"url": "https://github.com/paambaati/neon-js-sdk/issues"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "GP",
+		"email": "me@httgp.com",
+		"url": "https://httgp.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/paambaati/neon-js-sdk.git"
+	},
+	"scripts": {
+		"generate": "openapi-ts",
+		"build": "tsup --config tsup.config.ts",
+		"jsr:fix": "jscodeshift -t ./scripts/transformers/jsr-fixes.ts --extensions=ts --parser=ts './generated/core/CancelablePromise.ts' './generated/schemas.gen.ts'",
+		"jsr:publish:dry": "pnpm dlx jsr publish --allow-dirty --dry-run",
+		"jsr:publish": "pnpm dlx jsr publish",
+		"ci": "biome ci",
+		"format:check": "biome format",
+		"format": "biome format --fix",
+		"lint:check": "biome lint",
+		"lint": "biome lint --fix",
+		"lint:unsafe": "biome lint --fix --unsafe ./",
+		"prepublishOnly": "pnpm run build",
+		"test:types": "tsd -f tests/types.test-d.ts",
+		"test": "tsx --test 'tests/*.test.ts'"
+	},
+	"engines": {
+		"node": ">=18",
+		"deno": ">=1.42"
+	},
+	"engineStrict": true,
+	"files": ["dist/"],
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		"import": {
+			"types": "./dist/index.d.mts",
+			"default": "./dist/index.mjs"
+		},
+		"require": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		}
+	},
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/",
+		"tag": "latest",
+		"provenance": true,
+		"access": "public"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@hey-api/openapi-ts": "0.64.7",
+		"@sebbo2002/semantic-release-jsr": "2.0.4",
+		"@semantic-release/changelog": "6.0.3",
+		"@semantic-release/commit-analyzer": "13.0.1",
+		"@semantic-release/git": "10.0.1",
+		"@semantic-release/github": "11.0.1",
+		"@semantic-release/npm": "12.0.1",
+		"@semantic-release/release-notes-generator": "14.0.3",
+		"@types/jscodeshift": "0.12.0",
+		"@types/node": "22.13.5",
+		"jscodeshift": "17.1.2",
+		"tsd": "0.31.2",
+		"tsup": "8.4.0",
+		"tsx": "4.19.3",
+		"typescript": "5.7.3"
+	},
+	"packageManager": "pnpm@9.7.1",
+	"$schema": "https://json.schemastore.org/package"
 }
