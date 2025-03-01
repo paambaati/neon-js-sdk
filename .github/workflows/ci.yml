@@ -48,7 +48,9 @@ jobs:
       run: pnpm run build
 
     - name: Check npm package for packaging/publishing errors
-      run: pnpm dlx publint run --strict
+      run: |
+        pnpm dlx publint run --strict
+        pnpm dlx @arethetypeswrong/cli --profile strict --pack .
 
     - name: Check JSR package for packaging/publishing errors
       run: pnpm dlx jsr publish --dry-run --allow-dirty
