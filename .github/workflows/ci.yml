@@ -35,24 +35,33 @@ jobs:
     - name: Install dependencies
       run: pnpm install
 
-    - name: Check lock file for untrusted packages
-      run: pnpm dlx lockfile-lint --path package-lock.json --allowed-hosts npm --validate-https
+    - name: Generate OpenAPI bindings
+      run: pnpm run generate
 
-    - name: Generate OpenAPI bindings and build package
+    - name: Run JSR fixes
+      run: pnpm run jsr:fix
+
+    - name: Check lint & formatting
+      run: pnpm run ci
+
+    - name: Type-check and build package
+      run: pnpm run build
+
+    - name: Check npm package for packaging/publishing errors
       run: |
-        pnpm run generate
-        pnpm run build
+        pnpm dlx publint run --strict
+        pnpm dlx @arethetypeswrong/cli --profile strict --pack .
 
-    - name: Check package for packaging errors
-      run: pnpm dlx publint run
+    - name: Check JSR package for packaging/publishing errors
+      run: pnpm dlx jsr publish --dry-run --allow-dirty
 
-    - name: Check for uncommitted changes
+    - name: Check for uncommitted changes and upstream API changes from Neon
       # NOTE: Do not run this step for Dependabot PRs, because `pnpm run generate` might generate newer bindings (in case Neon's OpenAPI spec has had updates)
       # which in turn will flag a "found changed files after build" error, which turns CI red.
-      if: ${{ !contains(github.event.pull_request.labels.*.name, 'dependencies') }}
+      if: "!contains(github.event.pull_request.labels.*.name, 'dependencies')"
       # NOTE: Ensure no changes, but ignore node_modules dir since dev/fresh ci deps installed.
       run: |
         git diff --exit-code --stat -- . ':!node_modules' ':!dist' \
-        || (echo "##[error] found changed files after build. please 'pnpm run generate && pnpm run build'" \
+        || (echo "##[error] found changed files after build. please 'pnpm run generate && pnpm run build && pnpm run jsr:fix'" \
                  "and commit all changes" \
             && exit 1)

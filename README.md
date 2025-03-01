@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/paambaati/neon-js-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/paambaati/neon-js-sdk/actions/workflows/ci.yml)
 [![NPM Version](https://img.shields.io/npm/v/neon-sdk.svg?logo=npm)](https://www.npmjs.com/package/neon-sdk)
+[![JSR Version](https://img.shields.io/jsr/v/%40httgp/neon-sdk)](https://jsr.io/@httgp/neon-sdk)
 
 Fully-typed, zero-dependency Node.js and Deno SDK for managing your [Neon](https://neon.tech/) Serverless Postgres projects.
 
@@ -13,7 +14,7 @@ Fully-typed, zero-dependency Node.js and Deno SDK for managing your [Neon](https
 
 ## Usage
 
-**Node.js (>= v18.x)**
+### Node.js
 
 1. Install `neon-sdk` as a dependency using the package manager of your choice.
 
@@ -36,24 +37,18 @@ Fully-typed, zero-dependency Node.js and Deno SDK for managing your [Neon](https
     })()
     ```
 
-<details><summary><strong>Node.js (>= v16.15.x)</strong></summary>
+### Deno
 
-You can use the same steps to use this package if you're on Node.js v16.15.x or above, with one minor change; when running your code, you will need to pass the `--experimental-fetch` flag to `node`.
+1. Add the `neon-sdk` package from JSR.
 
-For example –
+    ```bash
+    deno add @httgp/neon-sdk
+    ```
 
-```
-node --experimental-fetch app.js
-```
-</details>
-
-**Deno (>= v1.28.x)**
-
-1. Simply import the `neon-sdk` from npm using the [`npm:` specifier](https://deno.land/manual@v1.30.3/node/npm_specifiers) and initialize the client with your [Neon API token](https://neon.tech/docs/manage/api-keys#manage-api-keys-with-the-neon-api).
+2. Now import the module and initialize the client with your [Neon API token](https://neon.tech/docs/manage/api-keys#manage-api-keys-with-the-neon-api).
 
     ```typescript
-    // neon.ts
-    import { NeonClient } from "npm:neon-sdk";
+    import { NeonClient } from "@httgp/neon-sdk";
 
     const neonClient = new NeonClient({
         TOKEN: "<INSERT NEON API KEY HERE>",
@@ -68,6 +63,44 @@ node --experimental-fetch app.js
     deno run --allow-net=console.neon.tech neon.ts
     ```
 
+2. Alternatively, the `neon-sdk` package is also available from npm, which can be used with the [`npm:` specifier](https://deno.land/manual@v1.30.3/node/npm_specifiers).
+
+    ```typescript
+    import { NeonClient } from "npm:neon-sdk";
+
+    const neonClient = new NeonClient({
+        TOKEN: "<INSERT NEON API KEY HERE>",
+    });
+    const projects = await neonClient.project.listProjects();
+    console.log(projects);
+    ```
+
+## Recipes
+
+All API responses are typed as a union of the specific API's successful response and `GeneralError`. To narrow this type down –
+
+```typescript
+import { NeonClient, type GeneralError } from 'neon-sdk';
+
+function isNeonError(neonResponse: unknown): neonResponse is GeneralError {
+    const allowedKeys = ['code', 'message'].sort();
+    const foundKeys = Object.getOwnPropertyNames(neonResponse || {}).sort();
+    return foundKeys.length === allowedKeys.length
+            && foundKeys.every((value, index) => value === allowedKeys[index])
+            && (neonResponse as GeneralError).code !== undefined
+            && (neonResponse as GeneralError).message !== undefined;
+}
+
+const neonClient = new NeonClient({
+    TOKEN: '<INSERT NEON API KEY HERE>',
+});
+const response = await neonClient.project.listProjects();
+
+if (!isNeonError(response)) {
+    // Correctly typed as `ProjectsResponse`
+    response
+}
+```
 ## Developer Notes
 
-This package is auto-generated from [Neon's OpenAPI reference](https://neon.tech/api-reference/v2/) using [`openapi-typescript-codegen`](https://www.npmjs.com/package/openapi-typescript-codegen).
+This package is auto-generated from [Neon's OpenAPI reference](https://neon.tech/api-reference/v2/) using [`@hey-api/openapi-ts`](https://github.com/hey-api/openapi-ts).

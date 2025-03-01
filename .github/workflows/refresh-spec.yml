@@ -30,6 +30,8 @@ jobs:
     - name: Generate OpenAPI bindings
       run: |
         pnpm run generate
+        pnpm run jsr:fix
+        pnpm run format
 
     - name: Create pull request with changes
       uses: peter-evans/create-pull-request@v5
