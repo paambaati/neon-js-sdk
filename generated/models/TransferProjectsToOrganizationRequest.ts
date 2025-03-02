@@ -4,9 +4,9 @@
 /* eslint-disable */
 export type TransferProjectsToOrganizationRequest = {
     /**
-     * The source organization identifier
+     * The destination organization identifier
      */
-    org_id: string;
+    destination_org_id: string;
     /**
      * The list of projects ids to transfer. Maximum of 400 project ids
      */

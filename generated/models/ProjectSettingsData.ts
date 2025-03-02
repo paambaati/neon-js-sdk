@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { AllowedIps } from './AllowedIps';
 import type { MaintenanceWindow } from './MaintenanceWindow';
+import type { ProjectAuditLogLevel } from './ProjectAuditLogLevel';
 import type { ProjectQuota } from './ProjectQuota';
 export type ProjectSettingsData = {
     quota?: ProjectQuota;
@@ -29,5 +30,6 @@ export type ProjectSettingsData = {
      *
      */
     block_vpc_connections?: boolean;
+    audit_log_level?: ProjectAuditLogLevel;
 };
 
