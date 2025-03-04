@@ -268,21 +268,21 @@ export class OrganizationsService {
      * Transfer projects between organizations
      * Transfers selected projects, identified by their IDs, from your organization to another specified organization.
      *
-     * @param orgId The Neon organization ID (destination org, where projects will be moved to)
+     * @param sourceOrgId The Neon organization ID (source org, which currently owns the project)
      * @param requestBody
      * @returns EmptyResponse Projects successfully transferred from organization to organization
      * @returns GeneralError General Error
      * @throws ApiError
      */
     public transferProjectsFromOrgToOrg(
-        orgId: string,
+        sourceOrgId: string,
         requestBody: TransferProjectsToOrganizationRequest,
     ): CancelablePromise<EmptyResponse | GeneralError> {
         return this.httpRequest.request({
             method: 'POST',
-            url: '/organizations/{org_id}/projects/transfer',
+            url: '/organizations/{source_org_id}/projects/transfer',
             path: {
-                'org_id': orgId,
+                'source_org_id': sourceOrgId,
             },
             body: requestBody,
             mediaType: 'application/json',
