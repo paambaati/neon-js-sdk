@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { AuthDetailsResponse } from '../models/AuthDetailsResponse';
 import type { CurrentUserInfoResponse } from '../models/CurrentUserInfoResponse';
 import type { EmptyResponse } from '../models/EmptyResponse';
 import type { GeneralError } from '../models/GeneralError';
@@ -62,6 +63,21 @@ export class UsersService {
                 406: `Transfer failed - the target organization has too many projects or its plan is incompatible with the source account. Reduce the number of projects or upgrade the target organization to increase its capacity.`,
                 422: `One or more of the provided project IDs have GitHub or Vercel integrations installed. Transferring integration projects is currently not supported`,
             },
+        });
+    }
+    /**
+     * Get request authentication details
+     * Returns auth information about the passed credentials. It can refer to an API key, Bearer token or OAuth session.
+     *
+     * @returns AuthDetailsResponse Returned auth information about the current auth entity
+     *
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public getAuthDetails(): CancelablePromise<AuthDetailsResponse | GeneralError> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/auth',
         });
     }
 }
