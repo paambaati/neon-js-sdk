@@ -24,6 +24,7 @@ export type { ApiKeyCreateResponse } from './models/ApiKeyCreateResponse';
 export type { ApiKeyCreatorData } from './models/ApiKeyCreatorData';
 export type { ApiKeyRevokeResponse } from './models/ApiKeyRevokeResponse';
 export type { ApiKeysListResponseItem } from './models/ApiKeysListResponseItem';
+export type { AuthDetailsResponse } from './models/AuthDetailsResponse';
 export type { BillingAccount } from './models/BillingAccount';
 export type { BillingAccountState } from './models/BillingAccountState';
 export type { BillingPaymentMethod } from './models/BillingPaymentMethod';
