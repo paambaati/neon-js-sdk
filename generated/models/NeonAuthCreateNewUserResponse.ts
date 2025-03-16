@@ -2,4 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type IdentityAuthProviderProjectOwnedBy = 'user' | 'neon';
+export type NeonAuthCreateNewUserResponse = {
+    /**
+     * ID of newly created user
+     */
+    id: string;
+};
+

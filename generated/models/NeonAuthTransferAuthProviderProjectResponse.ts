@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type IdentityTransferAuthProviderProjectResponse = {
+export type NeonAuthTransferAuthProviderProjectResponse = {
     /**
      * URL for completing the process of ownership transfer
      */

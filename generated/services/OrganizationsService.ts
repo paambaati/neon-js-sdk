@@ -378,6 +378,8 @@ export class OrganizationsService {
     /**
      * Delete VPC endpoint
      * Deletes the VPC endpoint from the specified Neon organization.
+     * If you delete a VPC endpoint from a Neon organization, that VPC endpoint cannot
+     * be added back to the Neon organization.
      *
      * @param orgId The Neon organization ID
      * @param regionId The Neon region ID.
