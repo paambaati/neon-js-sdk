@@ -3,13 +3,13 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { GeneralError } from '../models/GeneralError';
-import type { IdentityCreateAuthProviderSDKKeysRequest } from '../models/IdentityCreateAuthProviderSDKKeysRequest';
-import type { IdentityCreateIntegrationRequest } from '../models/IdentityCreateIntegrationRequest';
-import type { IdentityCreateIntegrationResponse } from '../models/IdentityCreateIntegrationResponse';
-import type { IdentitySupportedAuthProvider } from '../models/IdentitySupportedAuthProvider';
-import type { IdentityTransferAuthProviderProjectRequest } from '../models/IdentityTransferAuthProviderProjectRequest';
-import type { IdentityTransferAuthProviderProjectResponse } from '../models/IdentityTransferAuthProviderProjectResponse';
-import type { ListProjectIdentityIntegrationsResponse } from '../models/ListProjectIdentityIntegrationsResponse';
+import type { ListNeonAuthIntegrationsResponse } from '../models/ListNeonAuthIntegrationsResponse';
+import type { NeonAuthCreateAuthProviderSDKKeysRequest } from '../models/NeonAuthCreateAuthProviderSDKKeysRequest';
+import type { NeonAuthCreateIntegrationRequest } from '../models/NeonAuthCreateIntegrationRequest';
+import type { NeonAuthCreateIntegrationResponse } from '../models/NeonAuthCreateIntegrationResponse';
+import type { NeonAuthSupportedAuthProvider } from '../models/NeonAuthSupportedAuthProvider';
+import type { NeonAuthTransferAuthProviderProjectRequest } from '../models/NeonAuthTransferAuthProviderProjectRequest';
+import type { NeonAuthTransferAuthProviderProjectResponse } from '../models/NeonAuthTransferAuthProviderProjectResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class AuthService {
@@ -21,12 +21,12 @@ export class AuthService {
      *
      * @param requestBody
      * @returns GeneralError General Error
-     * @returns IdentityCreateIntegrationResponse Creates Neon Auth integration
+     * @returns NeonAuthCreateIntegrationResponse Creates Neon Auth integration
      * @throws ApiError
      */
-    public createProjectIdentityIntegration(
-        requestBody: IdentityCreateIntegrationRequest,
-    ): CancelablePromise<GeneralError | IdentityCreateIntegrationResponse> {
+    public createNeonAuthIntegration(
+        requestBody: NeonAuthCreateIntegrationRequest,
+    ): CancelablePromise<GeneralError | NeonAuthCreateIntegrationResponse> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/projects/auth/create',
@@ -41,12 +41,12 @@ export class AuthService {
      *
      * @param requestBody
      * @returns GeneralError General Error
-     * @returns IdentityCreateIntegrationResponse Creates Auth Provider SDK keys
+     * @returns NeonAuthCreateIntegrationResponse Creates Auth Provider SDK keys
      * @throws ApiError
      */
-    public createProjectIdentityAuthProviderSdkKeys(
-        requestBody: IdentityCreateAuthProviderSDKKeysRequest,
-    ): CancelablePromise<GeneralError | IdentityCreateIntegrationResponse> {
+    public createNeonAuthProviderSdkKeys(
+        requestBody: NeonAuthCreateAuthProviderSDKKeysRequest,
+    ): CancelablePromise<GeneralError | NeonAuthCreateIntegrationResponse> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/projects/auth/keys',
@@ -59,13 +59,13 @@ export class AuthService {
      * Transfer ownership of your Neon-managed auth project to your own auth provider account.
      *
      * @param requestBody
-     * @returns IdentityTransferAuthProviderProjectResponse Transfer initiated. Follow the URL to complete the process in your auth provider's UI.
+     * @returns NeonAuthTransferAuthProviderProjectResponse Transfer initiated. Follow the URL to complete the process in your auth provider's UI.
      * @returns GeneralError General Error
      * @throws ApiError
      */
-    public transferProjectIdentityAuthProviderProject(
-        requestBody: IdentityTransferAuthProviderProjectRequest,
-    ): CancelablePromise<IdentityTransferAuthProviderProjectResponse | GeneralError> {
+    public transferNeonAuthProviderProject(
+        requestBody: NeonAuthTransferAuthProviderProjectRequest,
+    ): CancelablePromise<NeonAuthTransferAuthProviderProjectResponse | GeneralError> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/projects/auth/transfer_ownership',
@@ -76,13 +76,13 @@ export class AuthService {
     /**
      * Lists active integrations with auth providers
      * @param projectId The Neon project ID
-     * @returns ListProjectIdentityIntegrationsResponse Return management API keys metadata
+     * @returns ListNeonAuthIntegrationsResponse Return management API keys metadata
      * @returns GeneralError General Error
      * @throws ApiError
      */
-    public listProjectIdentityIntegrations(
+    public listNeonAuthIntegrations(
         projectId: string,
-    ): CancelablePromise<ListProjectIdentityIntegrationsResponse | GeneralError> {
+    ): CancelablePromise<ListNeonAuthIntegrationsResponse | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
             url: '/projects/{project_id}/auth/integrations',
@@ -99,9 +99,9 @@ export class AuthService {
      * @returns GeneralError General Error
      * @throws ApiError
      */
-    public deleteProjectIdentityIntegration(
+    public deleteNeonAuthIntegration(
         projectId: string,
-        authProvider: IdentitySupportedAuthProvider,
+        authProvider: NeonAuthSupportedAuthProvider,
     ): CancelablePromise<any | GeneralError> {
         return this.httpRequest.request({
             method: 'DELETE',
