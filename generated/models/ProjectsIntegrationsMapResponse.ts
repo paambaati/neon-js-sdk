@@ -7,6 +7,6 @@
  *
  */
 export type ProjectsIntegrationsMapResponse = {
-    integrations: Record<string, Array<'vercel' | 'github' | 'datadog'>>;
+    integrations: Record<string, Array<'vercel' | 'github' | 'datadog' | 'opentelemetry'>>;
 };
 

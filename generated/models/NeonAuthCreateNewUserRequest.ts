@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { IdentitySupportedAuthProvider } from './IdentitySupportedAuthProvider';
-export type IdentityCreateNewUserRequest = {
+import type { NeonAuthSupportedAuthProvider } from './NeonAuthSupportedAuthProvider';
+export type NeonAuthCreateNewUserRequest = {
     project_id: string;
-    auth_provider: IdentitySupportedAuthProvider;
+    auth_provider: NeonAuthSupportedAuthProvider;
     email: string;
     name?: string;
 };

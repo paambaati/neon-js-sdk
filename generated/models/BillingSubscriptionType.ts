@@ -7,4 +7,4 @@
  * Notice that for users without billing account this will be "UNKNOWN"
  *
  */
-export type BillingSubscriptionType = 'UNKNOWN' | 'direct_sales' | 'aws_marketplace' | 'free_v2' | 'launch' | 'scale' | 'business' | 'vercel_pg_legacy';
+export type BillingSubscriptionType = 'UNKNOWN' | 'direct_sales' | 'aws_marketplace' | 'free_v2' | 'free_v3' | 'serverless_v3' | 'launch' | 'scale' | 'business' | 'business_v3' | 'vercel_pg_legacy';

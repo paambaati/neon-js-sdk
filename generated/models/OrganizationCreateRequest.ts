@@ -16,5 +16,10 @@ export type OrganizationCreateRequest = {
         invitations?: Array<InvitationCreateRequest>;
     };
     subscription_type: BillingSubscriptionType;
+    /**
+     * Whether to transfer credits from the user account to the newly created organization account.
+     *
+     */
+    transfer_credits?: boolean;
 };
 

@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type IdentityTransferAuthProviderProjectResponse = {
-    /**
-     * URL for completing the process of ownership transfer
-     */
+/**
+ * Neon Data API created successfully
+ */
+export type DataAPICreateResponse = {
     url: string;
 };
 

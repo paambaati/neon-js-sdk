@@ -23,5 +23,9 @@ export type Organization = {
      *
      */
     updated_at: string;
+    /**
+     * If true, allow account to mark projects as HIPAA
+     */
+    allow_hipaa_projects?: boolean;
 };
 

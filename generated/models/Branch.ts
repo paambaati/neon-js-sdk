@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { BranchRestoreStatus } from './BranchRestoreStatus';
 import type { BranchState } from './BranchState';
 export type Branch = {
     /**
@@ -20,12 +21,17 @@ export type Branch = {
      */
     parent_id?: string;
     /**
-     * The Log Sequence Number (LSN) on the parent branch from which this branch was created
+     * The Log Sequence Number (LSN) on the parent branch from which this branch was created.
+     * When restoring a branch using the [Restore branch](https://api-docs.neon.tech/reference/restoreprojectbranch) endpoint,
+     * this value isn’t finalized until all operations related to the restore have completed successfully.
      *
      */
     parent_lsn?: string;
     /**
-     * The point in time on the parent branch from which this branch was created
+     * The point in time on the parent branch from which this branch was created.
+     * When restoring a branch using the [Restore branch](https://api-docs.neon.tech/reference/restoreprojectbranch) endpoint,
+     * this value isn’t finalized until all operations related to the restore have completed successfully.
+     * After all the operations completed, this value might stay empty.
      *
      */
     parent_timestamp?: string;
@@ -93,6 +99,20 @@ export type Branch = {
      */
     updated_at: string;
     /**
+     * The time-to-live (TTL) duration originally configured for the branch, in seconds. This read-only value represents the interval between the time `expires_at` was set and the expiration timestamp itself. It is preserved to ensure the same TTL duration is reapplied when resetting the branch from its parent, and only updates when a new `expires_at` value is set.
+     *
+     * This feature is currently in private preview. Get in touch with us to get access.
+     *
+     */
+    ttl_interval_seconds?: number;
+    /**
+     * The timestamp when the branch is scheduled to expire and be automatically deleted. Must be set by the client following the [RFC 3339, section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6) format with precision up to seconds (such as 2025-06-09T18:02:16Z). Deletion is performed by a background job and may not occur exactly at the specified time.
+     *
+     * This feature is currently in private preview. Get in touch with us to get access.
+     *
+     */
+    expires_at?: string;
+    /**
      * A timestamp indicating when the branch was last reset
      *
      */
@@ -118,5 +138,11 @@ export type Branch = {
      *
      */
     init_source?: string;
+    restore_status?: BranchRestoreStatus;
+    /**
+     * ID of the snapshot that was the restore source for this branch
+     *
+     */
+    restored_from?: string;
 };
 

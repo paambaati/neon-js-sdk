@@ -2,4 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type IdentitySupportedAuthProvider = 'mock' | 'stack';
+export type SupportTicket = {
+    zendesk_id: number;
+};
+

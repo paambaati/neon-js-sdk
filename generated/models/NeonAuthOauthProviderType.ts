@@ -2,10 +2,4 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type IdentityCreateNewUserResponse = {
-    /**
-     * ID of newly created user
-     */
-    id: string;
-};
-
+export type NeonAuthOauthProviderType = 'standard' | 'shared';

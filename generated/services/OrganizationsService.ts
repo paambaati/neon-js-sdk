@@ -19,6 +19,7 @@ import type { TransferProjectsToOrganizationRequest } from '../models/TransferPr
 import type { VPCEndpointAssignment } from '../models/VPCEndpointAssignment';
 import type { VPCEndpointDetails } from '../models/VPCEndpointDetails';
 import type { VPCEndpointsResponse } from '../models/VPCEndpointsResponse';
+import type { VPCEndpointsWithRegionResponse } from '../models/VPCEndpointsWithRegionResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class OrganizationsService {
@@ -293,6 +294,26 @@ export class OrganizationsService {
         });
     }
     /**
+     * List VPC endpoints across all regions
+     * Retrieves the list of VPC endpoints for the specified Neon organization across all regions.
+     *
+     * @param orgId The Neon organization ID
+     * @returns VPCEndpointsWithRegionResponse The list of configured VPC endpoint IDs for the specified organization across all regions
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public listOrganizationVpcEndpointsAllRegions(
+        orgId: string,
+    ): CancelablePromise<VPCEndpointsWithRegionResponse | GeneralError> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/organizations/{org_id}/vpc/vpc_endpoints',
+            path: {
+                'org_id': orgId,
+            },
+        });
+    }
+    /**
      * List VPC endpoints
      * Retrieves the list of VPC endpoints for the specified Neon organization.
      *
@@ -378,6 +399,8 @@ export class OrganizationsService {
     /**
      * Delete VPC endpoint
      * Deletes the VPC endpoint from the specified Neon organization.
+     * If you delete a VPC endpoint from a Neon organization, that VPC endpoint cannot
+     * be added back to the Neon organization.
      *
      * @param orgId The Neon organization ID
      * @param regionId The Neon region ID.

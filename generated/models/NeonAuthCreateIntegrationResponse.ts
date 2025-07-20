@@ -2,9 +2,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { IdentitySupportedAuthProvider } from './IdentitySupportedAuthProvider';
-export type IdentityCreateIntegrationResponse = {
-    auth_provider: IdentitySupportedAuthProvider;
+import type { NeonAuthSupportedAuthProvider } from './NeonAuthSupportedAuthProvider';
+export type NeonAuthCreateIntegrationResponse = {
+    auth_provider: NeonAuthSupportedAuthProvider;
     auth_provider_project_id: string;
     pub_client_key: string;
     secret_server_key: string;

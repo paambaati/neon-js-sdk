@@ -9,6 +9,7 @@ import { ApiKeyService } from './services/ApiKeyService';
 import { AuthService } from './services/AuthService';
 import { BranchService } from './services/BranchService';
 import { ConsumptionService } from './services/ConsumptionService';
+import { DataApiService } from './services/DataApiService';
 import { EndpointService } from './services/EndpointService';
 import { OperationService } from './services/OperationService';
 import { OrganizationsService } from './services/OrganizationsService';
@@ -21,6 +22,7 @@ export class NeonClient {
     public readonly auth: AuthService;
     public readonly branch: BranchService;
     public readonly consumption: ConsumptionService;
+    public readonly dataApi: DataApiService;
     public readonly endpoint: EndpointService;
     public readonly operation: OperationService;
     public readonly organizations: OrganizationsService;
@@ -44,6 +46,7 @@ export class NeonClient {
         this.auth = new AuthService(this.request);
         this.branch = new BranchService(this.request);
         this.consumption = new ConsumptionService(this.request);
+        this.dataApi = new DataApiService(this.request);
         this.endpoint = new EndpointService(this.request);
         this.operation = new OperationService(this.request);
         this.organizations = new OrganizationsService(this.request);

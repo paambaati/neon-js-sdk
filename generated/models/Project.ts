@@ -102,7 +102,7 @@ export type Project = {
      */
     creation_source: string;
     /**
-     * The number of seconds to retain the shared history for all branches in this project. The default for all plans is 1 day (86400 seconds).
+     * The number of seconds to retain the shared history for all branches in this project.
      *
      */
     history_retention_seconds: number;
@@ -153,5 +153,9 @@ export type Project = {
      *
      */
     maintenance_scheduled_for?: string;
+    /**
+     * A timestamp indicating when HIPAA was enabled for this project
+     */
+    hipaa_enabled_at?: string;
 };
 

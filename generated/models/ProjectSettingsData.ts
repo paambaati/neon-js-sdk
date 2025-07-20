@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { AllowedIps } from './AllowedIps';
 import type { MaintenanceWindow } from './MaintenanceWindow';
+import type { PreloadLibraries } from './PreloadLibraries';
 import type { ProjectAuditLogLevel } from './ProjectAuditLogLevel';
 import type { ProjectQuota } from './ProjectQuota';
 export type ProjectSettingsData = {
@@ -31,5 +32,7 @@ export type ProjectSettingsData = {
      */
     block_vpc_connections?: boolean;
     audit_log_level?: ProjectAuditLogLevel;
+    hipaa?: boolean;
+    preload_libraries?: PreloadLibraries;
 };
 

@@ -106,11 +106,25 @@ export type ProjectListItem = {
      */
     compute_last_active_at?: string;
     /**
-     * Organization id if a project belongs to organization.
+     * Organization id if the project belongs to an organization.
      * Permissions for the project will be given to organization members as defined by the organization admins.
      * The permissions of the project do not depend on the user that created the project if a project belongs to an organization.
      *
      */
     org_id?: string;
+    /**
+     * Organization name if the project belongs to an organization.
+     *
+     */
+    org_name?: string;
+    /**
+     * The number of seconds to retain the shared history for all branches in this project.
+     *
+     */
+    history_retention_seconds?: number;
+    /**
+     * A timestamp indicating when HIPAA was enabled for this project
+     */
+    hipaa_enabled_at?: string;
 };
 

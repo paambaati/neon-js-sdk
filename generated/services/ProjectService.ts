@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { AddProjectJWKSRequest } from '../models/AddProjectJWKSRequest';
+import type { AvailablePreloadLibraries } from '../models/AvailablePreloadLibraries';
 import type { BranchResponse } from '../models/BranchResponse';
 import type { ConnectionURIResponse } from '../models/ConnectionURIResponse';
 import type { ConnectionURIsResponse } from '../models/ConnectionURIsResponse';
@@ -22,6 +23,7 @@ import type { ProjectResponse } from '../models/ProjectResponse';
 import type { ProjectsApplicationsMapResponse } from '../models/ProjectsApplicationsMapResponse';
 import type { ProjectsIntegrationsMapResponse } from '../models/ProjectsIntegrationsMapResponse';
 import type { ProjectsResponse } from '../models/ProjectsResponse';
+import type { ProjectTransferRequestResponse } from '../models/ProjectTransferRequestResponse';
 import type { ProjectUpdateRequest } from '../models/ProjectUpdateRequest';
 import type { RolesResponse } from '../models/RolesResponse';
 import type { VPCEndpointAssignment } from '../models/VPCEndpointAssignment';
@@ -32,8 +34,8 @@ export class ProjectService {
     constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
      * List projects
-     * Retrieves a list of projects for the Neon account.
-     * A project is the top-level object in the Neon object hierarchy.
+     * Retrieves a list of projects for an organization.
+     * You may need to specify an org_id parameter depending on your API key type.
      * For more information, see [Manage projects](https://neon.tech/docs/manage/projects/).
      *
      * @param cursor Specify the cursor value from the previous response to retrieve the next batch of projects.
@@ -70,8 +72,8 @@ export class ProjectService {
     }
     /**
      * Create project
-     * Creates a Neon project.
-     * A project is the top-level object in the Neon object hierarchy.
+     * Creates a Neon project within an organization.
+     * You may need to specify an org_id parameter depending on your API key type.
      * Plan limits define how many projects you can create.
      * For more information, see [Manage projects](https://neon.tech/docs/manage/projects/).
      *
@@ -100,8 +102,7 @@ export class ProjectService {
     }
     /**
      * List shared projects
-     * Retrieves a list of shared projects for the Neon account.
-     * A project is the top-level object in the Neon object hierarchy.
+     * Retrieves a list of projects shared with your Neon account.
      * For more information, see [Manage projects](https://neon.tech/docs/manage/projects/).
      *
      * @param cursor Specify the cursor value from the previous response to get the next batch of projects.
@@ -136,8 +137,7 @@ export class ProjectService {
     /**
      * Retrieve project details
      * Retrieves information about the specified project.
-     * A project is the top-level object in the Neon object hierarchy.
-     * You can obtain a `project_id` by listing the projects for your Neon account.
+     * You can obtain a `project_id` by listing the projects for an organization.
      *
      * @param projectId The Neon project ID
      * @returns ProjectResponse Returned information about the specified project
@@ -265,6 +265,98 @@ export class ProjectService {
                 'project_id': projectId,
                 'permission_id': permissionId,
             },
+        });
+    }
+    /**
+     * Return available shared preload libraries
+     * Return available shared preload libraries
+     * @param projectId
+     * @returns AvailablePreloadLibraries Successfully returned available shared preload libraries
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public getAvailablePreloadLibraries(
+        projectId: string,
+    ): CancelablePromise<AvailablePreloadLibraries | GeneralError> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/projects/{project_id}/available_preload_libraries',
+            path: {
+                'project_id': projectId,
+            },
+        });
+    }
+    /**
+     * Create a project transfer request
+     * Creates a transfer request for the specified project. A transfer request allows
+     * the project to be transferred to another account or organization. The request
+     * has an expiration time after which it can no longer be used. To accept/claim
+     * the transfer request, the recipient user/organization must call the
+     * `/projects/{project_id}/transfer_requests/{request_id}` API endpoint, or visit
+     * `https://console.neon.tech/app/claim?p={project_id}&tr={request_id}&ru={redirect_url}`
+     * in the Neon Console. The `ru` parameter is optional and can be used to redirect
+     * the user after accepting the transfer request. This feature is currently in
+     * private preview. Get in touch with us to get access.
+     *
+     * @param projectId The Neon project ID
+     * @param requestBody
+     * @returns GeneralError General Error
+     * @returns ProjectTransferRequestResponse Project transfer request created successfully
+     * @throws ApiError
+     */
+    public createProjectTransferRequest(
+        projectId: string,
+        requestBody?: {
+            /**
+             * Specifies the validity duration of the transfer request in seconds. If not provided,
+             * the request will expire after 24 hours (86,400 seconds).
+             *
+             */
+            ttl_seconds?: number;
+        },
+    ): CancelablePromise<GeneralError | ProjectTransferRequestResponse> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/projects/{project_id}/transfer_requests',
+            path: {
+                'project_id': projectId,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+    /**
+     * Accept a project transfer request
+     * Accepts a transfer request for the specified project, transferring it to the specified organization
+     * or user. If org_id is not passed, the project will be transferred to the current user or organization account.
+     *
+     * @param projectId The Neon project ID
+     * @param requestId The Neon project transfer request ID
+     * @param requestBody
+     * @returns GeneralError General Error
+     * @throws ApiError
+     */
+    public acceptProjectTransferRequest(
+        projectId: string,
+        requestId: string,
+        requestBody?: {
+            /**
+             * The Neon organization ID to transfer the project to. If not provided, the project will be
+             * transferred to the current user or organization account.
+             *
+             */
+            org_id?: string;
+        },
+    ): CancelablePromise<GeneralError> {
+        return this.httpRequest.request({
+            method: 'PUT',
+            url: '/projects/{project_id}/transfer_requests/{request_id}',
+            path: {
+                'project_id': projectId,
+                'request_id': requestId,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
     /**

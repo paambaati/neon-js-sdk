@@ -5,6 +5,7 @@
 import type { ConsumptionHistoryGranularity } from '../models/ConsumptionHistoryGranularity';
 import type { ConsumptionHistoryPerAccountResponse } from '../models/ConsumptionHistoryPerAccountResponse';
 import type { ConsumptionHistoryPerProjectResponse } from '../models/ConsumptionHistoryPerProjectResponse';
+import type { ConsumptionHistoryQueryMetrics } from '../models/ConsumptionHistoryQueryMetrics';
 import type { GeneralError } from '../models/GeneralError';
 import type { PaginationResponse } from '../models/PaginationResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -41,9 +42,24 @@ export class ConsumptionService {
      * If this parameter is not provided, the endpoint will return the metrics for the
      * authenticated user's account.
      *
-     * @param includeV1Metrics Include metrics utilized in previous pricing models.
+     * @param includeV1Metrics The field is deprecated. Please use `metrics` instead.
+     * If `metrics` is specified, this field is ignored.
+     * Include metrics utilized in previous pricing models.
      * - **data_storage_bytes_hour**: The sum of the maximum observed storage values for each hour
      * for each project, which never decreases.
+     *
+     * @param metrics Specify a list of metrics to include in the response.
+     * If omitted, active_time, compute_time, written_data, synthetic_storage_size are returned.
+     * Possible values:
+     * - `active_time_seconds`
+     * - `compute_time_seconds`
+     * - `written_data_bytes`
+     * - `synthetic_storage_size_bytes`
+     * - `data_storage_bytes_hour`
+     *
+     * A list of metrics can be specified as an array of parameter values or as a comma-separated list in a single parameter value.
+     * - As an array of parameter values: `metrics=cpu_seconds&metrics=ram_bytes`
+     * - As a comma-separated list in a single parameter value: `metrics=cpu_seconds,ram_bytes`
      *
      * @returns ConsumptionHistoryPerAccountResponse Returned consumption metrics for the Neon account
      * @returns GeneralError General Error
@@ -55,6 +71,7 @@ export class ConsumptionService {
         granularity: ConsumptionHistoryGranularity,
         orgId?: string,
         includeV1Metrics?: boolean,
+        metrics?: ConsumptionHistoryQueryMetrics,
     ): CancelablePromise<ConsumptionHistoryPerAccountResponse | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
@@ -65,6 +82,7 @@ export class ConsumptionService {
                 'granularity': granularity,
                 'org_id': orgId,
                 'include_v1_metrics': includeV1Metrics,
+                'metrics': metrics,
             },
             errors: {
                 403: `This endpoint is not available. It is only supported for Scale, Business, and Enterprise plan accounts.`,
@@ -115,9 +133,26 @@ export class ConsumptionService {
      * If this parameter is not provided, the endpoint will return the metrics for the
      * authenticated user's projects.
      *
-     * @param includeV1Metrics Include metrics utilized in previous pricing models.
+     * @param includeV1Metrics The field is deprecated. Please use `metrics` instead.
+     * If `metrics` is specified, this field is ignored.
+     * Include metrics utilized in previous pricing models.
      * - **data_storage_bytes_hour**: The sum of the maximum observed storage values for each hour,
      * which never decreases.
+     *
+     * @param metrics Specify a list of metrics to include in the response.
+     * If omitted, active_time, compute_time, written_data, synthetic_storage_size are returned.
+     * Possible values:
+     * - `active_time_seconds`
+     * - `compute_time_seconds`
+     * - `written_data_bytes`
+     * - `synthetic_storage_size_bytes`
+     * - `data_storage_bytes_hour`
+     * - `logical_size_bytes`
+     * - `logical_size_bytes_hour`
+     *
+     * A list of metrics can be specified as an array of parameter values or as a comma-separated list in a single parameter value.
+     * - As an array of parameter values: `metrics=cpu_seconds&metrics=ram_bytes`
+     * - As a comma-separated list in a single parameter value: `metrics=cpu_seconds,ram_bytes`
      *
      * @returns any Returned project consumption metrics for the Neon account
      * @returns GeneralError General Error
@@ -132,6 +167,7 @@ export class ConsumptionService {
         projectIds?: Array<string>,
         orgId?: string,
         includeV1Metrics?: boolean,
+        metrics?: ConsumptionHistoryQueryMetrics,
     ): CancelablePromise<(ConsumptionHistoryPerProjectResponse & PaginationResponse) | GeneralError> {
         return this.httpRequest.request({
             method: 'GET',
@@ -145,6 +181,7 @@ export class ConsumptionService {
                 'granularity': granularity,
                 'org_id': orgId,
                 'include_v1_metrics': includeV1Metrics,
+                'metrics': metrics,
             },
             errors: {
                 403: `This endpoint is not available. It is only supported with Scale, Business, and Enterprise plan accounts.`,

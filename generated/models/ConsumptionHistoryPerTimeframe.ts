@@ -38,5 +38,15 @@ export type ConsumptionHistoryPerTimeframe = {
      *
      */
     data_storage_bytes_hour?: number;
+    /**
+     * Bytes. The amount of logical size consumed.
+     *
+     */
+    logical_size_bytes?: number;
+    /**
+     * Bytes-Hour. The amount of logical size consumed hourly.
+     *
+     */
+    logical_size_bytes_hour?: number;
 };
 

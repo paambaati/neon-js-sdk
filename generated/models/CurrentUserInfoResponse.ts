@@ -11,7 +11,7 @@ export type CurrentUserInfoResponse = {
      *
      */
     active_seconds_limit: number;
-    billing_account: BillingAccount;
+    billing_account?: BillingAccount;
     auth_accounts: Array<CurrentUserAuthAccount>;
     email: string;
     id: string;

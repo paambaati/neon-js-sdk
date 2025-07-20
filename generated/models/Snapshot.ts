@@ -8,7 +8,6 @@ export type Snapshot = {
     lsn?: string;
     timestamp?: string;
     source_branch_id?: string;
-    source_schedule_id?: string;
     created_at: string;
     expires_at?: string;
 };

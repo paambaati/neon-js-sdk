@@ -37,11 +37,10 @@ export class BranchService {
      * Create branch
      * Creates a branch in the specified project.
      * You can obtain a `project_id` by listing the projects for your Neon account.
-     *
      * This method does not require a request body, but you can specify one to create a compute endpoint for the branch or to select a non-default parent branch.
-     * The default behavior is to create a branch from the project's default branch with no compute endpoint, and the branch name is auto-generated.
-     * There is a maximum of one read-write endpoint per branch.
-     * A branch can have multiple read-only endpoints.
+     * By default, the branch is created from the project's default branch with no compute endpoint, and the branch name is auto-generated.
+     * To access the branch, you must add an endpoint object. A `read_write` endpoint allows you to perform read and write operations on the branch.
+     * Each branch supports one read-write endpoint and multiple read-only endpoints.
      * For related information, see [Manage branches](https://neon.tech/docs/manage/branches/).
      *
      * @param projectId The Neon project ID

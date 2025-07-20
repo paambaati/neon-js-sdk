@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { AnnotationValueData } from './AnnotationValueData';
 import type { ComputeUnit } from './ComputeUnit';
 import type { DefaultEndpointSettings } from './DefaultEndpointSettings';
 import type { PgVersion } from './PgVersion';
@@ -30,6 +31,11 @@ export type ProjectCreateRequest = {
              *
              */
             database_name?: string;
+            /**
+             * The annotations for the branch.
+             *
+             */
+            annotations?: AnnotationValueData;
         };
         /**
          * DEPRECATED, use default_endpoint_settings.autoscaling_limit_min_cu instead.

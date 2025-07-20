@@ -21,6 +21,11 @@ export type Endpoint = {
      */
     id: string;
     /**
+     * Optional name of the compute endpoint
+     *
+     */
+    name?: string;
+    /**
      * The ID of the project to which the compute endpoint belongs
      *
      */
@@ -59,8 +64,7 @@ export type Endpoint = {
      * Whether to restrict connections to the compute endpoint.
      * Enabling this option schedules a suspend compute operation.
      * A disabled compute endpoint cannot be enabled by a connection or
-     * console action. However, the compute endpoint is periodically
-     * enabled by check_availability operations.
+     * console action.
      *
      */
     disabled: boolean;
@@ -89,6 +93,16 @@ export type Endpoint = {
      *
      */
     updated_at: string;
+    /**
+     * A timestamp indicating when the compute endpoint was last started
+     *
+     */
+    started_at?: string;
+    /**
+     * A timestamp indicating when the compute endpoint was last suspended
+     *
+     */
+    suspended_at?: string;
     /**
      * DEPRECATED. Use the "host" property instead.
      *

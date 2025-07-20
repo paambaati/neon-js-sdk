@@ -27,5 +27,13 @@ export type Limits = {
     max_concurrent_executing_operation_chains_per_project: number;
     max_root_branches: number;
     max_import_size: number;
+    max_organization_members: number;
+    schema_only_branches_size_limit: number;
+    per_project: {
+        compute_time_seconds: number;
+        written_data_bytes: number;
+        data_transfer_bytes: number;
+        suspend_default_branch: boolean;
+    };
 };
 

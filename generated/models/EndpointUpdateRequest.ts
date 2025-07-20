@@ -54,6 +54,11 @@ export type EndpointUpdateRequest = {
          */
         passwordless_access?: boolean;
         suspend_timeout_seconds?: SuspendTimeoutSeconds;
+        /**
+         * Optional name of the compute endpoint
+         *
+         */
+        name?: string;
     };
 };
 
