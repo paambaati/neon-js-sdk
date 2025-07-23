@@ -1,3 +1,10 @@
+# [1.32.0](https://github.com/paambaati/neon-js-sdk/compare/v1.31.0...v1.32.0) (2025-07-23)
+
+
+### Features
+
+* **docs:** add deprecation notice ([28697d0](https://github.com/paambaati/neon-js-sdk/commit/28697d0babc4c9e6d28ae753bc39eb29c6462387))
+
 # [1.31.0](https://github.com/paambaati/neon-js-sdk/compare/v1.30.0...v1.31.0) (2025-03-04)
 
 
