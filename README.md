@@ -3,6 +3,9 @@
 [![CI](https://github.com/paambaati/neon-js-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/paambaati/neon-js-sdk/actions/workflows/ci.yml)
 [![NPM Version](https://img.shields.io/npm/v/neon-sdk.svg?logo=npm)](https://www.npmjs.com/package/neon-sdk)
 
+> [!IMPORTANT]  
+> This package is now deprecated in favour of the offical Neon SDK [`@neondatabase/api-client`](https://www.npmjs.com/package/@neondatabase/api-client)
+
 Fully-typed, zero-dependency Node.js and Deno SDK for managing your [Neon](https://neon.tech/) Serverless Postgres projects.
 
 > **Note**
